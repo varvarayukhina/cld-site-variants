@@ -265,6 +265,8 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- responsive ---------- */
+@media (max-width: 1260px) { .nav [data-go="doctors:clinics"] { display: none; } }
+@media (max-width: 1080px) and (min-width: 961px) { .nav { display: none; } .bar .mbtn[data-menu] { display: inline-grid; place-items: center; } }
 @media (max-width: 1100px) {
   .nav button { padding: 10px 8px; font-size: 14.5px; }
   .organs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -608,6 +610,221 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
   .parts ul { columns: 1; }
 }
 
+/* ---------- screens 2.0: checkups, home visit, cart, checkout, order, booking, results, info pages, referral ---------- */
+.pg { padding-bottom: 80px; }
+.pg-h { padding-block: 16px 28px; max-width: 780px; }
+.pg-h h1 { font-size: clamp(32px, 4vw, 46px); letter-spacing: 0; }
+.pg-h .lede { font-size: 19px; color: var(--muted); margin-top: 12px; }
+.pg-h .lede + .lede { margin-top: 8px; }
+.pg-h .acts { margin-top: 22px; }
+.acts { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.small { font-size: 14.5px; color: var(--muted); }
+.demo { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; background: var(--navy-soft); color: var(--ink); font-size: 14px; line-height: 1.45; }
+.demo .ico { width: 18px; height: 18px; margin-top: 1px; }
+.fill { background: var(--lime-soft); border-radius: 4px; padding: 0 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.btn-lime.added { background: var(--navy); color: #FFF; }
+.cempty { display: grid; justify-items: start; gap: 12px; padding: 36px; border-radius: 20px; background: var(--surface-2); max-width: 780px; }
+.cempty[hidden] { display: none; }
+.cempty h2 { font-size: 26px; }
+.cempty p { color: var(--muted); }
+.fld { display: grid; gap: 6px; }
+.fld > span, .fld-l { font-size: 14px; font-weight: 600; color: var(--muted); }
+.fld input, .pg select { font: 500 16.5px var(--text); color: var(--ink); border: 1.5px solid var(--line); border-radius: var(--r-ctrl); padding: 12px 14px; background: #FFF; width: 100%; min-width: 0; }
+.fld input:focus, .pg select:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-soft); }
+.err { color: var(--danger); font-size: 14px; font-weight: 600; }
+.err[hidden] { display: none; }
+.consent { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; font-size: 14.5px; line-height: 1.5; cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--navy); }
+.consent a { font-weight: 600; }
+.okh { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; margin: 18px 0 18px; max-width: 780px; }
+.okh h1 { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: 0; }
+.okh h2 { font-size: 28px; }
+.okh .lede { font-size: 18px; margin-top: 8px; }
+.ok-ic { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--lime); color: var(--navy); }
+.ok-ic .ico { width: 28px; height: 28px; stroke-width: 2.4; }
+.okh + .demo { max-width: 780px; margin-bottom: 8px; }
+
+/* checkups */
+.cx-grp { scroll-margin-top: calc(var(--sw-h, 0px) + 124px); }
+.cx-grp > h2 { font-size: 24px; padding: 36px 0 14px; }
+.cx { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 290px) 220px; gap: 12px 36px; align-items: start; padding: 22px 4px; border-top: 1px solid var(--line); }
+.cx:last-child { border-bottom: 1px solid var(--line); }
+.cx h3 { font: 700 19px/1.3 var(--text); letter-spacing: 0; }
+.cx-code { font-size: 13px; color: var(--muted); margin-top: 3px; overflow-wrap: anywhere; }
+.cx-meta { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14px; color: var(--muted); margin-top: 8px; }
+.cx-meta span { display: inline-flex; align-items: center; gap: 7px; }
+.cx-meta .ico { width: 16px; height: 16px; }
+.cx .parts summary { margin-top: 10px; }
+.cx-none { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.cx-prep { font-size: 14px; line-height: 1.5; }
+.cx-lbl { font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+.cx-prep .prep-k { margin-right: 6px; }
+.cx-buy { display: grid; justify-items: end; gap: 12px; }
+.cx-buy .price small { max-width: 24ch; margin-left: auto; margin-top: 3px; line-height: 1.35; }
+.cx-small > h2 { font-size: 19px; padding-top: 30px; }
+.cx-mini { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px 20px; align-items: center; padding: 14px 4px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.cx-mini b { font-size: 15px; }
+.cx-mini .btn { padding: 9px 14px; font-size: 14px; }
+.cx-foot { margin-top: 26px; display: grid; gap: 6px; font-size: 14.5px; color: var(--muted); max-width: 80ch; }
+
+/* cart, checkout, order */
+.cart-g { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 48px; align-items: start; }
+.cart-g[hidden], .panel[hidden] { display: none; }
+.citems { border-top: 1px solid var(--line); }
+.citem { display: grid; grid-template-columns: minmax(0, 1fr) auto 40px; gap: 4px 18px; align-items: center; padding: 16px 4px; border-bottom: 1px solid var(--line); }
+.citem .c-n { display: block; font-weight: 700; font-size: 17px; background: none; border: 0; padding: 0; text-align: left; }
+button.c-n { cursor: pointer; }
+button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
+.citem small { display: block; font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+.citem .c-p { font-weight: 800; font-size: 17px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rm { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: var(--muted); cursor: pointer; }
+.rm:hover { background: var(--surface); color: var(--danger); }
+.copts { display: grid; gap: 30px; margin-top: 34px; }
+.copts h2, .bk-s h2, .osec h2 { font-size: 21px; margin-bottom: 12px; }
+.copts .seg { max-width: 380px; margin-bottom: 16px; }
+.mode { display: grid; gap: 10px; max-width: 560px; }
+.mode[hidden] { display: none; }
+.mode .small { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.hv { display: grid; gap: 10px; padding: 14px 16px; border-radius: 12px; background: var(--lime-soft); font-size: 14.5px; }
+.hv .btn { justify-self: start; }
+.hv-ok { display: flex; gap: 8px; align-items: flex-start; }
+.hv-ok .ico { width: 18px; height: 18px; margin-top: 2px; }
+.meter { height: 8px; border-radius: 4px; background: #FFF; overflow: hidden; }
+.meter i { display: block; height: 100%; border-radius: 4px; background: var(--lime); transition: width .4s var(--ease); }
+.copts .points { max-width: 560px; }
+.panel .lines small { display: block; font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.panel .lines .disc { color: var(--ok); font-weight: 600; }
+.panel .lines div > span:last-child { text-align: right; white-space: nowrap; }
+.sum-h { font-size: 21px; }
+.sum-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14.5px; }
+.sum-items li { display: flex; justify-content: space-between; gap: 12px; }
+.sum-items .num { white-space: nowrap; }
+.sum-where { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; font-size: 14.5px; border-top: 1px solid var(--line); padding-top: 12px; }
+.panel .linkbtn { justify-self: start; font-size: 14.5px; }
+.co-form { display: grid; gap: 16px; max-width: 560px; }
+.osec { padding-top: 28px; margin-top: 28px; border-top: 1px solid var(--line); max-width: 780px; }
+.osec p + p { margin-top: 6px; }
+.prep-l { margin: 0; padding-left: 22px; display: grid; gap: 14px; }
+.prep-l ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15.5px; }
+.prep-l p { margin-top: 6px; font-size: 15.5px; }
+.prep-l .prep-k { margin-right: 6px; }
+.prep-last { margin-top: 14px; font-weight: 600; }
+.bring { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+
+/* booking */
+.bk-s + .bk-s, .bk-s + .hv { margin-top: 28px; }
+.bk-s select { max-width: 560px; }
+.bk-s .small { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.dates { display: flex; flex-wrap: wrap; gap: 8px; }
+.dates .chip { display: grid; justify-items: center; gap: 1px; border-radius: 12px; padding: 8px 14px; min-width: 96px; line-height: 1.3; }
+.dates .chip small { font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.dates .chip[aria-pressed="true"] small { color: var(--on-navy-muted); }
+.slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; max-width: 640px; }
+.slots .chip { border-radius: 10px; text-align: center; padding: 9px 6px; }
+.chip:disabled { background: var(--surface-2); border-color: transparent; color: var(--muted); text-decoration: line-through; cursor: not-allowed; }
+
+/* results */
+.auth { display: grid; gap: 14px; max-width: 480px; padding: 26px; border-radius: var(--r-card); box-shadow: inset 0 0 0 1.5px var(--line); }
+.auth h2 { font-size: 23px; }
+.auth p { font-size: 15.5px; }
+.auth .linkbtn { justify-self: start; font-size: 15px; }
+.res-top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-bottom: 18px; }
+.ords { display: grid; gap: 16px; max-width: 860px; margin-bottom: 16px; }
+.ord { display: grid; gap: 12px; padding: 22px 24px; border-radius: var(--r-card); box-shadow: inset 0 0 0 1.5px var(--line); }
+.ord-h { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; }
+.ord-h b { font-size: 18px; }
+.ord-h .small { display: block; margin-top: 2px; }
+.ord ul { margin: 0; padding-left: 20px; font-size: 15.5px; display: grid; gap: 3px; }
+.ord .acts > span { font-weight: 600; }
+.tag .ico { width: 14px; height: 14px; stroke-width: 2.2; }
+.pdfp { display: grid; gap: 10px; padding: 20px; border-radius: 10px; background: #FFF; box-shadow: 0 0 0 1px var(--line), 0 10px 24px rgba(20,55,75,.10); font-size: 14px; max-width: 520px; }
+.pdfp-h { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding-bottom: 10px; border-bottom: 2px solid var(--navy); font-weight: 700; }
+.pdfp-h img { width: 150px; }
+
+/* info pages */
+.prose { max-width: 780px; }
+.prose h2 { font-size: 23px; margin: 36px 0 10px; }
+.prose h2:first-child { margin-top: 0; }
+.prose p + p, .prose p + ul, .prose ul + p { margin-top: 10px; }
+.prose ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.draftbar { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; border-radius: 12px; background: var(--lime); color: var(--navy); font-weight: 700; margin-bottom: 32px; max-width: 780px; }
+.draftbar .ico { width: 22px; height: 22px; }
+.kv { display: grid; grid-template-columns: 280px minmax(0, 1fr); margin: 0; max-width: 940px; border-top: 1px solid var(--line); }
+.kv dt, .kv dd { margin: 0; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.kv dt { font-weight: 700; padding-right: 20px; }
+.kv .big { font-size: 24px; font-weight: 800; text-decoration: none; }
+.dlist { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); max-width: 940px; }
+.dlist li { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.dlist b { display: block; font-size: 17px; }
+.dlist p { margin-top: 3px; font-size: 15px; color: var(--muted); }
+.phs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.ph-box { display: grid; align-content: start; gap: 8px; padding: 22px; border-radius: 16px; border: 1.5px dashed var(--line); min-height: 150px; }
+.ph-box b { font-size: 18px; }
+.ph-box p { font-size: 15px; color: var(--muted); }
+.regs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; border-top: 1px solid var(--line); }
+.regs li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.regs b { font-variant-numeric: tabular-nums; }
+
+/* referral: A5 sheet, the only thing that prints on this screen */
+.rf-tools { margin-bottom: 26px; }
+.rf-sheet { width: 148mm; max-width: 100%; min-height: 210mm; margin: 0 auto; padding: 9mm 9mm 8mm; background: #FFF; color: var(--navy); box-shadow: 0 0 0 1px var(--line), 0 14px 34px rgba(20,55,75,.12); font-size: 9pt; line-height: 1.3; display: flex; flex-direction: column; gap: 2.4mm; }
+.rf-h { display: flex; justify-content: space-between; align-items: center; gap: 4mm; padding-bottom: 3mm; border-bottom: .7mm solid var(--lime); }
+.rf-h img { width: 54mm; }
+.rf-h p { text-align: right; font-weight: 700; font-size: 8.5pt; }
+.rf-t { font: 700 14pt/1.2 var(--display); letter-spacing: 0; }
+.rf-f { display: grid; grid-template-columns: 1fr 1fr; gap: 2.8mm 6mm; }
+.rf-l { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2mm; align-items: end; }
+.rf-l > span { font-weight: 600; white-space: nowrap; }
+.rf-l > i { display: block; min-height: 5.5mm; border-bottom: .25mm solid var(--navy); font-style: normal; font-size: 8pt; }
+.rf-w { grid-column: 1 / -1; }
+.rf-lh { display: flex; justify-content: space-between; gap: 4mm; font-weight: 700; font-size: 8.5pt; margin-top: 1mm; padding-bottom: 1.2mm; border-bottom: .3mm solid var(--navy); }
+.rf-lh span { font-weight: 500; color: var(--muted); }
+.rf-list { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 6mm; }
+.rf-list li { break-inside: avoid; display: grid; grid-template-columns: 3.6mm minmax(0, 1fr) auto; gap: 2mm; align-items: center; padding: .55mm 0; border-bottom: .2mm solid var(--line); font-size: 8.5pt; }
+.rf-box { display: block; width: 3.6mm; height: 3.6mm; border: .3mm solid var(--navy); border-radius: .8mm; }
+.rf-c { color: var(--muted); font-size: 8pt; font-variant-numeric: tabular-nums; }
+.rf-sign { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin-top: auto; padding-top: 3mm; }
+.rf-foot { font-size: 7.5pt; color: var(--muted); }
+@page rf { size: 148mm 210mm; margin: 0; }
+@media print {
+  body[data-screen="referral"] { padding: 0 !important; }
+  body[data-screen="referral"]::before, body[data-screen="referral"] > :not(#app), body[data-screen="referral"] #app > :not(#v-referral), #v-referral .wrap > :not(.rf-sheet), .rf-sheet .pin { display: none !important; }
+  #v-referral .wrap { max-width: none; padding: 0; }
+  .rf-sheet { page: rf; width: 148mm; height: 210mm; min-height: 0; max-width: none; margin: 0; box-shadow: none; overflow: hidden; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (max-width: 960px) {
+  .pg-h .lede { font-size: 17px; }
+  .cx { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 18px 0; }
+  .cx-buy { grid-template-columns: minmax(0, 1fr) auto; align-items: center; justify-items: start; }
+  .cx-buy .price { text-align: left; }
+  .cx-buy .price small { margin-left: 0; }
+  .cx-mini { grid-template-columns: minmax(0, 1fr) auto; }
+  .cx-mini .btn { grid-column: 1 / -1; justify-self: start; }
+  .cart-g { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .citem { gap: 2px 10px; padding: 14px 0; }
+  .cempty { padding: 26px 20px; }
+  .kv { grid-template-columns: minmax(0, 1fr); }
+  .kv dt { border-bottom: 0; padding-bottom: 0; }
+  .kv dd { padding-top: 4px; }
+  .phs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .regs { grid-template-columns: minmax(0, 1fr); }
+  .dates { flex-wrap: nowrap; overflow-x: auto; margin-inline: -20px; padding: 0 20px 4px; scrollbar-width: none; }
+  .dates::-webkit-scrollbar { display: none; }
+  .dates .chip { flex: none; }
+  .ord { padding: 18px; }
+  .okh { grid-template-columns: 48px minmax(0, 1fr); gap: 14px; }
+  .ok-ic { width: 48px; height: 48px; }
+}
+@media (max-width: 520px) { .phs { grid-template-columns: minmax(0, 1fr); } }
+@media screen and (max-width: 600px) {
+  .rf-sheet { min-height: 0; padding: 18px 16px; font-size: 13px; }
+  .rf-list { columns: 1; }
+  .rf-f, .rf-sign { grid-template-columns: minmax(0, 1fr); }
+  .rf-h img { width: 150px; }
+}
+
 #pts-map.osm-gray .leaflet-tile-pane { filter: grayscale(1) contrast(.9) brightness(1.07); }
 </style>
 </head>
@@ -631,6 +848,9 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
   <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V4h10v5"/><rect x="4" y="9" width="16" height="7.5" rx="1.5"/><path d="M7 14h10v6H7Z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14"/></symbol>
 </svg>
 
 <header class="top" id="top">
@@ -639,8 +859,8 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
       <button class="pointbtn" data-note="h1" type="button" data-go="points"><svg class="ico"><use href="#i-pin"/></svg><b id="u-point">Черкесск, пр-т Ленина, 148</b> <span class="state" id="u-state">открыто до 19:00</span></button>
       <span class="spacer"></span>
       <a href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>8 800 201 78 30</a>
-      <a href="#" data-stub="Номер WhatsApp добавим после согласования"><svg class="ico"><use href="#i-chat"/></svg>Написать в WhatsApp</a>
-      <a href="#" data-stub="Личный кабинет — после подключения к МИС"><svg class="ico"><use href="#i-file"/></svg>Результаты анализов</a>
+      <a href="#" data-stub="Номер WhatsApp появится после согласования"><svg class="ico"><use href="#i-chat"/></svg>Написать в WhatsApp</a>
+      <a href="#results" data-go="results"><svg class="ico"><use href="#i-file"/></svg>Результаты анализов</a>
     </div>
   </div>
   <div class="bar">
@@ -648,14 +868,14 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
       <button class="logo" data-go="home" type="button" style="background:none;border:0;padding:0;cursor:pointer" aria-label="На главную"><img src="../assets/cld-logo-medanalizy-navy.svg" alt="CLD · Медицинские анализы" width="1200" height="276"></button>
       <nav class="nav" aria-label="Разделы" data-note="h2">
         <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
-        <button type="button" data-go="catalog:checkups" data-nav="checkups">Чек-апы</button>
-        <button type="button" data-stub="Страница выезда на дом появится на сайте">Анализы на дому</button>
+        <button type="button" data-go="checkups" data-nav="checkups">Чек-апы</button>
+        <button type="button" data-go="home-visit" data-nav="home-visit">Анализы на дому</button>
         <button type="button" data-go="points" data-nav="points">Пункты</button>
         <button type="button" data-go="doctors" data-nav="doctors">Врачам</button>
         <button type="button" data-go="doctors:clinics">Клиникам</button>
       </nav>
       <span class="grow"></span>
-      <button class="cartbtn" type="button" data-stub="Оформление заказа подключим к МИС"><svg class="ico"><use href="#i-cart"/></svg>Корзина <span class="count num" data-cart>0</span></button>
+      <button class="cartbtn" type="button" data-go="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина <span class="count num" data-cart>0</span></button>
       <button class="mbtn" type="button" aria-label="Поиск" data-focus-search><svg class="ico" style="width:24px;height:24px"><use href="#i-search"/></svg></button>
       <button class="mbtn" type="button" aria-label="Меню" aria-controls="mmenu" aria-expanded="false" data-menu><svg class="ico" style="width:24px;height:24px"><use href="#i-menu"/></svg></button>
     </div>
@@ -664,8 +884,9 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
 <div class="mmenu" id="mmenu" hidden>
   <div class="wrap">
     <button type="button" data-go="catalog:blood">Анализы и цены</button>
-    <button type="button" data-go="catalog:checkups">Чек-апы</button>
-    <button type="button" data-stub="Страница выезда на дом появится на сайте">Анализы на дому</button>
+    <button type="button" data-go="checkups">Чек-апы</button>
+    <button type="button" data-go="home-visit">Анализы на дому</button>
+    <button type="button" data-go="results">Результаты анализов</button>
     <button type="button" data-go="points">Пункты</button>
     <button type="button" data-go="doctors">Врачам</button>
     <button type="button" data-go="doctors:clinics">Клиникам</button>
@@ -857,6 +1078,7 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
           <p class="dsub">Собственная лаборатория CLD в&nbsp;Черкесске выполняет 99&nbsp;анализов и&nbsp;22&nbsp;комплекса. Сроки&nbsp;— по&nbsp;МИС, почти все анализы&nbsp;— 1&nbsp;день.</p>
           <div class="dacts">
             <a class="btn btn-lime" href="../print/cld-katalog-dlya-vrachey.pdf" download><svg class="ico"><use href="#i-file"/></svg>Скачать каталог для врачей (PDF)</a>
+            <a class="btn btn-line" href="#referral" data-go="referral"><svg class="ico"><use href="#i-print"/></svg>Бланк направления</a>
             <a class="btn btn-line" href="#points" data-go="points"><svg class="ico"><use href="#i-pin"/></svg>Пункты на карте</a>
           </div>
         </div>
@@ -904,34 +1126,326 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
     </div>
   </section>
 
+  <!-- ============ CHECKUPS ============ -->
+  <section id="v-checkups" data-view="checkups" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Чек-апы</span></div>
+      <div class="pg-h" data-note="cx1">
+        <h1>Чек-апы</h1>
+        <p class="lede">Готовые наборы анализов собственной лаборатории CLD в Черкесске: состав, срок, подготовка и цена.</p>
+        <p class="lede">Какой набор нужен, решает врач — покажите ему состав, прежде чем сдавать.</p>
+      </div>
+      <div class="dchips" id="cx-nav" role="group" aria-label="Разделы чек-апов"></div>
+      <div id="cx-list"></div>
+      <div class="cx-foot">
+        <p>Цены указаны для пункта в Черкесске, в других пунктах могут отличаться. При оплате на сайте — скидка 10 %. Взятие крови — 200 ₽, оплачивается отдельно.</p>
+        <p>Лекарства перед анализами сами не отменяйте — скажите о них врачу.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOME VISIT ============ -->
+  <section id="v-home-visit" data-view="home-visit" hidden>
+    <div class="wrap">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Анализы на дому</span></div>
+      <div class="pg-h">
+        <h1>Анализы на дому</h1>
+        <p class="lede">Медсестра CLD приедет к вам домой и возьмёт анализы.</p>
+        <p class="perk"><svg class="ico"><use href="#i-home"/></svg>Выезд бесплатно при заказе от 1 500 ₽</p>
+        <div class="acts"><a class="btn btn-lime" href="#catalog-blood" data-go="catalog:blood">Выбрать анализы</a><a class="btn btn-ghost" href="#checkups" data-go="checkups">Чек-апы</a></div>
+      </div>
+    </div>
+    <section class="how wrap">
+      <div class="how-in">
+        <h2>Как заказать</h2>
+        <ol class="how-list">
+          <li><span class="how-n num" aria-hidden="true">1</span><h3>Выберите анализы</h3><p>На сайте — в каталоге и чек-апах. Или позвоните по телефону 8 800 201 78 30.</p></li>
+          <li><span class="how-n num" aria-hidden="true">2</span><h3>Укажите адрес</h3><p>В корзине выберите «Дома» и впишите адрес. Если заказываете по телефону, назовите адрес при звонке.</p></li>
+          <li><span class="how-n num" aria-hidden="true">3</span><h3>Медсестра возьмёт анализы</h3><p>Дома, так же как в пункте. Результат — в личном кабинете на сайте или в пункте CLD.</p></li>
+        </ol>
+      </div>
+    </section>
+    <div class="sec wrap pg">
+      <div class="opts">
+        <div class="opt opt-hl"><span class="opt-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b>Где работает выезд</b><p>Работает ли выезд в вашем населённом пункте, уточните по телефону 8 800 201 78 30.</p><a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>Позвонить</a></div>
+        <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Если заказ меньше 1 500 ₽</b><p>Стоимость выезда уточните по телефону 8 800 201 78 30.</p></div>
+        <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Как подготовиться</b><p>Так же, как к сдаче в пункте: правила указаны в описании каждого анализа. Лекарства сами не отменяйте — скажите о них врачу.</p></div>
+        <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><b>Где получить результат</b><p>В личном кабинете на сайте или в пункте CLD. Обсудите результат с врачом.</p><a class="btn btn-ghost" href="#results" data-go="results">Результаты анализов</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CART ============ -->
+  <section id="v-cart" data-view="cart" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Корзина</span></div>
+      <div class="pg-h" data-note="cart1"><h1>Корзина</h1></div>
+      <div class="cempty" id="cart-empty" hidden>
+        <h2>В корзине пока пусто</h2>
+        <p>Найдите анализ по названию или выберите готовый набор анализов.</p>
+        <div class="acts"><a class="btn btn-lime" href="#catalog-blood" data-go="catalog:blood">Анализы и цены</a><a class="btn btn-ghost" href="#checkups" data-go="checkups">Чек-апы</a></div>
+      </div>
+      <div class="cart-g" id="cart-full">
+        <div>
+          <div class="citems" id="cart-items"></div>
+          <div class="copts" data-note="cart2">
+            <section>
+              <h2>Где сдать</h2>
+              <div class="seg" role="group" aria-label="Где сдать анализы"><button type="button" aria-pressed="true" data-mode="point">В пункте</button><button type="button" aria-pressed="false" data-mode="home">Дома</button></div>
+              <div class="mode" id="mode-point">
+                <label class="fld-l" for="c-pt">Пункт</label>
+                <div id="cart-pt"></div>
+                <p class="small" id="cart-pt-st"></p>
+              </div>
+              <div class="mode" id="mode-home" hidden>
+                <label class="fld"><span>Адрес</span><input id="c-addr" type="text" autocomplete="street-address" placeholder="Город, улица, дом, квартира"></label>
+                <p class="err" id="c-addr-err" hidden>Укажите адрес, куда приехать медсестре.</p>
+                <div class="hv" id="hv-note"></div>
+                <p class="small">Работает ли выезд в вашем населённом пункте, уточните по телефону 8 800 201 78 30.</p>
+              </div>
+            </section>
+            <section>
+              <h2>Оплата</h2>
+              <div class="points" role="radiogroup" aria-label="Оплата">
+                <label><input type="radio" name="pay" value="online" checked><span class="p-addr">Оплатить на сайте — скидка 10 %</span><span class="p-hours">Скидка действует на анализы</span></label>
+                <label><input type="radio" name="pay" value="point"><span class="p-addr" id="pay-point-t">Оплатить в пункте</span><span class="p-hours">По ценам каталога</span></label>
+              </div>
+            </section>
+          </div>
+        </div>
+        <aside class="panel" id="cart-sum"></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHECKOUT ============ -->
+  <section id="v-checkout" data-view="checkout" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" data-go="cart">Корзина</button><span>/</span><span>Оформление</span></div>
+      <div class="pg-h"><h1>Оформление заказа</h1><p class="lede">Имя и телефон нужны, чтобы оформить заказ и открыть результаты в личном кабинете.</p></div>
+      <div class="cempty" id="co-empty" hidden>
+        <h2>Корзина пуста</h2>
+        <p>Добавьте анализы, чтобы оформить заказ.</p>
+        <div class="acts"><a class="btn btn-lime" href="#catalog-blood" data-go="catalog:blood">Анализы и цены</a><a class="btn btn-ghost" href="#checkups" data-go="checkups">Чек-апы</a></div>
+      </div>
+      <div class="cart-g" id="co-full">
+        <form class="co-form" id="co-form" data-form="order" novalidate>
+          <label class="fld"><span>Имя и фамилия</span><input id="co-name" type="text" autocomplete="name" required></label>
+          <label class="fld"><span>Телефон</span><input id="co-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></label>
+          <p class="err" id="co-err" hidden></p>
+          <label class="consent"><input type="checkbox" id="co-ok"><span>Даю согласие на обработку персональных данных, в том числе сведений о состоянии здоровья, на условиях <a href="#privacy" data-go="privacy">Политики обработки персональных данных</a>.</span></label>
+          <div class="acts"><button class="btn btn-lime" id="co-go" type="submit" disabled>Оформить заказ</button><button class="linkbtn" type="button" data-go="cart">Вернуться в корзину</button></div>
+          <p class="demo"><svg class="ico"><use href="#i-info"/></svg><span><b>Демо: подключим к МИС.</b> Данные никуда не отправляются: заказ, оплата и SMS работают только в этом окне браузера.</span></p>
+        </form>
+        <aside class="panel" id="co-sum"></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORDER CONFIRMATION ============ -->
+  <section id="v-order" data-view="order" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Заказ</span></div>
+      <div id="order-body"></div>
+    </div>
+  </section>
+
+  <!-- ============ BOOKING ============ -->
+  <section id="v-book" data-view="book" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" id="bk-crumb" data-go="card:40-111">Анализ</button><span>/</span><span>Запись на время</span></div>
+      <div class="pg-h"><h1>Запись на время</h1><p class="lede" id="bk-lede"></p></div>
+      <div class="cart-g"><div id="bk-body"></div><aside class="panel" id="bk-sum"></aside></div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="v-results" data-view="results" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Результаты анализов</span></div>
+      <div class="pg-h" data-note="res1"><h1>Результаты анализов</h1><p class="lede">Результат — в личном кабинете на сайте или в пункте CLD, где вы сдавали анализы.</p></div>
+      <div id="res-body"></div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="v-about" data-view="about" hidden>
+    <div class="dhero">
+      <div class="wrap dhero-grid">
+        <div>
+          <h1>О лаборатории</h1>
+          <p class="dsub">CLD — центр лабораторной диагностики. Собственная лаборатория в Черкесске выполняет 99 анализов и 22 комплекса. Остальные анализы из каталога выполняют партнёрские лаборатории.</p>
+          <div class="dacts"><a class="btn btn-lime" href="#catalog-blood" data-go="catalog:blood">Анализы и цены</a><a class="btn btn-line" href="#points" data-go="points"><svg class="ico"><use href="#i-pin"/></svg>Пункты на карте</a></div>
+        </div>
+        <dl class="dfacts">
+          <div><dt>99</dt><dd>анализов в собственной лаборатории</dd></div>
+          <div><dt>22</dt><dd>комплекса анализов</dd></div>
+          <div><dt>29</dt><dd>пунктов приёма в 9 регионах</dd></div>
+          <div><dt>−10 %</dt><dd>при оплате заказа на сайте</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="sec wrap">
+      <div class="sec-h"><h2>Пункты приёма по регионам</h2><a class="linkbtn" href="#points" data-go="points">Адреса и часы на карте</a></div>
+      <ul class="regs"><li><span>Карачаево-Черкесия</span><b>15</b></li><li><span>Кабардино-Балкария</span><b>5</b></li><li><span>Ставропольский край</span><b>2</b></li><li><span>Северная Осетия</span><b>2</b></li><li><span>Краснодарский край</span><b>1</b></li><li><span>Ингушетия</span><b>1</b></li><li><span>Дагестан</span><b>1</b></li><li><span>Татарстан</span><b>1</b></li><li><span>Удмуртия</span><b>1</b></li></ul>
+    </div>
+    <div class="sec wrap">
+      <div class="opts">
+        <div class="opt opt-hl"><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Медсестра на дом</b><p>Выезд бесплатно при заказе от 1 500 ₽.</p><a class="btn btn-navy" href="#home-visit" data-go="home-visit">Анализы на дому</a></div>
+        <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-percent"/></svg></span><b>Скидка 10 % при заказе на сайте</b><p>Выберите анализы в каталоге и оплатите заказ онлайн.</p><a class="btn btn-ghost" href="#catalog-blood" data-go="catalog:blood">Выбрать анализы</a></div>
+      </div>
+    </div>
+    <div class="sec wrap pg">
+      <div class="phs">
+        <div class="ph-box"><b>История</b><p><span class="fill">[год основания и история лаборатории]</span></p></div>
+        <div class="ph-box"><b>Оборудование</b><p><span class="fill">[анализаторы и методы — от лаборатории]</span></p></div>
+        <div class="ph-box"><b>Контроль качества</b><p><span class="fill">[сертификаты, участие в программах контроля качества]</span></p></div>
+        <div class="ph-box"><b>Команда</b><p><span class="fill">[фото лаборатории и сотрудников — снять в Черкесске]</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTS ============ -->
+  <section id="v-contacts" data-view="contacts" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Контакты</span></div>
+      <div class="pg-h"><h1>Контакты</h1><p class="lede">Позвоните, если не знаете, какой анализ выбрать или как к нему подготовиться, — подскажем.</p></div>
+      <dl class="kv">
+        <dt>Телефон</dt><dd><a class="big num" href="tel:88002017830">8 800 201 78 30</a></dd>
+        <dt>Часы работы колл-центра</dt><dd><span class="fill">[уточнить]</span></dd>
+        <dt>WhatsApp</dt><dd><span class="fill">[номер после согласования]</span></dd>
+        <dt>Электронная почта</dt><dd><span class="fill">[e-mail для обращений]</span></dd>
+        <dt>Адреса пунктов</dt><dd>29 пунктов в 9 регионах. <a href="#points" data-go="points">Адреса и часы работы на карте</a></dd>
+        <dt>Врачам и клиникам</dt><dd><a href="#doctors" data-go="doctors">Каталог для врачей</a> · <a href="#referral" data-go="referral">Бланк направления</a></dd>
+        <dt>Реквизиты</dt><dd><span class="fill">[юрлицо]</span><br>ОГРН <span class="fill">[…]</span> · ИНН <span class="fill">[…]</span><br>Юридический адрес: <span class="fill">[адрес]</span></dd>
+        <dt>Документы</dt><dd><a href="#docs" data-go="docs">Лицензии и документы</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ DOCS ============ -->
+  <section id="v-docs" data-view="docs" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Лицензии и документы</span></div>
+      <div class="pg-h"><h1>Лицензии и документы</h1></div>
+      <ul class="dlist">
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Лицензия на медицинскую деятельность</b><p><span class="fill">[лицензия № … от …, кем выдана]</span></p></div></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Юридическое лицо и реквизиты</b><p><span class="fill">[юрлицо, ОГРН, ИНН, адрес]</span></p></div></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><div><b><a href="#privacy" data-go="privacy">Политика обработки персональных данных</a></b><p>Черновик структуры, текст готовит юрист.</p></div></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Согласие на обработку персональных данных</b><p><span class="fill">[документ от юриста]</span></p></div></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Оферта</b><p><span class="fill">[документ от юриста]</span></p></div></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Правила оказания платных медицинских услуг</b><p><span class="fill">[документ от юриста]</span></p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PRIVACY ============ -->
+  <section id="v-privacy" data-view="privacy" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" data-go="docs">Лицензии и документы</button><span>/</span><span>Политика</span></div>
+      <div class="pg-h"><h1>Политика обработки персональных данных</h1></div>
+      <p class="draftbar"><svg class="ico"><use href="#i-info"/></svg><span>Черновик структуры. Текст готовит юрист.</span></p>
+      <div class="prose">
+        <h2>1. Оператор</h2>
+        <p>Оператор персональных данных — <span class="fill">[юрлицо, ИНН, адрес]</span>.</p>
+        <p>Редакция от <span class="fill">[дата]</span>.</p>
+        <h2>2. Цели обработки</h2>
+        <ul>
+          <li>Оформление и выполнение заказа на лабораторные исследования, в том числе выезд медсестры на дом.</li>
+          <li>Запись в пункт на выбранное время.</li>
+          <li>Выдача результатов в личном кабинете и в пункте.</li>
+          <li>Связь с пациентом по заказу.</li>
+          <li><span class="fill">[другие цели — по решению юриста]</span></li>
+        </ul>
+        <h2>3. Категории данных</h2>
+        <ul>
+          <li>Фамилия, имя, отчество, дата рождения, номер телефона.</li>
+          <li>Адрес — если заказан выезд медсестры.</li>
+          <li>Сведения о заказанных анализах и их результаты. Это сведения о состоянии здоровья — специальная категория персональных данных, их обрабатывают по статье 10 Федерального закона № 152-ФЗ «О персональных данных».</li>
+          <li>Технические данные: файлы cookie, IP-адрес, сведения о посещении сайта.</li>
+          <li><span class="fill">[уточнить перечень]</span></li>
+        </ul>
+        <h2>4. Правовые основания</h2>
+        <ul>
+          <li>Согласие субъекта персональных данных.</li>
+          <li>Договор на оказание платных медицинских услуг.</li>
+          <li><span class="fill">[нормативные акты — юрист]</span></li>
+        </ul>
+        <h2>5. Сроки обработки и хранения</h2>
+        <p><span class="fill">[сроки по каждой категории данных — юрист]</span></p>
+        <h2>6. Передача третьим лицам</h2>
+        <p><span class="fill">[перечень получателей и цели передачи — юрист; например, партнёрские лаборатории, которые выполняют часть анализов]</span></p>
+        <h2>7. Файлы cookie и Яндекс Метрика</h2>
+        <p>Сайт использует файлы cookie и сервис веб-аналитики Яндекс Метрика, чтобы понимать, как посетители пользуются сайтом. <span class="fill">[какие данные собирает Метрика и как отключить cookie — юрист]</span></p>
+        <h2>8. Права субъекта персональных данных</h2>
+        <ul>
+          <li>Получить сведения об обработке своих персональных данных.</li>
+          <li>Потребовать уточнить, заблокировать или уничтожить данные, если они неполные, устаревшие или обрабатываются незаконно.</li>
+          <li>Отозвать согласие на обработку персональных данных.</li>
+          <li>Обжаловать действия оператора в Роскомнадзоре или в суде.</li>
+        </ul>
+        <h2>9. Контакты для обращений</h2>
+        <p>Электронная почта: <span class="fill">[e-mail]</span>. Почтовый адрес: <span class="fill">[адрес]</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFERRAL (A5 print) ============ -->
+  <section id="v-referral" data-view="referral" hidden>
+    <div class="wrap pg">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" data-go="doctors">Врачам</button><span>/</span><span>Бланк направления</span></div>
+      <div class="pg-h"><h1>Бланк направления</h1><p class="lede">Для врача: отметьте анализы, пациент сдаёт их в любом пункте CLD. Формат A5, печатается только бланк.</p></div>
+      <div class="acts rf-tools"><button class="btn btn-navy" type="button" data-print><svg class="ico"><use href="#i-print"/></svg>Распечатать</button><a class="linkbtn" href="#doctors" data-go="doctors">Каталог с кодами МИС</a></div>
+      <div class="rf-sheet" data-note="rf1">
+        <header class="rf-h"><img src="../assets/cld-logo-horizontal-navy.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276"><p>8 800 201 78 30<br>cldmed.ru</p></header>
+        <h2 class="rf-t">Направление на лабораторные исследования</h2>
+        <div class="rf-f">
+          <div class="rf-l rf-w"><span>ФИО пациента</span><i></i></div>
+          <div class="rf-l"><span>Дата рождения</span><i></i></div>
+          <div class="rf-l"><span>Телефон</span><i></i></div>
+          <div class="rf-l rf-w"><span>Врач (ФИО)</span><i></i></div>
+          <div class="rf-l"><span>Код врача</span><i><span class="fill">[код врача]</span></i></div>
+          <div class="rf-l"><span>Дата</span><i></i></div>
+        </div>
+        <div class="rf-lh"><b>Исследования</b><span>код МИС</span></div>
+        <ul class="rf-list"><li><i class="rf-box"></i><span>ОАК развёрнутый</span><span class="rf-c">20-017</span></li><li><i class="rf-box"></i><span>ОАК</span><span class="rf-c">20-001</span></li><li><i class="rf-box"></i><span>СОЭ</span><span class="rf-c">20-003</span></li><li><i class="rf-box"></i><span>Глюкоза</span><span class="rf-c">40-047</span></li><li><i class="rf-box"></i><span>Гликированный гемоглобин (HbA1c)</span><span class="rf-c">40-141</span></li><li><i class="rf-box"></i><span>Инсулин</span><span class="rf-c">30-035</span></li><li><i class="rf-box"></i><span>АЛТ</span><span class="rf-c">40-026</span></li><li><i class="rf-box"></i><span>АСТ</span><span class="rf-c">40-025</span></li><li><i class="rf-box"></i><span>Билирубин общий</span><span class="rf-c">40-035</span></li><li><i class="rf-box"></i><span>Креатинин</span><span class="rf-c">40-063</span></li><li><i class="rf-box"></i><span>Мочевина</span><span class="rf-c">40-077</span></li><li><i class="rf-box"></i><span>Общий белок</span><span class="rf-c">40-001</span></li><li><i class="rf-box"></i><span>Мочевая кислота</span><span class="rf-c">40-004</span></li><li><i class="rf-box"></i><span>СРБ</span><span class="rf-c">40-081</span></li><li><i class="rf-box"></i><span>Калий, натрий, хлор</span><span class="rf-c">40-018.1</span></li><li><i class="rf-box"></i><span>Железо</span><span class="rf-c">40-052</span></li><li><i class="rf-box"></i><span>Ферритин</span><span class="rf-c">40-111</span></li><li><i class="rf-box"></i><span>Витамин D, 25-OH</span><span class="rf-c">40-297</span></li><li><i class="rf-box"></i><span>Витамин B12</span><span class="rf-c">40-041</span></li><li><i class="rf-box"></i><span>ТТГ</span><span class="rf-c">30-010</span></li><li><i class="rf-box"></i><span>Т4 свободный</span><span class="rf-c">30-009</span></li><li><i class="rf-box"></i><span>Анти-ТПО</span><span class="rf-c">50-125</span></li><li><i class="rf-box"></i><span>Липидный профиль</span><span class="rf-c">00-014</span></li><li><i class="rf-box"></i><span>Холестерин общий</span><span class="rf-c">40-070</span></li><li><i class="rf-box"></i><span>Коагулограмма скрининговая</span><span class="rf-c">80-049</span></li><li><i class="rf-box"></i><span>Общий анализ мочи</span><span class="rf-c">10-008</span></li><li><i class="rf-box"></i><span>ХГЧ</span><span class="rf-c">30-017</span></li><li><i class="rf-box"></i><span>Группа крови и резус-фактор</span><span class="rf-c">25-018</span></li><li><i class="rf-box"></i><span>ПСА общий</span><span class="rf-c">41-016</span></li></ul>
+        <div class="rf-l"><span>Другие (код МИС)</span><i></i></div>
+        <div class="rf-l"><span></span><i></i></div>
+        <div class="rf-l"><span></span><i></i></div>
+        <div class="rf-sign"><div class="rf-l"><span>Подпись врача</span><i></i></div><div></div></div>
+        <p class="rf-foot">Адреса пунктов, часы работы и подготовка к анализам — на сайте cldmed.ru и по телефону 8 800 201 78 30.</p>
+      </div>
+    </div>
+  </section>
+
   <footer class="foot">
     <div class="wrap">
       <div class="f-top">
         <div class="f-brand">
           <img src="../assets/cld-logo-horizontal-white.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276">
           <a class="f-phone num" href="tel:88002017830">8 800 201 78 30</a>
-          <a href="#" data-stub="Номер WhatsApp добавим после согласования">Написать в WhatsApp</a>
+          <a href="#" data-stub="Номер WhatsApp появится после согласования">Написать в WhatsApp</a>
           <p><a href="#points" data-go="points">Черкесск, пр-т Ленина, 148</a><br>07:30–19:00</p>
           <a href="#points" data-go="points">Все 29 пунктов на карте</a>
         </div>
         <nav class="f-col" aria-label="Пациентам"><h4>Пациентам</h4>
           <a href="#catalog-blood" data-go="catalog:blood">Анализы и цены</a>
-          <a href="#" data-stub="Страница чек-апов появится на сайте">Чек-апы</a>
+          <a href="#checkups" data-go="checkups">Чек-апы</a>
           <a href="#" data-scroll="promos">Акции</a>
-          <a href="#" data-stub="Страница выезда на дом появится на сайте">Анализы на дому</a>
+          <a href="#home-visit" data-go="home-visit">Анализы на дому</a>
           <a href="#points" data-go="points">Пункты</a>
-          <a href="#" data-stub="Личный кабинет — после подключения к МИС">Результаты анализов</a>
+          <a href="#results" data-go="results">Результаты анализов</a>
         </nav>
         <nav class="f-col" aria-label="Врачам и клиникам"><h4>Врачам и клиникам</h4>
           <a href="#doctors" data-go="doctors">Врачам</a>
           <a href="#doctors" data-go="doctors:clinics">Клиникам и санаториям</a>
-          <a href="#" data-stub="Бланк направления появится в разделе для врачей">Бланк направления</a>
+          <a href="#referral" data-go="referral">Бланк направления</a>
         </nav>
         <nav class="f-col" aria-label="О компании"><h4>О компании</h4>
-          <a href="#" data-stub="Страница о лаборатории — в разработке">О лаборатории</a>
-          <a href="#" data-stub="Лицензии и документы — после сверки с юристом">Лицензии и документы</a>
-          <a href="#" data-stub="Страница контактов — в разработке">Контакты</a>
-          <a href="#" data-stub="Политику загрузим после проверки юристом">Политика конфиденциальности</a>
+          <a href="#about" data-go="about">О лаборатории</a>
+          <a href="#docs" data-go="docs">Лицензии и документы</a>
+          <a href="#contacts" data-go="contacts">Контакты</a>
+          <a href="#privacy" data-go="privacy">Политика обработки персональных данных</a>
         </nav>
       </div>
       <p class="f-legal">ООО «Название по лицензии» · Лицензия № — заполнить после сверки с реестром Росздравнадзора. Прототип: цены — сайт lab.discript.ru, пункт Черкесск, 22.10.2026.</p>
@@ -943,8 +1457,8 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
 <nav class="tabbar" aria-label="Быстрые разделы">
   <button type="button" data-go="catalog:blood" data-tab="catalog"><svg class="ico"><use href="#i-grid"/></svg>Анализы</button>
   <button type="button" data-go="points" data-tab="points"><svg class="ico"><use href="#i-pin"/></svg>Пункты</button>
-  <button type="button"><svg class="ico"><use href="#i-file"/></svg>Результаты</button>
-  <button type="button"><svg class="ico"><use href="#i-cart"/></svg>Корзина<span class="count num" data-cart>0</span></button>
+  <button type="button" data-go="results" data-tab="results"><svg class="ico"><use href="#i-file"/></svg>Результаты</button>
+  <button type="button" data-go="cart" data-tab="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина<span class="count num" data-cart>0</span></button>
 </nav>
 
 <button class="notes-toggle" id="notes-toggle" type="button" aria-pressed="false"><svg class="ico"><use href="#i-info"/></svg>Пояснения</button>
@@ -1040,6 +1554,26 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
     kids: { n: "Чек-ап для детей и подростков", inc: "12 анализов: общий анализ крови, витамин D, железо, ферритин, глюкоза, билирубин и другие", count: 12, p: 2700, days: 2 },
     yearly: { n: "Чек-ап всего организма", inc: "16 анализов: кровь, витамин D, железо, ТТГ, холестерин, печень, почки, сахар", count: 16, p: 3800, days: 2 }
   };
+  var CK2CX = { anemia: "04.25.002", thyroid: "04.25.004", diabetes: "04.25.007", kidneys: "04.25.009", kids: "04.25.005", yearly: "04.25.015" }; // чек-ап раздела каталога = комплекс МИС, одна позиция в корзине
+  // 22 комплекса: человеческое название и цена пункта Черкесск (catalog.json, 22.10.2026); состав, срок и подготовка — из DOC.complexes (МИС)
+  var CXI = {
+    "04.25.015": ["Чек-ап всего организма", 3800], "04.25.005": ["Чек-ап для детей и подростков", 2700],
+    "00-701": ["Комплекс для мужчин", 2337], "00-115.1": ["Биохимия крови: 10 показателей", 1200],
+    "04.25.001": ["Анемия: расширенный набор", 3100], "04.25.002": ["Анемия: основной набор", 1000],
+    "04.25.006": ["Суставы: ревматоидный фактор, СРБ, АСЛО", 1600], "04.25.007": ["Сахар: глюкоза, HbA1c, инсулин, С-пептид", 1500],
+    "04.25.004": ["Гормоны щитовидной железы: основной набор", 800], "04.25.003": ["Гормоны щитовидной железы: расширенный набор", 1450],
+    "00-04.02": ["Щитовидная железа: расширенный скрининг", 2610],
+    "00-014": ["Липидный профиль: основной", 620, ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"]],
+    "00-099.1": ["Липидный профиль: развёрнутый", 620, ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"]],
+    "04.25.008": ["Сердце и сосуды: расширенный набор", 2800], "04.25.009": ["Почки: основной набор", 800],
+    "04.25.016": ["Витамины: B12, D, фолиевая кислота", 2100],
+    "04.25.011": ["Женские гормоны: основной набор", 1600], "04.25.010": ["Женские гормоны: расширенный набор", 2600],
+    "04.25.012": ["Мужские гормоны", 1700],
+    "04.25.013": ["Онкомаркеры: основной набор для женщин", 2500], "04.25.014": ["Онкомаркеры: основной набор для мужчин", 2500],
+    "00-094": ["Госпитальный скрининг: ВИЧ, гепатиты B и C, сифилис", 990]
+  };
+  var CX = {};
+  DOC.complexes.forEach(function (g) { g.items.forEach(function (it) { var x = CXI[it.c]; CX[it.c] = { c: it.c, n: x[0], p: x[1], mis: it.m || it.n, parts: it.parts && it.parts.length ? it.parts : x[2] || null, r: it.r || "", prep: it.p }; }); });
   // 9x9 cell pictograms on the brand grid: '#' navy, 'o' lime accent
   var PICT = {
     blood:   ["....#....","...###...","..#####..",".#####o#.",".#####o#.","#########","#########",".#######.","..#####.."],
@@ -1112,11 +1646,27 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
   var cart = {};
   function cartCount() { return Object.keys(cart).length; }
   function toast(t) { var el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove("show"); }, 1800); }
-  function toggleCart(code, btn) {
-    if (cart[code]) { delete cart[code]; toast("Убрали из корзины"); } else { cart[code] = 1; toast("Добавили в корзину: " + (A[code] ? A[code].n : CHECKUPS[code].n)); }
-    $$("[data-cart]").forEach(function (el) { el.textContent = cartCount(); });
-    $$('[data-add="' + code + '"]').forEach(function (b) { b.classList.toggle("added", !!cart[code]); b.innerHTML = '<svg class="ico"><use href="#' + (cart[code] ? "i-check" : "i-plus") + '"/></svg>'; b.setAttribute("aria-label", cart[code] ? "Убрать из корзины" : "В корзину"); });
+  function toggleCart(code) {
+    if (cart[code]) { delete cart[code]; toast("Убрали из корзины"); } else { cart[code] = 1; toast("Добавили в корзину: " + item(code).n); }
+    syncCart();
   }
+  // one source of truth for every cart counter and «В корзину» button on every screen
+  function syncCart() {
+    $$("[data-cart]").forEach(function (el) { el.textContent = cartCount(); });
+    $$("[data-add]").forEach(function (b) {
+      var on = !!cart[b.dataset.add]; b.classList.toggle("added", on);
+      if (b.classList.contains("addbtn")) { b.innerHTML = icon(on ? "i-check" : "i-plus"); b.setAttribute("aria-label", on ? "Убрать из корзины" : "В корзину"); }
+      else b.innerHTML = icon(on ? "i-check" : "i-plus") + (on ? "В корзине" : "В корзину");
+    });
+    if (state.view === "cart") renderCart();
+  }
+  function buyBtn(code) { var on = !!cart[code]; return '<button class="btn btn-lime' + (on ? " added" : "") + '" type="button" data-add="' + esc(code) + '">' + icon(on ? "i-check" : "i-plus") + (on ? "В корзине" : "В корзину") + "</button>"; }
+  function item(code) {
+    var a = A[code], x = CX[code];
+    if (a) return { n: a.n, p: a.p, blood: a.bio.indexOf("Кровь") === 0, urine: /моч/i.test(a.bio), days: a.days, go: "card:" + code };
+    return { n: x.n, p: x.p, blood: true, urine: false, days: parseInt(x.r, 10) || 0, go: "checkups" };
+  }
+  function icon(id) { return '<svg class="ico"><use href="#' + id + '"/></svg>'; }
   function addBtn(code) {
     return '<button class="addbtn' + (cart[code] ? " added" : "") + '" type="button" data-add="' + code + '" aria-label="В корзину"><svg class="ico"><use href="#' + (cart[code] ? "i-check" : "i-plus") + '"/></svg></button>';
   }
@@ -1218,7 +1768,7 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
     $("#c-picto").innerHTML = picto(cat.id);
     $("#c-title").textContent = cat.n; $("#crumb-cat").textContent = cat.n; $("#c-desc").textContent = cat.desc;
     var ck = cat.checkup ? CHECKUPS[cat.checkup] : null;
-    $("#c-checkup").innerHTML = ck ? '<div class="checkup"><b>' + esc(ck.n) + " · " + ck.count + " анализа</b><p>" + esc(ck.inc) + ". Готово через " + ck.days + ' дня.</p><div class="price"><div><b>' + rub(ck.p) + "</b><small>онлайн " + rub(online(ck.p)) + "</small></div>" + addBtn(cat.checkup) + "</div></div>" : "";
+    $("#c-checkup").innerHTML = ck ? '<div class="checkup"><b>' + esc(ck.n) + " · " + ck.count + " анализа</b><p>" + esc(ck.inc) + ". Готово через " + ck.days + ' дня.</p><div class="price"><div><b>' + rub(ck.p) + "</b><small>онлайн " + rub(online(ck.p)) + "</small></div>" + addBtn(CK2CX[cat.checkup]) + "</div></div>" : "";
     var items = cat.items.filter(function (c) { return (!state.filters.own || A[c].own) && (!state.filters.oneday || A[c].days === 1); });
     items.sort(function (a, b) { return state.sort === "cheap" ? A[a].p - A[b].p : A[a].pop - A[b].pop; });
     $("#c-rows").innerHTML = items.length ? items.map(row).join("") : '<div class="empty">' + (cat.items.length ? "Под выбранные фильтры ничего не подошло. Снимите фильтр." : "В прототипе этот раздел пустой: на сайте он собирается из каталога МИС по тому же шаблону.") + "</div>";
@@ -1256,10 +1806,10 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
     $("#k-panel").innerHTML = '<div><div class="p-price num">' + rub(a.p) + '</div><div class="p-online" style="margin-top:6px">' + rub(online(a.p)) + " при оплате на сайте</div></div>" +
       '<div class="lines" data-note="card3"><div><span>Анализ</span><span class="num">' + rub(a.p) + "</span></div>" + (blood ? "<div><span>Взятие крови</span><span class=\"num\">" + rub(BLOOD_DRAW) + "</span></div>" : "") + '<div class="tot"><span>Итого в пункте</span><span class="num">' + rub(a.p + (blood ? BLOOD_DRAW : 0)) + "</span></div></div>" +
       '<div class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + daysLabel(a.days) + ' после сдачи</span><span><svg class="ico"><use href="#i-pin"/></svg>Есть в ' + (NPTS[code] || 24) + ' пунктах сети</span></div>' +
-      '<label class="muted" style="font-size:13.5px;font-weight:600" for="k-point">Пункт</label><select id="k-point">' + REGIONS.map(function (r) { return '<optgroup label="' + esc(r.n) + '">' + r.pts.map(function (i) { return "<option>" + esc(ptName(POINTS[i])) + " · " + ptHours(POINTS[i]) + "</option>"; }).join("") + "</optgroup>"; }).join("") + "</select>" +
-      '<button class="btn btn-lime" type="button" data-add="' + code + '"><svg class="ico"><use href="#i-plus"/></svg>В корзину</button><button class="btn btn-ghost" type="button">Записаться на время</button>' +
+      '<label class="muted" style="font-size:13.5px;font-weight:600" for="k-point">Пункт</label>' + ptSelect("k-point") +
+      buyBtn(code) + '<button class="btn btn-ghost" type="button" data-go="book:' + esc(code) + '">' + icon("i-cal") + "Записаться на время</button>" +
       '<p class="fine">Срочно (ЦИТО) — когда лаборатория утвердит список, здесь появится плашка «Сегодня» и время, до которого нужно сдать.</p>';
-    $("#k-sticky").innerHTML = '<div class="price"><b>' + rub(a.p) + "</b><small>" + daysLabel(a.days).replace("Готово ", "") + (blood ? " · + взятие крови " + rub(BLOOD_DRAW) : "") + '</small></div><button class="btn btn-lime" type="button" data-add="' + code + '">В корзину</button>';
+    $("#k-sticky").innerHTML = '<div class="price"><b>' + rub(a.p) + "</b><small>" + daysLabel(a.days).replace("Готово ", "") + (blood ? " · + взятие крови " + rub(BLOOD_DRAW) : "") + "</small></div>" + buyBtn(code);
   }
   // ---------- points page: list + Leaflet map (loaded only when the view opens) ----------
   var CORE = ["Карачаево-Черкесия", "Кабардино-Балкария", "Ставропольский край"]; // вид карты по умолчанию
@@ -1400,25 +1950,272 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
   window.addEventListener("scroll", function () { if (!tip.hidden) hideTip(); }, { passive: true });
   $("#d-q").addEventListener("input", function (e) { docQ = norm(e.target.value); renderDocRows(); });
 
+  // ---------- screens 2.0: checkups, cart, checkout, order, booking, results. Demo: everything stays in this browser tab, nothing is sent ----------
+  var PAGES = ["points", "doctors", "checkups", "home-visit", "cart", "checkout", "order", "results", "about", "contacts", "docs", "privacy", "referral"];
+  var NAVOF = { card: "catalog", book: "catalog", checkout: "cart", order: "cart" };
+  var RENDER = { checkups: renderCheckups, cart: renderCart, checkout: renderCheckout, order: renderOrder, book: renderBook, results: renderResults };
+  var HOME_FREE = 1500;
+  var co = { mode: "point", pay: "online", addr: "" }, lastOrder = null;
+  var bk = { day: -1, slot: "", done: false };
+  var res = { step: "phone", phone: "", pdf: {} };
+  var DPREP = {}; DOC.sections.forEach(function (s) { s.items.forEach(function (it) { DPREP[it.c] = it.p; }); });
+  state.pt = 0; // выбранный пункт — общий для карточки, корзины и записи
+  function demo(t) { return '<p class="demo">' + icon("i-info") + "<span><b>Демо: подключим к МИС.</b> " + typo(t) + "</span></p>"; }
+  function nPos(n) { return plural(n, ["позиция", "позиции", "позиций"]); }
+  function ptSelect(id) {
+    return '<select id="' + id + '" data-ptsel>' + REGIONS.map(function (r) { return '<optgroup label="' + esc(r.n) + '">' + r.pts.map(function (i) { return '<option value="' + i + '"' + (i === state.pt ? " selected" : "") + ">" + esc(ptName(POINTS[i])) + " · " + ptHours(POINTS[i]) + "</option>"; }).join("") + "</optgroup>"; }).join("") + "</select>";
+  }
+  function ptLine(p) { return p.open ? '<span class="num">' + ptHours(p) + "</span>" + stateHtml(pointState(p)) : "<span>Часы работы — по телефону 8 800 201 78 30</span>"; }
+  function phoneDigits(v) { var d = v.replace(/\D/g, ""); if (d.length === 11 && (d[0] === "7" || d[0] === "8")) d = d.slice(1); return d; }
+  function fmtPhone(d) { return "+7 " + d.slice(0, 3) + " " + d.slice(3, 6) + "-" + d.slice(6, 8) + "-" + d.slice(8); }
+
+  // checkups: every complex of the own lab, grouped as in DOC.complexes
+  function renderCheckups() {
+    if ($("#cx-list").innerHTML) return; // static content; cart buttons are kept in sync by syncCart()
+    $("#cx-nav").innerHTML = DOC.complexes.map(function (g, i) { return g.items[0].c === "00-094" ? "" : '<button class="chip" type="button" data-cxg="' + i + '">' + esc(g.n) + ' <span class="n">' + g.items.length + "</span></button>"; }).join("");
+    $("#cx-list").innerHTML = DOC.complexes.map(function (g, i) {
+      if (g.items[0].c === "00-094") return '<section class="cx-grp cx-small" id="cxg-' + i + '"><h2>' + esc(g.n) + "</h2>" + g.items.map(function (it) { var x = CX[it.c]; return '<div class="cx-mini"><div><b>' + esc(x.n) + '</b><p class="cx-code num">Код МИС ' + esc(x.c) + " · " + (x.r ? typo("готово через " + x.r) : "срок — по телефону") + " · подготовка " + esc(x.prep) + '</p></div><b class="num">' + rub(x.p) + "</b>" + buyBtn(x.c) + "</div>"; }).join("") + "</section>";
+      return '<section class="cx-grp" id="cxg-' + i + '"><h2>' + esc(g.n) + "</h2><div>" + g.items.map(function (it) { return cxRow(CX[it.c]); }).join("") + "</div></section>";
+    }).join("");
+  }
+  function cxRow(x) {
+    var parts = x.parts ? '<details class="parts"><summary>Состав: ' + nAn(x.parts.length) + "</summary><ul>" + x.parts.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></details>" : '<p class="cx-none">Состав — <span class="fill">[уточнить в МИС]</span></p>';
+    return '<article class="cx"><div><h3>' + esc(x.n) + '</h3><p class="cx-code num">Код МИС ' + esc(x.c) + " · " + esc(x.mis) + "</p>" +
+      '<p class="cx-meta"><span>' + icon("i-clock") + (x.r ? typo("Готово через " + x.r) : "Срок — по телефону") + "</span><span>" + icon("i-drop") + "Кровь из вены</span></p>" + parts + "</div>" +
+      '<div class="cx-prep"><p class="cx-lbl">Подготовка</p><p><span class="prep-k">' + esc(x.prep) + "</span>" + esc(DOC.prep[x.prep]) + "</p></div>" +
+      '<div class="cx-buy"><div class="price"><b>' + rub(x.p) + "</b><small>цена в Черкесске, в других пунктах может отличаться</small></div>" + buyBtn(x.c) + "</div></article>";
+  }
+
+  // cart
+  function totals() {
+    var codes = Object.keys(cart), sum = 0, blood = false, urine = false, days = 0;
+    codes.forEach(function (c) { var x = item(c); sum += x.p; blood = blood || x.blood; urine = urine || x.urine; days = Math.max(days, x.days); });
+    var disc = co.pay === "online" ? sum - online(sum) : 0, draw = blood ? BLOOD_DRAW : 0;
+    return { codes: codes, sum: sum, disc: disc, draw: draw, total: sum - disc + draw, days: days, urine: urine, left: Math.max(0, HOME_FREE - sum), mode: co.mode, pay: co.pay };
+  }
+  function payLabel(t) { return t.pay === "online" ? "на сайте, скидка 10 %" : t.mode === "home" ? "при визите медсестры" : "в пункте"; }
+  function sumHtml(t, withItems) {
+    return (withItems ? '<ul class="sum-items">' + t.codes.map(function (c) { var x = item(c); return "<li><span>" + esc(x.n) + '</span><span class="num">' + rub(x.p) + "</span></li>"; }).join("") + "</ul>" : "") +
+      '<div class="lines"><div><span>' + nPos(t.codes.length) + '</span><span class="num">' + rub(t.sum) + "</span></div>" +
+      (t.disc ? '<div class="disc"><span>Скидка 10 % при оплате на сайте</span><span class="num">−' + rub(t.disc) + "</span></div>" : "") +
+      (t.draw ? '<div><span>Взятие крови<small>оплачивается отдельно</small></span><span class="num">' + rub(t.draw) + "</span></div>" : "") +
+      (t.mode === "home" ? "<div><span>Выезд медсестры</span><span>" + (t.left ? "по телефону" : "бесплатно") + "</span></div>" : "") +
+      '<div class="tot"><span>Итого' + (t.mode === "home" && t.left ? "<small>без стоимости выезда</small>" : "") + '</span><span class="num">' + rub(t.total) + "</span></div></div>";
+  }
+  function renderCart() {
+    var n = cartCount();
+    $("#cart-empty").hidden = !!n; $("#cart-full").hidden = !n;
+    if (!n) return;
+    var t = totals();
+    $("#cart-items").innerHTML = t.codes.map(function (c) {
+      var x = item(c);
+      return '<div class="citem"><div><button class="c-n" type="button" data-go="' + x.go + '">' + esc(x.n) + "</button><small>" + (CX[c] ? "Комплекс · " : "") + "код " + esc(c) + " · " + (x.days ? typo(daysLabel(x.days).toLowerCase()) : "срок — по телефону") + '</small></div><span class="c-p num">' + rub(x.p) + '</span><button class="rm" type="button" data-rm="' + esc(c) + '" aria-label="Убрать: ' + esc(x.n) + '">' + icon("i-x") + "</button></div>";
+    }).join("") + (t.draw ? '<div class="citem"><div><span class="c-n">Взятие крови из вены</span><small>Оплачивается отдельно, один раз на заказ</small></div><span class="c-p num">' + rub(BLOOD_DRAW) + "</span><span></span></div>" : "");
+    $("#cart-pt").innerHTML = ptSelect("c-pt");
+    $$("[data-mode]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.mode === co.mode ? "true" : "false"); });
+    $("#mode-point").hidden = co.mode !== "point"; $("#mode-home").hidden = co.mode !== "home";
+    renderCartSum();
+  }
+  function renderCartSum() {
+    var t = totals();
+    $("#cart-pt-st").innerHTML = ptLine(POINTS[state.pt]);
+    $("#pay-point-t").textContent = co.mode === "home" ? "Оплатить при визите медсестры" : "Оплатить в пункте";
+    $("#hv-note").innerHTML = t.left
+      ? "<p>" + typo("Выезд медсестры бесплатно при заказе от 1 500 ₽. До бесплатного выезда не хватает ") + '<b class="num">' + rub(t.left) + '</b>.</p><div class="meter" role="progressbar" aria-label="Сумма заказа до бесплатного выезда" aria-valuemin="0" aria-valuemax="' + HOME_FREE + '" aria-valuenow="' + t.sum + '"><i style="width:' + Math.min(100, t.sum / HOME_FREE * 100).toFixed(1) + '%"></i></div><p class="small">' + typo("Если заказ меньше 1 500 ₽, стоимость выезда уточните по телефону 8 800 201 78 30.") + "</p>"
+      : '<p class="hv-ok">' + icon("i-check") + "<span>" + typo("Выезд медсестры для этого заказа бесплатный: сумма анализов — ") + rub(t.sum) + ".</span></p>";
+    $("#cart-sum").innerHTML = '<h2 class="sum-h">Ваш заказ</h2>' + sumHtml(t) + '<button class="btn btn-lime" type="button" data-checkout>Оформить</button><p class="fine">' + typo("Цены — для пункта в Черкесске, в других пунктах могут отличаться.") + "</p>" + demo("Заказ и оплата работают только в этом окне браузера, ничего не отправляется.");
+  }
+  function renderCheckout() {
+    var n = cartCount();
+    $("#co-empty").hidden = !!n; $("#co-full").hidden = !n;
+    if (!n) return;
+    var t = totals();
+    $("#co-sum").innerHTML = '<h2 class="sum-h">Ваш заказ</h2>' + sumHtml(t, true) +
+      '<div class="sum-where"><b>' + (t.mode === "home" ? "Дома" : "Пункт") + "</b><span>" + esc(t.mode === "home" ? co.addr || "адрес не указан" : ptName(POINTS[state.pt])) + "</span><b>Оплата</b><span>" + payLabel(t) + '</span></div><button class="linkbtn" type="button" data-go="cart">Изменить заказ</button>';
+    $("#co-go").disabled = !$("#co-ok").checked;
+  }
+  function submitOrder() {
+    var name = $("#co-name").value.trim(), ph = phoneDigits($("#co-phone").value);
+    var err = !name ? "Укажите имя." : ph.length !== 10 ? "Проверьте номер телефона: нужно 10 цифр после +7." : "";
+    $("#co-err").textContent = err; $("#co-err").hidden = !err;
+    if (err) { (name ? $("#co-phone") : $("#co-name")).focus(); return; }
+    lastOrder = { no: "ДЕМО-" + String(Date.now()).slice(-6), t: totals(), pt: state.pt, addr: co.addr, name: name, phone: fmtPhone(ph) };
+    cart = {}; syncCart();
+    $("#co-form").reset(); $("#co-go").disabled = true;
+    go("order");
+  }
+  // preparation for each position: the card's own list, otherwise the MIS code from the doctors' catalogue
+  function prepHtml(codes) {
+    return '<ol class="prep-l">' + codes.map(function (c) {
+      var t = CARDS[c], b = t && t.blocks.filter(function (x) { return /подготов/i.test(x.h); })[0];
+      var rules = b ? (b.list || b.p || []).filter(function (x) { return !/^Лекарства сами не отменяйте/.test(x); }) : null;
+      var k = !rules && (CX[c] ? CX[c].prep : DPREP[c]);
+      return "<li><b>" + esc(item(c).n) + "</b>" + (rules ? "<ul>" + rules.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul>" : k ? '<p><span class="prep-k">' + esc(k) + "</span>" + esc(DOC.prep[k]) + "</p>" : "<p>Подготовка — в карточке анализа.</p>") + "</li>";
+    }).join("") + '</ol><p class="prep-last">Лекарства сами не отменяйте — скажите о них врачу.</p>';
+  }
+  function renderOrder() {
+    var o = lastOrder, el = $("#order-body");
+    if (!o) { el.innerHTML = '<div class="cempty"><h2>Заказа пока нет</h2><p>Подтверждение появится здесь, когда вы оформите заказ.</p><div class="acts"><a class="btn btn-lime" href="#cart" data-go="cart">Корзина</a><a class="btn btn-ghost" href="#catalog-blood" data-go="catalog:blood">Анализы и цены</a></div></div>'; return; }
+    var t = o.t, p = POINTS[o.pt], home = t.mode === "home";
+    var where = home
+      ? "<h2>Куда приедет медсестра</h2><p>" + esc(o.addr) + '</p><p class="small">Время визита — <span class="fill">[как согласуем: звонок оператора или выбор времени на сайте]</span></p>'
+      : "<h2>Куда прийти</h2><p><b>" + esc(ptName(p)) + '</b></p><p class="small">' + ptLine(p) + '</p><p><button class="linkbtn" type="button" data-go="points">Пункт на карте</button></p>';
+    var bring = ["Номер заказа — " + o.no + ".", typo("Паспорт или другой документ, удостоверяющий личность, — ") + '<span class="fill">[уточнить у лаборатории]</span>.', "Направление врача, если оно есть."];
+    if (t.urine) bring.push(typo("Контейнер с мочой — как собрать, сказано в подготовке."));
+    if (t.pay !== "online") bring.push(home ? "Оплата — при визите медсестры." : "Оплата — в пункте.");
+    var ready = t.days === 1 ? "Результат будет готов через 1 день после сдачи. " : t.days ? "Срок — до " + t.days + " дней после сдачи. " : "";
+    el.innerHTML = '<div class="okh"><span class="ok-ic">' + icon("i-check") + '</span><div><h1 class="num">Заказ № ' + o.no + '</h1><p class="lede">' + esc(o.name) + ", " + (home ? "медсестра приедет по адресу ниже." : "ждём вас в пункте CLD.") + "</p></div></div>" +
+      demo("Заказ не отправлен в лабораторию и не оплачен. Настоящий номер заказа, оплату и SMS подключим к МИС.") +
+      '<div class="cart-g"><div>' +
+        '<section class="osec">' + where + "</section>" +
+        '<section class="osec"><h2>Как подготовиться</h2>' + prepHtml(t.codes) + "</section>" +
+        '<section class="osec"><h2>Что взять с собой</h2><ul class="bring">' + bring.map(function (b) { return "<li>" + b + "</li>"; }).join("") + "</ul></section>" +
+        '<section class="osec"><h2>Результат</h2><p>' + typo(ready + "Посмотреть его можно в личном кабинете на сайте или в пункте CLD. Обсудите результат с врачом.") + '</p><div class="acts" style="margin-top:14px"><a class="btn btn-navy" href="#results" data-go="results">' + icon("i-file") + "Результаты анализов</a></div></section>" +
+      '</div><aside class="panel"><h2 class="sum-h">Состав заказа</h2>' + sumHtml(t, true) + '<div class="sum-where"><b>Оплата</b><span>' + payLabel(t) + '</span><b>Телефон</b><span class="num">' + esc(o.phone) + "</span></div></aside></div>";
+  }
+
+  // booking: point, one of the next 7 days, a demo slot within the point's hours
+  function bkDays() { var out = []; for (var i = 0; i < 7; i++) { var d = new Date(); d.setDate(d.getDate() + i); out.push(d); } return out; }
+  function hhmm(t) { return ("0" + Math.floor(t / 60)).slice(-2) + ":" + ("0" + t % 60).slice(-2); }
+  function fullDate(d) { return d.toLocaleDateString("ru-RU", { weekday: "long", day: "numeric", month: "long" }); }
+  function bkSlots(p, di) {
+    var out = [], now = new Date(), m = ((now.getUTCHours() + (p.tz || 3)) % 24) * 60 + now.getUTCMinutes();
+    for (var t = minutes(p.open); t + 30 <= minutes(p.close); t += 30) {
+      if (di === 0 && t < m + 60) continue; // сегодня — не раньше чем через час
+      out.push({ t: t, busy: (t / 30 + di * 5 + state.pt * 3) % 7 === 0 }); // ponytail: демо-занятость; настоящие слоты — из расписания МИС
+    }
+    return out;
+  }
+  function renderBook() {
+    var code = state.code, a = A[code], p = POINTS[state.pt], days = bkDays();
+    var cr = $("#bk-crumb"); cr.textContent = a.n; cr.dataset.go = "card:" + code;
+    $("#bk-lede").textContent = a.n + " · " + rub(a.p) + (a.bio.indexOf("Кровь") === 0 ? " + взятие крови " + rub(BLOOD_DRAW) : "");
+    $("#bk-sum").hidden = bk.done;
+    if (bk.done) {
+      $("#bk-body").innerHTML = '<div class="okh"><span class="ok-ic">' + icon("i-check") + '</span><div><h2>Вы записаны</h2><p class="lede">' + esc(a.n) + "<br>" + esc(fullDate(days[bk.day])) + ", " + bk.slot + "<br>" + esc(ptName(p)) + "</p></div></div>" +
+        demo("Запись не отправлена в пункт. Расписание пунктов и подтверждение записи подключим к МИС.") +
+        '<section class="osec"><h2>Как подготовиться</h2>' + prepHtml([code]) + "</section>" +
+        '<section class="osec"><h2>Оплатить заранее</h2><p>' + typo("Добавьте анализ в корзину и оплатите на сайте — скидка 10 %. Или оплатите в пункте.") + '</p><div class="acts" style="margin-top:14px">' + buyBtn(code) + '<button class="btn btn-ghost" type="button" data-bk="reset">Изменить запись</button></div></section>';
+      return;
+    }
+    if (p.open && bk.day < 0) { bk.day = 0; while (bk.day < 6 && !bkSlots(p, bk.day).length) bk.day++; }
+    var html = '<section class="bk-s"><h2>Пункт</h2>' + ptSelect("bk-pt") + '<p class="small">' + ptLine(p) + "</p></section>";
+    if (!p.open) html += '<div class="hv"><p>' + typo("В этот пункт запись по телефону 8 800 201 78 30. Там же подскажут часы работы.") + '</p><a class="btn btn-navy" href="tel:88002017830">' + icon("i-phone") + "Позвонить</a></div>";
+    else {
+      var sl = bkSlots(p, bk.day);
+      html += '<section class="bk-s"><h2>День</h2><div class="dates">' + days.map(function (d, i) { return '<button class="chip" type="button" data-day="' + i + '" aria-pressed="' + (i === bk.day) + '">' + (i === 0 ? "Сегодня" : i === 1 ? "Завтра" : d.toLocaleDateString("ru-RU", { weekday: "short" })) + "<small>" + d.toLocaleDateString("ru-RU", { day: "numeric", month: "short" }) + "</small></button>"; }).join("") + "</div></section>" +
+        '<section class="bk-s"><h2>Время</h2>' + (sl.length ? '<div class="slots">' + sl.map(function (s) { var h = hhmm(s.t); return '<button class="chip num" type="button" data-slot="' + h + '" aria-pressed="' + (bk.slot === h) + '"' + (s.busy ? ' disabled aria-label="' + h + ', занято"' : "") + ">" + h + "</button>"; }).join("") + "</div>" : '<p class="small">На этот день свободного времени нет — выберите другой день.</p>') + "</section>";
+    }
+    var sx = $("#bk-body .dates"); sx = sx ? sx.scrollLeft : 0;
+    $("#bk-body").innerHTML = html;
+    if ($("#bk-body .dates")) $("#bk-body .dates").scrollLeft = sx;
+    renderBookSum();
+  }
+  function renderBookSum() {
+    var a = A[state.code], p = POINTS[state.pt], d = bkDays()[bk.day];
+    $("#bk-sum").innerHTML = '<h2 class="sum-h">Запись</h2><div class="sum-where"><b>Анализ</b><span>' + esc(a.n) + "</span><b>Пункт</b><span>" + esc(ptName(p)) + "</span><b>Когда</b><span>" + (bk.slot && d ? esc(fullDate(d)) + ", " + bk.slot : p.open ? "выберите день и время" : "по телефону") + "</span></div>" +
+      '<button class="btn btn-lime" type="button" data-bk="ok"' + (bk.slot && p.open ? "" : " disabled") + ">" + icon("i-cal") + "Записаться</button>" + demo("Слоты — пример в часы работы пункта. Запись ничего не отправляет.");
+  }
+
+  // results: phone → code from SMS (demo: any 4 digits) → orders
+  var ST = { ready: ["own", "i-check", "Готов"], work: ["", "i-clock", "В работе"], new: ["partner", "i-cal", "Оформлен"] };
+  function demoOrders() {
+    function ago(n) { var x = new Date(); x.setDate(x.getDate() - n); return x.toLocaleDateString("ru-RU", { day: "numeric", month: "long" }); }
+    var list = [
+      { no: "ДЕМО-104215", date: ago(1), pt: 0, codes: ["04.25.015"], st: "work" },
+      { no: "ДЕМО-103870", date: ago(6), pt: 0, codes: ["20-017", "40-111", "30-010"], st: "ready" },
+      { no: "ДЕМО-099412", date: ago(41), pt: 1, codes: ["40-297"], st: "ready" }
+    ];
+    if (lastOrder) list.unshift({ no: lastOrder.no, date: "сегодня", pt: lastOrder.pt, codes: lastOrder.t.codes, st: "new", home: lastOrder.t.mode === "home" });
+    return list;
+  }
+  function pdfHtml(o) {
+    return '<div class="pdfp" role="region" aria-label="Макет бланка результатов"><div class="pdfp-h"><img src="../assets/cld-logo-horizontal-navy.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276"><span class="num">Заказ № ' + o.no + "</span></div>" +
+      '<p><span class="fill">[ФИО и дата рождения пациента]</span></p><p><span class="fill">[таблица из МИС: исследование, результат, единицы, референсный интервал лаборатории]</span></p><p><span class="fill">[подпись врача клинической лабораторной диагностики, дата выдачи]</span></p></div>' +
+      demo("Здесь скачается PDF-бланк из МИС. Сейчас файл не скачивается — показан макет бланка.");
+  }
+  function ordHtml(o) {
+    var st = ST[o.st], body;
+    if (o.st === "ready") body = '<div class="acts"><button class="btn btn-navy" type="button" data-res="pdf:' + o.no + '" aria-expanded="' + !!res.pdf[o.no] + '">' + icon("i-down") + "Скачать PDF (демо)</button><span>Обсудите результат с врачом.</span></div>" + (res.pdf[o.no] ? pdfHtml(o) : "");
+    else if (o.st === "work") body = '<p class="small">' + typo("Срок — " + o.codes.map(function (c) { return item(c).days; }).reduce(function (x, y) { return Math.max(x, y); }, 0) + " дня после сдачи. Когда результат будет готов, бланк появится здесь.") + "</p>";
+    else body = '<p class="small">Результат появится здесь после сдачи анализов.</p>';
+    return '<article class="ord"><div class="ord-h"><div><b class="num">Заказ № ' + o.no + '</b><span class="small">' + esc(o.date) + " · " + esc(o.home ? "анализы на дому" : ptName(POINTS[o.pt])) + '</span></div><span class="tag ' + st[0] + '">' + icon(st[1]) + st[2] + "</span></div><ul>" + o.codes.map(function (c) { return "<li>" + esc(item(c).n) + "</li>"; }).join("") + "</ul>" + body + "</article>";
+  }
+  function renderResults() {
+    var el = $("#res-body");
+    if (res.step === "phone") el.innerHTML = '<form class="auth" data-form="r-phone" novalidate><h2>Вход по номеру телефона</h2><p>' + typo("Введите номер, который указывали при заказе. Пришлём код в SMS.") + '</p><label class="fld"><span>Телефон</span><input id="r-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value="' + esc(res.phone) + '"></label><p class="err" id="r-err" hidden></p><button class="btn btn-lime" type="submit">Получить код</button>' + demo("SMS не отправляется: на следующем шаге подойдёт любой код из 4 цифр.") + "</form>";
+    else if (res.step === "code") el.innerHTML = '<form class="auth" data-form="r-code" novalidate><h2>Код из SMS</h2><p>Отправили код на номер <b class="num">' + esc(res.phone) + '</b>.</p><label class="fld"><span>Код из SMS</span><input id="r-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="4" placeholder="0000"></label><p class="err" id="r-err" hidden></p><button class="btn btn-lime" type="submit">Войти</button><button class="linkbtn" type="button" data-res="edit">Изменить номер</button>' + demo("SMS не отправляется. Подойдёт любой код из 4 цифр, например 1234.") + "</form>";
+    else el.innerHTML = '<div class="res-top"><p>Вы вошли по номеру <b class="num">' + esc(res.phone) + '</b></p><button class="linkbtn" type="button" data-res="out">Выйти</button></div><div class="ords">' + demoOrders().map(ordHtml).join("") + "</div>" + demo("Заказы на этой странице — примеры. Настоящие заказы и бланки результатов подключим к МИС.");
+  }
+
+  document.addEventListener("submit", function (e) {
+    var f = e.target.dataset.form; if (!f) return;
+    e.preventDefault();
+    if (f === "order") { submitOrder(); return; }
+    var err = $("#r-err");
+    if (f === "r-phone") {
+      var d = phoneDigits($("#r-phone").value);
+      if (d.length !== 10) { err.textContent = "Проверьте номер: нужно 10 цифр после +7."; err.hidden = false; $("#r-phone").focus(); return; }
+      res.phone = fmtPhone(d); res.step = "code"; renderResults(); $("#r-code").focus();
+    } else if (f === "r-code") {
+      if (!/^\d{4}$/.test($("#r-code").value.trim())) { err.textContent = "Введите 4 цифры кода."; err.hidden = false; $("#r-code").focus(); return; }
+      res.step = "in"; renderResults(); window.scrollTo(0, 0);
+    }
+  });
+  document.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t.matches("[data-ptsel]")) { state.pt = +t.value; if (state.view === "cart") renderCartSum(); if (state.view === "book") { bk.day = -1; bk.slot = ""; renderBook(); } }
+    else if (t.name === "pay") { co.pay = t.value; renderCartSum(); }
+    else if (t.id === "co-ok") $("#co-go").disabled = !t.checked;
+  });
+  document.addEventListener("input", function (e) { if (e.target.id === "c-addr") $("#c-addr-err").hidden = true; });
+  // clicks of the new screens; returns true when handled
+  function clickNew(e) {
+    var t = e.target, x;
+    if ((x = t.closest("[data-rm]"))) { delete cart[x.dataset.rm]; toast("Убрали из корзины"); syncCart(); return true; }
+    if ((x = t.closest("[data-mode]"))) { co.mode = x.dataset.mode; renderCart(); return true; }
+    if (t.closest("[data-checkout]")) {
+      if (co.mode === "home") { co.addr = $("#c-addr").value.trim(); $("#c-addr-err").hidden = !!co.addr; if (!co.addr) { $("#c-addr").focus(); return true; } }
+      go("checkout"); return true;
+    }
+    if ((x = t.closest("[data-cxg]"))) { $("#cxg-" + x.dataset.cxg).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); return true; }
+    if ((x = t.closest("[data-day]"))) { bk.day = +x.dataset.day; bk.slot = ""; renderBook(); return true; }
+    if ((x = t.closest("[data-slot]"))) { bk.slot = x.dataset.slot; $$("[data-slot]").forEach(function (b) { b.setAttribute("aria-pressed", b === x ? "true" : "false"); }); renderBookSum(); return true; }
+    if ((x = t.closest("[data-bk]"))) { if (x.dataset.bk === "ok") bk.done = true; else bk = { day: -1, slot: "", done: false }; renderBook(); window.scrollTo(0, 0); return true; }
+    if ((x = t.closest("[data-res]"))) {
+      var v = x.dataset.res;
+      if (v === "edit") res.step = "phone";
+      else if (v === "out") res = { step: "phone", phone: "", pdf: {} };
+      else { var no = v.slice(4); res.pdf[no] = !res.pdf[no]; }
+      renderResults(); return true;
+    }
+    if (t.closest("[data-print]")) { window.print(); return true; }
+    return false;
+  }
+
   var curHash = null;
   function go(target, push) {
     var p = target.split(":"), v = p[0];
-    if (v === "catalog") { state.view = "catalog"; state.cat = p[1] === "checkups" ? "blood" : (p[1] || state.cat); }
+    if (v === "catalog" && p[1] === "checkups") v = "checkups"; // старые ссылки «catalog:checkups» ведут на экран чек-апов
+    if (v === "catalog") { state.view = "catalog"; state.cat = p[1] || state.cat; }
     else if (v === "card") { state.view = "card"; state.code = p[1] || state.code; }
-    else if (v === "points" || v === "doctors") state.view = v;
+    else if (v === "book") { if (state.view !== "book" || state.code !== p[1]) bk = { day: -1, slot: "", done: false }; state.view = "book"; if (A[p[1]]) state.code = p[1]; }
+    else if (PAGES.indexOf(v) >= 0) state.view = v;
     else state.view = "home";
     $$("[data-view]").forEach(function (s) { s.hidden = s.dataset.view !== state.view; });
-    var navv = state.view === "card" ? "catalog" : state.view;
+    document.body.dataset.screen = state.view; // print rules for the referral form
+    var navv = NAVOF[state.view] || state.view;
     $$(".nav [data-nav]").forEach(function (b) { if (b.dataset.nav === navv) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
     $$(".tabbar [data-tab]").forEach(function (b) { if (b.dataset.tab === navv) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
     if (state.view === "catalog") renderCatalog();
     if (state.view === "card") renderCard();
     if (state.view === "points") { renderPoints(); initMap(); }
     if (state.view === "doctors") renderDoctors();
+    if (RENDER[state.view]) RENDER[state.view]();
     hideTip();
     $$(".sugg").forEach(function (b) { b.hidden = true; });
     menu(false);
-    var hash = state.view === "home" ? "home" : state.view === "catalog" ? "catalog-" + state.cat : state.view === "card" ? "card-" + state.code : state.view;
+    var hash = state.view === "home" ? "home" : state.view === "catalog" ? "catalog-" + state.cat : state.view === "card" ? "card-" + state.code : state.view === "book" ? "book-" + state.code : state.view;
     curHash = hash;
     // a real history entry for every screen, so the browser «Назад» works; the hashchange that follows is ignored by route()
     if (push !== false && location.hash !== "#" + hash) { try { location.hash = hash; } catch (e) { /* sandboxed frame */ } }
@@ -1470,6 +2267,19 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
       ["doc1", "Первый экран для врача", "Что выполняет собственная лаборатория и где скачать PDF-каталог. Цен нет: они различаются по пунктам и есть в карточках анализов."],
       ["doc2", "Код МИС и подготовка", "Поиск по коду и названию, разделы как в печатном каталоге. Подготовка — коротким кодом: расшифровка по наведению или нажатию и в легенде под таблицей. На телефоне таблица превращается в карточки."],
       ["doc3", "Клиникам — без форм", "Условия сотрудничества — у медицинского представителя по телефону. Врачу лично ничего не обещаем: так требует 323-ФЗ."]
+    ],
+    checkups: [
+      ["cx1", "Все комплексы собственной лаборатории", "22 набора из МИС, сгруппированы как в каталоге для врачей. У каждого — понятное название и код МИС мелко, состав раскрывается, срок, подготовка кодом и расшифровкой, точная цена Черкесска. Госпитальный скрининг — в конце мелко."]
+    ],
+    cart: [
+      ["cart1", "Полный итог до оформления", "Позиции с ценами и отдельной строкой «Взятие крови — 200 ₽». Скидка 10 % считается только на анализы. Для выезда медсестры видно, сколько не хватает до бесплатного выезда от 1 500 ₽."],
+      ["cart2", "В пункте или дома", "Пункт выбирается из всех 29, по регионам. Дома — адрес и честная фраза: работает ли выезд в населённом пункте, уточните по телефону. Заказ не отправляется — это демо до подключения МИС."]
+    ],
+    results: [
+      ["res1", "Вход по телефону и коду из SMS", "Без логина и пароля. В демо подходит любой код из 4 цифр. На экране нет чисел и оценок «норма / не норма»: бланк в PDF и подсказка обсудить результат с врачом."]
+    ],
+    referral: [
+      ["rf1", "Бланк для печати A5", "Врач отмечает анализы галочками, коды — по МИС. Кнопка «Распечатать» печатает только бланк. Код врача — заглушка, пока лаборатория не утвердит формат."]
     ]
   };
   var notesOn = false;
@@ -1493,7 +2303,7 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
       else { pin.style.left = (Math.max(0, 4 - el.getBoundingClientRect().left) + off * 32) + "px"; pin.style.top = "-32px"; } // phone: above the element, not over its text
       el.appendChild(pin);
     });
-    $("#drawer-title").textContent = { home: "Главная", catalog: "Раздел каталога", card: "Карточка анализа", points: "Пункты", doctors: "Врачам" }[state.view] + ": пояснения";
+    $("#drawer-title").textContent = ({ home: "Главная", catalog: "Раздел каталога", card: "Карточка анализа", points: "Пункты", doctors: "Врачам", checkups: "Чек-апы", cart: "Корзина", results: "Результаты", referral: "Бланк направления" }[state.view] || "Экран") + ": пояснения";
     $("#notes-list").innerHTML = viewNotes().map(function (n, i) { return '<li data-i="' + i + '"><span>' + (i + 1) + "</span><div><b>" + esc(n[1]) + "</b><p>" + esc(n[2]) + "</p></div></li>"; }).join("");
   }
   function setNotes(on) {
@@ -1531,6 +2341,7 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
     var add = e.target.closest("[data-add]"); if (add) { toggleCart(add.dataset.add, add); return; }
     var ft = e.target.closest("[data-ftab]"); if (ft) { $$("[data-ftab]").forEach(function (b) { b.setAttribute("aria-selected", b === ft ? "true" : "false"); }); $("#organs").hidden = ft.dataset.ftab !== "organs"; $("#situations").hidden = ft.dataset.ftab !== "sits"; if (notesOn) placePins(); return; }
     var sgo = e.target.closest("[data-search-go]"); if (sgo) { var si = sgo.closest(".search").querySelector("input"); var best = si.value.trim() && search(si.value)[0]; if (best) go("card:" + best.code); else si.focus(); return; }
+    if (clickNew(e)) return;
     var stub = e.target.closest("[data-stub]"); if (stub) { e.preventDefault(); toast(stub.dataset.stub); return; }
     if (e.target.closest("[data-focus-search]")) { var fi = $('[data-view="' + state.view + '"] input[type="search"]'); window.scrollTo(0, 0); if (fi) fi.focus(); return; }
     var sc = e.target.closest("[data-scroll]"); if (sc) { e.preventDefault(); go("home"); setTimeout(function () { $("#" + sc.dataset.scroll).scrollIntoView({ behavior: "smooth" }); }, 50); return; }
@@ -1548,7 +2359,8 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
     if (h === curHash) return;
     if (h.indexOf("catalog-") === 0) go("catalog:" + h.slice(8), false);
     else if (h.indexOf("card-") === 0) go("card:" + h.slice(5), false);
-    else if (h === "points" || h === "doctors") go(h, false);
+    else if (h.indexOf("book-") === 0) go("book:" + h.slice(5), false);
+    else if (PAGES.indexOf(h) >= 0) go(h, false);
     else go("home", false);
   }
   window.addEventListener("hashchange", route);
