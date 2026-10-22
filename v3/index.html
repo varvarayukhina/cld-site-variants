@@ -711,7 +711,7 @@ p { margin: 0; }
       "<div><dt>Что сдаём</dt><dd>" + esc(a.bio) + "</dd></div>" +
       "<div><dt>Сколько ждать</dt><dd>" + C.daysLabel(a.days) + "</dd></div>" +
       "<div><dt>Где сдать</dt><dd>" + inPoints(n) + "</dd></div>" +
-      "<div><dt>Кто делает анализ</dt><dd>" + (a.own ? "Своя лаборатория в Черкесске" : "Выполняет партнёрская лаборатория") + "</dd></div></dl></section>";
+      "<div><dt>Кто делает анализ</dt><dd>" + (a.own ? "Собственная лаборатория в Черкесске" : "Выполняет партнёрская лаборатория") + "</dd></div></dl></section>";
     var body;
     if (t) {
       var sec = function (h, b, extra) { return b ? '<section class="qa"><h2>' + h + "</h2>" + (extra || "") + blockHTML(b) + "</section>" : ""; };

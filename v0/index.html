@@ -545,7 +545,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
       <div class="wrap hero-grid">
         <div class="hero-main">
           <h1 data-note="home1">Результат анализов — <em>сегодня</em></h1>
-          <p class="sub">Своя лаборатория в Черкесске и 29 пунктов рядом с домом.</p>
+          <p class="sub">Собственная лаборатория в Черкесске и 29 пунктов рядом с домом.</p>
           <p class="perk"><svg class="ico"><use href="#i-home"/></svg>Бесплатный выезд медсестры при заказе от 1&nbsp;500&nbsp;₽</p>
           <div class="search hero-search" data-note="home2">
             <svg class="ico"><use href="#i-search"/></svg>
@@ -624,7 +624,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
     <div class="sec wrap">
       <div class="sec-h"><h2>Почему CLD</h2></div>
       <div class="advs" data-note="home8">
-        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-lab"/></svg></span><b>Своя лаборатория в Черкесске</b><p>Самые частые анализы делаем здесь, а не везём в другой город.</p></div>
+        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-lab"/></svg></span><b>Собственная лаборатория в Черкесске</b><p>Самые частые анализы делаем здесь, а не везём в другой город.</p></div>
         <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b class="num">29 пунктов</b><p>В Карачаево-Черкесии, Кабардино-Балкарии и других регионах.</p></div>
         <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Выезд медсестры</b><p>Бесплатно при заказе от 1 500 ₽.</p></div>
         <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-percent"/></svg></span><b class="num">−10% на сайте</b><p>При оплате заказа онлайн.</p></div>
@@ -656,7 +656,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
         <div>
           <div class="chead" data-note="cat2"><div class="picto" id="c-picto"></div><div><h1 id="c-title">Кровь и анемия</h1><p id="c-desc"></p></div></div>
           <div class="filters" data-note="cat3">
-            <button class="chip" type="button" aria-pressed="false" data-filter="own">Своя лаборатория</button>
+            <button class="chip" type="button" aria-pressed="false" data-filter="own">Собственная лаборатория</button>
             <button class="chip" type="button" aria-pressed="false" data-filter="oneday">Готово за 1 день</button>
             <span class="grow"></span>
             <label class="muted" style="font-size:14px" for="sort">Порядок</label>
@@ -904,7 +904,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
   function row(code) {
     var a = A[code];
     return '<div class="arow"><div><button class="a-name" type="button" data-go="card:' + code + '">' + esc(a.n) + '</button><p class="a-desc">' + esc(a.d) + '</p></div>' +
-      '<div class="a-meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + (a.days === 1 ? "1 день" : a.days + " дня") + '</span><span><svg class="ico"><use href="#i-drop"/></svg>' + esc(a.bio) + '</span><span><svg class="ico"><use href="#i-lab"/></svg>' + (a.own ? "Своя лаборатория" : "Партнёрская лаборатория") + "</span></div>" +
+      '<div class="a-meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + (a.days === 1 ? "1 день" : a.days + " дня") + '</span><span><svg class="ico"><use href="#i-drop"/></svg>' + esc(a.bio) + '</span><span><svg class="ico"><use href="#i-lab"/></svg>' + (a.own ? "Собственная лаборатория" : "Партнёрская лаборатория") + "</span></div>" +
       '<div class="a-buy"><div class="price"><b>' + rub(a.p) + "</b><small>онлайн " + rub(online(a.p)) + "</small></div>" + addBtn(code) + "</div></div>";
   }
 
@@ -1012,7 +1012,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
     var cc = $("#crumb-card-cat"); cc.textContent = cat.n; cc.dataset.go = "catalog:" + cat.id;
     var t = CARDS[code];
     $("#k-lede").textContent = (t && t.lede) || a.d + ".";
-    $("#k-tags").innerHTML = '<span class="tag">' + esc(a.bio) + '</span><span class="tag ' + (a.own ? "own" : "partner") + '">' + (a.own ? "Своя лаборатория CLD" : "Партнёрская лаборатория") + '</span><span class="tag">Код ' + esc(code) + '</span>' + (a.off !== a.n ? '<span class="tag" style="background:none;padding-left:0;font-weight:500;letter-spacing:0">' + esc(a.off) + "</span>" : "");
+    $("#k-tags").innerHTML = '<span class="tag">' + esc(a.bio) + '</span><span class="tag ' + (a.own ? "own" : "partner") + '">' + (a.own ? "Собственная лаборатория CLD" : "Партнёрская лаборатория") + '</span><span class="tag">Код ' + esc(code) + '</span>' + (a.off !== a.n ? '<span class="tag" style="background:none;padding-left:0;font-weight:500;letter-spacing:0">' + esc(a.off) + "</span>" : "");
     var html = "";
     if (t) {
       t.blocks.forEach(function (b) {
@@ -1079,9 +1079,9 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
     catalog: [
       ["cat1", "Две навигации рядом", "Переключатель «по органам / по ситуации» и список разделов. На телефоне разделы становятся лентой сверху."],
       ["cat2", "Раздел объясняет себя", "Название словами пациента и одно-два предложения: что покажут эти анализы и когда их сдают."],
-      ["cat3", "Фильтры, которые нужны пациенту", "«Своя лаборатория» и «Готово за 1 день». Плашки «Сегодня» и «ЦИТО» появятся, когда в МИС заполнят поля срочности."],
+      ["cat3", "Фильтры, которые нужны пациенту", "«Собственная лаборатория» и «Готово за 1 день». Плашки «Сегодня» и «ЦИТО» появятся, когда в МИС заполнят поля срочности."],
       ["cat4", "Чек-ап раздела — первым", "Готовый набор с составом, сроком и ценой. Выгоду показываем, только если она честно считается от цен каталога."],
-      ["cat5", "Строка анализа", "Название, что покажет, срок, биоматериал, своя или партнёрская лаборатория, цена и цена онлайн. Партнёр не называется по имени."]
+      ["cat5", "Строка анализа", "Название, что покажет, срок, биоматериал, собственная или партнёрская лаборатория, цена и цена онлайн. Партнёр не называется по имени."]
     ],
     card: [
       ["card1", "Название и одна строка смысла", "Сначала простое название и что анализ покажет. Официальное название и код — мелко, для врача и поиска."],
