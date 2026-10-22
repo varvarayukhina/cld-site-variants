@@ -1,0 +1,15 @@
+/* Avanti CLD — rebuilt from the brandbook PDF subsets. Paths are relative to this file. */
+@font-face {
+  font-family: "Avanti CLD";
+  src: url('AvantiCLD-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Avanti CLD";
+  src: url('AvantiCLD-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}

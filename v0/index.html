@@ -1,0 +1,871 @@
+<title>CLD — прототип сайта</title>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="../fonts/montserrat.css">
+<link rel="stylesheet" href="../fonts/avanti.css">
+<style>
+/* Layout: two-row header, thesis hero on navy with live point status, catalogue as an index (organs / situations) of cell pictograms, analysis rows instead of identical cards, card page with sticky price. Single light theme on purpose: CLD's brand world is white + navy + lime. */
+:root {
+  --navy: #14374B; --navy-2: #0F2B3B; --lime: #AFC81E; --lime-soft: #F3F7E0; --navy-soft: #E7EFF3;
+  --bg: #FFFFFF; --surface: #F0F0F0; --surface-2: #F7F8F8; --ink: #14374B; --muted: #4A6474; --line: #D6DEE2;
+  --ok: #2E7D32; --danger: #C54D42; --on-navy: #FFFFFF; --on-navy-muted: #B9CAD3;
+  --display: "Avanti CLD", "Montserrat", "Segoe UI", Arial, sans-serif;
+  --text: "Montserrat", "Segoe UI", Arial, sans-serif;
+  --r-card: 14px; --r-ctrl: 10px; --wrap: 1240px;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--text); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--lime); color: var(--navy); }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; text-underline-offset: 3px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3 { margin: 0; line-height: 1.15; text-wrap: balance; font-family: var(--display); font-weight: 700; letter-spacing: -.01em; }
+p { margin: 0; }
+.num { font-variant-numeric: tabular-nums; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.muted { color: var(--muted); }
+.ico { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- header ---------- */
+.top { position: sticky; top: calc(var(--sw-h, 0px) + env(safe-area-inset-top, 0px)); z-index: 40; background: var(--bg); box-shadow: 0 1px 0 var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 41; background: var(--bg); }
+.util { background: var(--surface-2); font-size: 14px; }
+.util .wrap { display: flex; align-items: center; gap: 22px; min-height: 40px; }
+.util a, .util button { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
+.util .ico { width: 17px; height: 17px; }
+.util .spacer { flex: 1; }
+.pointbtn b { font-weight: 600; }
+.state { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.state::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+.state.closed { color: var(--danger); }
+.state.closed::before { background: var(--danger); }
+.bar .wrap { display: flex; align-items: center; gap: 28px; min-height: 72px; }
+.logo { width: 178px; flex: none; }
+.nav { display: flex; gap: 4px; }
+.nav button { background: none; border: 0; padding: 10px 12px; border-radius: 10px; font-weight: 600; font-size: 15.5px; cursor: pointer; white-space: nowrap; }
+.nav button:hover { background: var(--surface); }
+.nav button[aria-current="page"] { background: var(--navy-soft); }
+.bar .grow { flex: 1; }
+.cartbtn { position: relative; display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: #FFF; border: 0; border-radius: 10px; padding: 11px 16px; font-weight: 700; font-size: 15px; cursor: pointer; }
+.cartbtn .count { min-width: 22px; height: 22px; border-radius: 11px; background: var(--lime); color: var(--navy); font-size: 13px; display: inline-grid; place-items: center; padding: 0 6px; }
+.mbtn { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
+.tabbar { display: none; }
+
+/* ---------- search ---------- */
+.search { position: relative; }
+.search input { width: 100%; font: 500 18px var(--text); color: var(--navy); border: 0; border-radius: 12px; padding: 18px 20px 18px 54px; background: #FFF; box-shadow: 0 2px 0 rgba(0,0,0,.05); }
+.search input::placeholder { color: #6A7F8C; }
+.search .ico { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; color: var(--navy); }
+.sugg { position: absolute; left: 0; right: 0; top: calc(100% + 8px); background: #FFF; border-radius: 12px; box-shadow: 0 12px 32px rgba(20,55,75,.22); padding: 6px; z-index: 30; display: grid; color: var(--ink); }
+.sugg[hidden] { display: none; }
+.sugg button { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; text-align: left; background: none; border: 0; padding: 10px 12px; border-radius: 8px; cursor: pointer; }
+.sugg button:hover, .sugg button.on { background: var(--navy-soft); }
+.sugg .s-name { font-weight: 600; }
+.sugg .s-hint { grid-column: 1; font-size: 13.5px; color: var(--muted); }
+.sugg .s-price { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sugg .s-empty { padding: 12px; font-size: 15px; color: var(--muted); }
+.sugg mark { background: var(--lime-soft); color: inherit; border-radius: 3px; padding: 0 1px; }
+.fixnote { font-size: 13px; color: var(--muted); padding: 4px 12px 8px; }
+
+/* ---------- hero ---------- */
+.hero { background: var(--navy); color: var(--on-navy); position: relative; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: 56px; padding-block: 56px 64px; align-items: start; position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(38px, 5.2vw, 64px); line-height: 1.04; }
+.hero h1 em { font-style: normal; color: var(--lime); }
+.hero .sub { font-size: 19px; color: var(--on-navy-muted); margin-top: 18px; max-width: 46ch; }
+.hero .search { margin-top: 30px; max-width: 640px; }
+.quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.quick button { background: rgba(255,255,255,.1); color: #FFF; border: 0; border-radius: 999px; padding: 8px 14px; font-size: 14.5px; font-weight: 500; cursor: pointer; transition: background .2s var(--ease); }
+.quick button:hover { background: rgba(255,255,255,.2); }
+.pointcard { background: #FFF; color: var(--ink); border-radius: var(--r-card); padding: 22px; display: grid; gap: 14px; box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+.pointcard h2 { font-size: 20px; }
+.points { display: grid; gap: 6px; }
+.points label { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; padding: 10px 12px; border-radius: 10px; cursor: pointer; border: 1.5px solid var(--line); }
+.points label:has(input:checked) { border-color: var(--navy); background: var(--navy-soft); }
+.points input { accent-color: var(--navy); width: 18px; height: 18px; margin: 0; }
+.points .p-addr { font-weight: 600; font-size: 15.5px; }
+.points .p-hours { font-size: 13.5px; color: var(--muted); grid-column: 2; }
+.points .state { grid-row: 1 / span 2; grid-column: 3; font-size: 13px; }
+.pointcard .row2 { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15.5px var(--text); border: 0; border-radius: var(--r-ctrl); padding: 13px 18px; cursor: pointer; text-decoration: none; transition: transform .2s var(--ease), background .2s var(--ease); }
+.btn:active { transform: translateY(1px); }
+.btn-lime { background: var(--lime); color: var(--navy); }
+.btn-lime:hover { background: #BED62F; }
+.btn-navy { background: var(--navy); color: #FFF; }
+.btn-navy:hover { background: var(--navy-2); }
+.btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--navy); }
+.hero-cells { position: absolute; right: -40px; bottom: -70px; width: 340px; opacity: .55; z-index: 0; pointer-events: none; }
+
+/* ---------- sections ---------- */
+.sec { padding-block: 64px; }
+.sec + .sec { padding-top: 8px; }
+.sec-h { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 26px; flex-wrap: wrap; }
+.sec-h h2 { font-size: clamp(28px, 3.2vw, 38px); }
+.sec-h p { color: var(--muted); max-width: 56ch; }
+.linkbtn { background: none; border: 0; padding: 0; font-weight: 700; color: var(--navy); cursor: pointer; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+
+/* finder: organs index + situations */
+.finder { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 48px; }
+.finder h3 { font-size: 22px; margin-bottom: 16px; }
+.organs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px 18px; }
+.organ { display: grid; grid-template-columns: 46px 1fr; gap: 12px; align-items: center; text-align: left; background: none; border: 0; border-radius: 12px; padding: 10px; cursor: pointer; transition: background .2s var(--ease); }
+.organ:hover { background: var(--surface-2); }
+.organ b { display: block; font-weight: 700; font-size: 15.5px; line-height: 1.3; }
+.organ span { display: block; font-size: 13px; color: var(--muted); line-height: 1.35; margin-top: 2px; }
+.picto { width: 46px; height: 46px; background: var(--navy-soft); border-radius: 12px; padding: 7px; }
+.picto svg { width: 100%; height: 100%; }
+.picto rect { fill: var(--navy); transition: transform .35s var(--ease), fill .35s var(--ease); transform-box: fill-box; transform-origin: center; }
+.picto rect.ac { fill: var(--lime); }
+.organ:hover .picto rect, .crow:hover .picto rect { transform: scale(.72); }
+.organ:hover .picto rect:nth-child(3n), .crow:hover .picto rect:nth-child(3n) { transform: scale(1); }
+.situations { display: grid; border-top: 1px solid var(--line); }
+.sit { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 15px 4px; border-bottom: 1px solid var(--line); text-align: left; background: none; border-left: 0; border-right: 0; border-top: 0; cursor: pointer; }
+.sit:hover .sit-t { text-decoration: underline; text-underline-offset: 3px; }
+.sit-t { font-weight: 700; font-size: 16.5px; }
+.sit-d { font-size: 14px; color: var(--muted); grid-column: 1; }
+.sit-p { grid-row: 1 / span 2; grid-column: 2; text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; font-size: 17px; }
+.sit-p small { display: block; font-weight: 500; font-size: 12.5px; color: var(--muted); }
+
+/* analysis rows */
+.rows { display: grid; border-top: 1px solid var(--line); }
+.arow { display: grid; grid-template-columns: minmax(0, 1fr) 210px 200px; gap: 8px 28px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--line); }
+.arow .a-name { font-weight: 700; font-size: 17.5px; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.arow .a-name:hover { text-decoration: underline; text-underline-offset: 3px; }
+.arow .a-desc { font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+.arow .a-meta { display: grid; gap: 3px; font-size: 14px; color: var(--muted); }
+.arow .a-meta span { display: inline-flex; align-items: center; gap: 7px; }
+.arow .a-meta .ico { width: 16px; height: 16px; }
+.arow .a-buy { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+.price { text-align: right; line-height: 1.2; }
+.price b { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.price small { display: block; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.addbtn { width: 44px; height: 44px; border-radius: 10px; border: 0; background: var(--lime); color: var(--navy); display: grid; place-items: center; cursor: pointer; transition: background .2s var(--ease), transform .2s var(--ease); }
+.addbtn:hover { background: #BED62F; }
+.addbtn.added { background: var(--navy); color: #FFF; }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: .03em; padding: 4px 9px; border-radius: 999px; background: var(--navy-soft); color: var(--navy); white-space: nowrap; }
+.tag.own { background: var(--lime-soft); }
+.tag.partner { background: var(--surface); color: var(--muted); }
+.tag.cito { background: var(--navy); color: #FFF; }
+
+/* steps */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; counter-reset: s; border-top: 2px solid var(--navy); }
+.step { padding: 22px 26px 0 0; counter-increment: s; }
+.step::before { content: counter(s); font: 800 44px/1 var(--text); color: var(--lime); display: block; margin-bottom: 10px; }
+.step b { display: block; font-size: 18px; margin-bottom: 4px; }
+.step p { font-size: 15px; color: var(--muted); max-width: 32ch; }
+
+/* proof + doctors band */
+.band { background: var(--surface); }
+.band .wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding-block: 40px; }
+.fact b { display: block; font: 800 34px/1.1 var(--text); font-variant-numeric: tabular-nums; }
+.fact span { color: var(--muted); font-size: 15px; }
+.docs { background: var(--lime); }
+.docs .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; padding-block: 36px; }
+.docs h2 { font-size: clamp(24px, 2.6vw, 32px); }
+.docs p { margin-top: 6px; max-width: 60ch; }
+footer.foot { background: var(--navy); color: var(--on-navy-muted); font-size: 14px; }
+footer.foot .wrap { display: grid; grid-template-columns: auto 1fr; gap: 12px 40px; padding-block: 36px 28px; }
+footer.foot img { width: 150px; }
+footer.foot .warn { grid-column: 1 / -1; background: #FFF; color: var(--navy); text-align: center; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; padding: 14px; border-radius: 8px; font-size: 14px; }
+
+/* ---------- catalogue ---------- */
+.crumbs { font-size: 14px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; padding-top: 22px; }
+.crumbs button { background: none; border: 0; padding: 0; color: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.catalog { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 44px; padding-block: 20px 72px; }
+.rail { position: sticky; top: calc(140px + var(--sw-h, 0px)); align-self: start; display: grid; gap: 14px; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface); border-radius: 10px; padding: 4px; }
+.seg button { border: 0; background: none; padding: 9px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: #FFF; box-shadow: 0 1px 3px rgba(20,55,75,.15); }
+.clist { display: grid; gap: 2px; }
+.crow { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; background: none; border: 0; border-radius: 10px; padding: 7px 8px; text-align: left; cursor: pointer; font-weight: 600; font-size: 15px; }
+.crow .picto { width: 34px; height: 34px; padding: 5px; border-radius: 9px; }
+.crow:hover { background: var(--surface-2); }
+.crow[aria-current="true"] { background: var(--navy-soft); }
+.chead { display: grid; grid-template-columns: 76px 1fr; gap: 20px; align-items: center; margin-bottom: 22px; }
+.chead .picto { width: 76px; height: 76px; padding: 12px; border-radius: 18px; }
+.chead h1 { font-size: clamp(32px, 4vw, 46px); }
+.chead p { color: var(--muted); margin-top: 6px; max-width: 60ch; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 18px; }
+.chip { border: 1.5px solid var(--line); background: #FFF; border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #FFF; }
+.filters .grow { flex: 1; }
+.filters select { font: 600 14px var(--text); color: var(--ink); border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 10px; background: #FFF; }
+.checkup { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; align-items: center; background: var(--lime-soft); border-radius: var(--r-card); padding: 20px 22px; margin-bottom: 22px; }
+.checkup b { font-size: 18px; }
+.checkup p { font-size: 14.5px; color: var(--muted); grid-column: 1; }
+.checkup .price { grid-row: 1 / span 2; grid-column: 2; display: flex; align-items: center; gap: 16px; }
+.empty { padding: 28px; background: var(--surface-2); border-radius: var(--r-card); color: var(--muted); }
+
+/* ---------- analysis card ---------- */
+.card { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 56px; padding-block: 20px 80px; align-items: start; }
+.card h1 { font-size: clamp(34px, 4.4vw, 52px); }
+.card .lede { font-size: 21px; font-weight: 500; margin-top: 12px; max-width: 40ch; }
+.card .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.blocks { margin-top: 34px; display: grid; gap: 30px; max-width: 68ch; }
+.blocks h2 { font-size: 23px; margin-bottom: 8px; }
+.blocks ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.blocks p + p { margin-top: 8px; }
+.together { display: grid; border-top: 1px solid var(--line); }
+.together .arow { grid-template-columns: minmax(0, 1fr) 200px; }
+.faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+.faq summary { font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--navy); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { margin-top: 8px; color: var(--ink); }
+.srcs { font-size: 13.5px; color: var(--muted); }
+.srcs summary { cursor: pointer; font-weight: 600; }
+.srcs ul { margin-top: 8px; }
+.panel { position: sticky; top: calc(140px + var(--sw-h, 0px)); align-self: start; border: 1px solid var(--line); border-radius: var(--r-card); padding: 22px; display: grid; gap: 14px; background: #FFF; box-shadow: 0 10px 30px rgba(20,55,75,.08); }
+.panel .p-price { font: 800 36px/1 var(--text); font-variant-numeric: tabular-nums; }
+.panel .p-online { color: var(--ok); font-weight: 600; font-size: 14.5px; }
+.panel .lines { display: grid; gap: 6px; font-size: 14.5px; border-top: 1px solid var(--line); padding-top: 12px; }
+.panel .lines div { display: flex; justify-content: space-between; gap: 12px; }
+.panel .lines .tot { font-weight: 800; font-size: 16px; }
+.panel select { font: 600 14.5px var(--text); color: var(--ink); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px; width: 100%; background: #FFF; }
+.panel .meta { display: grid; gap: 6px; font-size: 14.5px; }
+.panel .meta span { display: inline-flex; gap: 8px; align-items: center; }
+.panel .meta .ico { width: 17px; height: 17px; }
+.panel .fine { font-size: 12.5px; color: var(--muted); }
+.stickybuy { display: none; }
+.draft { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; font-weight: 600; color: var(--muted); background: var(--surface); border-radius: 999px; padding: 4px 10px; margin-top: 14px; }
+
+/* ---------- notes (пояснения) ---------- */
+.notes-toggle { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: inline-flex; align-items: center; gap: 8px; background: var(--lime); color: var(--navy); border: 0; border-radius: 999px; padding: 12px 18px; font-weight: 800; font-size: 15px; box-shadow: 0 8px 24px rgba(20,55,75,.3); cursor: pointer; }
+.notes-toggle[aria-pressed="true"] { background: var(--navy); color: #FFF; }
+.has-pin > button.pin { display: grid; place-items: center; gap: 0; position: absolute; z-index: 35; width: 28px; height: 28px; border-radius: 50%; background: var(--lime); color: var(--navy); font: 800 14px/28px var(--text); text-align: center; box-shadow: 0 0 0 3px #FFF, 0 4px 12px rgba(20,55,75,.35); cursor: pointer; border: 0; padding: 0; }
+.has-pin > button.pin.hot { background: var(--navy); color: #FFF; }
+body.shot .notes-toggle, body.shot .toast { display: none; }
+.has-pin { position: relative; }
+.panel.has-pin { position: sticky; }
+.drawer { position: fixed; right: 0; top: var(--sw-h, 0px); bottom: 0; width: min(420px, 100%); z-index: 70; background: #FFF; box-shadow: -18px 0 40px rgba(20,55,75,.18); transform: translateX(105%); transition: transform .45s var(--ease); display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); }
+.drawer.open { transform: none; }
+.drawer header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+.drawer header b { font: 700 20px var(--display); }
+.drawer header button { background: none; border: 0; cursor: pointer; padding: 6px; }
+.drawer ol { list-style: none; margin: 0; padding: 10px 22px 90px; overflow: auto; display: grid; gap: 4px; }
+.drawer li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 12px; border-radius: 12px; }
+.drawer li.hot { background: var(--lime-soft); }
+.drawer li > span { width: 28px; height: 28px; border-radius: 50%; background: var(--lime); font: 800 14px/28px var(--text); text-align: center; }
+.drawer li b { display: block; margin-bottom: 3px; }
+.drawer li p { font-size: 14.5px; color: var(--ink); }
+.toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0; background: var(--navy); color: #FFF; padding: 12px 18px; border-radius: 10px; font-weight: 600; z-index: 80; transition: opacity .3s var(--ease), transform .3s var(--ease); pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .nav button { padding: 10px 8px; font-size: 14.5px; }
+  .organs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 960px) {
+  .util, .nav, .bar .cartbtn { display: none; }
+  .bar .wrap { min-height: 60px; gap: 12px; }
+  .logo { width: 150px; }
+  .mbtn { display: inline-grid; place-items: center; }
+  .tabbar { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; background: #FFF; box-shadow: 0 -1px 0 var(--line); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+  .tabbar button { display: grid; justify-items: center; gap: 3px; background: none; border: 0; font-size: 11.5px; font-weight: 600; padding: 6px 0; cursor: pointer; position: relative; }
+  .tabbar button[aria-current="page"] { color: var(--navy); }
+  .tabbar button[aria-current="page"] .ico { stroke-width: 2.4; }
+  .tabbar .count { position: absolute; top: 2px; left: calc(50% + 6px); min-width: 18px; height: 18px; border-radius: 9px; background: var(--lime); font-size: 11px; display: grid; place-items: center; padding: 0 4px; }
+  body { padding-bottom: 70px; }
+  .notes-toggle { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); padding: 10px 14px; font-size: 14px; }
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 32px 40px; }
+  .hero .sub { font-size: 17px; }
+  .search input { font-size: 17px; padding: 16px 16px 16px 48px; }
+  .hero-cells { width: 200px; bottom: auto; top: -60px; right: -90px; opacity: .16; }
+  .finder { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .arow { grid-template-columns: minmax(0, 1fr) auto; }
+  .arow .a-meta { grid-column: 1; grid-row: 2; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .arow .a-buy { grid-column: 2; grid-row: 1 / span 2; align-self: center; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .step { padding: 18px 0 0; }
+  .band .wrap, .docs .wrap { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .catalog { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 12px; }
+  .rail { position: static; }
+  .clist { display: flex; overflow-x: auto; gap: 6px; padding-bottom: 6px; scrollbar-width: none; }
+  .clist::-webkit-scrollbar { display: none; }
+  .crow { grid-template-columns: 26px auto; white-space: nowrap; background: var(--surface-2); padding: 7px 12px 7px 8px; border-radius: 999px; font-size: 14px; }
+  .crow .picto { width: 26px; height: 26px; padding: 4px; border-radius: 7px; }
+  .chead { grid-template-columns: 56px 1fr; gap: 14px; }
+  .chead .picto { width: 56px; height: 56px; padding: 9px; border-radius: 14px; }
+  .checkup { grid-template-columns: minmax(0, 1fr); }
+  .checkup .price { grid-row: auto; grid-column: 1; justify-content: space-between; }
+  .card { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-bottom: 120px; }
+  .panel, .panel.has-pin { position: relative; top: auto; }
+  .stickybuy { display: flex; position: fixed; left: 0; right: 0; bottom: calc(62px + env(safe-area-inset-bottom, 0px)); z-index: 44; background: #FFF; box-shadow: 0 -1px 0 var(--line), 0 -8px 20px rgba(20,55,75,.08); padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); align-items: center; gap: 12px; }
+  .stickybuy .price { text-align: left; flex: 1; }
+  .card .lede { font-size: 18px; }
+  .together .arow { grid-template-columns: minmax(0, 1fr) auto; }
+  footer.foot .wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .organs { grid-template-columns: minmax(0, 1fr); }
+  .quick button { font-size: 13.5px; padding: 7px 12px; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3.5l1.8 4.2-2.2 1.6a11 11 0 0 0 6.1 6.1l1.6-2.2L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5C10.4 20 4 13.6 3.5 5.6A1.5 1.5 0 0 1 5 4Z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 19.5 5.3 16A8 8 0 1 1 8 18.7Z"/><path d="M9 10.5h6M9 13.5h4"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7Z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 11h10l2-8H7"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.5a6 6 0 0 1-12 0c0-4.1 6-10.5 6-10.5Z"/></symbol>
+  <symbol id="i-lab" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6.5L5 19a1.5 1.5 0 0 0 1.3 2h11.4A1.5 1.5 0 0 0 19 19l-5-9.5V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></symbol>
+</svg>
+
+<header class="top" id="top">
+  <div class="util">
+    <div class="wrap">
+      <button class="pointbtn" data-note="h1" type="button"><svg class="ico"><use href="#i-pin"/></svg><b id="u-point">Черкесск, ул. Гутякулова, 20</b> <span class="state" id="u-state">открыто до 19:00</span></button>
+      <span class="spacer"></span>
+      <a href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>8 800 201 78 30</a>
+      <a href="#top"><svg class="ico"><use href="#i-chat"/></svg>Написать в WhatsApp</a>
+      <a href="#top"><svg class="ico"><use href="#i-file"/></svg>Результаты анализов</a>
+    </div>
+  </div>
+  <div class="bar">
+    <div class="wrap">
+      <button class="logo" data-go="home" type="button" style="background:none;border:0;padding:0;cursor:pointer" aria-label="На главную"><img src="../assets/cld-logo-medanalizy-navy.svg" alt="CLD · Медицинские анализы" width="1200" height="276"></button>
+      <nav class="nav" aria-label="Разделы" data-note="h2">
+        <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
+        <button type="button" data-go="catalog:checkups" data-nav="checkups">Чек-апы</button>
+        <button type="button">Анализы на дому</button>
+        <button type="button">Пункты</button>
+        <button type="button">Врачам</button>
+        <button type="button">Клиникам</button>
+      </nav>
+      <span class="grow"></span>
+      <button class="cartbtn" type="button"><svg class="ico"><use href="#i-cart"/></svg>Корзина <span class="count num" data-cart>0</span></button>
+      <button class="mbtn" type="button" aria-label="Поиск" data-go="home"><svg class="ico" style="width:24px;height:24px"><use href="#i-search"/></svg></button>
+      <button class="mbtn" type="button" aria-label="Меню"><svg class="ico" style="width:24px;height:24px"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ============ HOME ============ -->
+  <section id="v-home" data-view="home">
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <h1 data-note="home1">Результат анализов — <em>сегодня</em></h1>
+          <p class="sub">Своя лаборатория в Черкесске и 29 пунктов рядом с домом. Цена, срок и подготовка — в каждой карточке.</p>
+          <div class="search" data-note="home2">
+            <svg class="ico"><use href="#i-search"/></svg>
+            <input id="q-home" type="search" autocomplete="off" placeholder="Ферритин, витамин D, анализ крови…" aria-label="Найти анализ">
+            <div class="sugg" id="sugg-home" hidden></div>
+          </div>
+          <div class="quick" id="quick"></div>
+        </div>
+        <div class="pointcard" data-note="home3">
+          <h2>Где сдать в Черкесске</h2>
+          <div class="points" id="points"></div>
+          <div class="row2">
+            <button class="btn btn-navy" type="button"><svg class="ico"><use href="#i-pin"/></svg>Все 29 пунктов</button>
+            <button class="btn btn-ghost" type="button"><svg class="ico"><use href="#i-phone"/></svg>Позвонить</button>
+          </div>
+        </div>
+      </div>
+      <svg class="hero-cells" id="hero-cells" viewBox="0 0 130 130" aria-hidden="true"></svg>
+    </div>
+
+    <div class="sec wrap">
+      <div class="sec-h"><h2>Найдите анализ по-своему</h2><p>По органу, который хотите проверить, или по ситуации, в которой назначили анализы.</p></div>
+      <div class="finder">
+        <div data-note="home4">
+          <h3>По органам и системам</h3>
+          <div class="organs" id="organs"></div>
+        </div>
+        <div data-note="home5">
+          <h3>По ситуации</h3>
+          <div class="situations" id="situations"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec wrap">
+      <div class="sec-h"><h2>Чаще всего сдают</h2><button class="linkbtn" type="button" data-go="catalog:blood">Весь каталог</button></div>
+      <div class="rows" id="popular" data-note="home6"></div>
+    </div>
+
+    <div class="sec wrap">
+      <div class="sec-h"><h2>Как сдать анализ</h2></div>
+      <div class="steps" data-note="home7">
+        <div class="step"><b>Выберите анализ</b><p>На сайте, по телефону или по направлению врача. Оплатить можно онлайн со скидкой 10% или в пункте.</p></div>
+        <div class="step"><b>Приходите в пункт</b><p>Утром натощак, если этого требует анализ. Подготовка указана в карточке.</p></div>
+        <div class="step"><b>Получите результат</b><p>Пришлём SMS со ссылкой, когда результат будет готов. Обсудите его с врачом.</p></div>
+      </div>
+    </div>
+
+    <div class="band" data-note="home8">
+      <div class="wrap">
+        <div class="fact"><b>Своя лаборатория</b><span>в Черкесске: самые частые анализы делаем здесь, а не везём в другой город</span></div>
+        <div class="fact"><b class="num">29 пунктов</b><span>в Карачаево-Черкесии, Кабардино-Балкарии и других регионах</span></div>
+        <div class="fact"><b class="num">−10%</b><span>при оплате на сайте</span></div>
+      </div>
+    </div>
+
+    <div class="docs" data-note="home9">
+      <div class="wrap">
+        <div><h2>Вы врач и направляете пациентов?</h2><p>Список срочных анализов и часы сдачи, бланк направления, результат пациента — вам на почту с его согласия.</p></div>
+        <button class="btn btn-navy" type="button">Раздел для врачей</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATALOGUE ============ -->
+  <section id="v-catalog" data-view="catalog" hidden>
+    <div class="wrap">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" data-go="catalog:blood">Анализы и цены</button><span>/</span><span id="crumb-cat">Кровь и анемия</span></div>
+      <div class="catalog">
+        <aside class="rail" data-note="cat1">
+          <div class="seg" role="group" aria-label="Как искать">
+            <button type="button" aria-pressed="true" data-seg="organs">По органам</button>
+            <button type="button" aria-pressed="false" data-seg="situations">По ситуации</button>
+          </div>
+          <div class="clist" id="clist"></div>
+        </aside>
+        <div>
+          <div class="chead" data-note="cat2"><div class="picto" id="c-picto"></div><div><h1 id="c-title">Кровь и анемия</h1><p id="c-desc"></p></div></div>
+          <div class="filters" data-note="cat3">
+            <button class="chip" type="button" aria-pressed="false" data-filter="own">Своя лаборатория</button>
+            <button class="chip" type="button" aria-pressed="false" data-filter="oneday">Готово за 1 день</button>
+            <span class="grow"></span>
+            <label class="muted" style="font-size:14px" for="sort">Порядок</label>
+            <select id="sort"><option value="pop">Сначала популярные</option><option value="cheap">Сначала дешевле</option></select>
+          </div>
+          <div id="c-checkup" data-note="cat4"></div>
+          <div class="rows" id="c-rows" data-note="cat5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CARD ============ -->
+  <section id="v-card" data-view="card" hidden>
+    <div class="wrap">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" id="crumb-card-cat" data-go="catalog:blood">Кровь и анемия</button><span>/</span><span id="crumb-card">Ферритин</span></div>
+      <div class="card">
+        <article>
+          <h1 id="k-title" data-note="card1">Ферритин</h1>
+          <p class="lede" id="k-lede"></p>
+          <div class="tags" id="k-tags"></div>
+          <div id="k-draft"></div>
+          <div class="blocks" id="k-blocks" data-note="card4"></div>
+        </article>
+        <aside class="panel" id="k-panel" data-note="card2"></aside>
+      </div>
+    </div>
+    <div class="stickybuy" id="k-sticky" data-note="card7"></div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <img src="../assets/cld-logo-horizontal-white.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276">
+      <p>ООО «Название по лицензии» · Лицензия № — заполнить после сверки с реестром Росздравнадзора · 8 800 201 78 30 · Прототип: данные цен — сайт lab.discript.ru, пункт Черкесск, 22.10.2026.</p>
+      <div class="warn">Имеются противопоказания. Необходима консультация специалиста</div>
+    </div>
+  </footer>
+</main>
+
+<nav class="tabbar" aria-label="Быстрые разделы">
+  <button type="button" data-go="catalog:blood" data-tab="catalog"><svg class="ico"><use href="#i-grid"/></svg>Анализы</button>
+  <button type="button"><svg class="ico"><use href="#i-pin"/></svg>Пункты</button>
+  <button type="button"><svg class="ico"><use href="#i-file"/></svg>Результаты</button>
+  <button type="button"><svg class="ico"><use href="#i-cart"/></svg>Корзина<span class="count num" data-cart>0</span></button>
+</nav>
+
+<button class="notes-toggle" id="notes-toggle" type="button" aria-pressed="false"><svg class="ico"><use href="#i-info"/></svg>Пояснения</button>
+<aside class="drawer" id="drawer" aria-label="Пояснения к экрану">
+  <header><b id="drawer-title">Пояснения</b><button type="button" id="drawer-close" aria-label="Закрыть"><svg class="ico"><use href="#i-x"/></svg></button></header>
+  <ol id="notes-list"></ol>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  "use strict";
+  // ---------- data: Черкесск, ул. Гутякулова, 20 — цены с lab.discript.ru на 22.10.2026 ----------
+  var POINTS = [
+    { id: "g20", addr: "ул. Гутякулова, 20", open: "07:30", close: "19:00" },
+    { id: "l146", addr: "ул. Ленина, 146", open: "07:30", close: "18:00" },
+    { id: "k27", addr: "ул. Космонавтов, 27", open: "08:00", close: "17:00" }
+  ];
+  var BLOOD_DRAW = 200;
+  var A = {
+    "20-017": { n: "Общий анализ крови развёрнутый", off: "Общий анализ крови (ОАК) развернутый", d: "Покажет, нет ли анемии, воспаления или инфекции. С подсчётом видов лейкоцитов", p: 470, bio: "Кровь из вены", days: 1, own: true, pop: 1 },
+    "20-001": { n: "Общий анализ крови", off: "Общий анализ крови (ОАК)", d: "Основные показатели крови: гемоглобин, эритроциты, лейкоциты, тромбоциты", p: 340, bio: "Кровь из вены", days: 1, own: true, pop: 9 },
+    "40-111": { n: "Ферритин", off: "Ферритин", d: "Покажет, хватает ли организму запасов железа", p: 420, bio: "Кровь из вены", days: 1, own: true, pop: 4 },
+    "40-052": { n: "Железо в крови", off: "Железо в крови", d: "Сколько железа в крови сейчас — смотрят вместе с ферритином", p: 215, bio: "Кровь из вены", days: 1, own: true, pop: 12 },
+    "40-041": { n: "Витамин B12", off: "Витамин B12 (цианокобаламин)", d: "Хватает ли витамина B12 — он нужен для крови и нервной системы", p: 720, bio: "Кровь из вены", days: 1, own: true, pop: 11 },
+    "40-081": { n: "С-реактивный белок", off: "С-реактивный белок (СРБ)", d: "Есть ли в организме воспаление", p: 380, bio: "Кровь из вены", days: 1, own: true, pop: 8 },
+    "40-047": { n: "Глюкоза", off: "Глюкоза в крови", d: "Уровень сахара в крови на момент сдачи", p: 150, bio: "Кровь из вены", days: 1, own: true, pop: 5 },
+    "40-141": { n: "Гликированный гемоглобин", off: "Гликированный гемоглобин (HbA1c)", d: "Средний уровень сахара за последние 2–3 месяца", p: 490, bio: "Кровь из вены", days: 1, own: true, pop: 6 },
+    "30-035": { n: "Инсулин", off: "Инсулин", d: "Сколько инсулина вырабатывает организм — смотрят вместе с глюкозой", p: 555, bio: "Кровь из вены", days: 1, own: true, pop: 14 },
+    "40-004": { n: "Мочевая кислота", off: "Мочевая кислота в крови", d: "Помогает врачу при подозрении на подагру и болезни почек", p: 140, bio: "Кровь из вены", days: 1, own: true, pop: 16 },
+    "30-010": { n: "ТТГ", off: "Тиреотропный гормон (ТТГ)", d: "Главный анализ, чтобы проверить работу щитовидной железы", p: 350, bio: "Кровь из вены", days: 1, own: true, pop: 3 },
+    "30-009": { n: "Т4 свободный", off: "Тироксин свободный (Т4 свободный)", d: "Гормон щитовидной железы — уточняет результат ТТГ", p: 340, bio: "Кровь из вены", days: 1, own: true, pop: 13 },
+    "28.135": { n: "Антитела к ТПО", off: "Антитела к тиреопероксидазе (АТ-ТПО)", d: "Нет ли аутоиммунного воспаления щитовидной железы", p: 510, bio: "Кровь из вены", days: 1, own: false, pop: 18 },
+    "40-070": { n: "Холестерин общий", off: "Холестерин общий", d: "Общий уровень холестерина — первый шаг проверки сосудов", p: 170, bio: "Кровь из вены", days: 1, own: true, pop: 10 },
+    "00-014": { n: "Липидный профиль", off: "Липидный профиль стандартный (ЛПВП, ЛПНП, триглицериды, холестерин общий)", d: "«Хороший» и «плохой» холестерин и триглицериды — риск для сердца и сосудов", p: 620, bio: "Кровь из вены", days: 1, own: true, pop: 15 },
+    "80-049": { n: "Коагулограмма", off: "Коагулограмма (скрининг)", d: "Как сворачивается кровь — перед операцией и при приёме некоторых лекарств", p: 700, bio: "Кровь из вены", days: 1, own: true, pop: 17 },
+    "40-026": { n: "АЛТ", off: "Аланинаминотрансфераза (АЛТ)", d: "Фермент печени: показывает, не страдают ли её клетки", p: 170, bio: "Кровь из вены", days: 1, own: true, pop: 19 },
+    "40-035": { n: "Билирубин общий", off: "Билирубин общий", d: "Показатель работы печени и желчных путей", p: 160, bio: "Кровь из вены", days: 1, own: true, pop: 21 },
+    "40-063": { n: "Креатинин", off: "Креатинин в крови", d: "Как почки очищают кровь", p: 160, bio: "Кровь из вены", days: 1, own: true, pop: 20 },
+    "40-077": { n: "Мочевина", off: "Мочевина в крови", d: "Ещё один показатель работы почек", p: 160, bio: "Кровь из вены", days: 1, own: true, pop: 22 },
+    "40-297": { n: "Витамин D", off: "Витамин D, 25-OH (25-гидроксикальциферол)", d: "Хватает ли витамина D — он важен для костей и мышц", p: 980, bio: "Кровь из вены", days: 1, own: true, pop: 2 },
+    "30-017": { n: "ХГЧ", off: "Хорионический гонадотропин человека (б-ХГЧ общий)", d: "Подтвердит беременность и поможет следить за ней на ранних сроках", p: 380, bio: "Кровь из вены", days: 1, own: true, pop: 7 },
+    "10-008": { n: "Общий анализ мочи", off: "Общий анализ мочи (ОАМ)", d: "Покажет, нет ли воспаления в почках и мочевых путях", p: 240, bio: "Утренняя моча", days: 1, own: true, pop: 5.5 },
+    "60-011": { n: "IgE общий", off: "Иммуноглобулины класса Е (IgE), общий", d: "Помогает врачу понять, связаны ли жалобы с аллергией", p: 400, bio: "Кровь из вены", days: 1, own: true, pop: 23 },
+    "41-016": { n: "ПСА общий", off: "Простатический специфический антиген (ПСА) общий", d: "Анализ для мужчин: помогает врачу следить за здоровьем простаты", p: 480, bio: "Кровь из вены", days: 1, own: true, pop: 24 }
+  };
+  var CHECKUPS = {
+    anemia: { n: "Чек-ап «Анемия»", inc: "Общий анализ крови развёрнутый, железо, ферритин, трансферрин", count: 4, p: 1000, days: 2 },
+    thyroid: { n: "Чек-ап «Щитовидная железа»", inc: "ТТГ, Т3 свободный, Т4 свободный", count: 3, p: 800, days: 2 },
+    diabetes: { n: "Чек-ап «Сахар под контролем»", inc: "Общий анализ крови, гликированный гемоглобин, инсулин, С-пептид, глюкоза", count: 5, p: 1500, days: 2 },
+    kidneys: { n: "Чек-ап «Почки»", inc: "Общий анализ крови, мочевина, креатинин, калий, натрий, хлориды, щелочная фосфатаза", count: 6, p: 800, days: 2 },
+    kids: { n: "Чек-ап для детей и подростков", inc: "12 анализов: общий анализ крови, витамин D, железо, ферритин, глюкоза, билирубин и другие", count: 12, p: 2700, days: 2 },
+    yearly: { n: "Чек-ап всего организма", inc: "16 анализов: кровь, витамин D, железо, ТТГ, холестерин, печень, почки, сахар", count: 16, p: 3800, days: 2 }
+  };
+  // 9x9 cell pictograms on the brand grid: '#' navy, 'o' lime accent
+  var PICT = {
+    blood:   ["....#....","...###...","..#####..",".#####o#.",".#####o#.","#########","#########",".#######.","..#####.."],
+    sugar:   [".........",".#######.",".#.....#.",".#.o.o.#.",".#.....#.",".#.o.o.#.",".#.....#.",".#######.","........."],
+    thyroid: ["##.....##","###...###","####.####",".###o###.","..##o##..",".###o###.","####.####","###...###","##.....##"],
+    heart:   [".........",".##...##.","####.####","#########","####o####",".###o###.","..#####..","...###...","....#...."],
+    liver:   [".........",".##...##.","###...###","##.....##","##..o..##","##.....##","###...###",".##...##.","........."],
+    vitamins:["....o....",".#..o..#.","..#####..","..#####..","ooo###ooo","..#####..","..#####..",".#..o..#.","....o...."],
+    hormones:["...###...","..#...#..","..#...#..","..#...#..","...###...","....o....","..ooooo..","....o....","....o...."],
+    infect:  ["....#....",".#.###.#.","..#####..",".###o###.","###ooo###",".###o###.","..#####..",".#.###.#.","....#...."],
+    allergy: ["..##.##..",".###.###.",".###o###.","...ooo...",".###o###.",".###.###.","..##.##..","....#....","....#...."],
+    urine:   ["..#####..","...###...","...#.#...","...#.#...","...#.#...","...ooo...","...ooo...","...ooo...","....#...."],
+    clotting:[".........","...###...","...###...",".###o###.",".##ooo##.",".###o###.","...###...","...###...","........."],
+    onco:    ["#.......#",".#.....#.","..##o##..","...#.#...","....o....","...#.#...","..##o##..",".#.....#.","#.......#"],
+    checkups:["#########","#.......#","#.ooooo.#","#.......#","#.ooo...#","#.......#","#.ooooo.#","#.......#","#########"]
+  };
+  var CATS = [
+    { id: "blood", n: "Кровь и анемия", s: "Гемоглобин, железо, воспаление", desc: "Анализы покажут, хватает ли гемоглобина и железа, нет ли воспаления. С них часто начинают проверку при слабости и бледности.", items: ["20-017", "40-111", "40-052", "40-041", "40-081", "20-001"], checkup: "anemia" },
+    { id: "sugar", n: "Сахар и обмен веществ", s: "Глюкоза, гликированный гемоглобин", desc: "Покажут уровень сахара сейчас и за последние месяцы, помогут врачу заподозрить диабет или проконтролировать лечение.", items: ["40-047", "40-141", "30-035", "40-004"], checkup: "diabetes" },
+    { id: "thyroid", n: "Щитовидная железа", s: "ТТГ, Т4, антитела", desc: "Проверка начинается с ТТГ. Остальные анализы уточняют, что происходит, если ТТГ не в норме.", items: ["30-010", "30-009", "28.135"], checkup: "thyroid" },
+    { id: "heart", n: "Сердце и сосуды", s: "Холестерин, липидный профиль", desc: "Холестерин и его фракции помогают врачу оценить риск болезней сердца и сосудов.", items: ["00-014", "40-070", "40-081"] },
+    { id: "liver", n: "Печень и почки", s: "АЛТ, билирубин, креатинин", desc: "Биохимия крови покажет, как работают печень и почки. Её часто назначают при приёме лекарств и перед операцией.", items: ["40-026", "40-035", "40-063", "40-077", "10-008"], checkup: "kidneys" },
+    { id: "vitamins", n: "Витамины и минералы", s: "Витамин D, B12, железо", desc: "Покажут, хватает ли организму витаминов и железа. Принимать добавки по результату лучше вместе с врачом.", items: ["40-297", "40-041", "40-111", "40-052"] },
+    { id: "hormones", n: "Гормоны и беременность", s: "ХГЧ и женские гормоны", desc: "Гормоны сдают в день цикла, который назвал врач. ХГЧ подтверждает беременность на раннем сроке.", items: ["30-017"] },
+    { id: "infect", n: "Инфекции", s: "ВИЧ, гепатиты, ИППП, TORCH", desc: "Раздел соберётся по тому же шаблону: антитела, ПЦР и мазки с понятными объяснениями.", items: [] },
+    { id: "allergy", n: "Аллергия", s: "IgE общий и аллергены", desc: "Помогут врачу понять, связаны ли насморк, сыпь или кашель с аллергией и на что именно.", items: ["60-011"] },
+    { id: "urine", n: "Моча и кал", s: "Общий анализ мочи", desc: "Простые анализы, которые много говорят о почках, мочевых путях и кишечнике.", items: ["10-008"] },
+    { id: "clotting", n: "Свёртываемость крови", s: "Коагулограмма, МНО", desc: "Нужны перед операцией, при беременности и при приёме препаратов, разжижающих кровь.", items: ["80-049"] },
+    { id: "onco", n: "Онкомаркеры", s: "ПСА и другие", desc: "Онкомаркеры назначает врач: по одному анализу диагноз не ставят. Чаще их используют для наблюдения.", items: ["41-016"] }
+  ];
+  var SITS = [
+    { n: "Усталость и слабость", d: "Общий анализ крови, ферритин, ТТГ, витамин D, B12", codes: ["20-017", "40-111", "30-010", "40-297", "40-041"], go: "blood" },
+    { n: "Ежегодная проверка", d: "Чек-ап всего организма — 16 анализов", checkup: "yearly", go: "blood" },
+    { n: "Ребёнку в сад и школу", d: "Чек-ап для детей и подростков — 12 анализов", checkup: "kids", go: "vitamins" },
+    { n: "Контроль сахара", d: "Чек-ап «Сахар под контролем» — 5 анализов", checkup: "diabetes", go: "sugar" },
+    { n: "Щитовидная железа", d: "ТТГ, Т3 и Т4 свободные", checkup: "thyroid", go: "thyroid" },
+    { n: "Перед операцией", d: "Кровь, свёртываемость, сахар — по списку врача", codes: ["20-017", "80-049", "40-047"], go: "clotting" }
+  ];
+  var CARDS = {"20-017": {"lede": "Покажет, сколько в крови эритроцитов, лейкоцитов, тромбоцитов и гемоглобина.", "blocks": [{"h": "Что покажет", "p": ["Сколько в крови эритроцитов, лейкоцитов, тромбоцитов и гемоглобина и как лейкоциты делятся по видам. Эритроциты переносят кислород, лейкоциты защищают от инфекций, тромбоциты останавливают кровотечение."]}, {"h": "Кому и когда назначают", "list": ["при плановой проверке и перед операцией", "при усталости, бледности, одышке, синяках без причины", "при температуре и других признаках инфекции", "при беременности — по плану врача", "для контроля лечения"]}, {"h": "Как подготовиться", "list": ["Особой подготовки обычно не нужно. Если в тот же день сдаёте биохимию, приходите натощак.", "Лекарства сами не отменяйте — скажите о них медсестре."]}, {"h": "Как понимать результат", "p": ["Врач смотрит на все показатели вместе. Сниженный гемоглобин может говорить об анемии, например из-за нехватки железа. Лейкоциты повышаются при инфекции или воспалении, снижаются — например, после вирусной инфекции. Небольшие отклонения часто не требуют лечения. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Зачем считать разные виды лейкоцитов?", "a": "Их соотношение помогает понять, с чем связано изменение лейкоцитов."}, {"q": "Почему нормы в лабораториях разные?", "a": "Из-за разных приборов и методов. Сравнивайте результат с нормой своего бланка."}], "src": ["MedlinePlus, Complete Blood Count — https://medlineplus.gov/lab-tests/complete-blood-count-cbc/", "Lab Tests Online UK, Full blood count — https://labtestsonline.org.uk/tests/full-blood-count-fbc", "КР Минздрава «Нормальная беременность» (ID 288_2, 2024) — https://cr.minzdrav.gov.ru/recomend/288_2"]}, "40-111": {"lede": "Покажет, хватает ли организму запасов железа.", "blocks": [{"h": "Что покажет", "p": ["Ферритин — белок, в котором организм хранит железо про запас. Анализ показывает, хватает ли этих запасов."]}, {"h": "Кому и когда назначают", "list": ["при усталости, одышке, головокружении, бледности", "если гемоглобин в общем анализе крови снижен", "при обильных менструациях и во время беременности", "при болезнях кишечника, когда пища плохо усваивается", "чтобы проверить, помогает ли лечение препаратами железа"]}, {"h": "Как подготовиться", "list": ["Утром натощак: после еды 8–12 часов, воду пить можно.", "Если недавно болели с температурой, скажите врачу: воспаление влияет на результат.", "Лекарства и добавки сами не отменяйте."]}, {"h": "Как понимать результат", "p": ["Низкий ферритин обычно значит, что запасы железа уменьшились. Высокий бывает при избытке железа, а также при воспалении, инфекции, болезнях печени. При воспалении ферритин может быть высоким, даже если железа мало, поэтому врач иногда добавляет С-реактивный белок. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Гемоглобин в норме — зачем ферритин?", "a": "Запасы железа могут уменьшиться раньше, чем снизится гемоглобин."}, {"q": "Чем ферритин отличается от анализа на железо?", "a": "Железо в крови меняется от еды и лекарств, а ферритин показывает запасы."}], "src": ["MedlinePlus, Ferritin Blood Test — https://medlineplus.gov/lab-tests/ferritin-blood-test/", "Lab Tests Online UK, Ferritin — https://labtestsonline.org.uk/tests/ferritin-test", "КР Минздрава «Железодефицитная анемия» (ID 669_2, 2024) — https://cr.minzdrav.gov.ru/recomend/669_2"]}, "30-010": {"lede": "Покажет, не работает ли щитовидная железа слишком слабо или слишком активно.", "blocks": [{"h": "Что покажет", "p": ["ТТГ вырабатывает гипофиз — небольшая железа в мозге. Он подсказывает щитовидной железе, сколько гормонов производить. По ТТГ видно, не работает ли она слишком слабо или слишком сильно."]}, {"h": "Кому и когда назначают", "list": ["при усталости, изменении веса, сердцебиении без причины", "при планировании и в начале беременности", "при приёме гормонов щитовидной железы", "при узлах в щитовидной железе"]}, {"h": "Как подготовиться", "list": ["Особой подготовки обычно не нужно.", "Принимаете гормоны щитовидной железы — спросите врача, пить ли таблетку до анализа.", "Скажите врачу, если принимаете биотин (витамин B7) из добавок для волос и ногтей: он может исказить результат."]}, {"h": "Как понимать результат", "p": ["Если ТТГ выше нормы, обычно гормонов щитовидной железы мало. Если ниже — гормонов может быть слишком много. Причину анализ не показывает: врач может добавить другие анализы или перепроверить ТТГ через 2–3 месяца. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Нужно ли проверять ТТГ при беременности?", "a": "Клинические рекомендации советуют — при планировании или в начале беременности."}, {"q": "Почему врач назначил только ТТГ?", "a": "Его обычно проверяют первым, остальные гормоны — если он не в норме."}], "src": ["MedlinePlus, TSH Test — https://medlineplus.gov/lab-tests/tsh-thyroid-stimulating-hormone-test/", "КР Минздрава «Гипотиреоз» (ID 531_4, 2024) — https://cr.minzdrav.gov.ru/recomend/531_4", "КР Минздрава «Нормальная беременность» (ID 288_2, 2024) — https://cr.minzdrav.gov.ru/recomend/288_2", "American Thyroid Association, биотин и анализы щитовидной железы — https://www.thyroid.org/patient-thyroid-information/ct-for-patients/january-2022/vol-15-issue-1-p-7-8/"]}, "40-297": {"lede": "Покажет, хватает ли организму витамина D.", "blocks": [{"h": "Что покажет", "p": ["Анализ показывает витамин D в той форме, в которой он запасается в организме. Это лучший способ понять, хватает ли его. Всем подряд анализ сдавать не рекомендуется — его назначают при риске нехватки."]}, {"h": "Кому и когда назначают", "list": ["при остеопорозе, переломах от небольшой травмы, частых падениях в пожилом возрасте", "при болезнях кишечника, когда пища плохо усваивается", "при болезнях почек или печени", "при приёме лекарств, которые влияют на витамин D", "чтобы проверить, как действует назначенный врачом витамин D"]}, {"h": "Как подготовиться", "list": ["Особой подготовки не нужно.", "Скажите врачу, какие витамины и добавки принимаете."]}, {"h": "Как понимать результат", "p": ["Низкий уровень говорит о нехватке витамина D — она может сказываться на костях и мышцах. Очень высокий обычно связан с избытком добавок, и это тоже вредно. Нужно ли принимать витамин D и в какой дозе, решает врач. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Почему анализ не советуют сдавать всем?", "a": "Нет доказательств, что проверка всех подряд приносит пользу."}, {"q": "Можно ли сдать анализ, если я уже пью витамин D?", "a": "Да. Скажите об этом врачу — он учтёт это при оценке."}], "src": ["MedlinePlus, Vitamin D Test — https://medlineplus.gov/lab-tests/vitamin-d-test/", "Российская ассоциация эндокринологов, КР «Дефицит витамина D» (2021) — https://endoinfo.ru/docs/kr_deficit_vitamina_d_2021.pdf", "Endocrine Society, Vitamin D for the Prevention of Disease (2024) — https://pubmed.ncbi.nlm.nih.gov/38828931/"]}, "40-047": {"lede": "Покажет уровень сахара в крови натощак.", "blocks": [{"h": "Что покажет", "p": ["Сколько в крови глюкозы — сахара, главного источника энергии для клеток. Анализ помогает выявить диабет и предиабет — когда сахар уже выше нормы, но диабета ещё нет."]}, {"h": "Кому и когда назначают", "list": ["при плановой проверке, особенно после 45 лет", "при лишнем весе, высоком давлении, диабете у родственников", "при сильной жажде, частом мочеиспускании, похудении без причины", "при беременности — по плану врача"]}, {"h": "Как подготовиться", "list": ["Утром натощак: после еды должно пройти от 8 до 14 часов. Пить можно только чистую воду.", "Если вы лечите диабет, спросите врача, как быть с утренними лекарствами."]}, {"h": "Как понимать результат", "p": ["Глюкоза выше нормы может говорить о предиабете или диабете. Но она бывает повышена и временно — при стрессе, тяжёлой болезни, приёме некоторых лекарств. Поэтому диагноз диабета врач обычно ставит после повторного анализа. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Можно ли утром чай или кофе?", "a": "Нет. Натощак — значит без еды и напитков, кроме чистой воды."}, {"q": "Чем глюкоза отличается от гликированного гемоглобина?", "a": "Глюкоза — сахар в момент анализа, гликированный гемоглобин — средний сахар за 2–3 месяца."}], "src": ["MedlinePlus, Blood Glucose Test — https://medlineplus.gov/lab-tests/blood-glucose-test/", "КР Минздрава «Сахарный диабет 2 типа у взрослых» (ID 290_2) — https://cr.minzdrav.gov.ru/recomend/290_2", "КР Минздрава «Нормальная беременность» (ID 288_2, 2024) — https://cr.minzdrav.gov.ru/recomend/288_2"]}, "40-141": {"lede": "Покажет средний уровень сахара в крови за последние 2–3 месяца.", "blocks": [{"h": "Что покажет", "p": ["Часть гемоглобина в эритроцитах соединяется с глюкозой: чем выше сахар, тем её больше. Эритроциты живут около трёх месяцев, поэтому анализ показывает средний сахар за последние 2–3 месяца."]}, {"h": "Кому и когда назначают", "list": ["чтобы выявить диабет 2 типа и предиабет", "при жажде, частом мочеиспускании, похудении без причины", "если диабет уже есть — чтобы оценить лечение", "если глюкоза натощак выше нормы — по назначению врача"]}, {"h": "Как подготовиться", "list": ["Натощак не обязательно — можно в любое время дня. Если вместе сдаёте глюкозу или биохимию — приходите натощак.", "Скажите врачу о беременности, недавней кровопотере или переливании крови."]}, {"h": "Как понимать результат", "p": ["Чем выше результат, тем выше был сахар в последние месяцы. Анализ бывает неточным при анемии, беременности, болезнях почек и печени, после кровопотери — тогда врач опирается на другие анализы. Диабет беременных по нему не выявляют. Норму указывает лаборатория в бланке, а цель при диабете — врач."]}], "faq": [{"q": "Глюкоза в норме — зачем этот анализ?", "a": "Глюкоза — сахар в момент анализа, а этот анализ — за несколько месяцев."}, {"q": "Как часто сдавать при диабете?", "a": "Обычно раз в 3 месяца, но частоту определяет врач."}], "src": ["MedlinePlus, Hemoglobin A1C Test — https://medlineplus.gov/lab-tests/hemoglobin-a1c-hba1c-test/", "NIDDK, The A1C Test & Diabetes — https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test", "КР Минздрава «Сахарный диабет 2 типа у взрослых» (ID 290_2) — https://cr.minzdrav.gov.ru/recomend/290_2"]}, "00-014": {"lede": "Покажет уровень холестерина и других жиров крови, от которых зависит здоровье сосудов.", "blocks": [{"h": "Что покажет", "p": ["Общий холестерин и его части: ЛПНП («плохой») участвует в образовании бляшек в сосудах, ЛПВП («хороший») помогает выводить холестерин. Ещё измеряют триглицериды — другой вид жиров крови."]}, {"h": "Кому и когда назначают", "list": ["взрослым старше 40 лет — чтобы оценить риск для сердца и сосудов", "если у родственников был ранний инфаркт или очень высокий холестерин", "при высоком давлении, диабете, лишнем весе, курении", "при приёме лекарств, снижающих холестерин"]}, {"h": "Как подготовиться", "list": ["Утром натощак: после еды 8–12 часов, воду пить можно.", "Накануне — без алкоголя и жирной еды."]}, {"h": "Как понимать результат", "p": ["Высокие ЛПНП и триглицериды повышают риск атеросклероза — сужения сосудов бляшками. Врач оценивает результат вместе с возрастом, давлением, курением и сахаром: так считают общий риск. Целевые значения у всех разные, их назначает врач. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Почему у меня и у соседа разные цели?", "a": "Цель зависит от общего риска: возраста, болезней, наследственности."}, {"q": "Можно ли сдать не натощак?", "a": "Иногда врач разрешает. Но если триглицериды раньше были повышены — только натощак."}], "src": ["MedlinePlus, Cholesterol Levels — https://medlineplus.gov/lab-tests/cholesterol-levels/", "КР Минздрава «Нарушения липидного обмена» (ID 752_1, 2023) — https://cr.minzdrav.gov.ru/recomend/752_1"]}, "40-026": {"lede": "Покажет, нет ли признаков повреждения клеток печени.", "blocks": [{"h": "Что покажет", "p": ["АЛТ — фермент: вещество, которое ускоряет реакции в клетках. Больше всего его в печени. Когда клетки печени повреждаются, АЛТ выходит в кровь."]}, {"h": "Кому и когда назначают", "list": ["при плановой проверке — в составе биохимии", "при тошноте, слабости, желтизне кожи, тёмной моче", "при приёме лекарств, которые могут влиять на печень", "при лишнем весе, диабете, частом употреблении алкоголя", "после контакта с больным гепатитом"]}, {"h": "Как подготовиться", "list": ["Утром натощак: после еды 8–12 часов, воду пить можно. За сутки — без алкоголя.", "За несколько дней — без непривычно тяжёлых тренировок: после силовой нагрузки АЛТ может быть повышен до недели."]}, {"h": "Как понимать результат", "p": ["Повышенный АЛТ может говорить о повреждении клеток печени. Причины разные: ожирение печени, алкоголь, вирусные гепатиты, некоторые лекарства и добавки. АЛТ может временно расти после тренировок и уколов в мышцу. Врач оценивает его вместе с другими анализами. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "АЛТ в норме — с печенью всё в порядке?", "a": "Не всегда: при некоторых болезнях печени он близок к норме."}, {"q": "Пью лекарства от холестерина. Нужен ли АЛТ?", "a": "Некоторые из них повышают АЛТ. Частоту проверки определит врач."}], "src": ["MedlinePlus, ALT Blood Test — https://medlineplus.gov/lab-tests/alt-blood-test/", "Lab Tests Online UK, ALT — https://labtestsonline.org.uk/tests/alanine-aminotransferase-alt-test", "Pettersson J. et al., Br J Clin Pharmacol 2008;65(2):253–259 (нагрузка и печёночные пробы) — https://doi.org/10.1111/j.1365-2125.2007.03001.x"]}, "40-063": {"lede": "Покажет, как почки справляются с очищением крови.", "blocks": [{"h": "Что покажет", "p": ["Креатинин образуется в мышцах, а здоровые почки выводят его с мочой. Если почки работают хуже, креатинина в крови больше. По нему, возрасту и полу врач может рассчитать СКФ — скорость фильтрации почек."]}, {"h": "Кому и когда назначают", "list": ["при плановой проверке здоровья", "при диабете, высоком давлении, болезнях сердца", "при отёках, изменении количества мочи, пенистой моче", "при приёме лекарств, которые могут влиять на почки"]}, {"h": "Как подготовиться", "list": ["Утром натощак: после еды 8–12 часов, воду пить можно.", "За 12 часов не ешьте мясо, накануне — без тяжёлых тренировок: это может временно повысить креатинин."]}, {"h": "Как понимать результат", "p": ["Креатинин выше нормы может говорить о том, что почки работают хуже. Но он бывает повышен и без болезни почек: при обезвоживании, большой мышечной массе, после мяса, нагрузки или приёма креатина. По одному результату диагноз не ставят. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Зачем СКФ, если есть креатинин?", "a": "Креатинин зависит от мышц, возраста и пола. СКФ это учитывает и точнее показывает работу почек."}, {"q": "Креатинин в норме — почки здоровы?", "a": "Не всегда: в начале болезни почек он бывает в норме. Иногда врач назначает анализ мочи на альбумин."}], "src": ["MedlinePlus, Creatinine Test — https://medlineplus.gov/lab-tests/creatinine-test/", "NICE NG203 Chronic kidney disease, рекомендация 1.1.4 — https://www.nice.org.uk/guidance/ng203/chapter/Recommendations", "КР Минздрава «Хроническая болезнь почек» (ID 469_3, 2024) — https://cr.minzdrav.gov.ru/recomend/469_3"]}, "10-008": {"lede": "Покажет, нет ли изменений, связанных с почками и мочевыми путями.", "blocks": [{"h": "Что покажет", "p": ["Цвет и прозрачность мочи, есть ли в ней белок, глюкоза, кровь, клетки, кристаллы и бактерии. Это помогает проверить почки и мочевые пути."]}, {"h": "Кому и когда назначают", "list": ["при плановой проверке и перед операцией", "при боли или жжении при мочеиспускании, частых позывах", "если моча изменила цвет", "при беременности — по плану врача", "при диабете и болезнях почек — для контроля"]}, {"h": "Как подготовиться", "list": ["Соберите первую утреннюю мочу, перед этим подмойтесь.", "Первую часть мочи спустите в унитаз, среднюю соберите в стерильный контейнер.", "Принесите его как можно скорее, лучше в течение 2 часов.", "Во время менструации анализ лучше перенести — спросите врача."]}, {"h": "Как понимать результат", "p": ["Врач смотрит на сочетание показателей. Лейкоциты и бактерии могут говорить о воспалении в мочевых путях. Белок, глюкоза и кровь требуют внимания врача, но кровь иногда появляется временно, например после тяжёлой нагрузки. Свёкла и некоторые лекарства меняют цвет мочи. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Можно собрать мочу вечером и принести утром?", "a": "Нет: при долгом хранении результат искажается."}, {"q": "Где взять контейнер?", "a": "{где взять контейнер}"}], "src": ["Lab Tests Online UK, Urinalysis — https://labtestsonline.org.uk/tests/urinalysis", "MedlinePlus, Urinalysis — https://medlineplus.gov/ency/article/003579.htm", "MedlinePlus, Blood in Urine — https://medlineplus.gov/lab-tests/blood-in-urine/", "КР Минздрава «Нормальная беременность» (ID 288_2, 2024) — https://cr.minzdrav.gov.ru/recomend/288_2"]}, "60-011": {"lede": "Покажет общее количество IgE — антител, которые связаны в том числе с аллергией.", "blocks": [{"h": "Что покажет", "p": ["IgE — антитела, которые организм вырабатывает в том числе при аллергии. Анализ показывает их общее количество. Он не говорит, на что аллергия, и сам по себе её не подтверждает и не исключает, поэтому врач назначает его как дополнительный."]}, {"h": "Кому и когда назначают", "list": ["при насморке, чихании, зуде глаз, приступах кашля", "при кожном зуде, сыпи, крапивнице, экземе", "когда врач ищет другие причины, например глисты"]}, {"h": "Как подготовиться", "list": ["Особой подготовки обычно не нужно.", "Если принимаете лекарства от аллергии, скажите врачу. Сами их не отменяйте."]}, {"h": "Как понимать результат", "p": ["Повышенный IgE бывает при аллергии, а также при глистах, курении и некоторых других болезнях. Нормальный IgE аллергию не исключает. Чтобы найти конкретный аллерген, врач назначает специфические IgE или кожные пробы. Норма зависит от возраста — её указывают в бланке результата."]}], "faq": [{"q": "Чем общий IgE отличается от специфических?", "a": "Общий — всё количество IgE. Специфический — реакция на один аллерген, например пыльцу берёзы."}, {"q": "Можно ли по анализу решить, какие продукты исключить?", "a": "Нет. Сами ничего не исключайте — это решает врач по анализам и симптомам."}], "src": ["MedlinePlus, Allergy Blood Test — https://medlineplus.gov/lab-tests/allergy-blood-test/", "Testing.com (бывший Lab Tests Online US), Total IgE — https://www.testing.com/tests/total-ige/", "КР Минздрава «Аллергический ринит» (ID 261_2, 2024) — https://cr.minzdrav.gov.ru/recomend/261_2"]}, "41-016": {"lede": "Покажет уровень белка ПСА, который помогает врачу оценить состояние простаты.", "blocks": [{"h": "Что покажет", "p": ["ПСА — белок, который вырабатывают клетки предстательной железы (простаты). Он повышается при разных её болезнях, не только при раке, поэтому это не анализ «на рак». Сдавать ли его, решите с врачом."]}, {"h": "Кому и когда назначают", "list": ["мужчинам старше 50 лет, при раке простаты у близких родственников — старше 45", "при учащённом или затруднённом мочеиспускании", "после лечения болезней простаты"]}, {"h": "Как подготовиться", "list": ["За 48 часов — без семяизвержения, велосипеда и нагрузок до одышки.", "Скажите врачу о недавней инфекции мочевых путей, осмотре простаты, биопсии или операции и о лекарствах от увеличения простаты: они снижают ПСА."]}, {"h": "Как понимать результат", "p": ["ПСА повышается при увеличении простаты, простатите, после осмотра и процедур — и при раке. Один повышенный результат не означает рак: врач может попросить пересдать анализ или назначить обследования. Нормальный ПСА болезнь полностью не исключает. Норму лаборатория указывает в бланке результата."]}], "faq": [{"q": "Почему перед анализом нельзя ездить на велосипеде?", "a": "Это может временно повысить ПСА, и результат будет менее точным."}, {"q": "Как часто сдавать ПСА?", "a": "Решает врач — по возрасту, наследственности и прошлым результатам."}], "src": ["NHS, PSA testing — https://www.nhs.uk/conditions/prostate-cancer/psa-testing/", "MedlinePlus, PSA blood test — https://medlineplus.gov/ency/article/003346.htm", "КР Минздрава «Рак предстательной железы» (ID 12_4) — https://cr.minzdrav.gov.ru/recomend/12_4"]}};
+  var QUICK = ["20-017", "40-297", "30-010", "40-111", "40-047"];
+  var SYN = { "оак": "общий анализ крови", "клинический анализ крови": "общий анализ крови", "сахар": "глюкоза", "тиреотропный": "ттг", "tsh": "ттг", "щитовидка": "ттг", "vitamin d": "витамин d", "витамин д": "витамин d", "25-oh": "витамин d", "hba1c": "гликированный", "гликированный": "гликированный", "psa": "пса", "ige": "ige", "аллергия": "ige", "срб": "с-реактивный", "crp": "с-реактивный", "оам": "общий анализ мочи", "моча": "общий анализ мочи", "холестерин": "холестерин", "железо": "железо", "печень": "алт", "почки": "креатинин", "беременность": "хгч", "хгч": "хгч" };
+
+  // ---------- helpers ----------
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function rub(n) { return n.toLocaleString("ru-RU").replace(/ |\s/g, " ") + " ₽"; }
+  function online(n) { return Math.round(n * 0.9); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function picto(id, small) {
+    var rows = PICT[id] || PICT.checkups, out = "";
+    for (var r = 0; r < 9; r++) for (var c = 0; c < 9; c++) {
+      var ch = rows[r][c];
+      if (ch !== ".") out += '<rect x="' + (c * 11) + '" y="' + (r * 11) + '" width="9.4" height="9.4" rx="2.4"' + (ch === "o" ? ' class="ac"' : "") + "/>";
+    }
+    return '<svg viewBox="0 0 98 98" aria-hidden="true">' + out + "</svg>";
+  }
+  function daysLabel(d) { return d === 1 ? "Готово через 1 день" : "Готово через " + d + " дня"; }
+  function minutes(t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; }
+  function pointState(pt) {
+    var now = new Date(), m = now.getHours() * 60 + now.getMinutes();
+    if (m >= minutes(pt.open) && m < minutes(pt.close)) return { open: true, label: "открыто до " + pt.close };
+    return { open: false, label: "закрыто · откроется в " + pt.open };
+  }
+
+  // ---------- cart ----------
+  var cart = {};
+  function cartCount() { return Object.keys(cart).length; }
+  function toast(t) { var el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove("show"); }, 1800); }
+  function toggleCart(code, btn) {
+    if (cart[code]) { delete cart[code]; toast("Убрали из корзины"); } else { cart[code] = 1; toast("Добавили в корзину: " + (A[code] ? A[code].n : CHECKUPS[code].n)); }
+    $$("[data-cart]").forEach(function (el) { el.textContent = cartCount(); });
+    $$('[data-add="' + code + '"]').forEach(function (b) { b.classList.toggle("added", !!cart[code]); b.innerHTML = '<svg class="ico"><use href="#' + (cart[code] ? "i-check" : "i-plus") + '"/></svg>'; b.setAttribute("aria-label", cart[code] ? "Убрать из корзины" : "В корзину"); });
+  }
+  function addBtn(code) {
+    return '<button class="addbtn' + (cart[code] ? " added" : "") + '" type="button" data-add="' + code + '" aria-label="В корзину"><svg class="ico"><use href="#' + (cart[code] ? "i-check" : "i-plus") + '"/></svg></button>';
+  }
+  function row(code) {
+    var a = A[code];
+    return '<div class="arow"><div><button class="a-name" type="button" data-go="card:' + code + '">' + esc(a.n) + '</button><p class="a-desc">' + esc(a.d) + '</p></div>' +
+      '<div class="a-meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + (a.days === 1 ? "1 день" : a.days + " дня") + '</span><span><svg class="ico"><use href="#i-drop"/></svg>' + esc(a.bio) + '</span><span><svg class="ico"><use href="#i-lab"/></svg>' + (a.own ? "Своя лаборатория" : "Партнёрская лаборатория") + "</span></div>" +
+      '<div class="a-buy"><div class="price"><b>' + rub(a.p) + "</b><small>онлайн " + rub(online(a.p)) + "</small></div>" + addBtn(code) + "</div></div>";
+  }
+
+  // ---------- search (typos + everyday words) ----------
+  function norm(s) { return s.toLowerCase().replace(/ё/g, "е").replace(/[«»"()]/g, " ").replace(/\s+/g, " ").trim(); }
+  function lev(a, b) {
+    if (Math.abs(a.length - b.length) > 2) return 9;
+    var d = []; for (var i = 0; i <= a.length; i++) { d[i] = [i]; }
+    for (var j = 1; j <= b.length; j++) d[0][j] = j;
+    for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+  function search(q) {
+    q = norm(q); if (q.length < 2) return [];
+    var target = q; Object.keys(SYN).forEach(function (k) { if (q === k || q.indexOf(k) === 0) target = SYN[k]; });
+    var qw = target.split(" ");
+    var res = [];
+    Object.keys(A).forEach(function (code) {
+      var a = A[code], hay = norm(a.n + " " + a.off), words = hay.split(" "), score = 0, fuzzy = false;
+      if (hay.indexOf(target) >= 0) score = 100 - hay.indexOf(target);
+      else {
+        var hits = 0;
+        qw.forEach(function (w) {
+          if (!w) return;
+          if (words.some(function (x) { return x.indexOf(w) === 0; })) hits++;
+          else if (w.length >= 3 && words.some(function (x) { return lev(w, x.slice(0, w.length + 1)) <= (w.length > 5 ? 2 : 1) || lev(w, x) <= (w.length > 5 ? 2 : 1); })) { hits++; fuzzy = true; }
+        });
+        if (hits === qw.filter(Boolean).length) score = 50 + hits;
+      }
+      if (score) res.push({ code: code, score: score - (a.pop || 30) / 100, fuzzy: fuzzy });
+    });
+    res.sort(function (x, y) { return y.score - x.score; });
+    return res.slice(0, 6);
+  }
+  function bindSearch(input, box) {
+    var idx = -1, items = [];
+    function render() {
+      var q = input.value;
+      items = search(q);
+      if (!q.trim()) { box.hidden = true; return; }
+      var fixed = items.some(function (r) { return r.fuzzy; }) || norm(q) !== norm(q) ;
+      box.innerHTML = (items.length ? items.map(function (r, i) { var a = A[r.code]; return '<button type="button" data-go="card:' + r.code + '" class="' + (i === idx ? "on" : "") + '"><span class="s-name">' + esc(a.n) + '</span><span class="s-hint">' + esc(a.d) + '</span><span class="s-price">' + rub(a.p) + "</span></button>"; }).join("") + (items.some(function (r) { return r.fuzzy; }) ? '<p class="fixnote">Показали похожие: исправили опечатку в запросе «' + esc(q) + '».</p>' : "")
+        : '<p class="s-empty">Ничего не нашли по запросу «' + esc(q) + '». Попробуйте другое слово или позвоните: 8 800 201 78 30.</p>');
+      box.hidden = false;
+    }
+    input.addEventListener("input", function () { idx = -1; render(); });
+    input.addEventListener("focus", render);
+    input.addEventListener("keydown", function (e) {
+      if (box.hidden) return;
+      if (e.key === "ArrowDown") { idx = Math.min(idx + 1, items.length - 1); render(); e.preventDefault(); }
+      else if (e.key === "ArrowUp") { idx = Math.max(idx - 1, 0); render(); e.preventDefault(); }
+      else if (e.key === "Enter" && items[idx < 0 ? 0 : idx]) { go("card:" + items[idx < 0 ? 0 : idx].code); }
+      else if (e.key === "Escape") { box.hidden = true; }
+    });
+    document.addEventListener("click", function (e) { if (!e.target.closest(".search")) box.hidden = true; });
+  }
+
+  // ---------- views ----------
+  var state = { view: "home", cat: "blood", code: "40-111", seg: "organs", filters: {}, sort: "pop" };
+  function renderHome() {
+    $("#quick").innerHTML = QUICK.map(function (c) { return '<button type="button" data-go="card:' + c + '">' + esc(A[c].n) + "</button>"; }).join("");
+    $("#points").innerHTML = POINTS.map(function (pt, i) { var st = pointState(pt); return '<label><input type="radio" name="pt" value="' + pt.id + '"' + (i === 0 ? " checked" : "") + '><span class="p-addr">' + esc(pt.addr) + '</span><span class="p-hours">Ежедневно ' + pt.open + "–" + pt.close + ' · по данным МИС</span><span class="state' + (st.open ? "" : " closed") + '">' + (st.open ? "открыто" : "закрыто") + "</span></label>"; }).join("");
+    $("#organs").innerHTML = CATS.map(function (c) { return '<button class="organ" type="button" data-go="catalog:' + c.id + '"><div class="picto">' + picto(c.id) + "</div><div><b>" + esc(c.n) + "</b><span>" + esc(c.s) + "</span></div></button>"; }).join("");
+    $("#situations").innerHTML = SITS.map(function (s) {
+      var price, note;
+      if (s.checkup) { price = CHECKUPS[s.checkup].p; note = "чек-ап"; } else { price = s.codes.reduce(function (t, c) { return t + A[c].p; }, 0); note = nAn(s.codes.length) + " по отдельности"; }
+      return '<button class="sit" type="button" data-go="catalog:' + s.go + '"><span class="sit-t">' + esc(s.n) + '</span><span class="sit-d">' + esc(s.d) + '</span><span class="sit-p">' + rub(price) + "<small>" + note + "</small></span></button>";
+    }).join("");
+    var pop = Object.keys(A).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 7);
+    $("#popular").innerHTML = pop.map(row).join("");
+    var st = pointState(POINTS[0]); var u = $("#u-state"); u.textContent = st.label; u.classList.toggle("closed", !st.open);
+    // hero motif: "brackets" from the brand pattern, in negative
+    var W = ["2,4","3,4","4,4","5,4","6,4","7,4","8,4","8,5","8,6","8,7","8,9","8,10"], L = ["4,2","4,3","4,5","4,6","4,7","4,8","5,8","6,8","7,8","8,8","9,8","10,8"], h = "";
+    for (var r = 0; r < 12; r++) for (var c = 0; c < 12; c++) { var k = r + "," + c, f = W.indexOf(k) >= 0 ? "#FFFFFF" : L.indexOf(k) >= 0 ? "#AFC81E" : "rgba(255,255,255,.08)"; h += '<rect x="' + c * 11 + '" y="' + r * 11 + '" width="9" height="9" rx="2.2" fill="' + f + '"/>'; }
+    $("#hero-cells").innerHTML = h;
+  }
+  function renderCatalog() {
+    var cat = CATS.filter(function (c) { return c.id === state.cat; })[0] || CATS[0];
+    $("#clist").innerHTML = (state.seg === "organs" ? CATS.map(function (c) { return '<button class="crow" type="button" data-go="catalog:' + c.id + '"' + (c.id === cat.id ? ' aria-current="true"' : "") + '><div class="picto">' + picto(c.id) + "</div>" + esc(c.n) + "</button>"; }) :
+      SITS.map(function (s) { return '<button class="crow" type="button" data-go="catalog:' + s.go + '"><div class="picto">' + picto("checkups") + "</div>" + esc(s.n) + "</button>"; })).join("");
+    $$("[data-seg]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.seg === state.seg ? "true" : "false"); });
+    $("#c-picto").innerHTML = picto(cat.id);
+    $("#c-title").textContent = cat.n; $("#crumb-cat").textContent = cat.n; $("#c-desc").textContent = cat.desc;
+    var ck = cat.checkup ? CHECKUPS[cat.checkup] : null;
+    $("#c-checkup").innerHTML = ck ? '<div class="checkup"><b>' + esc(ck.n) + " · " + ck.count + " анализа</b><p>" + esc(ck.inc) + ". Готово через " + ck.days + ' дня.</p><div class="price"><div><b>' + rub(ck.p) + "</b><small>онлайн " + rub(online(ck.p)) + "</small></div>" + addBtn(cat.checkup) + "</div></div>" : "";
+    var items = cat.items.filter(function (c) { return (!state.filters.own || A[c].own) && (!state.filters.oneday || A[c].days === 1); });
+    items.sort(function (a, b) { return state.sort === "cheap" ? A[a].p - A[b].p : A[a].pop - A[b].pop; });
+    $("#c-rows").innerHTML = items.length ? items.map(row).join("") : '<div class="empty">' + (cat.items.length ? "Под выбранные фильтры ничего не подошло. Снимите фильтр." : "В прототипе этот раздел пустой: на сайте он собирается из каталога МИС по тому же шаблону.") + "</div>";
+  }
+  function nAn(n) { var m = n % 10, h = n % 100; return n + (m === 1 && h !== 11 ? " анализ" : m >= 2 && m <= 4 && (h < 12 || h > 14) ? " анализа" : " анализов"); }
+  if (matchMedia("(max-width: 520px)").matches) $("#q-home").placeholder = "Ферритин, витамин D…";
+  function renderCard() {
+    var code = state.code, a = A[code]; if (!a) return;
+    var cat = CATS.filter(function (c) { return c.items.indexOf(code) >= 0; })[0] || CATS[0];
+    $("#k-title").textContent = a.n; $("#crumb-card").textContent = a.n;
+    var cc = $("#crumb-card-cat"); cc.textContent = cat.n; cc.dataset.go = "catalog:" + cat.id;
+    var t = CARDS[code];
+    $("#k-lede").textContent = (t && t.lede) || a.d + ".";
+    $("#k-tags").innerHTML = '<span class="tag">' + esc(a.bio) + '</span><span class="tag ' + (a.own ? "own" : "partner") + '">' + (a.own ? "Своя лаборатория CLD" : "Партнёрская лаборатория") + '</span><span class="tag">Код ' + esc(code) + '</span>' + (a.off !== a.n ? '<span class="tag" style="background:none;padding-left:0;font-weight:500;letter-spacing:0">' + esc(a.off) + "</span>" : "");
+    $("#k-draft").innerHTML = '<span class="draft"><svg class="ico" style="width:16px;height:16px"><use href="#i-info"/></svg>Черновик текста по шаблону раздела — перед публикацией вычитывает врач</span>';
+    var html = "";
+    if (t) {
+      t.blocks.forEach(function (b) {
+        html += "<section><h2>" + esc(b.h) + "</h2>" + (b.list ? "<ul>" + b.list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") + (b.p ? b.p.map(function (x) { return "<p>" + esc(x) + "</p>"; }).join("") : "") + "</section>";
+      });
+    } else {
+      html += "<section><h2>Что покажет</h2><p>" + esc(a.d) + ".</p></section><section><h2>Как подготовиться</h2><p>Кровь сдают утром натощак: после еды должно пройти 8–12 часов, воду пить можно. Особые правила для этого анализа уточните у администратора.</p></section>";
+    }
+    var tog = (t && t.together) || cat.items.filter(function (c) { return c !== code; }).slice(0, 3);
+    if (tog.length) {
+      var sum = tog.reduce(function (s, c) { return s + A[c].p; }, a.p);
+      html += '<section data-note="card5"><h2>Часто сдают вместе</h2><div class="together rows">' + tog.map(function (c) { var x = A[c]; return '<div class="arow"><div><button class="a-name" type="button" data-go="card:' + c + '">' + esc(x.n) + '</button><p class="a-desc">' + esc(x.d) + '</p></div><div class="a-buy"><div class="price"><b>' + rub(x.p) + "</b></div>" + addBtn(c) + "</div></div>"; }).join("") + '</div><p class="muted" style="margin-top:10px;font-size:15px">Вместе с этим анализом — ' + rub(sum) + " за " + nAn(tog.length + 1) + ", взятие крови оплачивается один раз.</p></section>";
+    }
+    if (t && t.faq) html += '<section class="faq" data-note="card6"><h2>Вопросы</h2>' + t.faq.map(function (f) { return "<details><summary>" + esc(f.q) + "</summary><p>" + esc(f.a) + "</p></details>"; }).join("") + "</section>";
+    if (t && t.src) html += '<details class="srcs"><summary>Источники для проверки врачом</summary><ul>' + t.src.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul></details>";
+    $("#k-blocks").innerHTML = html;
+    var NPTS = { "28.135": 9, "80-049": 22, "30-017": 25, "10-008": 25 }; // пункты из API, 22.10.2026; остальные — 24
+    var blood = a.bio.indexOf("Кровь") === 0;
+    $("#k-panel").innerHTML = '<div><div class="p-price num">' + rub(a.p) + '</div><div class="p-online" style="margin-top:6px">' + rub(online(a.p)) + " при оплате на сайте</div></div>" +
+      '<div class="lines" data-note="card3"><div><span>Анализ</span><span class="num">' + rub(a.p) + "</span></div>" + (blood ? "<div><span>Взятие крови</span><span class=\"num\">" + rub(BLOOD_DRAW) + "</span></div>" : "") + '<div class="tot"><span>Итого в пункте</span><span class="num">' + rub(a.p + (blood ? BLOOD_DRAW : 0)) + "</span></div></div>" +
+      '<div class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + daysLabel(a.days) + ' после сдачи</span><span><svg class="ico"><use href="#i-pin"/></svg>Есть в ' + (NPTS[code] || 24) + ' пунктах сети</span></div>' +
+      '<label class="muted" style="font-size:13.5px;font-weight:600" for="k-point">Пункт</label><select id="k-point">' + POINTS.map(function (p) { return "<option>" + esc(p.addr) + " · " + p.open + "–" + p.close + "</option>"; }).join("") + "</select>" +
+      '<button class="btn btn-lime" type="button" data-add="' + code + '"><svg class="ico"><use href="#i-plus"/></svg>В корзину</button><button class="btn btn-ghost" type="button">Записаться на время</button>' +
+      '<p class="fine">Срочно (ЦИТО) — когда лаборатория утвердит список, здесь появится плашка «Сегодня» и время, до которого нужно сдать.</p>';
+    $("#k-sticky").innerHTML = '<div class="price"><b>' + rub(a.p) + "</b><small>" + daysLabel(a.days).replace("Готово ", "") + (blood ? " · + взятие крови " + rub(BLOOD_DRAW) : "") + '</small></div><button class="btn btn-lime" type="button" data-add="' + code + '">В корзину</button>';
+  }
+  function go(target, push) {
+    var p = target.split(":"), v = p[0];
+    if (v === "catalog") { state.view = "catalog"; state.cat = p[1] === "checkups" ? "blood" : (p[1] || state.cat); }
+    else if (v === "card") { state.view = "card"; state.code = p[1] || state.code; }
+    else state.view = "home";
+    $$("[data-view]").forEach(function (s) { s.hidden = s.dataset.view !== state.view; });
+    $$(".nav [data-nav]").forEach(function (b) { b.removeAttribute("aria-current"); });
+    if (state.view === "catalog" || state.view === "card") { var nb = $('.nav [data-nav="catalog"]'); if (nb) nb.setAttribute("aria-current", "page"); }
+    $$(".tabbar [data-tab]").forEach(function (b) { b.toggleAttribute("aria-current", state.view !== "home"); if (state.view !== "home") b.setAttribute("aria-current", "page"); });
+    if (state.view === "catalog") renderCatalog();
+    if (state.view === "card") renderCard();
+    $$(".sugg").forEach(function (b) { b.hidden = true; });
+    var hash = state.view === "home" ? "home" : state.view === "catalog" ? "catalog-" + state.cat : "card-" + state.code;
+    try { if (push !== false) history.replaceState(null, "", "#" + hash); } catch (e) { /* sandboxed frame */ }
+    window.scrollTo(0, 0);
+    if (notesOn) placePins();
+  }
+
+  // ---------- notes ----------
+  var NOTES = {
+    home: [
+      ["h1", "Шапка в два ряда", "Сверху — пункт, часы работы, телефон, WhatsApp и результаты. Ниже — разделы. Сейчас шапка нового сайта в четыре ряда и занимает около 220 px."],
+      ["h2", "Разделы по аудиториям", "Шесть пунктов меню: анализы, чек-апы, на дому, пункты, врачам, клиникам. Каждый раздел назван одинаково везде на сайте."],
+      ["home1", "Первый экран — про главное", "Обещание «результат сегодня» и сразу поиск. Слово «сегодня» включаем, когда лаборатория утвердит список ЦИТО; до этого — «за 1 день»."],
+      ["home2", "Поиск понимает опечатки", "Попробуйте «витамн д», «ферретин», «сахар», «щитовидка», «оак». На нынешнем сайте «витамн д» и «ферретин» дают 0 результатов, а по «оак» первым выходит анализ «вредные привычки»."],
+      ["home3", "Пункт и часы — из МИС", "Сайт сам пишет «открыто» или «закрыто» по часам работы из МИС. Адреса и часы — реальные данные трёх пунктов Черкесска."],
+      ["home4", "Каталог по органам", "12 разделов словами пациента вместо 40 технических категорий. Партнёрские деревья («Лаборатория НАКФФ», «Лабквест»), УЗИ и приёмы врачей из каталога анализов убраны."],
+      ["home4", "Пиктограммы по фирменной сетке", "Иконки нарисованы клетками, как паттерн из брендбука, и строятся кодом: чёткие на любом экране и весят доли килобайта. Сейчас на сайте PNG-иконки по 244–440 КБ."],
+      ["home5", "Вход по ситуации", "Человек часто знает не анализ, а повод: усталость, сад, операция. Каждая ситуация ведёт к готовому набору с реальной ценой Черкесска."],
+      ["home6", "Строки вместо одинаковых карточек", "В строке сразу видно, что анализ покажет, срок, биоматериал, чья лаборатория и цена с онлайн-скидкой. Добавить в корзину — одной кнопкой."],
+      ["home7", "Как сдать — в три шага", "Снимает главные вопросы новичка. Строку про SMS оставляем, когда заработают уведомления из МИС."],
+      ["home8", "Только проверяемые факты", "Своя лаборатория, 29 пунктов, −10% онлайн — это данные сайта. Цифры вроде «500 000 довольных пациентов» без источника убраны."],
+      ["home9", "Вход для врачей", "Сюда медпред ведёт врача: список ЦИТО и часы сдачи, бланк направления с кодом врача, как результат приходит врачу."]
+    ],
+    catalog: [
+      ["cat1", "Две навигации рядом", "Переключатель «по органам / по ситуации» и список разделов. На телефоне разделы становятся лентой сверху."],
+      ["cat2", "Раздел объясняет себя", "Название словами пациента и одно-два предложения: что покажут эти анализы и когда их сдают."],
+      ["cat3", "Фильтры, которые нужны пациенту", "«Своя лаборатория» и «Готово за 1 день». Плашки «Сегодня» и «ЦИТО» появятся, когда в МИС заполнят поля срочности."],
+      ["cat4", "Чек-ап раздела — первым", "Готовый набор с составом, сроком и ценой. Выгоду показываем, только если она честно считается от цен каталога."],
+      ["cat5", "Строка анализа", "Название, что покажет, срок, биоматериал, своя или партнёрская лаборатория, цена и цена онлайн. Партнёр не называется по имени."]
+    ],
+    card: [
+      ["card1", "Название и одна строка смысла", "Сначала простое название и что анализ покажет. Официальное название и код — мелко, для врача и поиска."],
+      ["card2", "Цена с полным итогом", "Цена анализа, цена онлайн и строка «взятие крови 200 ₽». Пациент сразу видит, сколько заплатит в пункте."],
+      ["card3", "Итог в пункте", "Сейчас на сайте нигде не сказано, что взятие крови оплачивается отдельно, и позиция «Взятие крови» не попадает в корзину."],
+      ["card4", "Текст по шаблону раздела", "Что покажет, кому и когда назначают, как подготовиться, как понимать результат. Без норм и диагнозов: норму даёт бланк, результат оценивает врач."],
+      ["card5", "Часто сдают вместе", "Связанные анализы из того же раздела с суммой. Взятие крови — один раз."],
+      ["card6", "Вопросы и источники", "Короткие ответы на частые вопросы. Источники — для врача, который вычитывает текст перед публикацией."],
+      ["card7", "Кнопка всегда под рукой", "На телефоне цена и кнопка «В корзину» закреплены внизу экрана. Сейчас они на 1,7 экрана ниже начала карточки."]
+    ]
+  };
+  var notesOn = false;
+  function viewNotes() { return NOTES[state.view] || []; }
+  function placePins() {
+    $$(".pin").forEach(function (p) { p.remove(); });
+    $$(".has-pin").forEach(function (e) { e.classList.remove("has-pin"); });
+    if (!notesOn) return;
+    var cnt = {}; viewNotes().forEach(function (n) { cnt[n[0]] = (cnt[n[0]] || 0) + 1; });
+    var used = {}, wl = $('[data-view="' + state.view + '"] .wrap').getBoundingClientRect().left;
+    viewNotes().forEach(function (n, i) {
+      var el = $('[data-view="' + state.view + '"] [data-note="' + n[0] + '"]') || $('#top [data-note="' + n[0] + '"]');
+      if (!el) return;
+      el.classList.add("has-pin");
+      var pin = document.createElement("button");
+      pin.type = "button"; pin.className = "pin"; pin.textContent = i + 1; pin.dataset.i = i;
+      var off = (used[n[0]] || 0); used[n[0]] = off + 1;
+      if (el.closest("#top")) { pin.style.left = (-36 - off * 32) + "px"; pin.style.top = "50%"; pin.style.marginTop = "-14px"; }
+      else if (el.getBoundingClientRect().left > 52) { pin.style.left = (-40 - (cnt[n[0]] - 1 - off) * 32) + "px"; pin.style.top = "-2px"; }
+      else if (wl > 52) { pin.style.left = (wl - el.getBoundingClientRect().left - 40 + off * 32) + "px"; pin.style.top = "18px"; } // full-bleed band: pin in the margin next to its content
+      else { pin.style.left = (Math.max(0, 4 - el.getBoundingClientRect().left) + off * 32) + "px"; pin.style.top = "-32px"; } // phone: above the element, not over its text
+      el.appendChild(pin);
+    });
+    $("#drawer-title").textContent = { home: "Главная", catalog: "Раздел каталога", card: "Карточка анализа" }[state.view] + ": пояснения";
+    $("#notes-list").innerHTML = viewNotes().map(function (n, i) { return '<li data-i="' + i + '"><span>' + (i + 1) + "</span><div><b>" + esc(n[1]) + "</b><p>" + esc(n[2]) + "</p></div></li>"; }).join("");
+  }
+  function setNotes(on) {
+    notesOn = on; $("#notes-toggle").setAttribute("aria-pressed", on ? "true" : "false");
+    $("#drawer").classList.toggle("open", on && window.innerWidth > 960);
+    placePins();
+  }
+  $("#notes-toggle").addEventListener("click", function () { setNotes(!notesOn); });
+  $("#drawer-close").addEventListener("click", function () { $("#drawer").classList.remove("open"); });
+
+  // ---------- events ----------
+  document.addEventListener("click", function (e) {
+    var pin = e.target.closest(".pin");
+    if (pin) {
+      e.preventDefault(); e.stopPropagation();
+      $("#drawer").classList.add("open");
+      $$(".pin").forEach(function (p) { p.classList.toggle("hot", p === pin); });
+      $$("#notes-list li").forEach(function (li) { li.classList.toggle("hot", li.dataset.i === pin.dataset.i); if (li.dataset.i === pin.dataset.i) li.scrollIntoView({ block: "nearest" }); });
+      return;
+    }
+    var add = e.target.closest("[data-add]"); if (add) { toggleCart(add.dataset.add, add); return; }
+    var g = e.target.closest("[data-go]"); if (g) { e.preventDefault(); go(g.dataset.go); return; }
+    var seg = e.target.closest("[data-seg]"); if (seg) { state.seg = seg.dataset.seg; renderCatalog(); if (notesOn) placePins(); return; }
+    var f = e.target.closest("[data-filter]"); if (f) { state.filters[f.dataset.filter] = !state.filters[f.dataset.filter]; f.setAttribute("aria-pressed", state.filters[f.dataset.filter] ? "true" : "false"); renderCatalog(); if (notesOn) placePins(); }
+  });
+  $("#sort").addEventListener("change", function (e) { state.sort = e.target.value; renderCatalog(); if (notesOn) placePins(); });
+  bindSearch($("#q-home"), $("#sugg-home"));
+
+  window.CLD_PROTO = { A: A, CARDS: CARDS, go: go, setNotes: setNotes };
+  renderHome();
+  function route() {
+    var h = (location.hash || "").slice(1);
+    if (h.indexOf("catalog-") === 0) go("catalog:" + h.slice(8), false);
+    else if (h.indexOf("card-") === 0) go("card:" + h.slice(5), false);
+    else go("home", false);
+  }
+  window.addEventListener("hashchange", route);
+  route();
+  var h = (location.hash || "").slice(1);
+  if (/pins/.test(location.search)) { document.body.classList.add("shot"); notesOn = true; $("#notes-toggle").setAttribute("aria-pressed", "true"); placePins(); }
+  else if (/notes/.test(location.search) || h.indexOf("notes") >= 0) setNotes(true);
+})();
+</script>
+
+<script src="../shared/switcher.js" defer></script>
