@@ -354,21 +354,32 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
 .sitcard span { font-size: 15px; color: var(--muted); }
 .sitcard em { font-style: normal; font-weight: 800; font-size: 20px; margin-top: 6px; }
 .sitcard em small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }
-.howto { border-radius: 24px; background: var(--surface-2); padding: 30px; }
-.hsteps { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.hsteps::before, .hsteps::after { content: ""; position: absolute; left: 32px; width: calc(66.67% + 10.67px); top: 31px; height: 3px; border-radius: 2px; background: var(--line); }
-.hsteps::after { width: calc((66.67% + 10.67px) * var(--pn, 0)); background: var(--lime); transition: width .45s var(--ease); } /* from the first icon centre to the active one */
-.hsteps button { position: relative; z-index: 1; display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; border: 0; background: none; text-align: left; cursor: pointer; padding: 0; color: var(--ink); }
-.hs-ic { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #FFF; box-shadow: inset 0 0 0 2px var(--line); transition: background .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease); }
-.hs-ic .ico { width: 26px; height: 26px; }
-.hsteps button:hover .hs-ic { box-shadow: inset 0 0 0 2px var(--navy); }
-.hsteps button[aria-selected="true"] .hs-ic { background: var(--lime); box-shadow: none; transform: scale(1.06); }
+.howto { --e-move: cubic-bezier(.77, 0, .175, 1); --e-out: cubic-bezier(.23, 1, .32, 1); border-radius: 26px; background: var(--surface-2); padding: 12px; }
+.hs { position: relative; }
+.hs-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.hs-list button { position: relative; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; align-items: center; padding: 16px 18px 20px; border: 0; border-radius: 18px; background: transparent; color: var(--ink); text-align: left; cursor: pointer; transition: background .2s ease, transform .16s var(--e-out); }
+.hs-list button:active { transform: scale(.98); }
+@media (hover: hover) and (pointer: fine) { .hs-list:not(.hs-on) button:hover { background: rgba(20, 55, 75, .05); } }
+.hs-ic { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); }
+.hs-ic .ico { width: 24px; height: 24px; }
 .hs-t { font-weight: 700; font-size: 18px; line-height: 1.25; }
-.hs-t small { display: block; font-size: 13px; font-weight: 600; color: var(--muted); }
-.hpanel { margin-top: 26px; padding: 26px; border-radius: 18px; background: #FFF; animation: hpin .3s var(--ease); }
+.hs-t small { display: block; margin-bottom: 2px; font-size: 13px; font-weight: 600; color: var(--muted); }
+/* the active look is a navy copy of the tabs, clipped to the selected one: the highlight glides instead of recolouring */
+.hs-on { position: absolute; inset: 0; pointer-events: none; transition: clip-path .46s var(--e-move); }
+.hs-on button { background: var(--navy); color: #FFF; }
+.hs-on .hs-ic { background: var(--lime); box-shadow: none; }
+.hs-on .hs-t small { color: var(--on-navy-muted); }
+.hs-bar { position: absolute; left: 18px; right: 18px; bottom: 9px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .16); overflow: hidden; opacity: 0; transition: opacity .25s ease; }
+.howto.is-auto .hs-bar { opacity: 1; }
+.hs-bar i { display: block; height: 100%; background: var(--lime); transform-origin: left center; transform: scaleX(0); }
+.hp { position: relative; margin-top: 12px; transition: height .46s var(--e-move); }
+.hpanel { position: absolute; top: 0; left: 0; right: 0; padding: 28px; border-radius: 18px; background: #FFF; opacity: 0; visibility: hidden; transform: translateX(calc(var(--dir, 1) * 22px)); filter: blur(4px); transition: opacity .16s ease, transform .16s ease, filter .16s ease, visibility 0s linear .16s; }
+.hpanel.is-on { opacity: 1; visibility: visible; transform: none; filter: none; transition: opacity .34s var(--e-out) .08s, transform .5s var(--e-out) .08s, filter .34s var(--e-out) .08s, visibility 0s; }
+.hpanel.is-on > *, .hpanel.is-on .opt { animation: hpup .5s var(--e-out) both; }
+.hpanel.is-on > :nth-child(2), .hpanel.is-on .opt:nth-child(2) { animation-delay: .07s; }
 .hpanel > p { font-size: 17px; max-width: 70ch; }
 .hpanel .row2 { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px; }
-@keyframes hpin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes hpup { from { opacity: 0; transform: translateY(8px); } }
 .opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .opt { display: grid; gap: 8px; align-content: start; padding: 22px; border-radius: 16px; box-shadow: inset 0 0 0 1.5px var(--line); }
 .opt-hl { background: var(--lime-soft); box-shadow: none; }
@@ -405,11 +416,12 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
   .tile { padding: 18px; gap: 12px; }
   .tile .picto, .tile-all .all-n { width: 52px; height: 52px; }
   .tile b { font-size: 16.5px; }
-  .howto { padding: 20px; }
-  .hsteps { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .hsteps::before, .hsteps::after { display: none; }
-  .hs-ic { width: 52px; height: 52px; }
-  .hsteps button { grid-template-columns: 52px 1fr; }
+  .howto { padding: 8px; }
+  .hs-list { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .hs-list button { grid-template-columns: 48px minmax(0, 1fr); padding: 12px 14px 16px; }
+  .hs-ic { width: 48px; height: 48px; }
+  .hs-t { font-size: 17px; }
+  .hpanel { padding: 20px; }
   .advs { grid-template-columns: minmax(0, 1fr); }
   .docs2 { grid-template-columns: minmax(0, 1fr); }
   .f-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -543,24 +555,28 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
     <div class="sec wrap">
       <div class="sec-h"><h2>Как сдать анализ</h2></div>
       <div class="howto" data-note="home7">
-        <div class="hsteps" role="tablist" aria-label="Шаги">
-          <button type="button" role="tab" aria-selected="true" data-step="0"><span class="hs-ic"><svg class="ico"><use href="#i-search"/></svg></span><span class="hs-t"><small>Шаг 1</small>Выберите анализ</span></button>
-          <button type="button" role="tab" aria-selected="false" data-step="1"><span class="hs-ic"><svg class="ico"><use href="#i-drop"/></svg></span><span class="hs-t"><small>Шаг 2</small>Сдайте в пункте или дома</span></button>
-          <button type="button" role="tab" aria-selected="false" data-step="2"><span class="hs-ic"><svg class="ico"><use href="#i-file"/></svg></span><span class="hs-t"><small>Шаг 3</small>Получите результат</span></button>
+        <div class="hs">
+          <div class="hs-list" role="tablist" aria-label="Шаги">
+            <button type="button" role="tab" id="hs-0" aria-controls="hp-0" aria-selected="true" data-step="0"><span class="hs-ic"><svg class="ico"><use href="#i-search"/></svg></span><span class="hs-t"><small>Шаг 1</small>Выберите анализ</span></button>
+            <button type="button" role="tab" id="hs-1" aria-controls="hp-1" aria-selected="false" data-step="1"><span class="hs-ic"><svg class="ico"><use href="#i-drop"/></svg></span><span class="hs-t"><small>Шаг 2</small>Сдайте в пункте или дома</span></button>
+            <button type="button" role="tab" id="hs-2" aria-controls="hp-2" aria-selected="false" data-step="2"><span class="hs-ic"><svg class="ico"><use href="#i-file"/></svg></span><span class="hs-t"><small>Шаг 3</small>Получите результат</span></button>
+          </div>
         </div>
-        <div class="hpanel" data-panel="0" role="tabpanel">
+        <div class="hp">
+          <div class="hpanel is-on" id="hp-0" role="tabpanel" aria-labelledby="hs-0">
           <p>Найдите анализ в поиске или в разделах выше. Не знаете, какой нужен, — позвоните, администратор подскажет. При оплате на сайте — скидка 10%.</p>
           <div class="row2"><button class="btn btn-navy" type="button" data-focus-search><svg class="ico"><use href="#i-search"/></svg>Найти анализ</button><a class="btn btn-ghost" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>8 800 201 78 30</a></div>
         </div>
-        <div class="hpanel" data-panel="1" role="tabpanel" hidden>
+          <div class="hpanel" id="hp-1" role="tabpanel" aria-labelledby="hs-1">
           <div class="opts">
             <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b>В пункте</b><p>29 пунктов. В Черкесске на ул. Гутякулова, 20 — ежедневно с 07:30 до 19:00. Большинство анализов крови сдают утром натощак, подготовка указана в карточке.</p><button class="btn btn-ghost" type="button" data-stub="Список всех пунктов появится на сайте">Все пункты</button></div>
             <div class="opt opt-hl"><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Дома</b><p>Медсестра приедет и возьмёт кровь дома. Выезд бесплатный при заказе от 1 500 ₽.</p><button class="btn btn-navy" type="button" data-stub="Заявку на выезд подключим к МИС">Вызвать медсестру</button></div>
           </div>
         </div>
-        <div class="hpanel" data-panel="2" role="tabpanel" hidden>
+          <div class="hpanel" id="hp-2" role="tabpanel" aria-labelledby="hs-2">
           <p>Результат появится в личном кабинете на сайте, его можно забрать и в пункте. Срок указан в карточке каждого анализа. Обсудите результат с врачом.</p>
           <div class="row2"><button class="btn btn-navy" type="button" data-stub="Личный кабинет — после подключения к МИС"><svg class="ico"><use href="#i-file"/></svg>Войти в личный кабинет</button></div>
+          </div>
         </div>
       </div>
     </div>
@@ -959,7 +975,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
       ["home4", "Пиктограммы по фирменной сетке", "Иконки нарисованы клетками, как паттерн из брендбука, и строятся кодом: чёткие на любом экране и весят доли килобайта. Сейчас на сайте PNG-иконки по 244–440 КБ."],
       ["home5", "Вход по ситуации", "Человек часто знает не анализ, а повод: усталость, сад, операция. Каждая ситуация ведёт к готовому набору с реальной ценой Черкесска."],
       ["home6", "Строки вместо одинаковых карточек", "В строке сразу видно, что анализ покажет, срок, биоматериал, чья лаборатория и цена с онлайн-скидкой. Добавить в корзину — одной кнопкой."],
-      ["home7", "Как сдать — по шагам", "Нажмите на шаг, и откроются подробности. Во втором шаге выбор: в пункте или дома, выезд медсестры бесплатно при заказе от 1 500 ₽."],
+      ["home7", "Как сдать — по шагам", "Шаги листаются сами, как сторис: полоса внизу показывает, когда будет следующий. Наведите или нажмите — автопрокрутка остановится. Во втором шаге выбор: в пункте или дома, выезд медсестры бесплатно при заказе от 1 500 ₽."],
       ["home8", "Почему CLD", "Четыре проверяемых преимущества с иконками. Цифры вроде «500 000 довольных пациентов» без источника не используем."],
       ["home9", "Вход для врачей", "Сюда медпред ведёт врача: список ЦИТО и часы сдачи, бланк направления с кодом врача, как результат приходит врачу."]
     ],
@@ -1024,7 +1040,6 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
     }
     var add = e.target.closest("[data-add]"); if (add) { toggleCart(add.dataset.add, add); return; }
     var ft = e.target.closest("[data-ftab]"); if (ft) { $$("[data-ftab]").forEach(function (b) { b.setAttribute("aria-selected", b === ft ? "true" : "false"); }); $("#organs").hidden = ft.dataset.ftab !== "organs"; $("#situations").hidden = ft.dataset.ftab !== "sits"; if (notesOn) placePins(); return; }
-    var hs = e.target.closest("[data-step]"); if (hs) { var n = +hs.dataset.step; $$("[data-step]").forEach(function (b) { b.setAttribute("aria-selected", +b.dataset.step === n ? "true" : "false"); }); $$("[data-panel]").forEach(function (pn) { pn.hidden = +pn.dataset.panel !== n; }); hs.closest(".howto").style.setProperty("--pn", n / 2); return; }
     var stub = e.target.closest("[data-stub]"); if (stub) { e.preventDefault(); toast(stub.dataset.stub); return; }
     if (e.target.closest("[data-focus-search]")) { scrollTo({ top: 0, behavior: "smooth" }); setTimeout(function () { $("#q-home").focus(); }, 350); return; }
     var sc = e.target.closest("[data-scroll]"); if (sc) { e.preventDefault(); go("home"); setTimeout(function () { $("#" + sc.dataset.scroll).scrollIntoView({ behavior: "smooth" }); }, 50); return; }
@@ -1037,6 +1052,48 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
 
   window.CLD_PROTO = { A: A, CARDS: CARDS, go: go, setNotes: setNotes };
   renderHome();
+  // «Как сдать»: gliding highlight, height-animated panels, story-like autoplay that stops on the first click
+  (function howto() {
+    var box = $(".howto"); if (!box) return;
+    var list = box.querySelector(".hs-list"), tabs = $$("[data-step]", list), hp = box.querySelector(".hp"), panels = $$(".hpanel", box);
+    var on = list.cloneNode(true);
+    on.className = "hs-list hs-on"; on.setAttribute("aria-hidden", "true"); on.removeAttribute("role"); on.removeAttribute("aria-label");
+    $$("button", on).forEach(function (b) { b.tabIndex = -1; ["role", "id", "aria-controls", "aria-selected", "data-step"].forEach(function (a) { b.removeAttribute(a); }); b.insertAdjacentHTML("beforeend", '<span class="hs-bar"><i></i></span>'); });
+    list.parentNode.appendChild(on);
+    var bars = $$(".hs-bar i", on), cur = 0, anim = null, paused = false, auto = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function clip() { var b = tabs[cur], W = list.offsetWidth, H = list.offsetHeight; on.style.clipPath = "inset(" + b.offsetTop + "px " + (W - b.offsetLeft - b.offsetWidth) + "px " + (H - b.offsetTop - b.offsetHeight) + "px " + b.offsetLeft + "px round 18px)"; }
+    function fit() { hp.style.height = panels[cur].offsetHeight + "px"; }
+    function show(n) {
+      if (n === cur) return;
+      var d = n > cur ? 1 : -1, prev = panels[cur], next = panels[n];
+      prev.style.setProperty("--dir", -d); next.style.setProperty("--dir", d); void next.offsetWidth;
+      prev.classList.remove("is-on"); prev.inert = true; prev.setAttribute("aria-hidden", "true");
+      next.classList.add("is-on"); next.inert = false; next.removeAttribute("aria-hidden");
+      tabs.forEach(function (t, i) { t.setAttribute("aria-selected", i === n ? "true" : "false"); });
+      cur = n; clip(); fit();
+    }
+    function run() {
+      if (!auto) return;
+      if (anim) anim.cancel();
+      anim = bars[cur].animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 6500, easing: "linear", fill: "forwards" });
+      if (paused || document.hidden) anim.pause();
+      anim.onfinish = function () { show((cur + 1) % tabs.length); run(); };
+    }
+    function stop() { auto = false; box.classList.remove("is-auto"); if (anim) { anim.cancel(); anim = null; } }
+    function hold(v) { paused = v; if (anim) { if (v) anim.pause(); else anim.play(); } }
+    box.addEventListener("click", function (e) { var t = e.target.closest("[data-step]"); if (!t) return; stop(); show(+t.dataset.step); });
+    box.addEventListener("pointerenter", function () { hold(true); });
+    box.addEventListener("pointerleave", function () { hold(false); });
+    box.addEventListener("focusin", function () { hold(true); });
+    box.addEventListener("focusout", function () { hold(false); });
+    document.addEventListener("visibilitychange", function () { if (anim) { if (document.hidden) anim.pause(); else if (!paused) anim.play(); } });
+    panels.forEach(function (pn, i) { if (i) { pn.inert = true; pn.setAttribute("aria-hidden", "true"); } });
+    var ro = new ResizeObserver(function () { clip(); fit(); }); ro.observe(list); panels.forEach(function (pn) { ro.observe(pn); });
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting && auto && !anim) { box.classList.add("is-auto"); run(); io.disconnect(); } }, { threshold: .5 });
+    io.observe(box);
+    clip(); fit();
+  })();
+
   function route() {
     var h = (location.hash || "").slice(1);
     if (h.indexOf("catalog-") === 0) go("catalog:" + h.slice(8), false);
