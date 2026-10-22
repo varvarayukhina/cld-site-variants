@@ -1,7 +1,8 @@
-/* Заставка CLD: лаймовый экран с логотипом при первом заходе за сеанс.
+/* Заставка CLD: лаймовый экран с логотипом при первом заходе за сеанс (с ?splash в адресе — всегда).
    Держится, пока грузится страница: не меньше 450 мс, не больше 900 мс. Подключать в <head>. */
 (function () {
-  try { if (sessionStorage.getItem("cldSplash")) return; sessionStorage.setItem("cldSplash", "1"); } catch (e) { return; }
+  var force = /[?&]splash\b/.test(location.search); // ?splash — показать всегда, для демонстрации
+  if (!force) { try { if (sessionStorage.getItem("cldSplash")) return; sessionStorage.setItem("cldSplash", "1"); } catch (e) { return; } }
   var d = document.documentElement, t0 = Date.now(), over = false;
   var logo = "../assets/cld-logo-horizontal-navy.svg";
   var pre = document.createElement("link"); pre.rel = "preload"; pre.as = "image"; pre.href = logo; document.head.appendChild(pre);
