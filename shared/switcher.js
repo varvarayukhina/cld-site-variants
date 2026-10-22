@@ -25,7 +25,7 @@
   bar.innerHTML = '<b class="t">Прототип CLD</b><b>Вариант:</b><nav>' + V.map(function (v, i) {
     return '<a href="../' + v.id + '/" data-v="' + v.id + '"' + (v.id === cur ? ' aria-current="page"' : "") + ">" + v.id.slice(1) + " · " + v.n + "</a>";
   }).join("") + '</nav><span class="d">' + V.filter(function (v) { return v.id === cur; })[0].d + '</span><a class="rep" href="../report/">Отчёт</a><a class="rep" href="../report/cld-novyi-sait-predlozheniya.pdf">PDF</a>';
-  function sync() { bar.querySelectorAll("a[data-v]").forEach(function (a) { a.href = "../" + a.dataset.v + "/" + location.hash; }); // only variant links, not «Отчёт»/«PDF» }
+  function sync() { bar.querySelectorAll("a[data-v]").forEach(function (a) { a.href = "../" + a.dataset.v + "/" + location.hash; }); /* only variant links, not «Отчёт»/«PDF» */ }
   function mount() { var gap = document.createElement("div"); gap.className = "cldsw-gap"; document.body.prepend(gap); document.body.prepend(bar); sync(); }
   window.addEventListener("hashchange", sync);
   if (document.body) mount(); else document.addEventListener("DOMContentLoaded", mount);
