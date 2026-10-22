@@ -17,13 +17,14 @@
     ".cldsw nav{display:flex;gap:4px;background:rgba(255,255,255,.08);padding:3px;border-radius:999px;flex:none}" +
     ".cldsw a{color:#DCE6EB;text-decoration:none;padding:7px 12px;border-radius:999px;font-weight:600;white-space:nowrap}" +
     ".cldsw a[aria-current=page]{background:#AFC81E;color:#14374B}.cldsw a:focus-visible{outline:2px solid #AFC81E;outline-offset:2px}" +
-    ".cldsw-gap{height:" + H + "px}@media (max-width:700px){.cldsw .d,.cldsw .t{display:none}.cldsw{justify-content:center}}@media (max-width:520px){.cldsw>b{display:none}.cldsw a{padding:7px 8px;font-size:12px}.cldsw nav{gap:2px}}";
+    ".cldsw .rep{margin-left:auto;padding:7px 10px;color:#FFF;text-decoration:underline;text-underline-offset:3px}.cldsw .rep+.rep{margin-left:0}" +
+    ".cldsw-gap{height:" + H + "px}@media (max-width:700px){.cldsw .d,.cldsw .t{display:none}.cldsw{justify-content:center}}@media (max-width:520px){.cldsw>b,.cldsw .rep{display:none}.cldsw a{padding:7px 8px;font-size:12px}.cldsw nav{gap:2px}}";
   document.head.appendChild(css);
   var bar = document.createElement("div");
   bar.className = "cldsw"; bar.setAttribute("role", "navigation"); bar.setAttribute("aria-label", "Варианты дизайна");
   bar.innerHTML = '<b class="t">Прототип CLD</b><b>Вариант:</b><nav>' + V.map(function (v, i) {
     return '<a href="../' + v.id + '/" data-v="' + v.id + '"' + (v.id === cur ? ' aria-current="page"' : "") + ">" + v.id.slice(1) + " · " + v.n + "</a>";
-  }).join("") + '</nav><span class="d">' + V.filter(function (v) { return v.id === cur; })[0].d + "</span>";
+  }).join("") + '</nav><span class="d">' + V.filter(function (v) { return v.id === cur; })[0].d + '</span><a class="rep" href="../report/">Отчёт</a><a class="rep" href="../report/cld-novyi-sait-predlozheniya.pdf">PDF</a>';
   function sync() { bar.querySelectorAll("a").forEach(function (a) { a.href = "../" + a.dataset.v + "/" + location.hash; }); }
   function mount() { var gap = document.createElement("div"); gap.className = "cldsw-gap"; document.body.prepend(gap); document.body.prepend(bar); sync(); }
   window.addEventListener("hashchange", sync);

@@ -310,6 +310,112 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
   .organs { grid-template-columns: minmax(0, 1fr); }
   .quick button { font-size: 13.5px; padding: 7px 12px; }
 }
+/* v0 home 2.0: perk, promos, calm finder, steps, advantages, footer */
+.perk { display: inline-flex; align-items: center; gap: 10px; margin: 22px 0 14px; padding: 9px 16px 9px 12px; border-radius: 999px; background: var(--lime); color: var(--navy); font-weight: 700; font-size: 16px; }
+.perk .ico { width: 20px; height: 20px; }
+.promos { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+.promo { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 10px; padding: 28px; border-radius: 20px; background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+.promo:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1.5px var(--navy), 0 14px 30px rgba(20,55,75,.10); }
+.promo h3 { font-size: 24px; line-height: 1.15; max-width: 16ch; position: relative; }
+.promo p { color: var(--muted); font-size: 15.5px; max-width: 34ch; position: relative; }
+.promo .btn { margin-top: auto; align-self: flex-start; position: relative; }
+.promo-when { align-self: flex-start; font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 999px; background: var(--navy-soft); position: relative; }
+.promo-price { display: flex; align-items: baseline; gap: 12px; margin: 4px 0 10px; position: relative; }
+.promo-price b { font-size: 34px; font-weight: 800; }
+.promo-price s { font-size: 17px; color: var(--muted); }
+.promo-main { background: var(--navy); color: #FFF; box-shadow: none; min-height: 320px; }
+.promo-main:hover { box-shadow: 0 16px 34px rgba(20,55,75,.25); }
+.promo-main h3 { font-size: 30px; }
+.promo-main p, .promo-main .promo-price s { color: var(--on-navy-muted); }
+.promo-main .promo-when { background: var(--lime); color: var(--navy); }
+.promo-cells { position: absolute; right: -54px; top: -54px; width: 190px; height: 190px; opacity: .35; }
+.promo-soft { background: var(--lime-soft); box-shadow: none; }
+.promo-soft:hover { box-shadow: 0 14px 30px rgba(20,55,75,.10); }
+.promo-soft .promo-when { background: #FFF; }
+.promo-terms { margin-top: 14px; font-size: 13.5px; color: var(--muted); }
+.seg2 { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface); }
+.seg2 button { border: 0; background: none; font: 700 16px var(--text); color: var(--muted); padding: 11px 22px; border-radius: 999px; cursor: pointer; transition: background .2s var(--ease), color .2s var(--ease); }
+.seg2 button[aria-selected="true"] { background: #FFF; color: var(--navy); box-shadow: 0 1px 3px rgba(20,55,75,.15); }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.tile { display: grid; justify-items: start; gap: 16px; padding: 24px; border: 0; border-radius: 20px; background: var(--surface-2); text-align: left; cursor: pointer; transition: background .2s var(--ease), transform .25s var(--ease); }
+.tile:hover { background: var(--navy-soft); transform: translateY(-2px); }
+.tile .picto { width: 64px; height: 64px; padding: 10px; border-radius: 16px; background: #FFF; }
+.tile:hover .picto rect { transform: scale(.72); }
+.tile:hover .picto rect:nth-child(3n) { transform: scale(1); }
+.tile b { font-size: 18px; line-height: 1.25; }
+.tile-all { background: var(--navy); color: #FFF; }
+.tile-all:hover { background: var(--navy-2); }
+.tile-all .all-n { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 16px; background: var(--lime); color: var(--navy); font-weight: 800; font-size: 26px; }
+.tiles[hidden], .sitcards[hidden], .hpanel[hidden] { display: none; }
+.sitcards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.sitcard { display: grid; gap: 8px; align-content: start; padding: 24px; border: 0; border-radius: 20px; background: var(--surface-2); text-align: left; cursor: pointer; transition: background .2s var(--ease), transform .25s var(--ease); }
+.sitcard:hover { background: var(--navy-soft); transform: translateY(-2px); }
+.sitcard b { font-size: 19px; }
+.sitcard span { font-size: 15px; color: var(--muted); }
+.sitcard em { font-style: normal; font-weight: 800; font-size: 20px; margin-top: 6px; }
+.sitcard em small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }
+.howto { border-radius: 24px; background: var(--surface-2); padding: 30px; }
+.hsteps { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.hsteps::before, .hsteps::after { content: ""; position: absolute; left: 32px; width: calc(66.67% + 10.67px); top: 31px; height: 3px; border-radius: 2px; background: var(--line); }
+.hsteps::after { width: calc((66.67% + 10.67px) * var(--pn, 0)); background: var(--lime); transition: width .45s var(--ease); } /* from the first icon centre to the active one */
+.hsteps button { position: relative; z-index: 1; display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; border: 0; background: none; text-align: left; cursor: pointer; padding: 0; color: var(--ink); }
+.hs-ic { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #FFF; box-shadow: inset 0 0 0 2px var(--line); transition: background .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease); }
+.hs-ic .ico { width: 26px; height: 26px; }
+.hsteps button:hover .hs-ic { box-shadow: inset 0 0 0 2px var(--navy); }
+.hsteps button[aria-selected="true"] .hs-ic { background: var(--lime); box-shadow: none; transform: scale(1.06); }
+.hs-t { font-weight: 700; font-size: 18px; line-height: 1.25; }
+.hs-t small { display: block; font-size: 13px; font-weight: 600; color: var(--muted); }
+.hpanel { margin-top: 26px; padding: 26px; border-radius: 18px; background: #FFF; animation: hpin .3s var(--ease); }
+.hpanel > p { font-size: 17px; max-width: 70ch; }
+.hpanel .row2 { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px; }
+@keyframes hpin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.opt { display: grid; gap: 8px; align-content: start; padding: 22px; border-radius: 16px; box-shadow: inset 0 0 0 1.5px var(--line); }
+.opt-hl { background: var(--lime-soft); box-shadow: none; }
+.opt-ic { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--navy); color: #FFF; }
+.opt-ic .ico { stroke: #FFF; }
+.opt b { font-size: 19px; margin-top: 4px; }
+.opt p { color: var(--muted); font-size: 15.5px; }
+.opt .btn { justify-self: start; margin-top: 6px; }
+.advs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.adv { display: grid; gap: 10px; align-content: start; padding: 26px; border-radius: 20px; box-shadow: inset 0 0 0 1.5px var(--line); }
+.adv-ic { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--lime-soft); }
+.adv-ic .ico { width: 26px; height: 26px; }
+.adv b { font-size: 20px; line-height: 1.2; margin-top: 6px; }
+.adv p { color: var(--muted); font-size: 15.5px; }
+.docs2 { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 30px; border-radius: 24px; background: var(--navy-soft); }
+.docs2 h3 { font-size: 24px; }
+.docs2 p { color: var(--muted); margin-top: 6px; max-width: 64ch; }
+footer.foot .wrap { display: block; padding-block: 52px 28px; }
+.f-top { display: grid; grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)); gap: 36px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,.12); }
+.f-brand { display: grid; gap: 10px; align-content: start; }
+.f-brand img { width: 170px; margin-bottom: 8px; }
+.f-brand a { color: #FFF; }
+.f-phone { font-size: 24px; font-weight: 800; text-decoration: none; }
+.f-col { display: grid; gap: 2px; align-content: start; }
+.f-col h4 { color: #FFF; font-size: 16px; margin-bottom: 8px; }
+.f-col a { color: var(--on-navy-muted); text-decoration: none; padding: 6px 0; font-size: 15px; }
+.f-col a:hover, .f-brand a:hover { color: #FFF; text-decoration: underline; text-underline-offset: 3px; }
+.f-legal { margin: 22px 0 18px; font-size: 13.5px; }
+@media (max-width: 1100px) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } .advs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 960px) {
+  .promos, .sitcards, .opts { grid-template-columns: minmax(0, 1fr); }
+  .promo-main { min-height: 0; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .tile { padding: 18px; gap: 12px; }
+  .tile .picto, .tile-all .all-n { width: 52px; height: 52px; }
+  .tile b { font-size: 16.5px; }
+  .howto { padding: 20px; }
+  .hsteps { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .hsteps::before, .hsteps::after { display: none; }
+  .hs-ic { width: 52px; height: 52px; }
+  .hsteps button { grid-template-columns: 52px 1fr; }
+  .advs { grid-template-columns: minmax(0, 1fr); }
+  .docs2 { grid-template-columns: minmax(0, 1fr); }
+  .f-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .f-brand { grid-column: 1 / -1; }
+  .perk { font-size: 14.5px; }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -324,6 +430,8 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
   <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.5a6 6 0 0 1-12 0c0-4.1 6-10.5 6-10.5Z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9H4Z"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></symbol>
   <symbol id="i-lab" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6.5L5 19a1.5 1.5 0 0 0 1.3 2h11.4A1.5 1.5 0 0 0 19 19l-5-9.5V3"/><path d="M7.5 15h9"/></symbol>
   <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
@@ -367,7 +475,8 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
       <div class="wrap">
         <div>
           <h1 data-note="home1">Результат анализов — <em>сегодня</em></h1>
-          <p class="sub">Своя лаборатория в Черкесске и 29 пунктов рядом с домом. Цена, срок и подготовка — в каждой карточке.</p>
+          <p class="sub">Своя лаборатория в Черкесске и 29 пунктов рядом с домом.</p>
+          <p class="perk"><svg class="ico"><use href="#i-home"/></svg>Бесплатный выезд медсестры при заказе от 1 500 ₽</p>
           <div class="search" data-note="home2">
             <svg class="ico"><use href="#i-search"/></svg>
             <input id="q-home" type="search" autocomplete="off" placeholder="Ферритин, витамин D, анализ крови…" aria-label="Найти анализ">
@@ -387,18 +496,43 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
       <svg class="hero-cells" id="hero-cells" viewBox="0 0 130 130" aria-hidden="true"></svg>
     </div>
 
-    <div class="sec wrap">
-      <div class="sec-h"><h2>Выберите, что хотите проверить</h2><p>Нажмите на орган или на повод, по которому идёте сдавать анализы.</p></div>
-      <div class="finder">
-        <div data-note="home4">
-          <h3>По органам и системам</h3>
-          <div class="organs" id="organs"></div>
-        </div>
-        <div data-note="home5">
-          <h3>По ситуации</h3>
-          <div class="situations" id="situations"></div>
+    <div class="sec wrap" id="promos" data-note="promos">
+      <div class="sec-h"><h2>Акции месяца</h2><span class="tag">Пример · акции утверждает лаборатория</span></div>
+      <div class="promos">
+        <article class="promo promo-main">
+          <svg class="promo-cells" id="promo-cells" viewBox="0 0 130 130" aria-hidden="true"></svg>
+          <span class="promo-when">До 30 ноября</span>
+          <h3>Общий анализ крови развёрнутый</h3>
+          <p>Самый частый анализ: с него начинают проверку здоровья. Готово через 1 день.</p>
+          <div class="promo-price"><b class="num">350 ₽</b><s class="num">470 ₽</s></div>
+          <button class="btn btn-lime" type="button" data-go="card:20-017">Подробнее</button>
+        </article>
+        <article class="promo">
+          <span class="promo-when">До 30 ноября</span>
+          <h3>Чек-ап «Анемия»</h3>
+          <p>4 анализа: общий анализ крови, железо, ферритин, трансферрин. Готово через 2 дня.</p>
+          <div class="promo-price"><b class="num">1 000 ₽</b></div>
+          <button class="btn btn-navy" type="button" data-go="catalog:blood">Подробнее</button>
+        </article>
+        <article class="promo promo-soft">
+          <span class="promo-when">Всегда</span>
+          <h3>−10% при оплате на сайте</h3>
+          <p>На анализы из каталога, если оплатить заказ онлайн.</p>
+          <button class="btn btn-navy" type="button" data-go="catalog:blood">Выбрать анализы</button>
+        </article>
+      </div>
+      <p class="promo-terms">Сроки и условия акций уточняйте по телефону 8 800 201 78 30.</p>
+    </div>
+
+    <div class="sec wrap" data-note="home4">
+      <div class="sec-h"><h2>Выберите, что хотите проверить</h2>
+        <div class="seg2" role="tablist" aria-label="Как выбрать анализы">
+          <button type="button" role="tab" aria-selected="true" data-ftab="organs">По органам</button>
+          <button type="button" role="tab" aria-selected="false" data-ftab="sits">По поводу</button>
         </div>
       </div>
+      <div class="tiles" id="organs"></div>
+      <div class="sitcards" id="situations" data-note="home5" hidden></div>
     </div>
 
     <div class="sec wrap">
@@ -408,25 +542,40 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
 
     <div class="sec wrap">
       <div class="sec-h"><h2>Как сдать анализ</h2></div>
-      <div class="steps" data-note="home7">
-        <div class="step"><b>Выберите анализ</b><p>На сайте, по телефону или по направлению врача. Оплатить можно онлайн со скидкой 10% или в пункте.</p></div>
-        <div class="step"><b>Приходите в пункт</b><p>Утром натощак, если этого требует анализ. Подготовка указана в карточке.</p></div>
-        <div class="step"><b>Получите результат</b><p>Пришлём SMS со ссылкой, когда результат будет готов. Обсудите его с врачом.</p></div>
+      <div class="howto" data-note="home7">
+        <div class="hsteps" role="tablist" aria-label="Шаги">
+          <button type="button" role="tab" aria-selected="true" data-step="0"><span class="hs-ic"><svg class="ico"><use href="#i-search"/></svg></span><span class="hs-t"><small>Шаг 1</small>Выберите анализ</span></button>
+          <button type="button" role="tab" aria-selected="false" data-step="1"><span class="hs-ic"><svg class="ico"><use href="#i-drop"/></svg></span><span class="hs-t"><small>Шаг 2</small>Сдайте в пункте или дома</span></button>
+          <button type="button" role="tab" aria-selected="false" data-step="2"><span class="hs-ic"><svg class="ico"><use href="#i-file"/></svg></span><span class="hs-t"><small>Шаг 3</small>Получите результат</span></button>
+        </div>
+        <div class="hpanel" data-panel="0" role="tabpanel">
+          <p>Найдите анализ в поиске или в разделах выше. Не знаете, какой нужен, — позвоните, администратор подскажет. При оплате на сайте — скидка 10%.</p>
+          <div class="row2"><button class="btn btn-navy" type="button" data-focus-search><svg class="ico"><use href="#i-search"/></svg>Найти анализ</button><a class="btn btn-ghost" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>8 800 201 78 30</a></div>
+        </div>
+        <div class="hpanel" data-panel="1" role="tabpanel" hidden>
+          <div class="opts">
+            <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b>В пункте</b><p>29 пунктов. В Черкесске на ул. Гутякулова, 20 — ежедневно с 07:30 до 19:00. Большинство анализов крови сдают утром натощак, подготовка указана в карточке.</p><button class="btn btn-ghost" type="button" data-stub="Список всех пунктов появится на сайте">Все пункты</button></div>
+            <div class="opt opt-hl"><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Дома</b><p>Медсестра приедет и возьмёт кровь дома. Выезд бесплатный при заказе от 1 500 ₽.</p><button class="btn btn-navy" type="button" data-stub="Заявку на выезд подключим к МИС">Вызвать медсестру</button></div>
+          </div>
+        </div>
+        <div class="hpanel" data-panel="2" role="tabpanel" hidden>
+          <p>Результат появится в личном кабинете на сайте, его можно забрать и в пункте. Срок указан в карточке каждого анализа. Обсудите результат с врачом.</p>
+          <div class="row2"><button class="btn btn-navy" type="button" data-stub="Личный кабинет — после подключения к МИС"><svg class="ico"><use href="#i-file"/></svg>Войти в личный кабинет</button></div>
+        </div>
       </div>
     </div>
 
-    <div class="band" data-note="home8">
-      <div class="wrap">
-        <div class="fact"><b>Своя лаборатория</b><span>в Черкесске: самые частые анализы делаем здесь, а не везём в другой город</span></div>
-        <div class="fact"><b class="num">29 пунктов</b><span>в Карачаево-Черкесии, Кабардино-Балкарии и других регионах</span></div>
-        <div class="fact"><b class="num">−10%</b><span>при оплате на сайте</span></div>
+    <div class="sec wrap">
+      <div class="sec-h"><h2>Почему CLD</h2></div>
+      <div class="advs" data-note="home8">
+        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-lab"/></svg></span><b>Своя лаборатория в Черкесске</b><p>Самые частые анализы делаем здесь, а не везём в другой город.</p></div>
+        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b class="num">29 пунктов</b><p>В Карачаево-Черкесии, Кабардино-Балкарии и других регионах.</p></div>
+        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Выезд медсестры</b><p>Бесплатно при заказе от 1 500 ₽.</p></div>
+        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-percent"/></svg></span><b class="num">−10% на сайте</b><p>При оплате заказа онлайн.</p></div>
       </div>
-    </div>
-
-    <div class="docs" data-note="home9">
-      <div class="wrap">
-        <div><h2>Вы врач и направляете пациентов?</h2><p>Список срочных анализов и часы сдачи, бланк направления, результат пациента — вам на почту с его согласия.</p></div>
-        <button class="btn btn-navy" type="button">Раздел для врачей</button>
+      <div class="docs2" data-note="home9">
+        <div><h3>Вы врач и направляете пациентов?</h3><p>Список срочных анализов и часы сдачи, бланк направления, результат пациента — вам на почту с его согласия.</p></div>
+        <button class="btn btn-navy" type="button" data-stub="Раздел для врачей — в разработке">Раздел для врачей</button>
       </div>
     </div>
   </section>
@@ -479,8 +628,34 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
 
   <footer class="foot">
     <div class="wrap">
-      <img src="../assets/cld-logo-horizontal-white.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276">
-      <p>ООО «Название по лицензии» · Лицензия № — заполнить после сверки с реестром Росздравнадзора · 8 800 201 78 30 · Прототип: данные цен — сайт lab.discript.ru, пункт Черкесск, 22.10.2026.</p>
+      <div class="f-top">
+        <div class="f-brand">
+          <img src="../assets/cld-logo-horizontal-white.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276">
+          <a class="f-phone num" href="tel:88002017830">8 800 201 78 30</a>
+          <a href="#" data-stub="Номер WhatsApp добавим после согласования">Написать в WhatsApp</a>
+          <p>Черкесск, ул. Гутякулова, 20<br>Ежедневно 07:30–19:00</p>
+        </div>
+        <nav class="f-col" aria-label="Пациентам"><h4>Пациентам</h4>
+          <a href="#catalog-blood" data-go="catalog:blood">Анализы и цены</a>
+          <a href="#" data-stub="Страница чек-апов появится на сайте">Чек-апы</a>
+          <a href="#" data-scroll="promos">Акции</a>
+          <a href="#" data-stub="Страница выезда на дом появится на сайте">Анализы на дому</a>
+          <a href="#" data-stub="Список всех пунктов появится на сайте">Где сдать</a>
+          <a href="#" data-stub="Личный кабинет — после подключения к МИС">Результаты анализов</a>
+        </nav>
+        <nav class="f-col" aria-label="Врачам и клиникам"><h4>Врачам и клиникам</h4>
+          <a href="#" data-stub="Раздел для врачей — в разработке">Врачам</a>
+          <a href="#" data-stub="Раздел для клиник — в разработке">Клиникам и санаториям</a>
+          <a href="#" data-stub="Бланк направления появится в разделе для врачей">Бланк направления</a>
+        </nav>
+        <nav class="f-col" aria-label="О компании"><h4>О компании</h4>
+          <a href="#" data-stub="Страница о лаборатории — в разработке">О лаборатории</a>
+          <a href="#" data-stub="Лицензии и документы — после сверки с юристом">Лицензии и документы</a>
+          <a href="#" data-stub="Страница контактов — в разработке">Контакты</a>
+          <a href="#" data-stub="Политику загрузим после проверки юристом">Политика конфиденциальности</a>
+        </nav>
+      </div>
+      <p class="f-legal">ООО «Название по лицензии» · Лицензия № — заполнить после сверки с реестром Росздравнадзора. Прототип: цены — сайт lab.discript.ru, пункт Черкесск, 22.10.2026.</p>
       <div class="warn">Имеются противопоказания. Необходима консультация специалиста</div>
     </div>
   </footer>
@@ -687,11 +862,13 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
   function renderHome() {
     $("#quick").innerHTML = QUICK.map(function (c) { return '<button type="button" data-go="card:' + c + '">' + esc(A[c].n) + "</button>"; }).join("");
     $("#points").innerHTML = POINTS.map(function (pt, i) { var st = pointState(pt); return '<label><input type="radio" name="pt" value="' + pt.id + '"' + (i === 0 ? " checked" : "") + '><span class="p-addr">' + esc(pt.addr) + '</span><span class="p-hours">Ежедневно ' + pt.open + "–" + pt.close + ' · по данным МИС</span><span class="state' + (st.open ? "" : " closed") + '">' + (st.open ? "открыто" : "закрыто") + "</span></label>"; }).join("");
-    $("#organs").innerHTML = CATS.map(function (c) { return '<button class="organ" type="button" data-go="catalog:' + c.id + '"><div class="picto">' + picto(c.id) + "</div><div><b>" + esc(c.n) + "</b><span>" + esc(c.s) + "</span></div></button>"; }).join("");
+    var TOP = ["blood", "sugar", "thyroid", "heart", "liver", "vitamins", "hormones"];
+    $("#organs").innerHTML = TOP.map(function (id) { var c = CATS.filter(function (x) { return x.id === id; })[0]; return '<button class="tile" type="button" data-go="catalog:' + c.id + '"><span class="picto">' + picto(c.id) + "</span><b>" + esc(c.n) + "</b></button>"; }).join("") +
+      '<button class="tile tile-all" type="button" data-go="catalog:blood"><span class="all-n num">' + CATS.length + "</span><b>Все разделы</b></button>";
     $("#situations").innerHTML = SITS.map(function (s) {
       var price, note;
       if (s.checkup) { price = CHECKUPS[s.checkup].p; note = "чек-ап"; } else { price = s.codes.reduce(function (t, c) { return t + A[c].p; }, 0); note = nAn(s.codes.length) + " по отдельности"; }
-      return '<button class="sit" type="button" data-go="catalog:' + s.go + '"><span class="sit-t">' + esc(s.n) + '</span><span class="sit-d">' + esc(s.d) + '</span><span class="sit-p">' + rub(price) + "<small>" + note + "</small></span></button>";
+      return '<button class="sitcard" type="button" data-go="catalog:' + s.go + '"><b>' + esc(s.n) + "</b><span>" + esc(s.d) + '</span><em class="num">' + rub(price) + "<small>" + note + "</small></em></button>";
     }).join("");
     var pop = Object.keys(A).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 7);
     $("#popular").innerHTML = pop.map(row).join("");
@@ -699,7 +876,7 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
     // hero motif: "brackets" from the brand pattern, in negative
     var W = ["2,4","3,4","4,4","5,4","6,4","7,4","8,4","8,5","8,6","8,7","8,9","8,10"], L = ["4,2","4,3","4,5","4,6","4,7","4,8","5,8","6,8","7,8","8,8","9,8","10,8"], h = "";
     for (var r = 0; r < 12; r++) for (var c = 0; c < 12; c++) { var k = r + "," + c, f = W.indexOf(k) >= 0 ? "#FFFFFF" : L.indexOf(k) >= 0 ? "#AFC81E" : "rgba(255,255,255,.08)"; h += '<rect x="' + c * 11 + '" y="' + r * 11 + '" width="9" height="9" rx="2.2" fill="' + f + '"/>'; }
-    $("#hero-cells").innerHTML = h;
+    $("#hero-cells").innerHTML = h; $("#promo-cells").innerHTML = h;
   }
   function renderCatalog() {
     var cat = CATS.filter(function (c) { return c.id === state.cat; })[0] || CATS[0];
@@ -774,15 +951,16 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
     home: [
       ["h1", "Шапка в два ряда", "Сверху — пункт, часы работы, телефон, WhatsApp и результаты. Ниже — разделы. Сейчас шапка нового сайта в четыре ряда и занимает около 220 px."],
       ["h2", "Разделы по аудиториям", "Шесть пунктов меню: анализы, чек-апы, на дому, пункты, врачам, клиникам. Каждый раздел назван одинаково везде на сайте."],
-      ["home1", "Первый экран — про главное", "Обещание «результат сегодня» и сразу поиск. Слово «сегодня» включаем, когда лаборатория утвердит список ЦИТО; до этого — «за 1 день»."],
+      ["home1", "Первый экран — про главное", "Обещание и сразу поиск. Над поиском — бесплатный выезд медсестры при заказе от 1 500 ₽. Слово «сегодня» включаем, когда лаборатория утвердит список ЦИТО; до этого — «за 1 день»."],
       ["home2", "Поиск понимает опечатки", "Попробуйте «витамн д», «ферретин», «сахар», «щитовидка», «оак». На нынешнем сайте «витамн д» и «ферретин» дают 0 результатов, а по «оак» первым выходит анализ «вредные привычки»."],
       ["home3", "Пункт и часы — из МИС", "Сайт сам пишет «открыто» или «закрыто» по часам работы из МИС. Адреса и часы — реальные данные трёх пунктов Черкесска."],
-      ["home4", "Каталог по органам", "12 разделов словами пациента вместо 40 технических категорий. Партнёрские деревья («Лаборатория НАКФФ», «Лабквест»), УЗИ и приёмы врачей из каталога анализов убраны."],
+      ["promos", "Акции сразу под первым экраном", "Три акции без слайдера: крупно цена, срок и условия. Слайдеры почти не нажимают, поэтому всё видно сразу. Сейчас это примеры — акции утверждает лаборатория."],
+      ["home4", "Один выбор за раз", "Переключатель «по органам / по поводу» показывает что-то одно. Семь самых частых разделов крупными плитками и плитка «Все разделы» — глаза не разбегаются."],
       ["home4", "Пиктограммы по фирменной сетке", "Иконки нарисованы клетками, как паттерн из брендбука, и строятся кодом: чёткие на любом экране и весят доли килобайта. Сейчас на сайте PNG-иконки по 244–440 КБ."],
       ["home5", "Вход по ситуации", "Человек часто знает не анализ, а повод: усталость, сад, операция. Каждая ситуация ведёт к готовому набору с реальной ценой Черкесска."],
       ["home6", "Строки вместо одинаковых карточек", "В строке сразу видно, что анализ покажет, срок, биоматериал, чья лаборатория и цена с онлайн-скидкой. Добавить в корзину — одной кнопкой."],
-      ["home7", "Как сдать — в три шага", "Снимает главные вопросы новичка. Строку про SMS оставляем, когда заработают уведомления из МИС."],
-      ["home8", "Только проверяемые факты", "Своя лаборатория, 29 пунктов, −10% онлайн — это данные сайта. Цифры вроде «500 000 довольных пациентов» без источника убраны."],
+      ["home7", "Как сдать — по шагам", "Нажмите на шаг, и откроются подробности. Во втором шаге выбор: в пункте или дома, выезд медсестры бесплатно при заказе от 1 500 ₽."],
+      ["home8", "Почему CLD", "Четыре проверяемых преимущества с иконками. Цифры вроде «500 000 довольных пациентов» без источника не используем."],
       ["home9", "Вход для врачей", "Сюда медпред ведёт врача: список ЦИТО и часы сдачи, бланк направления с кодом врача, как результат приходит врачу."]
     ],
     catalog: [
@@ -845,6 +1023,11 @@ body.shot .notes-toggle, body.shot .toast { display: none; }
       return;
     }
     var add = e.target.closest("[data-add]"); if (add) { toggleCart(add.dataset.add, add); return; }
+    var ft = e.target.closest("[data-ftab]"); if (ft) { $$("[data-ftab]").forEach(function (b) { b.setAttribute("aria-selected", b === ft ? "true" : "false"); }); $("#organs").hidden = ft.dataset.ftab !== "organs"; $("#situations").hidden = ft.dataset.ftab !== "sits"; if (notesOn) placePins(); return; }
+    var hs = e.target.closest("[data-step]"); if (hs) { var n = +hs.dataset.step; $$("[data-step]").forEach(function (b) { b.setAttribute("aria-selected", +b.dataset.step === n ? "true" : "false"); }); $$("[data-panel]").forEach(function (pn) { pn.hidden = +pn.dataset.panel !== n; }); hs.closest(".howto").style.setProperty("--pn", n / 2); return; }
+    var stub = e.target.closest("[data-stub]"); if (stub) { e.preventDefault(); toast(stub.dataset.stub); return; }
+    if (e.target.closest("[data-focus-search]")) { scrollTo({ top: 0, behavior: "smooth" }); setTimeout(function () { $("#q-home").focus(); }, 350); return; }
+    var sc = e.target.closest("[data-scroll]"); if (sc) { e.preventDefault(); go("home"); setTimeout(function () { $("#" + sc.dataset.scroll).scrollIntoView({ behavior: "smooth" }); }, 50); return; }
     var g = e.target.closest("[data-go]"); if (g) { e.preventDefault(); go(g.dataset.go); return; }
     var seg = e.target.closest("[data-seg]"); if (seg) { state.seg = seg.dataset.seg; renderCatalog(); if (notesOn) placePins(); return; }
     var f = e.target.closest("[data-filter]"); if (f) { state.filters[f.dataset.filter] = !state.filters[f.dataset.filter]; f.setAttribute("aria-pressed", state.filters[f.dataset.filter] ? "true" : "false"); renderCatalog(); if (notesOn) placePins(); }
