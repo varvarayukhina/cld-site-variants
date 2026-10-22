@@ -414,24 +414,6 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
 @keyframes mmin { from { opacity: 0; transform: translateY(-8px); } }
 @media (min-width: 961px) { .mmenu { display: none !important; } }
 
-/* ---------- lime theme (v4): the same site with a lime header and first screen ---------- */
-:root[data-theme="lime"] .util { background: var(--navy); color: #FFF; }
-:root[data-theme="lime"] .state::before { background: var(--lime); }
-:root[data-theme="lime"] .top { background: var(--lime); box-shadow: 0 1px 0 rgba(20,55,75,.14); }
-:root[data-theme="lime"] .nav button { color: var(--navy); }
-:root[data-theme="lime"] .nav button:hover { background: rgba(20,55,75,.08); }
-:root[data-theme="lime"] .nav button[aria-current="page"] { background: #FFF; }
-:root[data-theme="lime"] .cartbtn .count { background: #FFF; }
-:root[data-theme="lime"] .hero { background: var(--lime); color: var(--navy); }
-:root[data-theme="lime"] .hero h1 em { color: var(--navy); background: linear-gradient(transparent 64%, #FFF 64%, #FFF 92%, transparent 92%); }
-:root[data-theme="lime"] .hero .sub { color: var(--navy); }
-:root[data-theme="lime"] .perk { background: var(--navy); color: #FFF; }
-:root[data-theme="lime"] .hero .search input { box-shadow: 0 10px 24px rgba(20,55,75,.14); }
-:root[data-theme="lime"] .quick button { background: rgba(20,55,75,.1); color: var(--navy); font-weight: 600; }
-:root[data-theme="lime"] .quick button:hover { background: rgba(20,55,75,.18); }
-:root[data-theme="lime"] .pointcard { box-shadow: 0 18px 40px rgba(20,55,75,.18); }
-:root[data-theme="lime"] .hero-cells { opacity: .5; }
-:root[data-theme="lime"] .psearch { background: var(--lime-soft); border-bottom-color: transparent; }
 .b-note { color: var(--muted); font-size: 15.5px; }
 .together-sec { margin-top: 48px; padding-top: 34px; border-top: 2px solid var(--navy-soft); }
 .together-sec h2 { font-size: clamp(26px, 2.6vw, 32px) !important; }
@@ -491,12 +473,6 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
   .how-list li .how-n { grid-row: 1 / span 2; }
 }
 
-/* lime theme */
-:root[data-theme="lime"] .hp-frame { border-color: var(--navy); }
-:root[data-theme="lime"] .hero-point { color: var(--navy); }
-:root[data-theme="lime"] .hero-point .state, :root[data-theme="lime"] .hero-point button { color: var(--navy); }
-:root[data-theme="lime"] .hero-search { box-shadow: 0 16px 36px rgba(20, 55, 75, .16); }
-:root[data-theme="lime"] .hero-search .s-go { background: var(--navy); color: #FFF; }
 </style>
 </head>
 <body>
@@ -1011,7 +987,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
     var W = ["2,4","3,4","4,4","5,4","6,4","7,4","8,4","8,5","8,6","8,7","8,9","8,10"], L = ["4,2","4,3","4,5","4,6","4,7","4,8","5,8","6,8","7,8","8,8","9,8","10,8"], h = "";
     function cells(w, l, rest) { var h = ""; for (var r = 0; r < 12; r++) for (var c = 0; c < 12; c++) { var k = r + "," + c, f = W.indexOf(k) >= 0 ? w : L.indexOf(k) >= 0 ? l : rest; h += '<rect x="' + c * 11 + '" y="' + r * 11 + '" width="9" height="9" rx="2.2" fill="' + f + '"/>'; } return h; }
     var onNavy = cells("#FFFFFF", "#AFC81E", "rgba(255,255,255,.08)");
-    $("#hero-cells").innerHTML = document.documentElement.dataset.theme === "lime" ? cells("#14374B", "#FFFFFF", "rgba(20,55,75,.09)") : onNavy;
+    $("#hero-cells").innerHTML = onNavy;
     $("#promo-cells").innerHTML = onNavy;
   }
   function renderCatalog() {
