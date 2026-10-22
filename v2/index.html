@@ -566,6 +566,7 @@ a.row-name:hover { text-decoration: underline; text-underline-offset: 4px; }
       body += k.blocks.map(function (b, i) {
         var t = (b.p || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
         if (b.list) t += '<ul class="dots">' + b.list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
+        if (b.note) t += "<p>" + esc(b.note) + "</p>";
         return acc(b.h, t, i === 0);
       }).join("");
       if (k.faq && k.faq.length) body += acc("Частые вопросы", k.faq.map(function (f) { return "<h3>" + esc(f.q) + "</h3><p>" + esc(f.a) + "</p>"; }).join(""));

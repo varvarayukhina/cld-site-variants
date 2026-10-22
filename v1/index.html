@@ -608,7 +608,7 @@ body[data-view="home"].past .hs { opacity: 1; visibility: visible; transform: no
     var a = A[code], t = C.CARDS[code], c = catOf(code), bl = blood(a), total = a.p + (bl ? C.BLOOD_DRAW : 0), on = C.online(a.p);
     var faq = t ? t.faq.filter(function (f) { return !/^\{.*\}$/.test(f.a); }) : [];
     var bodyHtml = t ? t.blocks.map(function (b) {
-      return "<h2>" + esc(b.h) + "</h2>" + (b.p ? b.p.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") : '<ul class="lst">' + b.list.map(function (li) { return "<li>" + esc(li) + "</li>"; }).join("") + "</ul>");
+      return "<h2>" + esc(b.h) + "</h2>" + (b.p || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + (b.list ? '<ul class="lst">' + b.list.map(function (li) { return "<li>" + esc(li) + "</li>"; }).join("") + "</ul>" : "") + (b.note ? "<p>" + esc(b.note) + "</p>" : "");
     }).join("") + (faq.length ? '<h2>Частые вопросы</h2><div class="faq">' + faq.map(function (f) {
       return "<details><summary>" + esc(f.q) + I.plus + "</summary><p>" + esc(f.a) + "</p></details>";
     }).join("") + "</div>" : "")

@@ -700,7 +700,7 @@ p { margin: 0; }
 
   function blockHTML(b) {
     return (b.p || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") +
-      (b.list ? '<ul class="dots">' + b.list.map(function (li) { return "<li>" + esc(li) + "</li>"; }).join("") + "</ul>" : "");
+      (b.list ? '<ul class="dots">' + b.list.map(function (li) { return "<li>" + esc(li) + "</li>"; }).join("") + "</ul>" : "") + (b.note ? "<p>" + esc(b.note) + "</p>" : "");
   }
   function card(code) {
     var a = A[code], t = CARDS[code], cat = catOf(code), blood = isBlood(code), n = C.points(code);
@@ -715,11 +715,12 @@ p { margin: 0; }
     if (t) {
       var sec = function (h, b, extra) { return b ? '<section class="qa"><h2>' + h + "</h2>" + (extra || "") + blockHTML(b) + "</section>" : ""; };
       var faq = t.faq.filter(function (f) { return !/^\{.*\}$/.test(f.a.trim()); });
-      body = sec("Что покажет?", byH["Что покажет"]) +
-        sec("Мне ли это?", byH["Кому и когда назначают"], '<p class="intro">Обычно врач назначает этот анализ:</p>') +
+      body = sec("Что это?", byH["Что это"]) +
+        sec("Какие бывают признаки?", byH["Какие бывают признаки"]) +
+        sec("Мне ли это?", byH["Когда назначают"], '<p class="intro">Обычно врач назначает этот анализ:</p>') +
         (byH["Как подготовиться"] ? '<section class="qa"><div class="prep"><h2>Как подготовиться?</h2>' + blockHTML(byH["Как подготовиться"]) + "</div></section>" : "") +
         facts +
-        sec("Как понять результат?", byH["Как понимать результат"]) +
+        sec("Как понять результат?", byH["Как понять результат"]) +
         (faq.length ? '<section class="qa"><h2>Часто спрашивают</h2>' + faq.map(function (f) {
           return '<details class="faq"><summary>' + esc(f.q) + IC.right + "</summary><p>" + esc(f.a) + "</p></details>";
         }).join("") + "</section>" : "") +
