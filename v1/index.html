@@ -621,7 +621,7 @@ body[data-view="home"].past .hs { opacity: 1; visibility: visible; transform: no
       '<p class="off">Официальное название: ' + esc(a.off) + "</p>" +
       '<ul class="meta"><li>' + esc(a.bio) + "</li><li>" + C.daysLabel(a.days) + "</li><li>Можно сдать " + inPoints(C.points(code)) + "</li>" +
       (a.own ? "" : "<li>Выполняет партнёрская лаборатория</li>") + "</ul>" +
-      '<p class="draft">Черновик текста — перед публикацией проверит врач</p></div>' +
+      '</div>' +
       '<aside class="rcpt" aria-label="Стоимость"><p class="rc-h">Стоимость</p><dl class="rc-rows">' + rows + "</dl>" +
       '<p class="rc-on"><span class="mark">−' + F.onlineDiscount + "%</span>При оплате на сайте анализ стоит <b>" + rub(on) + "</b></p>" +
       bigBtn(code, "btn-lime btn-wide") +

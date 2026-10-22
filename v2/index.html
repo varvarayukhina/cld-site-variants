@@ -370,6 +370,18 @@ a.row-name:hover { text-decoration: underline; text-underline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
+/* card: all blocks open, no plus buttons; sticky buy bar on desktop too */
+.acc.is-static > h2 { padding: 24px 24px 10px; }
+.bar-name { display: none; }
+@media (min-width: 761px) {
+  .has-bar .bar { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 12px 0; background: #FFFFFF; box-shadow: 0 -6px 22px rgba(20, 55, 75, .16); transform: translateY(110%); transition: transform .32s cubic-bezier(.23, 1, .32, 1); }
+  .has-bar.bar-on .bar { transform: none; }
+  .has-bar .bar-in { max-width: 1180px; margin: 0 auto; padding: 0 32px; gap: 28px; }
+  .bar-name { display: block; flex: 1; font-weight: 700; font-size: 19px; }
+  .has-bar.bar-on .toast { bottom: 104px; }
+  .has-bar { padding-bottom: 84px; }
+}
+@media (max-width: 760px) { .acc.is-static > h2 { padding: 18px 18px 8px; } }
 </style>
 </head>
 <body>
@@ -500,8 +512,8 @@ a.row-name:hover { text-decoration: underline; text-underline-offset: 4px; }
       "</div></div></section>";
   }
 
-  function acc(title, body, open) {
-    return '<details class="acc"' + (open ? " open" : "") + "><summary><h2>" + esc(title) + '</h2><span class="pm">' + I.plus + '</span></summary><div class="acc-c">' + body + "</div></details>";
+  function acc(title, body) {
+    return '<section class="acc is-static"><h2>' + esc(title) + '</h2><div class="acc-c">' + body + "</div></section>";
   }
 
   // ---------- screens ----------
@@ -561,13 +573,13 @@ a.row-name:hover { text-decoration: underline; text-underline-offset: 4px; }
   function vCard(code) {
     var a = A[code], k = CARDS[code], cat = parentCat(code), blood = /^Кровь/.test(a.bio);
     var back = cat ? { href: "#catalog-" + cat.id, label: "к разделу «" + cat.n + "»" } : { href: "#catalog", label: "ко всем разделам" };
-    var body = '<p class="draft"><i></i>Черновик текста — перед публикацией проверит врач</p>';
+    var body = '';
     if (k) {
       body += k.blocks.map(function (b, i) {
         var t = (b.p || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
         if (b.list) t += '<ul class="dots">' + b.list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
         if (b.note) t += "<p>" + esc(b.note) + "</p>";
-        return acc(b.h, t, i === 0);
+        return acc(b.h, t);
       }).join("");
       if (k.faq && k.faq.length) body += acc("Частые вопросы", k.faq.map(function (f) { return "<h3>" + esc(f.q) + "</h3><p>" + esc(f.a) + "</p>"; }).join(""));
       if (k.src && k.src.length) body += acc("Источники", '<ul class="src">' + k.src.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul>");
@@ -597,7 +609,7 @@ a.row-name:hover { text-decoration: underline; text-underline-offset: 4px; }
           box +
         "</div></section>" +
         '<section class="wrap card-body">' + body + "</section>",
-      bar: '<div class="bar-in"><div><b>' + rub(a.p) + "</b><small>на сайте " + rub(online(a.p)) + "</small></div>" + cartBtn(code) + "</div>" };
+      bar: '<div class="bar-in"><span class="bar-name">' + esc(a.n) + '</span><div><b>' + rub(a.p) + "</b><small>на сайте " + rub(online(a.p)) + "</small></div>" + cartBtn(code) + "</div>" };
   }
 
   function vCheckups() {
@@ -634,6 +646,10 @@ a.row-name:hover { text-decoration: underline; text-underline-offset: 4px; }
     $("#top").innerHTML = header(home);
     $("#main").innerHTML = v.html + help();
     $("#bar").innerHTML = v.bar || "";
+    // desktop: the buy bar slides in once the price box has scrolled away
+    if (route.io) route.io.disconnect();
+    var pb = $(".pbox");
+    if (pb && "IntersectionObserver" in window) { route.io = new IntersectionObserver(function (en) { document.body.classList.toggle("bar-on", !en[0].isIntersecting); }); route.io.observe(pb); }
     window.scrollTo(0, 0);
     if (!first) { var h1 = $("h1"); if (h1) h1.focus({ preventScroll: true }); }
     first = false;

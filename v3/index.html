@@ -741,7 +741,7 @@ p { margin: 0; }
       '<div class="ask"><p><b>Остались вопросы?</b> Позвоните — подскажем.</p><a class="btn btn-navy btn-wide" href="' + TEL + '">Позвонить ' + PHONE + '</a><a class="btn btn-ghost btn-wide" href="#" data-stub="wa">Написать в WhatsApp</a></div></div>';
 
     return '<div class="wrap page"><nav class="crumbs" aria-label="Назад">' + (cat ? '<a href="#catalog-' + cat.id + '">' + IC.left + esc(cat.n) + "</a>" : '<a href="#catalog">' + IC.left + "Все разделы</a>") + "</nav>" +
-      '<div class="card-grid"><header class="card-head"><h1 tabindex="-1">' + esc(a.n) + '</h1><p class="lede">' + esc(t ? t.lede : a.d) + '</p><p class="off">Официальное название: ' + esc(a.off) + '</p><p class="draft">Черновик текста — перед публикацией проверит врач</p></header>' +
+      '<div class="card-grid"><header class="card-head"><h1 tabindex="-1">' + esc(a.n) + '</h1><p class="lede">' + esc(t ? t.lede : a.d) + '</p><p class="off">Официальное название: ' + esc(a.off) + '</p></header>' +
       '<aside class="card-side" aria-label="Цена и заказ">' + panel + "</aside>" +
       '<div class="card-body">' + body + "</div></div></div>" +
       '<div class="bar"><div><b>' + rub(a.p) + "</b><span>онлайн " + rub(online(a.p)) + '</span></div><button type="button" class="btn btn-lime" data-add="' + code + '">В корзину</button></div>';
