@@ -5,9 +5,10 @@
     { id: "v0", n: "Первый", d: "Первый прототип: подробная навигация и пояснения" },
     { id: "v1", n: "Поиск", d: "Главное — строка поиска и короткий список частых анализов" },
     { id: "v2", n: "Кнопки", d: "Крупные кнопки: человек выбирает, что ему нужно" },
-    { id: "v3", n: "Помощник", d: "Сайт задаёт простые вопросы и подсказывает анализы" }
+    { id: "v3", n: "Помощник", d: "Сайт задаёт простые вопросы и подсказывает анализы" },
+    { id: "v4", n: "Лайм", d: "Первый вариант с яркой лаймовой шапкой" }
   ];
-  var m = location.pathname.match(/\/(v[0-3])\//), cur = m ? m[1] : "v1", H = 40;
+  var m = location.pathname.match(/\/(v[0-4])\//), cur = m ? m[1] : "v1", H = 40;
   document.documentElement.style.setProperty("--sw-h", H + "px");
   var css = document.createElement("style");
   css.textContent =
@@ -18,7 +19,7 @@
     ".cldsw a{color:#DCE6EB;text-decoration:none;padding:7px 12px;border-radius:999px;font-weight:600;white-space:nowrap}" +
     ".cldsw a[aria-current=page]{background:#AFC81E;color:#14374B}.cldsw a:focus-visible{outline:2px solid #AFC81E;outline-offset:2px}" +
     ".cldsw .rep{margin-left:auto;padding:7px 10px;color:#FFF;text-decoration:underline;text-underline-offset:3px}.cldsw .rep+.rep{margin-left:0}" +
-    ".cldsw-gap{height:" + H + "px}@media (max-width:700px){.cldsw .d,.cldsw .t{display:none}.cldsw{justify-content:center}}@media (max-width:520px){.cldsw>b,.cldsw .rep{display:none}.cldsw a{padding:7px 8px;font-size:12px}.cldsw nav{gap:2px}}";
+    ".cldsw-gap{height:" + H + "px}@media (max-width:700px){.cldsw .d,.cldsw .t{display:none}.cldsw{justify-content:center}}@media (max-width:520px){.cldsw{justify-content:flex-start}.cldsw nav{overflow-x:auto;scrollbar-width:none;max-width:100%}.cldsw nav::-webkit-scrollbar{display:none}.cldsw>b,.cldsw .rep{display:none}.cldsw a{padding:7px 8px;font-size:12px}.cldsw nav{gap:2px}}";
   document.head.appendChild(css);
   var bar = document.createElement("div");
   bar.className = "cldsw"; bar.setAttribute("role", "navigation"); bar.setAttribute("aria-label", "Варианты дизайна");
