@@ -826,6 +826,126 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 #pts-map.osm-gray .leaflet-tile-pane { filter: grayscale(1) contrast(.9) brightness(1.07); }
+
+/* ---------- doctors 2: tasks, memos, readable prep ---------- */
+.dtasks { display: grid; gap: 10px; }
+.dtasks a { display: grid; gap: 4px; padding: 18px 22px; border-radius: var(--r-card); background: rgba(255,255,255,.07); color: #FFF; text-decoration: none; transition: background .2s var(--ease); }
+.dtasks a:hover { background: rgba(255,255,255,.13); }
+.dtasks b { font-size: 18px; }
+.dtasks span { font-size: 14.5px; color: var(--on-navy-muted); line-height: 1.45; }
+.c-name .code { display: block; margin-top: 3px; font-size: 13px; color: var(--muted); }
+.c-prep { width: 210px; }
+.c-prep .prep { white-space: nowrap; }
+.c-mat { width: 150px; }
+.dtip b { display: block; margin-bottom: 6px; font-size: 14.5px; }
+.dtip ul { margin: 0; padding-left: 18px; }
+.dtip li { margin: 4px 0; }
+.dlegend { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 18px 0 0; }
+.dlegend .lg { background: #FFF; border-radius: var(--r-card); padding: 16px 18px; }
+.dlegend .lg b { font-size: 16px; }
+.dlegend .lg ul { margin: 8px 0 0; padding-left: 18px; font-size: 14.5px; line-height: 1.5; }
+.dlegend .lg li { margin: 3px 0; }
+.memos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.memo { display: grid; gap: 8px; align-content: start; padding: 22px; border-radius: 16px; box-shadow: inset 0 0 0 1.5px var(--line); text-decoration: none; color: var(--ink); transition: box-shadow .2s var(--ease); }
+.memo:hover { box-shadow: inset 0 0 0 1.5px var(--navy); }
+.memo-ic { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--navy); }
+.memo-ic .ico { stroke: #FFF; }
+.memo b { font-size: 18px; line-height: 1.3; }
+.memo span:last-child { font-size: 14.5px; color: var(--muted); line-height: 1.45; }
+#d-cat, #d-memo { scroll-margin-top: calc(var(--sw-h, 0px) + 120px); }
+
+/* ---------- home visit 2 ---------- */
+.hvhero { background: var(--navy-soft); }
+.hvhero .crumbs { padding-top: 22px; }
+.hvhero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-block: 18px 56px; }
+.hvhero h1 { font-size: clamp(34px, 4.4vw, 52px); }
+.hvhero .lede { margin-top: 14px; max-width: 46ch; }
+.hvhero .acts { margin-top: 26px; }
+.hv-call { margin-top: 16px; font-size: 15px; color: var(--muted); }
+.hv-card { position: relative; overflow: hidden; display: grid; gap: 10px; padding: 32px 32px 34px; border-radius: 24px; background: var(--navy); color: #FFF; }
+.hv-big { font: 800 40px/1 var(--text); color: var(--lime); }
+.hv-card b { font-size: 20px; line-height: 1.3; max-width: 18ch; }
+.hv-card p { color: var(--on-navy-muted); font-size: 15px; max-width: 30ch; }
+.hv-cells { position: absolute; right: 22px; bottom: 22px; display: grid; grid-template-columns: repeat(6, 14px); gap: 4px; }
+.hv-cells i { width: 14px; height: 14px; border-radius: 22%; background: rgba(255,255,255,.09); }
+.hv-cells i.l { background: var(--lime); }
+@media (max-width: 520px) { .hv-cells { display: none; } }
+.hv-who { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.hv-who > div, .cx-why > div { display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: 16px; background: var(--surface-2); }
+.hv-who b, .cx-why b { font-size: 18px; line-height: 1.3; }
+.hv-who p, .cx-why p { font-size: 15px; color: var(--muted); }
+.how-plain .how-in { background: var(--surface-2); }
+.how-plain .how-n { background: var(--navy); color: #FFF; }
+.faq { max-width: 860px; }
+.faq h2 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 14px; }
+.faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+.faq summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-weight: 600; font-size: 22px; line-height: 1; color: var(--muted); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { margin-top: 8px; color: var(--muted); max-width: 70ch; }
+
+/* ---------- checkups 2 ---------- */
+.cxhero { background: var(--navy-soft); }
+.cxhero .crumbs { padding-top: 22px; }
+.cxhero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-block: 18px 52px; }
+.cxhero h1 { font-size: clamp(34px, 4.4vw, 52px); }
+.cxhero .lede { margin-top: 14px; max-width: 50ch; }
+.cx-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 26px 0 0; padding: 0; }
+.cx-facts li { display: grid; gap: 2px; max-width: 17ch; }
+.cx-facts b { font: 800 28px/1.1 var(--text); }
+.cx-facts span { font-size: 14px; color: var(--muted); line-height: 1.4; }
+.cx-feature { display: grid; gap: 10px; padding: 28px 30px; border-radius: 24px; background: var(--navy); color: #FFF; text-decoration: none; transition: transform .2s var(--ease); }
+.cx-feature:hover { transform: translateY(-2px); }
+.cx-feature-k { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lime); }
+.cx-feature > b { font: 700 26px/1.15 var(--display); }
+.cx-feature > span:nth-of-type(2) { color: var(--on-navy-muted); font-size: 15px; }
+.cx-feature-p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 6px; }
+.cx-feature-p b { font-size: 30px; font-weight: 800; color: var(--lime); }
+.cx-feature-p span { color: var(--on-navy-muted); font-size: 14.5px; }
+.cx-feature-go { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px; margin-top: 4px; }
+.cx-qnav-wrap { position: sticky; top: calc(var(--sw-h, 0px) + 112px); z-index: 6; background: #FFF; box-shadow: 0 1px 0 var(--line); }
+@media (min-width: 961px) { .cx-qnav { flex-wrap: wrap; overflow: visible; } }
+.cx-qnav { display: flex; gap: 6px; overflow-x: auto; padding-block: 12px; scrollbar-width: none; }
+.cx-qnav::-webkit-scrollbar { display: none; }
+.cx-qnav .chip { flex: none; }
+.cx-why { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+.cx-start { margin-top: 48px; }
+.cx-start h2, .cx-grp h2 { font-size: clamp(26px, 3vw, 34px); }
+.cx-start-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.cx-start-list button { display: grid; gap: 4px; text-align: left; padding: 16px 18px; border: 0; border-radius: var(--r-card); background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); cursor: pointer; transition: box-shadow .2s var(--ease); }
+.cx-start-list button:hover { box-shadow: inset 0 0 0 1.5px var(--navy); }
+.cx-start-list b { font-size: 16px; line-height: 1.3; }
+.cx-start-list span { font-size: 14px; color: var(--muted); }
+.cx-note { margin-top: 12px; font-size: 15px; color: var(--muted); }
+.cx-grp { margin-top: 48px; scroll-margin-top: calc(var(--sw-h, 0px) + 180px); }
+.cx-grp h2 { margin-bottom: 16px; }
+.cxc { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 28px; padding: 24px 26px; border-radius: 18px; box-shadow: inset 0 0 0 1.5px var(--line); margin-bottom: 14px; scroll-margin-top: calc(var(--sw-h, 0px) + 180px); }
+.cxc h3 { font-size: 22px; }
+.cxc-desc { margin-top: 8px; color: var(--muted); font-size: 15.5px; max-width: 62ch; }
+.cxc-parts { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; }
+.cxc-parts li { font-size: 13.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); }
+.cxc-parts li[title] { cursor: help; }
+.cxc-side { display: grid; gap: 10px; align-content: start; }
+.cxc-price { display: grid; gap: 2px; }
+.cxc-price b { font-size: 26px; font-weight: 800; }
+.cxc-price span { font-size: 14px; color: var(--muted); }
+.cxc-price .save { color: var(--ok); font-weight: 700; }
+.cxc-meta { font-size: 14px; color: var(--muted); }
+.cxc-side .btn { justify-self: start; }
+.cx-small .cxc { background: var(--surface-2); box-shadow: none; }
+.cx-faq { margin-top: 56px; }
+@media (max-width: 960px) {
+  .dtasks a { padding: 14px 16px; }
+  .memos, .hv-who, .cx-why { grid-template-columns: minmax(0, 1fr); }
+  .hvhero-grid, .cxhero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 10px 32px; }
+  .cx-start-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cx-qnav-wrap { top: calc(var(--sw-h, 0px) + 61px); }
+  .cxc { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 20px; }
+  .cxc h3 { font-size: 20px; }
+  .cx-facts b { font-size: 24px; }
+}
+@media (max-width: 520px) { .cx-start-list { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body>
@@ -932,14 +1052,14 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
           <h3>Общий анализ крови развёрнутый</h3>
           <p>Самый частый анализ: с него начинают проверку здоровья. Готово через 1 день.</p>
           <div class="promo-price"><b class="num">350 ₽</b><s class="num">470 ₽</s></div>
-          <button class="btn btn-lime" type="button" data-go="card:20-017">Подробнее</button>
+          <button class="btn btn-lime" type="button" data-go="card:20-017">Открыть анализ</button>
         </article>
         <article class="promo">
           <span class="promo-when">До 30 ноября</span>
           <h3>Чек-ап «Анемия»</h3>
           <p>4 анализа: общий анализ крови, железо, ферритин, трансферрин. Готово через 2 дня.</p>
           <div class="promo-price"><b class="num">1 000 ₽</b></div>
-          <button class="btn btn-navy" type="button" data-go="catalog:blood">Подробнее</button>
+          <button class="btn btn-navy" type="button" data-go="checkups">Все чек-апы</button>
         </article>
         <article class="promo promo-soft">
           <span class="promo-when">Всегда</span>
@@ -971,7 +1091,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       <div class="how-in">
         <h2>Как сдать анализ</h2>
         <ol class="how-list">
-          <li><span class="how-n num" aria-hidden="true">1</span><h3>Выберите анализ</h3><p>Найдите его по названию в поиске или в разделах. Не знаете, какой нужен, — позвоните, подскажем.</p></li>
+          <li><span class="how-n num" aria-hidden="true">1</span><h3>Выберите анализ</h3><p>Найдите его по названию в поиске или в разделах. Если не знаете, какой анализ нужен, позвоните: 8 800 201 78 30.</p></li>
           <li><span class="how-n num" aria-hidden="true">2</span><h3>Сдайте в пункте или дома</h3><p>Подготовка указана в описании анализа. Медсестра приедет домой бесплатно при заказе от 1&nbsp;500&nbsp;₽.</p></li>
           <li><span class="how-n num" aria-hidden="true">3</span><h3>Получите результат</h3><p>Срок указан у каждого анализа. Результат — в личном кабинете или в пункте. Обсудите его с врачом.</p></li>
         </ol>
@@ -981,13 +1101,13 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     <div class="sec wrap">
       <div class="sec-h"><h2>Почему CLD</h2></div>
       <div class="advs" data-note="home8">
-        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-lab"/></svg></span><b>Собственная лаборатория в Черкесске</b><p>Самые частые анализы делаем здесь, а не везём в другой город.</p></div>
+        <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-lab"/></svg></span><b>Собственная лаборатория в Черкесске</b><p>Самые частые анализы выполняем в Черкесске, без отправки в другой город.</p></div>
         <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b class="num"><a href="#points" data-go="points">29 пунктов</a></b><p>В Карачаево-Черкесии, Кабардино-Балкарии и других регионах.</p></div>
         <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Выезд медсестры</b><p>Бесплатно при заказе от 1 500 ₽.</p></div>
         <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-percent"/></svg></span><b class="num">−10% на сайте</b><p>При оплате заказа онлайн.</p></div>
       </div>
       <div class="docs2" data-note="home9">
-        <div><h3>Вы врач и направляете пациентов?</h3><p>Каталог собственной лаборатории с кодами МИС, сроками и подготовкой, PDF-версия для печати.</p></div>
+        <div><h3>Вы врач и направляете пациентов?</h3><p>Каталог собственной лаборатории с кодами, сроками и подготовкой, бланк направления и памятки для пациентов.</p></div>
         <a class="btn btn-navy" href="#doctors" data-go="doctors">Раздел для врачей</a>
       </div>
     </div>
@@ -1074,20 +1194,18 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     <div class="dhero">
       <div class="wrap dhero-grid">
         <div data-note="doc1">
-          <h1>Каталог исследований для врачей</h1>
-          <p class="dsub">Собственная лаборатория CLD в&nbsp;Черкесске выполняет 99&nbsp;анализов и&nbsp;22&nbsp;комплекса. Сроки&nbsp;— по&nbsp;МИС, почти все анализы&nbsp;— 1&nbsp;день.</p>
+          <h1>Врачам</h1>
+          <p class="dsub">Всё, что нужно, чтобы направить пациента в&nbsp;CLD: бланк направления, каталог исследований собственной лаборатории и&nbsp;памятки по&nbsp;подготовке для пациентов.</p>
           <div class="dacts">
-            <a class="btn btn-lime" href="../print/cld-katalog-dlya-vrachey.pdf" download><svg class="ico"><use href="#i-file"/></svg>Скачать каталог для врачей (PDF)</a>
-            <a class="btn btn-line" href="#referral" data-go="referral"><svg class="ico"><use href="#i-print"/></svg>Бланк направления</a>
-            <a class="btn btn-line" href="#points" data-go="points"><svg class="ico"><use href="#i-pin"/></svg>Пункты на карте</a>
+            <a class="btn btn-lime" href="#referral" data-go="referral"><svg class="ico"><use href="#i-print"/></svg>Бланк направления</a>
+            <a class="btn btn-line" href="../print/cld-katalog-dlya-vrachey.pdf" download><svg class="ico"><use href="#i-file"/></svg>Каталог для печати (PDF)</a>
           </div>
         </div>
-        <dl class="dfacts">
-          <div><dt>99</dt><dd>анализов в&nbsp;собственной лаборатории</dd></div>
-          <div><dt>22</dt><dd>комплекса анализов</dd></div>
-          <div><dt>1&nbsp;день</dt><dd>срок почти всех анализов по&nbsp;МИС</dd></div>
-          <div><dt>29</dt><dd>пунктов приёма в&nbsp;9&nbsp;регионах</dd></div>
-        </dl>
+        <nav class="dtasks" aria-label="Разделы страницы">
+          <a href="#d-cat" data-jump="d-cat"><b>Каталог исследований</b><span>Что сдаёт пациент, срок и&nbsp;подготовка к&nbsp;каждому анализу</span></a>
+          <a href="#d-memo" data-jump="d-memo"><b>Памятки для пациентов</b><span>Подготовка к&nbsp;анализам: распечатать и&nbsp;отдать на&nbsp;приёме</span></a>
+          <a href="#d-clinics" data-jump="d-clinics"><b>Клиникам и&nbsp;санаториям</b><span>Сотрудничество с&nbsp;лабораторией</span></a>
+        </nav>
       </div>
     </div>
 
@@ -1095,32 +1213,41 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       <div class="how-in">
         <h2>Как направить пациента</h2>
         <ol class="how-list">
-          <li><span class="how-n num" aria-hidden="true">1</span><h3>Укажите анализ в&nbsp;направлении</h3><p>Название анализа или код МИС из&nbsp;каталога ниже.</p></li>
-          <li><span class="how-n num" aria-hidden="true">2</span><h3>Пациент сдаёт анализы в&nbsp;пункте CLD</h3><p>Адреса и&nbsp;часы работы&nbsp;— на&nbsp;<a href="#points" data-go="points">карте пунктов</a>. Подготовка к&nbsp;каждому анализу&nbsp;— в&nbsp;каталоге. Набор анализов в&nbsp;пунктах разный&nbsp;— он указан в&nbsp;карточке анализа.</p></li>
-          <li><span class="how-n num" aria-hidden="true">3</span><h3>Результат&nbsp;— у&nbsp;пациента</h3><p>В&nbsp;личном кабинете на&nbsp;сайте или в&nbsp;пункте CLD.</p></li>
+          <li><span class="how-n num" aria-hidden="true">1</span><h3>Выпишите направление</h3><p>На&nbsp;бланке CLD или на&nbsp;своём: название анализа или его код из&nbsp;каталога.</p></li>
+          <li><span class="how-n num" aria-hidden="true">2</span><h3>Дайте памятку по&nbsp;подготовке</h3><p>Подготовка зависит от&nbsp;анализа. Памятки для печати&nbsp;— ниже на&nbsp;этой странице.</p></li>
+          <li><span class="how-n num" aria-hidden="true">3</span><h3>Пациент сдаёт анализы в&nbsp;пункте CLD</h3><p>Адреса и&nbsp;часы&nbsp;— на&nbsp;<a href="#points" data-go="points">карте пунктов</a>. Результат пациент получает в&nbsp;личном кабинете или в&nbsp;пункте.</p></li>
         </ol>
       </div>
     </section>
 
     <div class="sec wrap" id="d-cat">
-      <div class="sec-h"><h2>Каталог исследований</h2><p>Коды и&nbsp;сроки&nbsp;— по&nbsp;МИС. Цен здесь нет: они различаются по&nbsp;пунктам и&nbsp;указаны в&nbsp;карточках анализов.</p></div>
+      <div class="sec-h"><h2>Каталог исследований</h2><p>Анализы, которые выполняет собственная лаборатория CLD в&nbsp;Черкесске. Нажмите на&nbsp;подготовку, чтобы увидеть правила целиком. Цены&nbsp;— в&nbsp;карточках анализов для пациентов.</p></div>
       <div class="dtool" data-note="doc2">
-        <div class="search"><svg class="ico"><use href="#i-search"/></svg><input id="d-q" type="search" autocomplete="off" placeholder="Код МИС или название: 40-111, ферритин" aria-label="Найти исследование по коду МИС или названию"></div>
+        <div class="search"><svg class="ico"><use href="#i-search"/></svg><input id="d-q" type="search" autocomplete="off" placeholder="Название или код: ферритин, 40-111" aria-label="Найти исследование по названию или коду"></div>
         <div class="dchips" id="d-chips" role="group" aria-label="Раздел каталога"></div>
       </div>
       <p class="dstat" id="d-stat" aria-live="polite"></p>
       <table class="dtab" id="d-tab">
-        <thead><tr><th scope="col">Код МИС</th><th scope="col">Исследование</th><th scope="col">Биоматериал</th><th scope="col">Срок</th><th scope="col">Подготовка</th></tr></thead>
+        <thead><tr><th scope="col">Исследование</th><th scope="col">Что сдаёт пациент</th><th scope="col">Срок</th><th scope="col">Подготовка</th></tr></thead>
       </table>
       <div class="dlegend-wrap">
-        <h3>Подготовка: расшифровка кодов</h3>
-        <dl class="dlegend" id="d-legend"></dl>
+        <h3>Правила подготовки</h3>
+        <div class="dlegend" id="d-legend"></div>
+      </div>
+    </div>
+
+    <div class="sec wrap" id="d-memo">
+      <div class="sec-h"><h2>Памятки для пациентов</h2><p>Их можно распечатать и&nbsp;отдать пациенту вместе с&nbsp;направлением.</p></div>
+      <div class="memos">
+        <a class="memo" href="../print/pamyatka-kak-podgotovitsya.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Как подготовиться к&nbsp;анализам</b><span>Листовка А5: сколько не&nbsp;есть перед разными анализами, подготовка детей, анализы мочи</span></a>
+        <a class="memo" href="../print/buklet-kak-sdat-analizy.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-file"/></svg></span><b>Как сдать анализы</b><span>Буклет: выбор анализа, подготовка, пункты и&nbsp;результат</span></a>
+        <a class="memo" href="../print/buklet-beremennost-i-deti.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-drop"/></svg></span><b>Беременность и&nbsp;дети</b><span>Буклет: анализы во&nbsp;время беременности и&nbsp;детский чек-ап</span></a>
       </div>
     </div>
 
     <div class="sec wrap" id="d-clinics">
       <div class="docs2" data-note="doc3">
-        <div><h2>Клиникам и санаториям</h2><p>Условия сотрудничества&nbsp;— у&nbsp;медицинского представителя CLD. Телефон: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span>.</p></div>
+        <div><h2>Клиникам и&nbsp;санаториям</h2><p>Условия сотрудничества для клиник, санаториев и&nbsp;частных врачей&nbsp;— у&nbsp;медицинского представителя CLD. Телефон: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span>.</p></div>
         <a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</a>
       </div>
     </div>
@@ -1128,50 +1255,112 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   <!-- ============ CHECKUPS ============ -->
   <section id="v-checkups" data-view="checkups" hidden>
-    <div class="wrap pg">
-      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Чек-апы</span></div>
-      <div class="pg-h" data-note="cx1">
-        <h1>Чек-апы</h1>
-        <p class="lede">Готовые наборы анализов собственной лаборатории CLD в Черкесске: состав, срок, подготовка и цена.</p>
-        <p class="lede">Какой набор нужен, решает врач — покажите ему состав, прежде чем сдавать.</p>
+    <div class="cxhero">
+      <div class="wrap">
+        <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Чек-апы</span></div>
+        <div class="cxhero-grid">
+          <div data-note="cx1">
+            <h1>Чек-апы</h1>
+            <p class="lede">Набор анализов, который сдают за&nbsp;один визит в&nbsp;пункт. Одна подготовка, одна поездка и&nbsp;цена ниже, чем если сдавать те&nbsp;же анализы по&nbsp;отдельности.</p>
+            <ul class="cx-facts">
+              <li><b class="num">до 16</b><span>анализов за&nbsp;один визит</span></li>
+              <li><b class="num">до 1&nbsp;735&nbsp;₽</b><span>экономии по&nbsp;сравнению с&nbsp;отдельными анализами</span></li>
+              <li><b class="num">1–2 дня</b><span>до&nbsp;результата</span></li>
+            </ul>
+          </div>
+          <a class="cx-feature" href="#checkups" data-jump="cx-04.25.015">
+            <span class="cx-feature-k">Для ежегодной проверки</span>
+            <b>Чек-ап всего организма</b>
+            <span>16 анализов: кровь, сахар, холестерин, печень, почки, щитовидная железа, витамин&nbsp;D</span>
+            <span class="cx-feature-p"><b class="num">3&nbsp;800&nbsp;₽</b><span class="num">по&nbsp;отдельности&nbsp;— 5&nbsp;380&nbsp;₽</span></span>
+            <span class="cx-feature-go">Посмотреть состав <svg class="ico"><use href="#i-down"/></svg></span>
+          </a>
+        </div>
       </div>
-      <div class="dchips" id="cx-nav" role="group" aria-label="Разделы чек-апов"></div>
+    </div>
+    <div class="cx-qnav-wrap"><div class="wrap"><nav class="cx-qnav" id="cx-nav" aria-label="Чек-апы по темам"></nav></div></div>
+    <div class="wrap pg">
+      <section class="cx-why" aria-label="Чем чек-ап удобнее отдельных анализов">
+        <div><span class="opt-ic"><svg class="ico"><use href="#i-cal"/></svg></span><b>Один визит</b><p>Все анализы набора сдают за&nbsp;один раз: не&nbsp;нужно приезжать несколько раз и&nbsp;каждый раз соблюдать подготовку.</p></div>
+        <div><span class="opt-ic"><svg class="ico"><use href="#i-percent"/></svg></span><b>Дешевле, чем по&nbsp;отдельности</b><p>Чек-ап всего организма стоит 3&nbsp;800&nbsp;₽, а&nbsp;те&nbsp;же 16 анализов по&nbsp;отдельности&nbsp;— 5&nbsp;380&nbsp;₽.</p></div>
+        <div><span class="opt-ic"><svg class="ico"><use href="#i-grid"/></svg></span><b>Больше сведений для врача</b><p>Многие показатели меняются без заметных признаков. Несколько анализов вместе дают врачу более полную картину, чем один.</p></div>
+      </section>
+      <section class="cx-start">
+        <h2>С чего начать</h2>
+        <div class="cx-start-list">
+          <button type="button" data-jump="cx-04.25.015"><b>Давно не&nbsp;сдавали анализы</b><span>Чек-ап всего организма</span></button>
+          <button type="button" data-jump="cx-04.25.005"><b>Проверить здоровье ребёнка</b><span>Чек-ап для детей и&nbsp;подростков</span></button>
+          <button type="button" data-jump="cx-04.25.002"><b>Гемоглобин и&nbsp;железо</b><span>Анемия: основной набор</span></button>
+          <button type="button" data-jump="cx-04.25.007"><b>Сахар в&nbsp;крови</b><span>Сахар и&nbsp;инсулин</span></button>
+          <button type="button" data-jump="cx-00-014"><b>Холестерин</b><span>Холестерин: основной профиль</span></button>
+          <button type="button" data-jump="cx-04.25.004"><b>Щитовидная железа</b><span>Основной набор гормонов</span></button>
+          <button type="button" data-jump="cx-04.25.011"><b>Женские гормоны</b><span>Основной набор</span></button>
+          <button type="button" data-jump="cx-04.25.012"><b>Мужские гормоны</b><span>Тестостерон и&nbsp;другие</span></button>
+        </div>
+        <p class="cx-note">Какой набор нужен именно вам, лучше решить с&nbsp;врачом.</p>
+      </section>
       <div id="cx-list"></div>
+      <section class="faq cx-faq">
+        <h2>Вопросы о&nbsp;чек-апах</h2>
+        <details><summary>Нужен ли чек-ап, если ничего не&nbsp;беспокоит?</summary><p>Ежегодную проверку как раз сдают, когда ничего не&nbsp;беспокоит: так проще заметить изменения показателей. Какой набор подойдёт вам, лучше обсудить с&nbsp;врачом.</p></details>
+        <details><summary>Как подготовиться?</summary><p>Подготовка указана у&nbsp;каждого набора и&nbsp;рассчитана по&nbsp;самому строгому анализу в&nbsp;составе. Чаще всего это 8–12 часов без еды. Лекарства сами не&nbsp;отменяйте&nbsp;— скажите о&nbsp;них врачу.</p></details>
+        <details><summary>Когда будет результат?</summary><p>Через 1–2 дня, срок указан у&nbsp;каждого набора. Результат появится в&nbsp;личном кабинете на&nbsp;сайте, его можно получить и&nbsp;в&nbsp;пункте.</p></details>
+        <details><summary>Можно ли сдать чек-ап дома?</summary><p>Да. Медсестра приедет бесплатно при заказе от&nbsp;1&nbsp;500&nbsp;₽. <a href="#home-visit" data-go="home-visit">Об&nbsp;анализах на&nbsp;дому</a></p></details>
+      </section>
       <div class="cx-foot">
-        <p>Цены указаны для пункта в Черкесске, в других пунктах могут отличаться. При оплате на сайте — скидка 10 %. Взятие крови — 200 ₽, оплачивается отдельно.</p>
-        <p>Лекарства перед анализами сами не отменяйте — скажите о них врачу.</p>
+        <p>Цены указаны для пункта в&nbsp;Черкесске, в&nbsp;других пунктах могут отличаться. При оплате на&nbsp;сайте&nbsp;— скидка 10&nbsp;%. Взятие крови&nbsp;— 200&nbsp;₽, оплачивается отдельно.</p>
       </div>
     </div>
   </section>
 
   <!-- ============ HOME VISIT ============ -->
   <section id="v-home-visit" data-view="home-visit" hidden>
-    <div class="wrap">
-      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Анализы на дому</span></div>
-      <div class="pg-h">
-        <h1>Анализы на дому</h1>
-        <p class="lede">Медсестра CLD приедет к вам домой и возьмёт анализы.</p>
-        <p class="perk"><svg class="ico"><use href="#i-home"/></svg>Выезд бесплатно при заказе от 1 500 ₽</p>
-        <div class="acts"><a class="btn btn-lime" href="#catalog-blood" data-go="catalog:blood">Выбрать анализы</a><a class="btn btn-ghost" href="#checkups" data-go="checkups">Чек-апы</a></div>
+    <div class="hvhero">
+      <div class="wrap">
+        <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Анализы на&nbsp;дому</span></div>
+        <div class="hvhero-grid">
+          <div>
+            <h1>Анализы на&nbsp;дому</h1>
+            <p class="lede">Медсестра CLD приедет домой и&nbsp;возьмёт анализы. Подготовка, сроки и&nbsp;результаты&nbsp;— такие&nbsp;же, как при сдаче в&nbsp;пункте.</p>
+            <div class="acts"><a class="btn btn-navy" href="#catalog-blood" data-go="catalog:blood">Выбрать анализы</a><a class="btn btn-ghost" href="#checkups" data-go="checkups">Чек-апы</a></div>
+            <p class="hv-call">Заказать по&nbsp;телефону: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></p>
+          </div>
+          <div class="hv-card">
+            <span class="hv-big">Бесплатно</span>
+            <b>Выезд медсестры при заказе от&nbsp;1&nbsp;500&nbsp;₽</b>
+            <p>Если заказ меньше, стоимость выезда назовут по&nbsp;телефону.</p>
+            <div class="hv-cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="l"></i><i class="l"></i><i></i><i></i><i></i><i class="l"></i><i></i><i></i><i class="l"></i><i></i><i class="l"></i><i></i><i></i><i></i><i></i><i class="l"></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
     </div>
-    <section class="how wrap">
+    <div class="sec wrap">
+      <div class="sec-h"><h2>Кому это удобно</h2></div>
+      <div class="hv-who">
+        <div><span class="opt-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Нет времени ехать в&nbsp;пункт</b><p>Не&nbsp;нужно отпрашиваться с&nbsp;работы и&nbsp;тратить время на&nbsp;дорогу.</p></div>
+        <div><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Пожилым родственникам</b><p>Не&nbsp;нужно везти человека в&nbsp;пункт: анализы можно заказать на&nbsp;его адрес.</p></div>
+        <div><span class="opt-ic"><svg class="ico"><use href="#i-drop"/></svg></span><b>С&nbsp;маленьким ребёнком</b><p>Ребёнку спокойнее дома, а&nbsp;вам не&nbsp;нужно собирать его в&nbsp;дорогу.</p></div>
+        <div><span class="opt-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b>Если трудно выходить из&nbsp;дома</b><p>После болезни, при ограниченной подвижности или в&nbsp;непогоду.</p></div>
+      </div>
+    </div>
+    <section class="how how-plain wrap">
       <div class="how-in">
         <h2>Как заказать</h2>
         <ol class="how-list">
-          <li><span class="how-n num" aria-hidden="true">1</span><h3>Выберите анализы</h3><p>На сайте — в каталоге и чек-апах. Или позвоните по телефону 8 800 201 78 30.</p></li>
-          <li><span class="how-n num" aria-hidden="true">2</span><h3>Укажите адрес</h3><p>В корзине выберите «Дома» и впишите адрес. Если заказываете по телефону, назовите адрес при звонке.</p></li>
-          <li><span class="how-n num" aria-hidden="true">3</span><h3>Медсестра возьмёт анализы</h3><p>Дома, так же как в пункте. Результат — в личном кабинете на сайте или в пункте CLD.</p></li>
+          <li><span class="how-n num" aria-hidden="true">1</span><h3>Выберите анализы</h3><p>В&nbsp;каталоге или среди чек-апов. Можно заказать по&nbsp;телефону 8&nbsp;800&nbsp;201&nbsp;78&nbsp;30.</p></li>
+          <li><span class="how-n num" aria-hidden="true">2</span><h3>Укажите адрес</h3><p>В&nbsp;корзине выберите «Дома» и&nbsp;впишите адрес. При заказе по&nbsp;телефону назовите его оператору.</p></li>
+          <li><span class="how-n num" aria-hidden="true">3</span><h3>Медсестра возьмёт анализы</h3><p>Результат появится в&nbsp;личном кабинете на&nbsp;сайте, его можно получить и&nbsp;в&nbsp;пункте CLD.</p></li>
         </ol>
       </div>
     </section>
-    <div class="sec wrap pg">
-      <div class="opts">
-        <div class="opt opt-hl"><span class="opt-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b>Где работает выезд</b><p>Работает ли выезд в вашем населённом пункте, уточните по телефону 8 800 201 78 30.</p><a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>Позвонить</a></div>
-        <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Если заказ меньше 1 500 ₽</b><p>Стоимость выезда уточните по телефону 8 800 201 78 30.</p></div>
-        <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Как подготовиться</b><p>Так же, как к сдаче в пункте: правила указаны в описании каждого анализа. Лекарства сами не отменяйте — скажите о них врачу.</p></div>
-        <div class="opt"><span class="opt-ic"><svg class="ico"><use href="#i-file"/></svg></span><b>Где получить результат</b><p>В личном кабинете на сайте или в пункте CLD. Обсудите результат с врачом.</p><a class="btn btn-ghost" href="#results" data-go="results">Результаты анализов</a></div>
-      </div>
+    <div class="sec wrap">
+      <section class="faq">
+        <h2>Вопросы об&nbsp;анализах на&nbsp;дому</h2>
+        <details><summary>Сколько стоит выезд?</summary><p>Бесплатно при заказе анализов от&nbsp;1&nbsp;500&nbsp;₽. Если заказ меньше, стоимость выезда назовут по&nbsp;телефону 8&nbsp;800&nbsp;201&nbsp;78&nbsp;30.</p></details>
+        <details><summary>Работает ли выезд в&nbsp;моём городе или селе?</summary><p>Список населённых пунктов уточняйте по&nbsp;телефону 8&nbsp;800&nbsp;201&nbsp;78&nbsp;30.</p></details>
+        <details><summary>Как подготовиться?</summary><p>Так&nbsp;же, как к&nbsp;сдаче в&nbsp;пункте: правила указаны в&nbsp;описании каждого анализа. Лекарства сами не&nbsp;отменяйте&nbsp;— скажите о&nbsp;них врачу.</p></details>
+        <details><summary>Где будет результат?</summary><p>В&nbsp;личном кабинете на&nbsp;сайте или в&nbsp;пункте CLD. Срок указан у&nbsp;каждого анализа. Обсудите результат с&nbsp;врачом.</p></details>
+      </section>
     </div>
   </section>
 
@@ -1235,7 +1424,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
           <p class="err" id="co-err" hidden></p>
           <label class="consent"><input type="checkbox" id="co-ok"><span>Даю согласие на обработку персональных данных, в том числе сведений о состоянии здоровья, на условиях <a href="#privacy" data-go="privacy">Политики обработки персональных данных</a>.</span></label>
           <div class="acts"><button class="btn btn-lime" id="co-go" type="submit" disabled>Оформить заказ</button><button class="linkbtn" type="button" data-go="cart">Вернуться в корзину</button></div>
-          <p class="demo"><svg class="ico"><use href="#i-info"/></svg><span><b>Демо: подключим к МИС.</b> Данные никуда не отправляются: заказ, оплата и SMS работают только в этом окне браузера.</span></p>
+          <p class="demo"><svg class="ico"><use href="#i-info"/></svg><span><b>Это прототип.</b> Данные никуда не отправляются: заказ, оплата и SMS работают только в этом окне браузера.</span></p>
         </form>
         <aside class="panel" id="co-sum"></aside>
       </div>
@@ -1309,7 +1498,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   <section id="v-contacts" data-view="contacts" hidden>
     <div class="wrap pg">
       <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Контакты</span></div>
-      <div class="pg-h"><h1>Контакты</h1><p class="lede">Позвоните, если не знаете, какой анализ выбрать или как к нему подготовиться, — подскажем.</p></div>
+      <div class="pg-h"><h1>Контакты</h1><p class="lede">По телефону помогут выбрать анализ и расскажут о подготовке.</p></div>
       <dl class="kv">
         <dt>Телефон</dt><dd><a class="big num" href="tel:88002017830">8 800 201 78 30</a></dd>
         <dt>Часы работы колл-центра</dt><dd><span class="fill">[уточнить]</span></dd>
@@ -1394,8 +1583,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   <section id="v-referral" data-view="referral" hidden>
     <div class="wrap pg">
       <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" data-go="doctors">Врачам</button><span>/</span><span>Бланк направления</span></div>
-      <div class="pg-h"><h1>Бланк направления</h1><p class="lede">Для врача: отметьте анализы, пациент сдаёт их в любом пункте CLD. Формат A5, печатается только бланк.</p></div>
-      <div class="acts rf-tools"><button class="btn btn-navy" type="button" data-print><svg class="ico"><use href="#i-print"/></svg>Распечатать</button><a class="linkbtn" href="#doctors" data-go="doctors">Каталог с кодами МИС</a></div>
+      <div class="pg-h"><h1>Бланк направления</h1><p class="lede">Для врача: отметьте анализы, пациент сдаёт их в пункте CLD. Формат A5, печатается только бланк.</p></div>
+      <div class="acts rf-tools"><button class="btn btn-navy" type="button" data-print><svg class="ico"><use href="#i-print"/></svg>Распечатать</button><a class="linkbtn" href="#doctors" data-go="doctors">Каталог исследований</a></div>
       <div class="rf-sheet" data-note="rf1">
         <header class="rf-h"><img src="../assets/cld-logo-horizontal-navy.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276"><p>8 800 201 78 30<br>cldmed.ru</p></header>
         <h2 class="rf-t">Направление на лабораторные исследования</h2>
@@ -1407,9 +1596,9 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
           <div class="rf-l"><span>Код врача</span><i><span class="fill">[код врача]</span></i></div>
           <div class="rf-l"><span>Дата</span><i></i></div>
         </div>
-        <div class="rf-lh"><b>Исследования</b><span>код МИС</span></div>
+        <div class="rf-lh"><b>Исследования</b><span>код</span></div>
         <ul class="rf-list"><li><i class="rf-box"></i><span>ОАК развёрнутый</span><span class="rf-c">20-017</span></li><li><i class="rf-box"></i><span>ОАК</span><span class="rf-c">20-001</span></li><li><i class="rf-box"></i><span>СОЭ</span><span class="rf-c">20-003</span></li><li><i class="rf-box"></i><span>Глюкоза</span><span class="rf-c">40-047</span></li><li><i class="rf-box"></i><span>Гликированный гемоглобин (HbA1c)</span><span class="rf-c">40-141</span></li><li><i class="rf-box"></i><span>Инсулин</span><span class="rf-c">30-035</span></li><li><i class="rf-box"></i><span>АЛТ</span><span class="rf-c">40-026</span></li><li><i class="rf-box"></i><span>АСТ</span><span class="rf-c">40-025</span></li><li><i class="rf-box"></i><span>Билирубин общий</span><span class="rf-c">40-035</span></li><li><i class="rf-box"></i><span>Креатинин</span><span class="rf-c">40-063</span></li><li><i class="rf-box"></i><span>Мочевина</span><span class="rf-c">40-077</span></li><li><i class="rf-box"></i><span>Общий белок</span><span class="rf-c">40-001</span></li><li><i class="rf-box"></i><span>Мочевая кислота</span><span class="rf-c">40-004</span></li><li><i class="rf-box"></i><span>СРБ</span><span class="rf-c">40-081</span></li><li><i class="rf-box"></i><span>Калий, натрий, хлор</span><span class="rf-c">40-018.1</span></li><li><i class="rf-box"></i><span>Железо</span><span class="rf-c">40-052</span></li><li><i class="rf-box"></i><span>Ферритин</span><span class="rf-c">40-111</span></li><li><i class="rf-box"></i><span>Витамин D, 25-OH</span><span class="rf-c">40-297</span></li><li><i class="rf-box"></i><span>Витамин B12</span><span class="rf-c">40-041</span></li><li><i class="rf-box"></i><span>ТТГ</span><span class="rf-c">30-010</span></li><li><i class="rf-box"></i><span>Т4 свободный</span><span class="rf-c">30-009</span></li><li><i class="rf-box"></i><span>Анти-ТПО</span><span class="rf-c">50-125</span></li><li><i class="rf-box"></i><span>Липидный профиль</span><span class="rf-c">00-014</span></li><li><i class="rf-box"></i><span>Холестерин общий</span><span class="rf-c">40-070</span></li><li><i class="rf-box"></i><span>Коагулограмма скрининговая</span><span class="rf-c">80-049</span></li><li><i class="rf-box"></i><span>Общий анализ мочи</span><span class="rf-c">10-008</span></li><li><i class="rf-box"></i><span>ХГЧ</span><span class="rf-c">30-017</span></li><li><i class="rf-box"></i><span>Группа крови и резус-фактор</span><span class="rf-c">25-018</span></li><li><i class="rf-box"></i><span>ПСА общий</span><span class="rf-c">41-016</span></li></ul>
-        <div class="rf-l"><span>Другие (код МИС)</span><i></i></div>
+        <div class="rf-l"><span>Другие (код)</span><i></i></div>
         <div class="rf-l"><span></span><i></i></div>
         <div class="rf-l"><span></span><i></i></div>
         <div class="rf-sign"><div class="rf-l"><span>Подпись врача</span><i></i></div><div></div></div>
@@ -1478,10 +1667,10 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   var REGIONS = [];
   POINTS.forEach(function (p, i) { var r = REGIONS.filter(function (x) { return x.n === p.region; })[0]; if (!r) REGIONS.push(r = { n: p.region, pts: [] }); r.pts.push(i); });
   // каталог собственной лаборатории для врачей: 12 разделов, 22 комплекса, легенда подготовки (тексты МИС)
-  var DOC = /*DOC*/{"prep":{"Н12":"Не есть 12 часов, можно чистую воду. Детям 1–5 лет — не есть 2–3 часа, до года — не кормить 30–40 минут. За 30 минут — без нагрузок и курения.","Н8":"Не есть 8 часов, можно чистую воду; за сутки — без алкоголя. Детям 1–5 лет — не есть 2–3 часа, до года — не кормить 30–40 минут. За 30 минут — без нагрузок и курения.","Е3":"Не есть 2–3 часа, можно чистую воду. Детям до года — не кормить 30–40 минут. За 30 минут — без нагрузок и курения.","Г":"Не есть 2–3 часа, можно чистую воду. За 48 часов — без стероидных и тиреоидных гормонов, если это согласовано с врачом. За сутки — без нагрузок, за 3 часа — без курения.","К":"Особой подготовки нет. За 30 минут — не курить.","ПСА":"За сутки — без жирной пищи. Не раньше чем через 10 дней после массажа простаты. При приёме биотина больше 5 мг в сутки — через 8 часов после последней дозы. За 30 минут — без нагрузок и курения.","М":"Если врач разрешил, за 48 часов отменить мочегонные. Женщинам — до менструации или через 2–3 дня после её окончания.","О":"Общие правила: утром, не есть 8 часов, можно чистую воду. За 30 минут — без нагрузок и курения."},"sections":[{"id":"blood","n":"Кровь и анемия","s":"Гемоглобин, железо, воспаление","items":[{"c":"20-001","n":"Общий анализ крови (ОАК)","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"20-017","n":"Общий анализ крови (ОАК) развернутый","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"20-003","n":"СОЭ","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"20-007","n":"Тромбоциты (подсчёт по Фонио)","mat":"Кровь","r":"1 день","p":"О","m":"Подсчёт тромбоцитов по Фонио"},{"c":"25-018","n":"Группа крови и резус-фактор","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"40-052","n":"Железо в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-060.","n":"Общая железосвязывающая способность сыворотки (ОЖСС), включая железо","mat":"Кровь","r":"1 день","p":"Е3","m":"Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe"},{"c":"40-062","n":"Коэффициент насыщения трансферрина железом (КНТЖ)","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-107","n":"Трансферрин","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-111","n":"Ферритин","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-081","n":"С-реактивный белок (СРБ)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-028","n":"Антистрептолизин-О (АСЛО)","mat":"Кровь","r":"1 день","p":"О"},{"c":"50-056","n":"Ревматоидный фактор","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-013","n":"Прокальцитонин (PCT)","mat":"Кровь","r":"1 день","p":"О"}]},{"id":"sugar","n":"Сахар и обмен веществ","s":"Глюкоза, HbA1c, инсулин","items":[{"c":"40-047","n":"Глюкоза в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-141","n":"Гликированный гемоглобин (HbA1c)","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-035","n":"Инсулин","mat":"Кровь","r":"1 день","p":"Н12","pn":"Лекарства — за сутки не принимать, если врач не решил иначе."},{"c":"30-037","n":"Инсулин через 120 минут после нагрузки","mat":"Кровь","r":"1 день","p":"О","m":"Инсулин после нагрузки (120 минут)"},{"c":"30-043","n":"С-пептид","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-390","n":"Индекс HOMA","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-391","n":"Индекс HOMA и индекс CARO","mat":"Кровь","r":"1 день","p":"О","m":"Индекс HOMA + Индекс CARO"},{"c":"40-004","n":"Мочевая кислота в крови","mat":"Кровь","r":"1 день","p":"Н12"}]},{"id":"thyroid","n":"Щитовидная железа","s":"ТТГ, Т4, Т3, антитела","items":[{"c":"30-010","n":"Тиреотропный гормон (ТТГ)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-009","n":"Тироксин свободный (Т4 свободный)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-008","n":"Тироксин общий (Т4 общий)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-007","n":"Трийодтиронин свободный (Т3 свободный)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-006","n":"Трийодтиронин общий (Т3 общий)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"50-125","n":"Антитела к тиреопероксидазе (анти-ТПО)","mat":"Кровь","r":"1 день","p":"К","m":"АТ к тиреоидной пероксидазе (анти-ТПО)"},{"c":"50-126","n":"Антитела к тиреоглобулину (анти-ТГ)","mat":"Кровь","r":"1 день","p":"О","m":"АТ к тиреоглобулину (анти-ТГ)"},{"c":"30-040","n":"Тиреоглобулин (ТГ)","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-001","n":"Кальцитонин","mat":"Кровь","r":"1 день","p":"О"}]},{"id":"heart","n":"Сердце и сосуды","s":"Липиды, гомоцистеин, NT-proBNP","items":[{"c":"40-070","n":"Холестерин общий","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-072","n":"Липопротеины высокой плотности (ЛПВП)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-073","n":"Липопротеины низкой плотности (ЛПНП)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-069","n":"Триглицериды","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-044","n":"Индекс атерогенности (с холестерином и ЛПВП)","mat":"Кровь","r":"1 день","p":"О","m":"Индекс атерогенности (включая холестерин и ЛПВП)"},{"c":"40-104","n":"Гомоцистеин","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-080","n":"NT-proBNP","mat":"Кровь","r":"1 день","p":"О","m":"NT-proBNP (пептид концевой натрийуретический В-типа)"}]},{"id":"liver","n":"Печень и почки","s":"Ферменты, билирубин, креатинин, электролиты","items":[{"c":"40-026","n":"Аланинаминотрансфераза (АЛТ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-025","n":"Аспартатаминотрансфераза (АСТ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-042","n":"Гамма-глютамилтранспептидаза (ГГТ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-121","n":"Щелочная фосфатаза","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-067","n":"Лактатдегидрогеназа (ЛДГ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-010","n":"Альфа-амилаза в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-035","n":"Билирубин общий","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-036","n":"Билирубин прямой","mat":"Кровь","r":"1 день","p":"Н12","m":"Билирубин прямой (связанный)"},{"c":"40-037","n":"Билирубин непрямой","mat":"Кровь","r":"1 день","p":"Н12","m":"Билирубин непрямой (свободный)"},{"c":"40-001","n":"Общий белок в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-027","n":"Альбумин","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-063","n":"Креатинин в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-077","n":"Мочевина в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-018.1","n":"Калий, натрий, хлор (K/Na/Cl)","mat":"Кровь","r":"1 день","p":"Е3","m":"Калий, натрий, хлориды (K/Na/Cl)"},{"c":"40-056","n":"Калий в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-057","n":"Натрий в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-058","n":"Хлор в крови","mat":"Кровь","r":"1 день","p":"Е3"}]},{"id":"vitamins","n":"Витамины и минералы","s":"Витамины D, B12, фолиевая кислота, кальций","items":[{"c":"40-297","n":"Витамин D, 25-OH (25-гидроксикальциферол)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-041","n":"Витамин B12 (цианокобаламин)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-123","n":"Фолиевая кислота","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-054","n":"Кальций в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-075","n":"Магний в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-112","n":"Фосфор в крови","mat":"Кровь","r":"1 день","p":"Е3"}]},{"id":"hormones","n":"Гормоны и беременность","s":"ХГЧ, половые гормоны, кортизол","items":[{"c":"30-017","n":"ХГЧ (бета-ХГЧ общий)","mat":"Кровь","r":"1 день","p":"Г","m":"Хорионический гонадотропин человека (б-ХГЧ общий)"},{"c":"30-021","n":"Антимюллеров гормон (АМГ)","mat":"Кровь","r":"4 дня","p":"О"},{"c":"30-004","n":"Лютеинизирующий гормон (ЛГ)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-011","n":"Фолликулостимулирующий гормон (ФСГ)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-018","n":"Эстрадиол (Е2)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-005","n":"Прогестерон","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-029","n":"Пролактин","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-014","n":"Тестостерон общий","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-020","n":"Тестостерон свободный","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-039","n":"Глобулин, связывающий половые гормоны (ГСПГ)","mat":"Кровь","r":"2 дня","p":"О"},{"c":"30-015","n":"ДГЭА-С","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-034","n":"Кортизол","mat":"Кровь","r":"1 день","p":"О"}]},{"id":"infect","n":"Инфекции","s":"ВИЧ, гепатиты, сифилис, краснуха","items":[{"c":"90-001","n":"ВИЧ: антиген и антитела (ИХЛА)","mat":"Кровь","r":"1 день","p":"К","m":"Антиген и антитела к вирусу иммунодефицита человека (ИХЛА)"},{"c":"90-021","n":"Сифилис: антитела к бледной трепонеме (ИХЛА)","mat":"Кровь","r":"1 день","p":"К","m":"Антитела к бледной трепонеме (ИХЛА)"},{"c":"90-279","n":"Гепатит C: антитела (ИХЛА)","mat":"Кровь","r":"1 день","p":"К","m":"АТ к вирусу гепатита С (ИХЛА)"},{"c":"90-006","n":"Гепатит B: HBsAg (ИХЛА)","mat":"Кровь","r":"1 день","p":"О","m":"Поверхностный антиген вируса гепатита В (ИХЛА)"},{"c":"90-046","n":"Краснуха: антитела IgG","mat":"Кровь","r":"1 день","p":"О","m":"АТ к вирусу краснухи (Rubella) IgG"}]},{"id":"allergy","n":"Аллергия","s":"IgE общий","items":[{"c":"60-011","n":"Иммуноглобулин E (IgE) общий","mat":"Кровь","r":"1 день","p":"Е3","m":"Иммуноглобулины класса Е (IgE), общий"}]},{"id":"urine","n":"Моча","s":"Общий анализ, по Нечипоренко","items":[{"c":"10-008","n":"Общий анализ мочи (ОАМ)","mat":"Моча","r":"1 день","p":"М"},{"c":"10-012","n":"Анализ мочи по Нечипоренко","mat":"Моча","r":"1 день","p":"М"}]},{"id":"clotting","n":"Свёртываемость крови","s":"Коагулограмма, МНО, D-димер","items":[{"c":"80-049","n":"Коагулограмма скрининговая","mat":"Кровь","r":"1 день","p":"О","m":"Коагулограмма (Скрининг)"},{"c":"80-041","n":"Коагулограмма расширенная","mat":"Кровь","r":"1 день","p":"Е3","m":"Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)"},{"c":"80-002","n":"Активированное частичное тромбопластиновое время (АЧТВ)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-012","n":"Протромбин по Квику и МНО","mat":"Кровь","r":"1 день","p":"Е3","m":"Протромбин (по Квику) - МНО"},{"c":"80-015","n":"Протромбиновое время","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-003","n":"Тромбиновое время","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-004","n":"Фибриноген","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-013","n":"Антитромбин III","mat":"Кровь","r":"1 день","p":"О"},{"c":"80-007","n":"D-димер","mat":"Кровь","r":"1 день","p":"О","m":"Д-Димер"}]},{"id":"onco","n":"Онкомаркеры","s":"ПСА, РЭА, СА 125 и другие","items":[{"c":"41-016","n":"ПСА общий","mat":"Кровь","r":"1 день","p":"ПСА","m":"Простатический специфический антиген (ПСА) общий"},{"c":"41-017","n":"ПСА свободный","mat":"Кровь","r":"1 день","p":"ПСА","m":"Простатический специфический антиген (ПСА) свободный"},{"c":"41-018","n":"ПСА: соотношение свободного и общего","mat":"Кровь","r":"1 день","p":"ПСА","m":"Простатический специфический антиген (ПСА), соотношение своб./общ."},{"c":"41-001","n":"Раково-эмбриональный антиген (РЭА)","mat":"Кровь","r":"1 день","p":"Н8","pn":"Не курить за сутки."},{"c":"41-002","n":"Альфа-фетопротеин (АФП)","mat":"Кровь","r":"1 день","p":"К"},{"c":"41-006","n":"Раковый антиген 125 (CA 125)","mat":"Кровь","r":"1 день","p":"К"},{"c":"41-003","n":"CA 15-3","mat":"Кровь","r":"1 день","p":"О"},{"c":"41-004","n":"СА 19-9","mat":"Кровь","r":"1 день","p":"О"},{"c":"41-005","n":"СА 72-4","mat":"Кровь","r":"1 день","p":"О"}]}],"complexes":[{"n":"Ежегодная проверка","items":[{"c":"04.25.015","n":"ЧЕК-АП всего организма","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развернутый","Витамин D, 25-OH (25-гидроксикальциферол)","Железо в крови","Тиреотропный гормон (ТТГ)","Холестерин общий","Аланинаминотрансфераза (АЛТ)","Аспартатаминотрансфераза (АСТ)","Триглицериды","Креатинин в крови","Мочевина в крови","Общий белок в крови","Билирубин общий","Гамма-глютамилтранспептидаза (ГГТ)","Кальций в крови","Гликированный гемоглобин (HbA1c)","Гомоцистеин"]},{"c":"04.25.005","n":"Детский и подростковый ЧЕК-АП","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развернутый","Витамин D, 25-OH (25-гидроксикальциферол)","Железо в крови","Ферритин","Гликированный гемоглобин (HbA1c)","Глюкоза в крови","Гамма-глютамилтранспептидаза (ГГТ)","Билирубин общий","Билирубин прямой (связанный)","Билирубин непрямой (свободный)","Общий белок в крови","Кальций в крови"]},{"c":"00-701","n":"Диагностика для мужчин","mat":"Кровь","r":"1 день","p":"О"},{"c":"00-115.1","n":"Биохимия крови, 10 показателей","mat":"Кровь","r":"1 день","p":"О","m":"Биохимическое обследование (10 показателей)"}]},{"n":"Кровь и анемия","items":[{"c":"04.25.001","n":"Анемия расширенный","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Железо в крови","Ферритин","Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe","Трансферрин","Витамин B12 (цианокобаламин)","Витамин D, 25-OH (25-гидроксикальциферол)","Фолиевая кислота"]},{"c":"04.25.002","n":"Анемия стандарт","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Железо в крови","Ферритин","Трансферрин"]},{"c":"04.25.006","n":"Диагностика и контроль ревматоидного артрита","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развернутый","Ревматоидный фактор","Мочевая кислота в крови","С-реактивный белок (СРБ)","Антистрептолизин-О (АСЛО)","Аланинаминотрансфераза (АЛТ)","Аспартатаминотрансфераза (АСТ)"]}]},{"n":"Сахар","items":[{"c":"04.25.007","n":"Диагностика и контроль сахарного диабета","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развернутый","Гликированный гемоглобин (HbA1c)","Инсулин","С-пептид","Глюкоза в крови"]}]},{"n":"Щитовидная железа","items":[{"c":"04.25.004","n":"Гормоны щитовидной железы (стандарт)","mat":"Кровь","r":"2 дня","p":"Г","parts":["Тиреотропный гормон (ТТГ)","Трийодтиронин свободный (Т3 свободный)","Тироксин свободный (Т4 свободный)"]},{"c":"04.25.003","n":"Гормоны щитовидной железы (расширенный)","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Тиреотропный гормон (ТТГ)","Трийодтиронин свободный (Т3 свободный)","Тироксин свободный (Т4 свободный)","АТ к тиреоидной пероксидазе (анти-ТПО)"]},{"c":"00-04.02","n":"Щитовидная железа, расширенный скрининг","mat":"Кровь","p":"О","m":"Щитовидная железа (расширенный скрининг)"}]},{"n":"Сердце и сосуды","items":[{"c":"00-014","n":"Липидный профиль стандартный","mat":"Кровь","r":"1 день","p":"Е3","m":"Липидный профиль стандартный (ЛПВП, ЛПНП, Триглицериды, Холестерин общий)"},{"c":"00-099.1","n":"Липидный профиль развёрнутый","mat":"Кровь","r":"1 день","p":"Е3","m":"Липидный профиль развернутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)"},{"c":"04.25.008","n":"Диагностика и контроль сердечно-сосудистых заболеваний","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развернутый","Липидный профиль развернутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)","Лактатдегидрогеназа (ЛДГ)","Аспартатаминотрансфераза (АСТ)","Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)","Гомоцистеин"]}]},{"n":"Почки","items":[{"c":"04.25.009","n":"Диагностика и контроль функции почек","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развернутый","Мочевина в крови","Креатинин в крови","Калий, натрий, хлориды (K/Na/Cl)","Щелочная фосфатаза"]}]},{"n":"Витамины","items":[{"c":"04.25.016","n":"Витамины","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Витамин B12 (цианокобаламин)","Витамин D, 25-OH (25-гидроксикальциферол)","Фолиевая кислота"]}]},{"n":"Гормоны","items":[{"c":"04.25.011","n":"Женские половые гормоны (стандарт)","mat":"Кровь","r":"2 дня","p":"Г","parts":["Эстрадиол (Е2)","Прогестерон","Фолликулостимулирующий гормон (ФСГ)","Лютеинизирующий гормон (ЛГ)","Пролактин","Тиреотропный гормон (ТТГ)"]},{"c":"04.25.010","n":"Женские половые гормоны (расширенный)","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Эстрадиол (Е2)","Прогестерон","Фолликулостимулирующий гормон (ФСГ)","Лютеинизирующий гормон (ЛГ)","Пролактин","Тиреотропный гормон (ТТГ)","Глобулин, связывающий половые гормоны (ГСПГ)","ДГЭА-С","Тестостерон общий"]},{"c":"04.25.012","n":"Мужские половые гормоны","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Тестостерон общий","Эстрадиол (Е2)","Глобулин, связывающий половые гормоны (ГСПГ)","Пролактин","Прогестерон"]}]},{"n":"Онкомаркеры","items":[{"c":"04.25.013","n":"Основные онкологические маркеры у женщин","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Раково-эмбриональный антиген (РЭА)","Альфа-фетопротеин (АФП)","CA 15-3","СА 19-9","СА 72-4","Раковый антиген 125 (CA 125)"]},{"c":"04.25.014","n":"Основные онкологические маркеры у мужчин","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развернутый","Альфа-фетопротеин (АФП)","Простатический специфический антиген (ПСА), соотношение своб./общ.","Раково-эмбриональный антиген (РЭА)","СА 19-9","СА 72-4"]}]},{"n":"Перед госпитализацией","items":[{"c":"00-094","n":"Госпитальный скрининг: ВИЧ, HBsAg, анти-HCV, сифилис","mat":"Кровь","r":"1 день","p":"О","m":"Госпитальный скрининг (ВИЧ 1/2, HbsAg, anti-HCV-total, анти-Tr.pallidum сумм)"}]}]};
+  var DOC = /*DOC*/{"prep":{"Н12":"Не есть 12 часов, можно чистую воду. Детям 1–5 лет — не есть 2–3 часа, до года — не кормить 30–40 минут. За 30 минут — без нагрузок и курения.","Н8":"Не есть 8 часов, можно чистую воду; за сутки — без алкоголя. Детям 1–5 лет — не есть 2–3 часа, до года — не кормить 30–40 минут. За 30 минут — без нагрузок и курения.","Е3":"Не есть 2–3 часа, можно чистую воду. Детям до года — не кормить 30–40 минут. За 30 минут — без нагрузок и курения.","Г":"Не есть 2–3 часа, можно чистую воду. За 48 часов — без стероидных и тиреоидных гормонов, если это согласовано с врачом. За сутки — без нагрузок, за 3 часа — без курения.","К":"Особой подготовки нет. За 30 минут — не курить.","ПСА":"За сутки — без жирной пищи. Не раньше чем через 10 дней после массажа простаты. При приёме биотина больше 5 мг в сутки — через 8 часов после последней дозы. За 30 минут — без нагрузок и курения.","М":"Если врач разрешил, за 48 часов отменить мочегонные. Женщинам — до менструации или через 2–3 дня после её окончания.","О":"Общие правила: утром, не есть 8 часов, можно чистую воду. За 30 минут — без нагрузок и курения."},"sections":[{"id":"blood","n":"Кровь и анемия","s":"Гемоглобин, железо, воспаление","items":[{"c":"20-001","n":"Общий анализ крови (ОАК)","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"20-017","n":"Общий анализ крови (ОАК) развёрнутый","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"20-003","n":"СОЭ","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"20-007","n":"Тромбоциты (подсчёт по Фонио)","mat":"Кровь","r":"1 день","p":"О","m":"Подсчёт тромбоцитов по Фонио"},{"c":"25-018","n":"Группа крови и резус-фактор","mat":"Кровь","r":"1 день","p":"Н8"},{"c":"40-052","n":"Железо в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-060.","n":"Общая железосвязывающая способность сыворотки (ОЖСС), включая железо","mat":"Кровь","r":"1 день","p":"Е3","m":"Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe"},{"c":"40-062","n":"Коэффициент насыщения трансферрина железом (КНТЖ)","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-107","n":"Трансферрин","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-111","n":"Ферритин","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-081","n":"С-реактивный белок (СРБ)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-028","n":"Антистрептолизин-О (АСЛО)","mat":"Кровь","r":"1 день","p":"О"},{"c":"50-056","n":"Ревматоидный фактор","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-013","n":"Прокальцитонин (PCT)","mat":"Кровь","r":"1 день","p":"О"}]},{"id":"sugar","n":"Сахар и обмен веществ","s":"Глюкоза, HbA1c, инсулин","items":[{"c":"40-047","n":"Глюкоза в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-141","n":"Гликированный гемоглобин (HbA1c)","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-035","n":"Инсулин","mat":"Кровь","r":"1 день","p":"Н12","pn":"За сутки до анализа не принимать лекарства — по согласованию с лечащим врачом."},{"c":"30-037","n":"Инсулин через 120 минут после нагрузки","mat":"Кровь","r":"1 день","p":"О","m":"Инсулин после нагрузки (120 минут)"},{"c":"30-043","n":"С-пептид","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-390","n":"Индекс HOMA","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-391","n":"Индекс HOMA и индекс CARO","mat":"Кровь","r":"1 день","p":"О","m":"Индекс HOMA + Индекс CARO"},{"c":"40-004","n":"Мочевая кислота в крови","mat":"Кровь","r":"1 день","p":"Н12"}]},{"id":"thyroid","n":"Щитовидная железа","s":"ТТГ, Т4, Т3, антитела","items":[{"c":"30-010","n":"Тиреотропный гормон (ТТГ)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-009","n":"Тироксин свободный (Т4 свободный)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-008","n":"Тироксин общий (Т4 общий)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-007","n":"Трийодтиронин свободный (Т3 свободный)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-006","n":"Трийодтиронин общий (Т3 общий)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"50-125","n":"Антитела к тиреопероксидазе (анти-ТПО)","mat":"Кровь","r":"1 день","p":"К","m":"АТ к тиреоидной пероксидазе (анти-ТПО)"},{"c":"50-126","n":"Антитела к тиреоглобулину (анти-ТГ)","mat":"Кровь","r":"1 день","p":"О","m":"АТ к тиреоглобулину (анти-ТГ)"},{"c":"30-040","n":"Тиреоглобулин (ТГ)","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-001","n":"Кальцитонин","mat":"Кровь","r":"1 день","p":"О"}]},{"id":"heart","n":"Сердце и сосуды","s":"Липиды, гомоцистеин, NT-proBNP","items":[{"c":"40-070","n":"Холестерин общий","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-072","n":"Липопротеины высокой плотности (ЛПВП)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-073","n":"Липопротеины низкой плотности (ЛПНП)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-069","n":"Триглицериды","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-044","n":"Индекс атерогенности (с холестерином и ЛПВП)","mat":"Кровь","r":"1 день","p":"О","m":"Индекс атерогенности (включая холестерин и ЛПВП)"},{"c":"40-104","n":"Гомоцистеин","mat":"Кровь","r":"1 день","p":"О"},{"c":"40-080","n":"NT-proBNP","mat":"Кровь","r":"1 день","p":"О","m":"NT-proBNP (пептид концевой натрийуретический В-типа)"}]},{"id":"liver","n":"Печень и почки","s":"Ферменты, билирубин, креатинин, электролиты","items":[{"c":"40-026","n":"Аланинаминотрансфераза (АЛТ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-025","n":"Аспартатаминотрансфераза (АСТ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-042","n":"Гамма-глютамилтранспептидаза (ГГТ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-121","n":"Щелочная фосфатаза","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-067","n":"Лактатдегидрогеназа (ЛДГ)","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-010","n":"Альфа-амилаза в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-035","n":"Билирубин общий","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-036","n":"Билирубин прямой","mat":"Кровь","r":"1 день","p":"Н12","m":"Билирубин прямой (связанный)"},{"c":"40-037","n":"Билирубин непрямой","mat":"Кровь","r":"1 день","p":"Н12","m":"Билирубин непрямой (свободный)"},{"c":"40-001","n":"Общий белок в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-027","n":"Альбумин","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-063","n":"Креатинин в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-077","n":"Мочевина в крови","mat":"Кровь","r":"1 день","p":"Н12"},{"c":"40-018.1","n":"Калий, натрий, хлор (K/Na/Cl)","mat":"Кровь","r":"1 день","p":"Е3","m":"Калий, натрий, хлориды (K/Na/Cl)"},{"c":"40-056","n":"Калий в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-057","n":"Натрий в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-058","n":"Хлор в крови","mat":"Кровь","r":"1 день","p":"Е3"}]},{"id":"vitamins","n":"Витамины и минералы","s":"Витамины D, B12, фолиевая кислота, кальций","items":[{"c":"40-297","n":"Витамин D, 25-OH (25-гидроксикальциферол)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-041","n":"Витамин B12 (цианокобаламин)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-123","n":"Фолиевая кислота","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-054","n":"Кальций в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-075","n":"Магний в крови","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"40-112","n":"Фосфор в крови","mat":"Кровь","r":"1 день","p":"Е3"}]},{"id":"hormones","n":"Гормоны и беременность","s":"ХГЧ, половые гормоны, кортизол","items":[{"c":"30-017","n":"ХГЧ (бета-ХГЧ общий)","mat":"Кровь","r":"1 день","p":"Г","m":"Хорионический гонадотропин человека (б-ХГЧ общий)"},{"c":"30-021","n":"Антимюллеров гормон (АМГ)","mat":"Кровь","r":"4 дня","p":"О"},{"c":"30-004","n":"Лютеинизирующий гормон (ЛГ)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-011","n":"Фолликулостимулирующий гормон (ФСГ)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-018","n":"Эстрадиол (Е2)","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-005","n":"Прогестерон","mat":"Кровь","r":"1 день","p":"Г"},{"c":"30-029","n":"Пролактин","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-014","n":"Тестостерон общий","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-020","n":"Тестостерон свободный","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-039","n":"Глобулин, связывающий половые гормоны (ГСПГ)","mat":"Кровь","r":"2 дня","p":"О"},{"c":"30-015","n":"ДГЭА-С","mat":"Кровь","r":"1 день","p":"О"},{"c":"30-034","n":"Кортизол","mat":"Кровь","r":"1 день","p":"О"}]},{"id":"infect","n":"Инфекции","s":"ВИЧ, гепатиты, сифилис, краснуха","items":[{"c":"90-001","n":"ВИЧ: антиген и антитела (ИХЛА)","mat":"Кровь","r":"1 день","p":"К","m":"Антиген и антитела к вирусу иммунодефицита человека (ИХЛА)"},{"c":"90-021","n":"Сифилис: антитела к бледной трепонеме (ИХЛА)","mat":"Кровь","r":"1 день","p":"К","m":"Антитела к бледной трепонеме (ИХЛА)"},{"c":"90-279","n":"Гепатит C: антитела (ИХЛА)","mat":"Кровь","r":"1 день","p":"К","m":"АТ к вирусу гепатита С (ИХЛА)"},{"c":"90-006","n":"Гепатит B: HBsAg (ИХЛА)","mat":"Кровь","r":"1 день","p":"О","m":"Поверхностный антиген вируса гепатита В (ИХЛА)"},{"c":"90-046","n":"Краснуха: антитела IgG","mat":"Кровь","r":"1 день","p":"О","m":"АТ к вирусу краснухи (Rubella) IgG"}]},{"id":"allergy","n":"Аллергия","s":"IgE общий","items":[{"c":"60-011","n":"Иммуноглобулин E (IgE) общий","mat":"Кровь","r":"1 день","p":"Е3","m":"Иммуноглобулины класса Е (IgE), общий"}]},{"id":"urine","n":"Моча","s":"Общий анализ, по Нечипоренко","items":[{"c":"10-008","n":"Общий анализ мочи (ОАМ)","mat":"Моча","r":"1 день","p":"М"},{"c":"10-012","n":"Анализ мочи по Нечипоренко","mat":"Моча","r":"1 день","p":"М"}]},{"id":"clotting","n":"Свёртываемость крови","s":"Коагулограмма, МНО, D-димер","items":[{"c":"80-049","n":"Коагулограмма скрининговая","mat":"Кровь","r":"1 день","p":"О","m":"Коагулограмма (Скрининг)"},{"c":"80-041","n":"Коагулограмма расширенная","mat":"Кровь","r":"1 день","p":"Е3","m":"Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)"},{"c":"80-002","n":"Активированное частичное тромбопластиновое время (АЧТВ)","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-012","n":"Протромбин по Квику и МНО","mat":"Кровь","r":"1 день","p":"Е3","m":"Протромбин (по Квику) - МНО"},{"c":"80-015","n":"Протромбиновое время","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-003","n":"Тромбиновое время","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-004","n":"Фибриноген","mat":"Кровь","r":"1 день","p":"Е3"},{"c":"80-013","n":"Антитромбин III","mat":"Кровь","r":"1 день","p":"О"},{"c":"80-007","n":"D-димер","mat":"Кровь","r":"1 день","p":"О","m":"Д-Димер"}]},{"id":"onco","n":"Онкомаркеры","s":"ПСА, РЭА, СА 125 и другие","items":[{"c":"41-016","n":"ПСА общий","mat":"Кровь","r":"1 день","p":"ПСА","m":"Простатический специфический антиген (ПСА) общий"},{"c":"41-017","n":"ПСА свободный","mat":"Кровь","r":"1 день","p":"ПСА","m":"Простатический специфический антиген (ПСА) свободный"},{"c":"41-018","n":"ПСА: соотношение свободного и общего","mat":"Кровь","r":"1 день","p":"ПСА","m":"Простатический специфический антиген (ПСА), соотношение своб./общ."},{"c":"41-001","n":"Раково-эмбриональный антиген (РЭА)","mat":"Кровь","r":"1 день","p":"Н8","pn":"Не курить за сутки."},{"c":"41-002","n":"Альфа-фетопротеин (АФП)","mat":"Кровь","r":"1 день","p":"К"},{"c":"41-006","n":"Раковый антиген 125 (CA 125)","mat":"Кровь","r":"1 день","p":"К"},{"c":"41-003","n":"CA 15-3","mat":"Кровь","r":"1 день","p":"О"},{"c":"41-004","n":"СА 19-9","mat":"Кровь","r":"1 день","p":"О"},{"c":"41-005","n":"СА 72-4","mat":"Кровь","r":"1 день","p":"О"}]}],"complexes":[{"n":"Ежегодная проверка","items":[{"c":"04.25.015","n":"ЧЕК-АП всего организма","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развёрнутый","Витамин D, 25-OH (25-гидроксикальциферол)","Железо в крови","Тиреотропный гормон (ТТГ)","Холестерин общий","Аланинаминотрансфераза (АЛТ)","Аспартатаминотрансфераза (АСТ)","Триглицериды","Креатинин в крови","Мочевина в крови","Общий белок в крови","Билирубин общий","Гамма-глютамилтранспептидаза (ГГТ)","Кальций в крови","Гликированный гемоглобин (HbA1c)","Гомоцистеин"]},{"c":"04.25.005","n":"Детский и подростковый ЧЕК-АП","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развёрнутый","Витамин D, 25-OH (25-гидроксикальциферол)","Железо в крови","Ферритин","Гликированный гемоглобин (HbA1c)","Глюкоза в крови","Гамма-глютамилтранспептидаза (ГГТ)","Билирубин общий","Билирубин прямой (связанный)","Билирубин непрямой (свободный)","Общий белок в крови","Кальций в крови"]},{"c":"00-701","n":"Диагностика для мужчин","mat":"Кровь","r":"1 день","p":"О"},{"c":"00-115.1","n":"Биохимия крови, 10 показателей","mat":"Кровь","r":"1 день","p":"О","m":"Биохимическое обследование (10 показателей)"}]},{"n":"Кровь и анемия","items":[{"c":"04.25.001","n":"Анемия расширенный","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Железо в крови","Ферритин","Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe","Трансферрин","Витамин B12 (цианокобаламин)","Витамин D, 25-OH (25-гидроксикальциферол)","Фолиевая кислота"]},{"c":"04.25.002","n":"Анемия стандарт","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Железо в крови","Ферритин","Трансферрин"]},{"c":"04.25.006","n":"Диагностика и контроль ревматоидного артрита","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развёрнутый","Ревматоидный фактор","Мочевая кислота в крови","С-реактивный белок (СРБ)","Антистрептолизин-О (АСЛО)","Аланинаминотрансфераза (АЛТ)","Аспартатаминотрансфераза (АСТ)"]}]},{"n":"Сахар","items":[{"c":"04.25.007","n":"Диагностика и контроль сахарного диабета","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развёрнутый","Гликированный гемоглобин (HbA1c)","Инсулин","С-пептид","Глюкоза в крови"]}]},{"n":"Щитовидная железа","items":[{"c":"04.25.004","n":"Гормоны щитовидной железы (стандарт)","mat":"Кровь","r":"2 дня","p":"Г","parts":["Тиреотропный гормон (ТТГ)","Трийодтиронин свободный (Т3 свободный)","Тироксин свободный (Т4 свободный)"]},{"c":"04.25.003","n":"Гормоны щитовидной железы (расширенный)","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Тиреотропный гормон (ТТГ)","Трийодтиронин свободный (Т3 свободный)","Тироксин свободный (Т4 свободный)","АТ к тиреоидной пероксидазе (анти-ТПО)"]},{"c":"00-04.02","n":"Щитовидная железа, расширенный скрининг","mat":"Кровь","p":"О","m":"Щитовидная железа (расширенный скрининг)"}]},{"n":"Сердце и сосуды","items":[{"c":"00-014","n":"Липидный профиль стандартный","mat":"Кровь","r":"1 день","p":"Е3","m":"Липидный профиль стандартный (ЛПВП, ЛПНП, Триглицериды, Холестерин общий)"},{"c":"00-099.1","n":"Липидный профиль развёрнутый","mat":"Кровь","r":"1 день","p":"Е3","m":"Липидный профиль развёрнутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)"},{"c":"04.25.008","n":"Диагностика и контроль сердечно-сосудистых заболеваний","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развёрнутый","Липидный профиль развёрнутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)","Лактатдегидрогеназа (ЛДГ)","Аспартатаминотрансфераза (АСТ)","Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)","Гомоцистеин"]}]},{"n":"Почки","items":[{"c":"04.25.009","n":"Диагностика и контроль функции почек","mat":"Кровь","r":"2 дня","p":"Н12","parts":["Общий анализ крови (ОАК) развёрнутый","Мочевина в крови","Креатинин в крови","Калий, натрий, хлориды (K/Na/Cl)","Щелочная фосфатаза"]}]},{"n":"Витамины","items":[{"c":"04.25.016","n":"Витамины","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Витамин B12 (цианокобаламин)","Витамин D, 25-OH (25-гидроксикальциферол)","Фолиевая кислота"]}]},{"n":"Гормоны","items":[{"c":"04.25.011","n":"Женские половые гормоны (стандарт)","mat":"Кровь","r":"2 дня","p":"Г","parts":["Эстрадиол (Е2)","Прогестерон","Фолликулостимулирующий гормон (ФСГ)","Лютеинизирующий гормон (ЛГ)","Пролактин","Тиреотропный гормон (ТТГ)"]},{"c":"04.25.010","n":"Женские половые гормоны (расширенный)","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Эстрадиол (Е2)","Прогестерон","Фолликулостимулирующий гормон (ФСГ)","Лютеинизирующий гормон (ЛГ)","Пролактин","Тиреотропный гормон (ТТГ)","Глобулин, связывающий половые гормоны (ГСПГ)","ДГЭА-С","Тестостерон общий"]},{"c":"04.25.012","n":"Мужские половые гормоны","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Тестостерон общий","Эстрадиол (Е2)","Глобулин, связывающий половые гормоны (ГСПГ)","Пролактин","Прогестерон"]}]},{"n":"Онкомаркеры","items":[{"c":"04.25.013","n":"Основные онкологические маркеры у женщин","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Раково-эмбриональный антиген (РЭА)","Альфа-фетопротеин (АФП)","CA 15-3","СА 19-9","СА 72-4","Раковый антиген 125 (CA 125)"]},{"c":"04.25.014","n":"Основные онкологические маркеры у мужчин","mat":"Кровь","r":"2 дня","p":"Н8","parts":["Общий анализ крови (ОАК) развёрнутый","Альфа-фетопротеин (АФП)","Простатический специфический антиген (ПСА), соотношение своб./общ.","Раково-эмбриональный антиген (РЭА)","СА 19-9","СА 72-4"]}]},{"n":"Перед госпитализацией","items":[{"c":"00-094","n":"Госпитальный скрининг: ВИЧ, HBsAg, анти-HCV, сифилис","mat":"Кровь","r":"1 день","p":"О","m":"Госпитальный скрининг (ВИЧ 1/2, HbsAg, anti-HCV-total, анти-Tr.pallidum сумм)"}]}]};
   var BLOOD_DRAW = 200;
   var A = {
-    "20-017": { n: "Общий анализ крови развёрнутый", off: "Общий анализ крови (ОАК) развернутый", d: "Покажет количество эритроцитов, лейкоцитов и тромбоцитов и уровень гемоглобина в крови", p: 470, bio: "Кровь из вены", days: 1, own: true, pop: 1 },
+    "20-017": { n: "Общий анализ крови развёрнутый", off: "Общий анализ крови (ОАК) развёрнутый", d: "Покажет количество эритроцитов, лейкоцитов и тромбоцитов и уровень гемоглобина в крови", p: 470, bio: "Кровь из вены", days: 1, own: true, pop: 1 },
     "20-001": { n: "Общий анализ крови", off: "Общий анализ крови (ОАК)", d: "Покажет количество эритроцитов, лейкоцитов и тромбоцитов и уровень гемоглобина в крови", p: 340, bio: "Кровь из вены", days: 1, own: true, pop: 9 },
     "40-111": { n: "Ферритин", off: "Ферритин", d: "Покажет, достаточно ли в организме запасов железа", p: 420, bio: "Кровь из вены", days: 1, own: true, pop: 4 },
     "40-052": { n: "Железо в крови", off: "Железо в крови", d: "Покажет уровень железа в крови на момент сдачи анализа", p: 215, bio: "Кровь из вены", days: 1, own: true, pop: 12 },
@@ -1560,17 +1749,17 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     "04.25.015": ["Чек-ап всего организма", 3800], "04.25.005": ["Чек-ап для детей и подростков", 2700],
     "00-701": ["Комплекс для мужчин", 2337], "00-115.1": ["Биохимия крови: 10 показателей", 1200],
     "04.25.001": ["Анемия: расширенный набор", 3100], "04.25.002": ["Анемия: основной набор", 1000],
-    "04.25.006": ["Суставы: ревматоидный фактор, СРБ, АСЛО", 1600], "04.25.007": ["Сахар: глюкоза, HbA1c, инсулин, С-пептид", 1500],
-    "04.25.004": ["Гормоны щитовидной железы: основной набор", 800], "04.25.003": ["Гормоны щитовидной железы: расширенный набор", 1450],
+    "04.25.006": ["Суставы и воспаление", 1600], "04.25.007": ["Сахар и инсулин", 1500],
+    "04.25.004": ["Щитовидная железа: основной набор", 800], "04.25.003": ["Щитовидная железа: расширенный набор", 1450],
     "00-04.02": ["Щитовидная железа: расширенный скрининг", 2610],
-    "00-014": ["Липидный профиль: основной", 620, ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"]],
-    "00-099.1": ["Липидный профиль: развёрнутый", 620, ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"]],
-    "04.25.008": ["Сердце и сосуды: расширенный набор", 2800], "04.25.009": ["Почки: основной набор", 800],
-    "04.25.016": ["Витамины: B12, D, фолиевая кислота", 2100],
+    "00-014": ["Холестерин: основной профиль", 620, ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"]],
+    "00-099.1": ["Холестерин: развёрнутый профиль", 620, ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"]],
+    "04.25.008": ["Сердце и сосуды: расширенный набор", 2800], "04.25.009": ["Почки", 800],
+    "04.25.016": ["Витамины B12, D и фолиевая кислота", 2100],
     "04.25.011": ["Женские гормоны: основной набор", 1600], "04.25.010": ["Женские гормоны: расширенный набор", 2600],
     "04.25.012": ["Мужские гормоны", 1700],
-    "04.25.013": ["Онкомаркеры: основной набор для женщин", 2500], "04.25.014": ["Онкомаркеры: основной набор для мужчин", 2500],
-    "00-094": ["Госпитальный скрининг: ВИЧ, гепатиты B и C, сифилис", 990]
+    "04.25.013": ["Онкомаркеры для женщин", 2500], "04.25.014": ["Онкомаркеры для мужчин", 2500],
+    "00-094": ["Госпитальный скрининг", 990]
   };
   var CX = {};
   DOC.complexes.forEach(function (g) { g.items.forEach(function (it) { var x = CXI[it.c]; CX[it.c] = { c: it.c, n: x[0], p: x[1], mis: it.m || it.n, parts: it.parts && it.parts.length ? it.parts : x[2] || null, r: it.r || "", prep: it.p }; }); });
@@ -1591,17 +1780,17 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     checkups:["#########","#.......#","#.ooooo.#","#.......#","#.ooo...#","#.......#","#.ooooo.#","#.......#","#########"]
   };
   var CATS = [
-    { id: "blood", n: "Кровь и анемия", s: "Гемоглобин, железо, воспаление", desc: "Анализы покажут, хватает ли гемоглобина и железа, нет ли воспаления. С них часто начинают проверку при слабости и бледности.", items: ["20-017", "40-111", "40-052", "40-041", "40-081", "20-001", "20-003", "40-060.", "40-062", "40-123", "25-018", "10.105"], checkup: "anemia" },
-    { id: "sugar", n: "Сахар и обмен веществ", s: "Глюкоза, гликированный гемоглобин", desc: "Покажут уровень сахара сейчас и за последние месяцы, помогут врачу заподозрить диабет или проконтролировать лечение.", items: ["40-047", "40-141", "30-035", "40-004", "30-043", "18.101", "18.103", "18.110", "40-390"], checkup: "diabetes" },
-    { id: "thyroid", n: "Щитовидная железа", s: "ТТГ, Т4, антитела", desc: "Проверка начинается с ТТГ. Остальные анализы уточняют, что происходит, если ТТГ не в норме.", items: ["30-010", "30-009", "28.135", "30-007", "30-008", "30-006", "50-126", "28.145", "32.100"], checkup: "thyroid" },
+    { id: "blood", n: "Кровь и анемия", s: "Гемоглобин, железо, воспаление", desc: "Гемоглобин, показатели обмена железа и признаки воспаления. Эти анализы часто назначают при слабости и бледности.", items: ["20-017", "40-111", "40-052", "40-041", "40-081", "20-001", "20-003", "40-060.", "40-062", "40-123", "25-018", "10.105"], checkup: "anemia" },
+    { id: "sugar", n: "Сахар и обмен веществ", s: "Глюкоза, гликированный гемоглобин", desc: "Уровень глюкозы на момент анализа и за последние месяцы. По ним врач выявляет нарушения углеводного обмена и контролирует лечение диабета.", items: ["40-047", "40-141", "30-035", "40-004", "30-043", "18.101", "18.103", "18.110", "40-390"], checkup: "diabetes" },
+    { id: "thyroid", n: "Щитовидная железа", s: "ТТГ, Т4, антитела", desc: "Обследование щитовидной железы обычно начинают с ТТГ. Остальные анализы назначают, если ТТГ отклоняется от нормы.", items: ["30-010", "30-009", "28.135", "30-007", "30-008", "30-006", "50-126", "28.145", "32.100"], checkup: "thyroid" },
     { id: "heart", n: "Сердце и сосуды", s: "Холестерин, липидный профиль", desc: "Холестерин и его фракции помогают врачу оценить риск болезней сердца и сосудов.", items: ["00-014", "40-070", "40-081", "40-069", "40-044", "19.115", "19.100", "19.105", "40-104", "40-080", "17.130"] },
-    { id: "liver", n: "Печень и почки", s: "АЛТ, билирубин, креатинин", desc: "Биохимия крови покажет, как работают печень и почки. Её часто назначают при приёме лекарств и перед операцией.", items: ["40-026", "40-035", "40-063", "40-077", "10-008", "17.167", "40-018.1", "40-056", "40-057", "40-058", "40.120", "40-010", "40-025", "21.120", "40-121", "40-036", "40-037", "40-001", "40-027"], checkup: "kidneys" },
-    { id: "vitamins", n: "Витамины и минералы", s: "Витамин D, B12, железо", desc: "Покажут, хватает ли организму витаминов и железа. Принимать добавки по результату лучше вместе с врачом.", items: ["40-297", "40-041", "40-111", "40-052"] },
+    { id: "liver", n: "Печень и почки", s: "АЛТ, билирубин, креатинин", desc: "Биохимические показатели работы печени и почек. Их часто назначают при длительном приёме лекарств и перед операцией.", items: ["40-026", "40-035", "40-063", "40-077", "10-008", "17.167", "40-018.1", "40-056", "40-057", "40-058", "40.120", "40-010", "40-025", "21.120", "40-121", "40-036", "40-037", "40-001", "40-027"], checkup: "kidneys" },
+    { id: "vitamins", n: "Витамины и минералы", s: "Витамин D, B12, железо", desc: "Уровень витаминов D, B12, фолиевой кислоты и минералов. Решение о приёме добавок по результату принимает врач.", items: ["40-297", "40-041", "40-111", "40-052"] },
     { id: "hormones", n: "Гормоны и беременность", s: "ХГЧ и женские гормоны", desc: "Гормоны сдают в день цикла, который назвал врач. ХГЧ подтверждает беременность на раннем сроке.", items: ["30-017"] },
-    { id: "infect", n: "Инфекции", s: "ВИЧ, гепатиты, ИППП, TORCH", desc: "Раздел соберётся по тому же шаблону: антитела, ПЦР и мазки с понятными объяснениями.", items: [] },
-    { id: "allergy", n: "Аллергия", s: "IgE общий и аллергены", desc: "Помогут врачу понять, связаны ли насморк, сыпь или кашель с аллергией и на что именно.", items: ["60-011"] },
-    { id: "urine", n: "Моча и кал", s: "Общий анализ мочи", desc: "Простые анализы, которые много говорят о почках, мочевых путях и кишечнике.", items: ["10-008"] },
-    { id: "clotting", n: "Свёртываемость крови", s: "Коагулограмма, МНО", desc: "Нужны перед операцией, при беременности и при приёме препаратов, разжижающих кровь.", items: ["80-049"] },
+    { id: "infect", n: "Инфекции", s: "ВИЧ, гепатиты, ИППП, TORCH", desc: "Антитела к инфекциям, ПЦР и мазки.", items: [] },
+    { id: "allergy", n: "Аллергия", s: "IgE общий и аллергены", desc: "Помогают врачу установить, связаны ли насморк, сыпь или кашель с аллергией, и определить аллерген.", items: ["60-011"] },
+    { id: "urine", n: "Моча и кал", s: "Общий анализ мочи", desc: "Анализы мочи и кала: показатели работы почек, мочевых путей и кишечника.", items: ["10-008"] },
+    { id: "clotting", n: "Свёртываемость крови", s: "Коагулограмма, МНО", desc: "Показатели свёртываемости крови. Их назначают перед операцией, во время беременности и при приёме препаратов, снижающих свёртываемость.", items: ["80-049"] },
     { id: "onco", n: "Онкомаркеры", s: "ПСА и другие", desc: "Онкомаркеры назначает врач: по одному анализу диагноз не ставят. Чаще их используют для наблюдения.", items: ["41-016"] }
   ];
   var SITS = [
@@ -1771,11 +1960,11 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     $("#c-checkup").innerHTML = ck ? '<div class="checkup"><b>' + esc(ck.n) + " · " + ck.count + " анализа</b><p>" + esc(ck.inc) + ". Готово через " + ck.days + ' дня.</p><div class="price"><div><b>' + rub(ck.p) + "</b><small>онлайн " + rub(online(ck.p)) + "</small></div>" + addBtn(CK2CX[cat.checkup]) + "</div></div>" : "";
     var items = cat.items.filter(function (c) { return (!state.filters.own || A[c].own) && (!state.filters.oneday || A[c].days === 1); });
     items.sort(function (a, b) { return state.sort === "cheap" ? A[a].p - A[b].p : A[a].pop - A[b].pop; });
-    $("#c-rows").innerHTML = items.length ? items.map(row).join("") : '<div class="empty">' + (cat.items.length ? "Под выбранные фильтры ничего не подошло. Снимите фильтр." : "В прототипе этот раздел пустой: на сайте он собирается из каталога МИС по тому же шаблону.") + "</div>";
+    $("#c-rows").innerHTML = items.length ? items.map(row).join("") : '<div class="empty">' + (cat.items.length ? "Под выбранные фильтры ничего не подошло. Снимите фильтр." : "В прототипе этот раздел пустой: на рабочем сайте он заполнится из каталога лаборатории по тому же шаблону.") + "</div>";
   }
   function plural(n, f) { var m = n % 10, h = n % 100; return n + " " + (m === 1 && h !== 11 ? f[0] : m >= 2 && m <= 4 && (h < 12 || h > 14) ? f[1] : f[2]); }
   function nAn(n) { return plural(n, ["анализ", "анализа", "анализов"]); }
-  if (matchMedia("(max-width: 520px)").matches) { $("#q-home").placeholder = "Ферритин, витамин D…"; $("#d-q").placeholder = "Код МИС или название"; }
+  if (matchMedia("(max-width: 520px)").matches) { $("#q-home").placeholder = "Ферритин, витамин D…"; $("#d-q").placeholder = "Название или код"; }
   function renderCard() {
     var code = state.code, a = A[code]; if (!a) return;
     var cat = CATS.filter(function (c) { return c.items.indexOf(code) >= 0; })[0] || CATS[0];
@@ -1910,18 +2099,20 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var hay = norm(it.c + " " + it.n + " " + (it.m || "") + " " + (it.parts || []).join(" "));
     return docQ.split(" ").every(function (w) { return hay.indexOf(w) >= 0; });
   }
-  function prepBtn(k) { return '<button class="prep" type="button" data-prep="' + esc(k) + '" aria-label="Подготовка ' + esc(k) + ": " + esc(DOC.prep[k]) + '">' + esc(k) + "</button>"; }
+  var PREPL = { "Н12": "Натощак 12 часов", "Н8": "Натощак 8 часов", "Е3": "2–3 часа без еды", "Г": "Гормоны", "К": "Без особой подготовки", "ПСА": "Для ПСА", "М": "Анализ мочи", "О": "Общие правила" };
+  function prepList(k) { return "<ul>" + DOC.prep[k].replace(/^Общие правила: /, "").split(/\.\s+/).map(function (x) { x = x.replace(/\.$/, ""); return x ? "<li>" + esc(x.charAt(0).toUpperCase() + x.slice(1)) + "</li>" : ""; }).join("") + "</ul>"; }
+  function prepBtn(k) { return '<button class="prep" type="button" data-prep="' + esc(k) + '" aria-label="Подготовка: ' + esc(PREPL[k]) + '. ' + esc(DOC.prep[k]) + '">' + esc(PREPL[k]) + "</button>"; }
   function docRow(it) {
     var name = A[it.c] ? '<a href="#card-' + esc(it.c) + '" data-go="card:' + esc(it.c) + '">' + esc(it.n) + "</a>" : "<b>" + esc(it.n) + "</b>";
     var parts = it.parts && it.parts.length ? '<details class="parts"><summary>Состав: ' + nAn(it.parts.length) + "</summary><ul>" + it.parts.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></details>" : "";
-    return '<tr><td class="c-code num">' + esc(it.c) + '</td><td class="c-name">' + name + (it.m ? "<small>В МИС: " + esc(it.m) + "</small>" : "") + parts + '</td><td class="c-mat">' + esc(it.mat) + '</td><td class="c-ready">' + esc(it.r || "срок не указан") + '</td><td class="c-prep">' + prepBtn(it.p) + (it.pn ? "<small>" + esc(it.pn) + "</small>" : "") + "</td></tr>";
+    return '<tr><td class="c-name">' + name + '<span class="code num">Код ' + esc(it.c) + "</span>" + (it.m ? "<small>Полное название: " + esc(it.m) + "</small>" : "") + parts + '</td><td class="c-mat">' + esc(it.mat) + '</td><td class="c-ready">' + esc(it.r || "срок не указан") + '</td><td class="c-prep">' + prepBtn(it.p) + (it.pn ? "<small>" + esc(it.pn) + "</small>" : "") + "</td></tr>";
   }
   function renderDocRows() {
     var chips = [["all", "Все", DCOUNT]].concat(DOC.sections.map(function (s) { return [s.id, s.n, s.items.length]; }), [["cx", "Комплексы", DCOUNT - DOC.sections.reduce(function (t, s) { return t + s.items.length; }, 0)]]);
     $("#d-chips").innerHTML = chips.map(function (c) { return '<button class="chip" type="button" data-dsec="' + c[0] + '" aria-pressed="' + (!docQ && docSec === c[0]) + '">' + esc(c[1]) + ' <span class="n">' + c[2] + "</span></button>"; }).join("");
     var n = 0, html = DGROUPS.filter(function (g) { return docQ || docSec === "all" || g.id === docSec; }).map(function (g) {
       var items = docQ ? g.items.filter(docMatch) : g.items; n += items.length;
-      return items.length ? '<tbody><tr class="grp"><th colspan="5" scope="colgroup">' + esc(g.n) + (g.sub ? "<small>" + esc(g.sub) + "</small>" : "") + "</th></tr>" + items.map(docRow).join("") + "</tbody>" : "";
+      return items.length ? '<tbody><tr class="grp"><th colspan="4" scope="colgroup">' + esc(g.n) + (g.sub ? "<small>" + esc(g.sub) + "</small>" : "") + "</th></tr>" + items.map(docRow).join("") + "</tbody>" : "";
     }).join("");
     var tab = $("#d-tab"), old = $("#d-cat .dempty");
     $$("tbody", tab).forEach(function (el) { el.remove(); });
@@ -1932,12 +2123,12 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     $("#d-stat").innerHTML = docQ ? "<span>Найдено: " + n + '</span><button class="linkbtn" type="button" data-dclear>Сбросить поиск</button>' : "<span>" + plural(n, ["исследование", "исследования", "исследований"]) + "</span>";
   }
   function renderDoctors() {
-    if (!$("#d-legend").innerHTML) $("#d-legend").innerHTML = Object.keys(DOC.prep).map(function (k) { return '<div><dt><span class="prep-k">' + esc(k) + "</span></dt><dd>" + esc(DOC.prep[k]) + "</dd></div>"; }).join("");
+    if (!$("#d-legend").innerHTML) $("#d-legend").innerHTML = Object.keys(DOC.prep).map(function (k) { return '<div class="lg"><b>' + esc(PREPL[k]) + "</b>" + prepList(k) + "</div>"; }).join("");
     renderDocRows();
   }
   var tip = $("#d-tip"), tipPinned = null;
   function showTip(b) {
-    tip.textContent = DOC.prep[b.dataset.prep]; tip.hidden = false;
+    tip.innerHTML = "<b>" + esc(PREPL[b.dataset.prep]) + "</b>" + prepList(b.dataset.prep); tip.hidden = false;
     var r = b.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
     var top = r.bottom + 8; if (top + h > innerHeight - 8 - $(".tabbar").offsetHeight) top = r.top - h - 8;
     tip.style.left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, document.documentElement.clientWidth - w - 8)) + "px"; tip.style.top = top + "px";
@@ -1960,7 +2151,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   var res = { step: "phone", phone: "", pdf: {} };
   var DPREP = {}; DOC.sections.forEach(function (s) { s.items.forEach(function (it) { DPREP[it.c] = it.p; }); });
   state.pt = 0; // выбранный пункт — общий для карточки, корзины и записи
-  function demo(t) { return '<p class="demo">' + icon("i-info") + "<span><b>Демо: подключим к МИС.</b> " + typo(t) + "</span></p>"; }
+  function demo(t) { return '<p class="demo">' + icon("i-info") + "<span><b>Это прототип.</b> " + typo(t) + "</span></p>"; }
   function nPos(n) { return plural(n, ["позиция", "позиции", "позиций"]); }
   function ptSelect(id) {
     return '<select id="' + id + '" data-ptsel>' + REGIONS.map(function (r) { return '<optgroup label="' + esc(r.n) + '">' + r.pts.map(function (i) { return '<option value="' + i + '"' + (i === state.pt ? " selected" : "") + ">" + esc(ptName(POINTS[i])) + " · " + ptHours(POINTS[i]) + "</option>"; }).join("") + "</optgroup>"; }).join("") + "</select>";
@@ -1969,21 +2160,24 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   function phoneDigits(v) { var d = v.replace(/\D/g, ""); if (d.length === 11 && (d[0] === "7" || d[0] === "8")) d = d.slice(1); return d; }
   function fmtPhone(d) { return "+7 " + d.slice(0, 3) + " " + d.slice(3, 6) + "-" + d.slice(6, 8) + "-" + d.slice(8); }
 
-  // checkups: every complex of the own lab, grouped as in DOC.complexes
+  // checkups: groups by audience and topic; parts in short names, savings against the same tests bought separately
+  var CXX = {"04.25.015": {"g": "all", "n": "Чек-ап всего организма", "d": "Основные показатели крови, сахар, холестерин, работа печени и почек, щитовидная железа и витамин D — за один визит.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "ТТГ", "Холестерин общий", "АЛТ", "АСТ", "Триглицериды", "Креатинин", "Мочевина", "Общий белок", "Билирубин общий", "ГГТ", "Кальций", "Гликированный гемоглобин", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Тиреотропный гормон (ТТГ)", "Холестерин общий", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)", "Триглицериды", "Креатинин в крови", "Мочевина в крови", "Общий белок в крови", "Билирубин общий", "Гамма-глютамилтранспептидаза (ГГТ)", "Кальций в крови", "Гликированный гемоглобин (HbA1c)", "Гомоцистеин"], "sum": 5380}, "04.25.005": {"g": "kids", "n": "Чек-ап для детей и подростков", "d": "Общий анализ крови, железо и витамин D, сахар и показатели работы печени — для ребёнка или подростка.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "Ферритин", "Гликированный гемоглобин", "Глюкоза", "ГГТ", "Билирубин общий", "Билирубин прямой", "Билирубин непрямой", "Общий белок", "Кальций"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Ферритин", "Гликированный гемоглобин (HbA1c)", "Глюкоза в крови", "Гамма-глютамилтранспептидаза (ГГТ)", "Билирубин общий", "Билирубин прямой (связанный)", "Билирубин непрямой (свободный)", "Общий белок в крови", "Кальций в крови"], "sum": 3820}, "04.25.011": {"g": "women", "n": "Женские гормоны: основной набор", "d": "Эстрадиол, прогестерон, ФСГ, ЛГ, пролактин и ТТГ. Сдают в день цикла, который назвал врач.", "parts": ["Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ"], "full": ["Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)"], "sum": 2140}, "04.25.010": {"g": "women", "n": "Женские гормоны: расширенный набор", "d": "Всё из основного набора, а также тестостерон, ДГЭА-С, ГСПГ и общий анализ крови. Сдают в день цикла, который назвал врач.", "parts": ["Общий анализ крови", "Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ", "ГСПГ", "ДГЭА-С", "Тестостерон общий"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)", "Глобулин, связывающий половые гормоны (ГСПГ)", "ДГЭА-С", "Тестостерон общий"], "sum": 3805}, "04.25.012": {"g": "men", "n": "Мужские гормоны", "d": "Тестостерон, эстрадиол, ГСПГ, пролактин, прогестерон и общий анализ крови.", "parts": ["Общий анализ крови", "Тестостерон общий", "Эстрадиол", "ГСПГ", "Пролактин", "Прогестерон"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тестостерон общий", "Эстрадиол (Е2)", "Глобулин, связывающий половые гормоны (ГСПГ)", "Пролактин", "Прогестерон"], "sum": 2325}, "04.25.002": {"g": "blood", "n": "Анемия: основной набор", "d": "Гемоглобин и показатели обмена железа: ферритин, железо, трансферрин.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "Трансферрин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Трансферрин"], "sum": 1485}, "04.25.001": {"g": "blood", "n": "Анемия: расширенный набор", "d": "Всё из основного набора, а также витамины B12 и D, фолиевая кислота и ОЖСС.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "ОЖСС", "Трансферрин", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe", "Трансферрин", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 4385}, "04.25.016": {"g": "blood", "n": "Витамины B12, D и фолиевая кислота", "d": "Витамины B12 и D, фолиевая кислота и общий анализ крови.", "parts": ["Общий анализ крови", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 3070}, "04.25.007": {"g": "sugar", "n": "Сахар и инсулин", "d": "Глюкоза и гликированный гемоглобин показывают уровень сахара сейчас и за последние месяцы, инсулин и С-пептид — как вырабатывается инсулин.", "parts": ["Общий анализ крови", "Гликированный гемоглобин", "Инсулин", "С-пептид", "Глюкоза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Гликированный гемоглобин (HbA1c)", "Инсулин", "С-пептид", "Глюкоза в крови"], "sum": 2165}, "00-014": {"g": "heart", "n": "Холестерин: основной профиль", "d": "Общий холестерин, его фракции ЛПВП и ЛПНП и триглицериды.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "sum": null}, "00-099.1": {"g": "heart", "n": "Холестерин: развёрнутый профиль", "d": "Всё из основного профиля и индекс атерогенности.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "sum": null}, "04.25.008": {"g": "heart", "n": "Сердце и сосуды: расширенный набор", "d": "Липидный профиль, свёртываемость крови, гомоцистеин и ферменты — набор, по которому врач оценивает риск болезней сердца и сосудов.", "parts": ["Общий анализ крови", "Липидный профиль", "ЛДГ", "АСТ", "Коагулограмма", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Липидный профиль развёрнутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)", "Лактатдегидрогеназа (ЛДГ)", "Аспартатаминотрансфераза (АСТ)", "Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)", "Гомоцистеин"], "sum": 3730}, "04.25.004": {"g": "thyroid", "n": "Щитовидная железа: основной набор", "d": "ТТГ и свободные гормоны Т3 и Т4.", "parts": ["ТТГ", "Т3 свободный", "Т4 свободный"], "full": ["Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)"], "sum": 1030}, "04.25.003": {"g": "thyroid", "n": "Щитовидная железа: расширенный набор", "d": "Всё из основного набора, а также антитела к ТПО и общий анализ крови.", "parts": ["Общий анализ крови", "ТТГ", "Т3 свободный", "Т4 свободный", "Антитела к ТПО"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)", "АТ к тиреоидной пероксидазе (анти-ТПО)"], "sum": 1940}, "04.25.009": {"g": "kidney", "n": "Почки", "d": "Креатинин и мочевина показывают, как почки выводят продукты обмена; в наборе также электролиты и щелочная фосфатаза.", "parts": ["Общий анализ крови", "Мочевина", "Креатинин", "Калий, натрий, хлор", "Щелочная фосфатаза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Мочевина в крови", "Креатинин в крови", "Калий, натрий, хлориды (K/Na/Cl)", "Щелочная фосфатаза"], "sum": 1180}, "04.25.006": {"g": "joints", "n": "Суставы и воспаление", "d": "Ревматоидный фактор, СРБ, АСЛО и мочевая кислота — анализы, которые врач назначает при болях и воспалении в суставах.", "parts": ["Общий анализ крови", "Ревматоидный фактор", "Мочевая кислота", "СРБ", "АСЛО", "АЛТ", "АСТ"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Ревматоидный фактор", "Мочевая кислота в крови", "С-реактивный белок (СРБ)", "Антистрептолизин-О (АСЛО)", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)"], "sum": 2100}, "04.25.013": {"g": "onco", "n": "Онкомаркеры для женщин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "РЭА", "АФП", "CA 15-3", "CA 19-9", "CA 72-4", "CA 125"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Раково-эмбриональный антиген (РЭА)", "Альфа-фетопротеин (АФП)", "CA 15-3", "СА 19-9", "СА 72-4", "Раковый антиген 125 (CA 125)"], "sum": 4235}, "04.25.014": {"g": "onco", "n": "Онкомаркеры для мужчин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "АФП", "ПСА общий и свободный", "РЭА", "CA 19-9", "CA 72-4"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Альфа-фетопротеин (АФП)", "Простатический специфический антиген (ПСА), соотношение своб./общ.", "Раково-эмбриональный антиген (РЭА)", "СА 19-9", "СА 72-4"], "sum": 3595}, "00-094": {"g": "hosp", "n": "Госпитальный скрининг", "d": "ВИЧ, гепатиты B и C, сифилис — анализы, которые обычно просят перед плановой госпитализацией.", "parts": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "full": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "sum": null}};
+  var CXG = [{"id": "all", "n": "Для всех", "c": ["04.25.015"]}, {"id": "kids", "n": "Детям", "c": ["04.25.005"]}, {"id": "women", "n": "Женщинам", "c": ["04.25.011", "04.25.010"]}, {"id": "men", "n": "Мужчинам", "c": ["04.25.012"]}, {"id": "blood", "n": "Кровь, железо и витамины", "c": ["04.25.002", "04.25.001", "04.25.016"]}, {"id": "sugar", "n": "Сахар", "c": ["04.25.007"]}, {"id": "heart", "n": "Сердце и сосуды", "c": ["00-014", "00-099.1", "04.25.008"]}, {"id": "thyroid", "n": "Щитовидная железа", "c": ["04.25.004", "04.25.003"]}, {"id": "kidney", "n": "Почки", "c": ["04.25.009"]}, {"id": "joints", "n": "Суставы", "c": ["04.25.006"]}, {"id": "onco", "n": "Онкомаркеры", "c": ["04.25.013", "04.25.014"]}, {"id": "hosp", "n": "Перед госпитализацией", "c": ["00-094"]}];
   function renderCheckups() {
     if ($("#cx-list").innerHTML) return; // static content; cart buttons are kept in sync by syncCart()
-    $("#cx-nav").innerHTML = DOC.complexes.map(function (g, i) { return g.items[0].c === "00-094" ? "" : '<button class="chip" type="button" data-cxg="' + i + '">' + esc(g.n) + ' <span class="n">' + g.items.length + "</span></button>"; }).join("");
-    $("#cx-list").innerHTML = DOC.complexes.map(function (g, i) {
-      if (g.items[0].c === "00-094") return '<section class="cx-grp cx-small" id="cxg-' + i + '"><h2>' + esc(g.n) + "</h2>" + g.items.map(function (it) { var x = CX[it.c]; return '<div class="cx-mini"><div><b>' + esc(x.n) + '</b><p class="cx-code num">Код МИС ' + esc(x.c) + " · " + (x.r ? typo("готово через " + x.r) : "срок — по телефону") + " · подготовка " + esc(x.prep) + '</p></div><b class="num">' + rub(x.p) + "</b>" + buyBtn(x.c) + "</div>"; }).join("") + "</section>";
-      return '<section class="cx-grp" id="cxg-' + i + '"><h2>' + esc(g.n) + "</h2><div>" + g.items.map(function (it) { return cxRow(CX[it.c]); }).join("") + "</div></section>";
+    $("#cx-nav").innerHTML = CXG.map(function (g) { return '<button class="chip" type="button" data-jump="cxg-' + g.id + '">' + esc(g.n) + "</button>"; }).join("");
+    $("#cx-list").innerHTML = CXG.map(function (g) {
+      return '<section class="cx-grp' + (g.id === "hosp" ? " cx-small" : "") + '" id="cxg-' + g.id + '"><h2>' + esc(g.n) + "</h2>" + g.c.map(cxCard).join("") + "</section>";
     }).join("");
   }
-  function cxRow(x) {
-    var parts = x.parts ? '<details class="parts"><summary>Состав: ' + nAn(x.parts.length) + "</summary><ul>" + x.parts.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></details>" : '<p class="cx-none">Состав — <span class="fill">[уточнить в МИС]</span></p>';
-    return '<article class="cx"><div><h3>' + esc(x.n) + '</h3><p class="cx-code num">Код МИС ' + esc(x.c) + " · " + esc(x.mis) + "</p>" +
-      '<p class="cx-meta"><span>' + icon("i-clock") + (x.r ? typo("Готово через " + x.r) : "Срок — по телефону") + "</span><span>" + icon("i-drop") + "Кровь из вены</span></p>" + parts + "</div>" +
-      '<div class="cx-prep"><p class="cx-lbl">Подготовка</p><p><span class="prep-k">' + esc(x.prep) + "</span>" + esc(DOC.prep[x.prep]) + "</p></div>" +
-      '<div class="cx-buy"><div class="price"><b>' + rub(x.p) + "</b><small>цена в Черкесске, в других пунктах может отличаться</small></div>" + buyBtn(x.c) + "</div></article>";
+  function cxCard(c) {
+    var x = CX[c], e = CXX[c];
+    var parts = '<ul class="cxc-parts">' + e.parts.map(function (p, i) { return "<li" + (e.full[i] !== p ? ' title="' + esc(e.full[i]) + '"' : "") + ">" + esc(p) + "</li>"; }).join("") + "</ul>";
+    var save = e.sum ? '<span class="num">по&nbsp;отдельности&nbsp;— ' + rub(e.sum) + '</span><span class="save num">экономия ' + rub(e.sum - x.p) + "</span>" : "";
+    return '<article class="cxc" id="cx-' + esc(c) + '"><div class="cxc-main"><h3>' + esc(e.n) + '</h3><p class="cxc-desc">' + typo(e.d) + "</p>" + parts + "</div>" +
+      '<div class="cxc-side"><div class="cxc-price"><b class="num">' + rub(x.p) + "</b>" + save + "</div>" +
+      '<p class="cxc-meta">' + nAn(e.parts.length) + " · " + (x.r ? typo("результат через " + x.r) : "срок — по телефону") + "</p>" +
+      '<p class="cxc-prep">' + prepBtn(x.prep) + "</p>" + buyBtn(c) + "</div></article>";
   }
 
   // cart
@@ -2065,7 +2259,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     if (t.pay !== "online") bring.push(home ? "Оплата — при визите медсестры." : "Оплата — в пункте.");
     var ready = t.days === 1 ? "Результат будет готов через 1 день после сдачи. " : t.days ? "Срок — до " + t.days + " дней после сдачи. " : "";
     el.innerHTML = '<div class="okh"><span class="ok-ic">' + icon("i-check") + '</span><div><h1 class="num">Заказ № ' + o.no + '</h1><p class="lede">' + esc(o.name) + ", " + (home ? "медсестра приедет по адресу ниже." : "ждём вас в пункте CLD.") + "</p></div></div>" +
-      demo("Заказ не отправлен в лабораторию и не оплачен. Настоящий номер заказа, оплату и SMS подключим к МИС.") +
+      demo("Заказ не отправлен в лабораторию и не оплачен. На рабочем сайте номер заказа, оплату и SMS подключат к системе лаборатории.") +
       '<div class="cart-g"><div>' +
         '<section class="osec">' + where + "</section>" +
         '<section class="osec"><h2>Как подготовиться</h2>' + prepHtml(t.codes) + "</section>" +
@@ -2093,14 +2287,14 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     $("#bk-sum").hidden = bk.done;
     if (bk.done) {
       $("#bk-body").innerHTML = '<div class="okh"><span class="ok-ic">' + icon("i-check") + '</span><div><h2>Вы записаны</h2><p class="lede">' + esc(a.n) + "<br>" + esc(fullDate(days[bk.day])) + ", " + bk.slot + "<br>" + esc(ptName(p)) + "</p></div></div>" +
-        demo("Запись не отправлена в пункт. Расписание пунктов и подтверждение записи подключим к МИС.") +
+        demo("Запись не отправлена в пункт. На рабочем сайте расписание пунктов и подтверждение записи подключат к системе лаборатории.") +
         '<section class="osec"><h2>Как подготовиться</h2>' + prepHtml([code]) + "</section>" +
         '<section class="osec"><h2>Оплатить заранее</h2><p>' + typo("Добавьте анализ в корзину и оплатите на сайте — скидка 10 %. Или оплатите в пункте.") + '</p><div class="acts" style="margin-top:14px">' + buyBtn(code) + '<button class="btn btn-ghost" type="button" data-bk="reset">Изменить запись</button></div></section>';
       return;
     }
     if (p.open && bk.day < 0) { bk.day = 0; while (bk.day < 6 && !bkSlots(p, bk.day).length) bk.day++; }
     var html = '<section class="bk-s"><h2>Пункт</h2>' + ptSelect("bk-pt") + '<p class="small">' + ptLine(p) + "</p></section>";
-    if (!p.open) html += '<div class="hv"><p>' + typo("В этот пункт запись по телефону 8 800 201 78 30. Там же подскажут часы работы.") + '</p><a class="btn btn-navy" href="tel:88002017830">' + icon("i-phone") + "Позвонить</a></div>";
+    if (!p.open) html += '<div class="hv"><p>' + typo("В этот пункт записывают по телефону 8 800 201 78 30. По тому же номеру можно уточнить часы работы.") + '</p><a class="btn btn-navy" href="tel:88002017830">' + icon("i-phone") + "Позвонить</a></div>";
     else {
       var sl = bkSlots(p, bk.day);
       html += '<section class="bk-s"><h2>День</h2><div class="dates">' + days.map(function (d, i) { return '<button class="chip" type="button" data-day="' + i + '" aria-pressed="' + (i === bk.day) + '">' + (i === 0 ? "Сегодня" : i === 1 ? "Завтра" : d.toLocaleDateString("ru-RU", { weekday: "short" })) + "<small>" + d.toLocaleDateString("ru-RU", { day: "numeric", month: "short" }) + "</small></button>"; }).join("") + "</div></section>" +
@@ -2131,8 +2325,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   }
   function pdfHtml(o) {
     return '<div class="pdfp" role="region" aria-label="Макет бланка результатов"><div class="pdfp-h"><img src="../assets/cld-logo-horizontal-navy.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276"><span class="num">Заказ № ' + o.no + "</span></div>" +
-      '<p><span class="fill">[ФИО и дата рождения пациента]</span></p><p><span class="fill">[таблица из МИС: исследование, результат, единицы, референсный интервал лаборатории]</span></p><p><span class="fill">[подпись врача клинической лабораторной диагностики, дата выдачи]</span></p></div>' +
-      demo("Здесь скачается PDF-бланк из МИС. Сейчас файл не скачивается — показан макет бланка.");
+      '<p><span class="fill">[ФИО и дата рождения пациента]</span></p><p><span class="fill">[таблица результата: исследование, результат, единицы, референсный интервал лаборатории]</span></p><p><span class="fill">[подпись врача клинической лабораторной диагностики, дата выдачи]</span></p></div>' +
+      demo("Здесь скачается PDF-бланк результата. Сейчас файл не скачивается — показан макет бланка.");
   }
   function ordHtml(o) {
     var st = ST[o.st], body;
@@ -2145,7 +2339,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var el = $("#res-body");
     if (res.step === "phone") el.innerHTML = '<form class="auth" data-form="r-phone" novalidate><h2>Вход по номеру телефона</h2><p>' + typo("Введите номер, который указывали при заказе. Пришлём код в SMS.") + '</p><label class="fld"><span>Телефон</span><input id="r-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value="' + esc(res.phone) + '"></label><p class="err" id="r-err" hidden></p><button class="btn btn-lime" type="submit">Получить код</button>' + demo("SMS не отправляется: на следующем шаге подойдёт любой код из 4 цифр.") + "</form>";
     else if (res.step === "code") el.innerHTML = '<form class="auth" data-form="r-code" novalidate><h2>Код из SMS</h2><p>Отправили код на номер <b class="num">' + esc(res.phone) + '</b>.</p><label class="fld"><span>Код из SMS</span><input id="r-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="4" placeholder="0000"></label><p class="err" id="r-err" hidden></p><button class="btn btn-lime" type="submit">Войти</button><button class="linkbtn" type="button" data-res="edit">Изменить номер</button>' + demo("SMS не отправляется. Подойдёт любой код из 4 цифр, например 1234.") + "</form>";
-    else el.innerHTML = '<div class="res-top"><p>Вы вошли по номеру <b class="num">' + esc(res.phone) + '</b></p><button class="linkbtn" type="button" data-res="out">Выйти</button></div><div class="ords">' + demoOrders().map(ordHtml).join("") + "</div>" + demo("Заказы на этой странице — примеры. Настоящие заказы и бланки результатов подключим к МИС.");
+    else el.innerHTML = '<div class="res-top"><p>Вы вошли по номеру <b class="num">' + esc(res.phone) + '</b></p><button class="linkbtn" type="button" data-res="out">Выйти</button></div><div class="ords">' + demoOrders().map(ordHtml).join("") + "</div>" + demo("Заказы на этой странице — примеры. На рабочем сайте заказы и бланки результатов подключат к системе лаборатории.");
   }
 
   document.addEventListener("submit", function (e) {
@@ -2178,7 +2372,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       if (co.mode === "home") { co.addr = $("#c-addr").value.trim(); $("#c-addr-err").hidden = !!co.addr; if (!co.addr) { $("#c-addr").focus(); return true; } }
       go("checkout"); return true;
     }
-    if ((x = t.closest("[data-cxg]"))) { $("#cxg-" + x.dataset.cxg).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); return true; }
+    if ((x = t.closest("[data-jump]"))) { e.preventDefault(); var to = document.getElementById(x.dataset.jump); if (to) to.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); return true; }
     if ((x = t.closest("[data-day]"))) { bk.day = +x.dataset.day; bk.slot = ""; renderBook(); return true; }
     if ((x = t.closest("[data-slot]"))) { bk.slot = x.dataset.slot; $$("[data-slot]").forEach(function (b) { b.setAttribute("aria-pressed", b === x ? "true" : "false"); }); renderBookSum(); return true; }
     if ((x = t.closest("[data-bk]"))) { if (x.dataset.bk === "ok") bk.done = true; else bk = { day: -1, slot: "", done: false }; renderBook(); window.scrollTo(0, 0); return true; }
@@ -2232,7 +2426,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       ["h2", "Разделы по аудиториям", "Шесть пунктов меню: анализы, чек-апы, на дому, пункты, врачам, клиникам. Каждый раздел назван одинаково везде на сайте."],
       ["home1", "Первый экран — про главное", "Заголовок, над поиском — бесплатный выезд медсестры при заказе от 1 500 ₽. Большой поиск с кнопкой «Найти» и три частых анализа сразу с ценами. Справа живое фото в фирменной рамке и два факта. Слово «сегодня» включаем, когда лаборатория утвердит список ЦИТО; до этого — «за 1 день»."],
       ["home2", "Поиск понимает опечатки", "Попробуйте «витамн д», «ферретин», «сахар», «щитовидка», «оак». На нынешнем сайте «витамн д» и «ферретин» дают 0 результатов, а по «оак» первым выходит анализ «вредные привычки»."],
-      ["home3", "Пункт и часы — одной строкой", "Ближайший пункт и «открыто до 19:00» — по часам из МИС. Полный список пунктов — по ссылке, первый экран не перегружаем."],
+      ["home3", "Пункт и часы — одной строкой", "Ближайший пункт и «открыто до 19:00» — по часам из каталога пунктов. Полный список пунктов — по ссылке, первый экран не перегружаем."],
       ["promos", "Акции сразу под первым экраном", "Три акции без слайдера: крупно цена, срок и условия. Слайдеры почти не нажимают, поэтому всё видно сразу. Сейчас это примеры — акции утверждает лаборатория."],
       ["home4", "Один выбор за раз", "Переключатель «по органам / по поводу» показывает что-то одно. Семь самых частых разделов крупными плитками и плитка «Все разделы» — глаза не разбегаются."],
       ["home4", "Пиктограммы по фирменной сетке", "Иконки нарисованы клетками, как паттерн из брендбука, и строятся кодом: чёткие на любом экране и весят доли килобайта. Сейчас на сайте PNG-иконки по 244–440 КБ."],
@@ -2240,12 +2434,12 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       ["home6", "Строки вместо одинаковых карточек", "В строке сразу видно, что анализ покажет, срок, биоматериал, чья лаборатория и цена с онлайн-скидкой. Добавить в корзину — одной кнопкой."],
       ["home7", "Как сдать — три шага", "Спокойная лаймовая панель, как в варианте 3: номер шага, заголовок, одна-две строки. Во втором шаге — выезд медсестры бесплатно при заказе от 1 500 ₽."],
       ["home8", "Почему CLD", "Четыре проверяемых преимущества с иконками. Цифры вроде «500 000 довольных пациентов» без источника не используем."],
-      ["home9", "Вход для врачей", "Сюда медпред ведёт врача: каталог собственной лаборатории с кодами МИС, сроками и подготовкой, PDF-версия для печати."]
+      ["home9", "Вход для врачей", "Сюда медпред ведёт врача: каталог собственной лаборатории с кодами, сроками и подготовкой, бланк направления и памятки для пациентов."]
     ],
     catalog: [
       ["cat1", "Две навигации рядом", "Переключатель «по органам / по ситуации» и список разделов. На телефоне разделы становятся лентой сверху."],
       ["cat2", "Раздел объясняет себя", "Название словами пациента и одно-два предложения: что покажут эти анализы и когда их сдают."],
-      ["cat3", "Фильтры, которые нужны пациенту", "«Собственная лаборатория» и «Готово за 1 день». Плашки «Сегодня» и «ЦИТО» появятся, когда в МИС заполнят поля срочности."],
+      ["cat3", "Фильтры, которые нужны пациенту", "«Собственная лаборатория» и «Готово за 1 день». Плашки «Сегодня» и «ЦИТО» появятся, когда в каталоге лаборатории заполнят поля срочности."],
       ["cat4", "Чек-ап раздела — первым", "Готовый набор с составом, сроком и ценой. Выгоду показываем, только если она честно считается от цен каталога."],
       ["cat5", "Строка анализа", "Название, что покажет, срок, биоматериал, собственная или партнёрская лаборатория, цена и цена онлайн. Партнёр не называется по имени."]
     ],
@@ -2259,27 +2453,27 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       ["card7", "Кнопка всегда под рукой", "На телефоне цена и кнопка «В корзину» закреплены внизу экрана. Сейчас они на 1,7 экрана ниже начала карточки."]
     ],
     points: [
-      ["pts1", "Все пункты из МИС", "29 пунктов в 9 регионах с адресами, координатами и часами. Где часов в МИС нет, пишем «часы — по телефону». Фильтр по региону сужает и список, и карту."],
+      ["pts1", "Все 29 пунктов", "29 пунктов в 9 регионах с адресами, координатами и часами. Где часы не указаны, пишем «часы — по телефону». Фильтр по региону сужает и список, и карту."],
       ["pts2", "Список связан с картой", "Нажмите на пункт — карта покажет его и откроет адрес с кнопкой «Маршрут» в Яндекс Картах. Нажмите на точку — пункт подсветится в списке. Статус «открыто до…» считается по времени региона пункта."],
       ["pts3", "Карта без тяжёлых виджетов", "Свободная карта Leaflet на светлой подложке и фирменные маркеры. Скрипт карты грузится, только когда открыта эта страница. Повторное нажатие на регион снимает фильтр."]
     ],
     doctors: [
-      ["doc1", "Первый экран для врача", "Что выполняет собственная лаборатория и где скачать PDF-каталог. Цен нет: они различаются по пунктам и есть в карточках анализов."],
-      ["doc2", "Код МИС и подготовка", "Поиск по коду и названию, разделы как в печатном каталоге. Подготовка — коротким кодом: расшифровка по наведению или нажатию и в легенде под таблицей. На телефоне таблица превращается в карточки."],
+      ["doc1", "Задачи врача, а не прайс", "Первый экран ведёт к тому, что нужно врачу и чего нет у пациента: бланк направления, каталог с биоматериалом и подготовкой, памятки для печати, сотрудничество для клиник."],
+      ["doc2", "Подготовка словами", "Поиск по названию и коду, разделы как в печатном каталоге. Код — мелко под названием. Подготовка — словами («Натощак 8 часов»), правила целиком — списком по наведению или нажатию и в блоке под таблицей."],
       ["doc3", "Клиникам — без форм", "Условия сотрудничества — у медицинского представителя по телефону. Врачу лично ничего не обещаем: так требует 323-ФЗ."]
     ],
     checkups: [
-      ["cx1", "Все комплексы собственной лаборатории", "22 набора из МИС, сгруппированы как в каталоге для врачей. У каждого — понятное название и код МИС мелко, состав раскрывается, срок, подготовка кодом и расшифровкой, точная цена Черкесска. Госпитальный скрининг — в конце мелко."]
+      ["cx1", "Зачем чек-ап", "Первый экран объясняет пользу тому, кто чек-ап не планировал: один визит, одна подготовка и экономия против тех же анализов по отдельности (посчитано по ценам Черкесска). Ниже — быстрая навигация по темам и «С чего начать». Три набора без известного состава скрыты до уточнения у лаборатории."]
     ],
     cart: [
       ["cart1", "Полный итог до оформления", "Позиции с ценами и отдельной строкой «Взятие крови — 200 ₽». Скидка 10 % считается только на анализы. Для выезда медсестры видно, сколько не хватает до бесплатного выезда от 1 500 ₽."],
-      ["cart2", "В пункте или дома", "Пункт выбирается из всех 29, по регионам. Дома — адрес и честная фраза: работает ли выезд в населённом пункте, уточните по телефону. Заказ не отправляется — это демо до подключения МИС."]
+      ["cart2", "В пункте или дома", "Пункт выбирается из всех 29, по регионам. Дома — адрес и честная фраза: работает ли выезд в населённом пункте, уточните по телефону. Заказ не отправляется: это прототип."]
     ],
     results: [
       ["res1", "Вход по телефону и коду из SMS", "Без логина и пароля. В демо подходит любой код из 4 цифр. На экране нет чисел и оценок «норма / не норма»: бланк в PDF и подсказка обсудить результат с врачом."]
     ],
     referral: [
-      ["rf1", "Бланк для печати A5", "Врач отмечает анализы галочками, коды — по МИС. Кнопка «Распечатать» печатает только бланк. Код врача — заглушка, пока лаборатория не утвердит формат."]
+      ["rf1", "Бланк для печати A5", "Врач отмечает анализы галочками, коды — из каталога лаборатории. Кнопка «Распечатать» печатает только бланк. Код врача — заглушка, пока лаборатория не утвердит формат."]
     ]
   };
   var notesOn = false;
