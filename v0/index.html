@@ -143,7 +143,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* analysis rows */
 .rows { display: grid; border-top: 1px solid var(--line); }
 .arow { display: grid; grid-template-columns: minmax(0, 1fr) 210px 200px; gap: 8px 28px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--line); }
-.arow .a-name { font-weight: 700; font-size: 17.5px; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.arow .a-name { font-weight: 700; font-size: 20px; line-height: 1.3; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
 .arow .a-name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .arow .a-desc { font-size: 14.5px; color: var(--muted); margin-top: 3px; }
 .arow .a-meta { display: grid; gap: 3px; font-size: 14px; color: var(--muted); }
@@ -992,6 +992,19 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   .rcpt { padding: 20px 18px 18px; }
 }
 
+/* cart: one blood draw, several results */
+.samedraw { margin-top: 28px; padding: 26px 26px 10px; border-radius: var(--r-card); background: var(--lime-soft); }
+.sd-top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
+.sd-eq { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 17px; white-space: nowrap; }
+.sd-eq .ico { width: 26px; height: 26px; padding: 9px; box-sizing: content-box; border-radius: 50%; background: var(--navy); color: #FFF; }
+.sd-eq b { font-size: 30px; line-height: 1; }
+.sd-top h2 { font-size: 22px; line-height: 1.2; }
+.sd-top p { font-size: 16px; color: var(--ink); margin-top: 6px; }
+.sd-sub { font-weight: 800; font-size: 16px; margin: 22px 0 4px; }
+.samedraw .citem { padding: 14px 0; border-bottom: 0; border-top: 1px solid #D9E2B4; }
+.samedraw .citem small { font-size: 14px; }
+@media (max-width: 520px) { .samedraw { padding: 20px 16px 6px; } .sd-top { grid-template-columns: 1fr; gap: 12px; } }
+
 /* readability floor: running text >= 16px (Varvara, 26.10.2026) */
 .rc-h span, .rc-l li, .rc-more summary, .rc-t, .rc-save, .cxc-ref, .cxc-meta, .cxc-draw, .cx-foot p, .cxc-price span,
 .hv-card p, .dstat, .parts summary, .parts ul, .c-ready, .c-mat, .dtab td, .crumbs, .crumbs button { font-size: 16px; }
@@ -1407,6 +1420,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       <div class="cart-g" id="cart-full">
         <div>
           <div class="citems" id="cart-items"></div>
+          <section class="samedraw" id="cart-more" aria-labelledby="sd-h" hidden></section>
           <div class="copts" data-note="cart2">
             <section>
               <h2>Где сдать</h2>
@@ -2293,6 +2307,23 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       (t.mode === "home" ? "<div><span>Выезд медсестры</span><span>" + (t.left ? "по телефону" : "бесплатно") + "</span></div>" : "") +
       '<div class="tot"><span>Итого' + (t.mode === "home" && t.left ? "<small>без стоимости выезда</small>" : "") + '</span><span class="num">' + rub(t.total) + "</span></div></div>";
   }
+  // analyses of a cart checkup, by name (checkup parts are names, not codes)
+  function cxParts(c) { var p = (CXX[c] && CXX[c].parts) || (CX[c] && CX[c].parts); return Array.isArray(p) ? p : []; }
+  function bloodN(codes) {
+    return codes.reduce(function (n, c) { var x = item(c); if (!x.blood) return n; var p = cxParts(c).filter(function (s) { return !/моч/i.test(s); }); return n + (p.length || 1); }, 0);
+  }
+  // blood analyses that can go into the same draw: same sections as the cart first, then the most ordered
+  function sameDraw(codes) {
+    var inCx = {}, cats = CATS.filter(function (k) { return codes.some(function (c) { return k.items.indexOf(c) >= 0; }); });
+    codes.forEach(function (c) { cxParts(c).forEach(function (s) { inCx[norm(s)] = 1; }); });
+    function near(c) { return cats.some(function (k) { return k.items.indexOf(c) >= 0; }) ? 1 : 0; }
+    var taken = codes.map(function (c) { return norm(item(c).n); }), out = [];
+    function twin(n) { return taken.some(function (t) { return n.indexOf(t) === 0 || t.indexOf(n) === 0; }); }
+    Object.keys(A).filter(function (c) { return !cart[c] && A[c].bio.indexOf("Кровь") === 0 && !inCx[norm(A[c].n)]; })
+      .sort(function (a, b) { return near(b) - near(a) || A[a].pop - A[b].pop; })
+      .forEach(function (c) { var n = norm(A[c].n); if (out.length < 4 && !twin(n)) { out.push(c); taken.push(n); } });
+    return out;
+  }
   function renderCart() {
     var n = cartCount();
     $("#cart-empty").hidden = !!n; $("#cart-full").hidden = !n;
@@ -2302,6 +2333,14 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       var x = item(c);
       return '<div class="citem"><div><button class="c-n" type="button" data-go="' + x.go + '">' + esc(x.n) + "</button><small>" + (CX[c] ? "Комплекс · " : "") + "код " + esc(c) + " · " + (x.days ? typo(daysLabel(x.days).toLowerCase()) : "срок — по телефону") + '</small></div><span class="c-p num">' + rub(x.p) + '</span><button class="rm" type="button" data-rm="' + esc(c) + '" aria-label="Убрать: ' + esc(x.n) + '">' + icon("i-x") + "</button></div>";
     }).join("") + (t.draw ? '<div class="citem"><div><span class="c-n">Взятие крови из вены</span><small>Оплачивается отдельно, один раз на заказ</small></div><span class="c-p num">' + rub(BLOOD_DRAW) + "</span><span></span></div>" : "");
+    var more = t.draw ? sameDraw(t.codes) : [], box = $("#cart-more");
+    box.hidden = !more.length;
+    if (more.length) box.innerHTML = '<div class="sd-top"><span class="sd-eq" aria-hidden="true">' + icon("i-drop") + '<b class="num">1</b>→<b class="num">' + bloodN(t.codes) + "</b></span>" +
+      '<div><h2 id="sd-h">' + typo("Одно взятие крови — " + nAn(bloodN(t.codes))) + "</h2><p>" + typo("Кровь берут один раз на весь заказ. Анализы ниже делают из той же процедуры, доплачивать за взятие крови не нужно.") + "</p></div></div>" +
+      '<p class="sd-sub">Добавить к этому визиту</p>' + more.map(function (c) {
+        var a = A[c];
+        return '<div class="citem"><div><button class="c-n" type="button" data-go="card:' + c + '">' + esc(a.n) + "</button><small>" + typo(daysLabel(a.days).toLowerCase()) + '</small></div><span class="c-p num">' + rub(a.p) + "</span>" + addBtn(c) + "</div>";
+      }).join("");
     $("#cart-pt").innerHTML = ptSelect("c-pt");
     $$("[data-mode]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.mode === co.mode ? "true" : "false"); });
     $("#mode-point").hidden = co.mode !== "point"; $("#mode-home").hidden = co.mode !== "home";
