@@ -29,7 +29,8 @@ img, svg { display: block; max-width: 100%; }
 img { height: auto; }
 a { color: inherit; text-underline-offset: 3px; }
 button { font: inherit; color: inherit; }
-:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; border-radius: 6px; }
+.dhero :focus-visible, .hv-card :focus-visible, footer :focus-visible, .tabbar :focus-visible, .util :focus-visible { outline-color: var(--lime); }
 h1, h2, h3 { margin: 0; line-height: 1.15; text-wrap: balance; font-family: var(--display); font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0; }
 .num { font-variant-numeric: tabular-nums; }
@@ -384,7 +385,7 @@ footer.foot .wrap { display: block; padding-block: 52px 28px; }
 .f-brand a { color: #FFF; }
 .f-phone { font-size: 24px; font-weight: 800; text-decoration: none; }
 .f-col { display: grid; gap: 2px; align-content: start; }
-.f-col h4 { color: #FFF; font-size: 16px; margin-bottom: 8px; }
+.f-col .f-h { color: #FFF; font: 700 16px/1.3 var(--display); margin-bottom: 8px; }
 .f-col a { color: var(--on-navy-muted); text-decoration: none; padding: 6px 0; font-size: 15px; }
 .f-col a:hover, .f-brand a:hover { color: #FFF; text-decoration: underline; text-underline-offset: 3px; }
 .f-legal { margin: 22px 0 18px; font-size: 13.5px; }
@@ -496,7 +497,8 @@ a.hp-chip:hover { transform: translateY(-2px); }
 .pts-grp h2 span { font: 600 14px var(--text); color: var(--muted); }
 .pt { display: grid; gap: 1px; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--line); padding: 12px 12px 13px; cursor: pointer; transition: background .2s var(--ease); }
 .pt:hover { background: var(--surface-2); }
-.pt.on { background: var(--navy-soft); box-shadow: inset 3px 0 0 var(--navy); }
+.pt.on { background: var(--navy-soft); }
+.pt.on b, .pt.on strong { color: var(--navy); }
 .pt-off { cursor: default; }
 .pt-off:hover { background: none; }
 .pt-city { font-weight: 700; font-size: 16px; }
@@ -950,6 +952,50 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   .cx-facts b { font-size: 24px; }
 }
 @media (max-width: 520px) { .cx-start-list { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- path & readability pass ---------- */
+.c-name .code { font-size: 14px; }
+.c-prep small, .dtab thead th { font-size: 14px; }
+.prep, .prep-k { font-size: 14px; }
+.dtasks span, .memo span:last-child, .hv-who p, .cxc-desc, .dlegend .lg ul, .faq details p, .docs2 p { font-size: 16px; }
+.cxc-parts li { font-size: 14px; }
+.cxc-ref { margin-top: 4px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cxc.flash { box-shadow: inset 0 0 0 2px var(--navy); transition: box-shadow 1.2s var(--ease); }
+.rcpt { position: relative; background: #FFF; color: var(--ink); border-radius: 6px; padding: 24px 26px 22px; box-shadow: 0 10px 30px rgba(20,55,75,.14); font-size: 16px; }
+.rcpt::after { content: ""; position: absolute; left: 0; right: 0; bottom: -9px; height: 10px; background: radial-gradient(circle at 7px 0, transparent 6px, #FFF 6.5px) 0 0 / 14px 10px repeat-x; }
+.rc-h { display: grid; gap: 2px; padding-bottom: 12px; border-bottom: 1.5px dashed var(--line); }
+.rc-h b { font: 700 22px/1.2 var(--display); }
+.rc-h span { font-size: 15px; color: var(--muted); }
+.rc-l { list-style: none; margin: 0; padding: 8px 0 0; }
+.rc-l li { display: flex; justify-content: space-between; gap: 16px; padding: 4px 0; font-size: 15px; }
+.rc-l li span:last-child { color: var(--muted); white-space: nowrap; }
+.rc-more summary { cursor: pointer; padding: 6px 0 2px; font-size: 15px; font-weight: 700; color: var(--navy); }
+.rc-t { display: flex; justify-content: space-between; gap: 16px; padding-top: 10px; margin-top: 8px; border-top: 1.5px dashed var(--line); font-size: 15px; color: var(--muted); }
+.rc-big { border-top: 0; margin-top: 0; padding-top: 2px; color: var(--ink); align-items: baseline; }
+.rc-big span { font-weight: 700; font-size: 17px; }
+.rc-big b { font-size: 30px; font-weight: 800; }
+.rc-save { margin-top: 4px; font-size: 15px; font-weight: 700; color: var(--ok); }
+.rc-draw { font-size: 16px; color: var(--muted); margin-top: 2px; }
+.rc-act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 16px; }
+.hv-who { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 48px; }
+.hv-who li { display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; }
+.hv-who li .opt-ic { grid-row: span 2; }
+.hv-who li b { font-size: 19px; line-height: 1.3; align-self: end; }
+.hv-who li p { color: var(--muted); }
+.hv-area-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 40px; align-items: center; padding: 32px 36px; border-radius: 24px; background: var(--navy-soft); }
+.hv-area-in h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 8px; }
+.hv-area-in p { font-size: 16px; max-width: 62ch; }
+.hv-area-in .fill { margin-top: 8px; font-weight: 600; }
+@media (max-width: 960px) {
+  .hv-who { grid-template-columns: minmax(0, 1fr); }
+  .hv-area-in { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; }
+  .rcpt { padding: 20px 18px 18px; }
+}
+
+/* readability floor: running text >= 16px (Varvara, 26.10.2026) */
+.rc-h span, .rc-l li, .rc-more summary, .rc-t, .rc-save, .cxc-ref, .cxc-meta, .cxc-draw, .cx-foot p, .cxc-price span,
+.hv-card p, .dstat, .parts summary, .parts ul, .c-ready, .c-mat, .dtab td, .crumbs, .crumbs button { font-size: 16px; }
+.cxc-parts li, .c-name .code, .chip, .chip .n, .prep, .prep-k, .dtab thead th { font-size: 14px; }
 </style>
 </head>
 <body>
@@ -965,6 +1011,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-baby" viewBox="0 0 24 24"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></symbol>
+  <symbol id="i-chair" viewBox="0 0 24 24"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></symbol>
   <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.5a6 6 0 0 1-12 0c0-4.1 6-10.5 6-10.5Z"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9H4Z"/><path d="M10 20v-5h4v5"/></symbol>
   <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></symbol>
@@ -1245,7 +1293,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       <div class="memos">
         <a class="memo" href="../print/pamyatka-kak-podgotovitsya.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Как подготовиться к&nbsp;анализам</b><span>Листовка А5: сколько не&nbsp;есть перед разными анализами, подготовка детей, анализы мочи</span></a>
         <a class="memo" href="../print/buklet-kak-sdat-analizy.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-file"/></svg></span><b>Как сдать анализы</b><span>Буклет: выбор анализа, подготовка, пункты и&nbsp;результат</span></a>
-        <a class="memo" href="../print/buklet-beremennost-i-deti.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-drop"/></svg></span><b>Беременность и&nbsp;дети</b><span>Буклет: анализы во&nbsp;время беременности и&nbsp;детский чек-ап</span></a>
+        <a class="memo" href="../print/buklet-beremennost-i-deti.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-baby"/></svg></span><b>Беременность и&nbsp;дети</b><span>Буклет: анализы во&nbsp;время беременности и&nbsp;детский чек-ап</span></a>
       </div>
     </div>
 
@@ -1266,47 +1314,19 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
           <div data-note="cx1">
             <h1>Чек-апы</h1>
             <p class="lede">Набор анализов, который сдают за&nbsp;один визит в&nbsp;пункт. Одна подготовка, одна поездка и&nbsp;цена ниже, чем если сдавать те&nbsp;же анализы по&nbsp;отдельности.</p>
-            <ul class="cx-facts">
-              <li><b class="num">до 16</b><span>анализов за&nbsp;один визит</span></li>
-              <li><b class="num">до 1&nbsp;580&nbsp;₽</b><span>экономии по&nbsp;сравнению с&nbsp;отдельными анализами</span></li>
-              <li><b class="num">1–2 дня</b><span>до&nbsp;результата</span></li>
-            </ul>
+
           </div>
-          <a class="cx-feature" href="#checkups" data-jump="cx-04.25.015">
-            <span class="cx-feature-k">Для ежегодной проверки</span>
-            <b>Чек-ап всего организма</b>
-            <span>16 анализов: кровь, сахар, холестерин, печень, почки, щитовидная железа, витамин&nbsp;D</span>
-            <span class="cx-feature-p"><b class="num">3&nbsp;800&nbsp;₽</b><span class="num">по&nbsp;отдельности&nbsp;— 5&nbsp;380&nbsp;₽</span></span>
-            <span class="cx-feature-go">Посмотреть состав <svg class="ico"><use href="#i-down"/></svg></span>
-          </a>
+          <div class="rcpt" id="cx-receipt" aria-label="Чек-ап всего организма: состав и цены"></div>
         </div>
       </div>
     </div>
     <div class="cx-qnav-wrap"><div class="wrap"><nav class="cx-qnav" id="cx-nav" aria-label="Чек-апы по темам"></nav></div></div>
     <div class="wrap pg">
-      <section class="cx-why" aria-label="Чем чек-ап удобнее отдельных анализов">
-        <div><span class="opt-ic"><svg class="ico"><use href="#i-cal"/></svg></span><b>Один визит</b><p>Все анализы набора сдают за&nbsp;один раз: не&nbsp;нужно приезжать несколько раз и&nbsp;каждый раз соблюдать подготовку.</p></div>
-        <div><span class="opt-ic"><svg class="ico"><use href="#i-percent"/></svg></span><b>Дешевле, чем по&nbsp;отдельности</b><p>Чек-ап всего организма стоит 3&nbsp;800&nbsp;₽, а&nbsp;те&nbsp;же 16 анализов по&nbsp;отдельности&nbsp;— 5&nbsp;380&nbsp;₽.</p></div>
-        <div><span class="opt-ic"><svg class="ico"><use href="#i-grid"/></svg></span><b>Больше сведений для врача</b><p>Многие показатели меняются без заметных признаков. Несколько анализов вместе дают врачу более полную картину, чем один.</p></div>
-      </section>
-      <section class="cx-start">
-        <h2>С чего начать</h2>
-        <div class="cx-start-list">
-          <button type="button" data-jump="cx-04.25.015"><b>Давно не&nbsp;сдавали анализы</b><span>Чек-ап всего организма</span></button>
-          <button type="button" data-jump="cx-04.25.005"><b>Проверить здоровье ребёнка</b><span>Чек-ап для детей и&nbsp;подростков</span></button>
-          <button type="button" data-jump="cx-04.25.002"><b>Гемоглобин и&nbsp;железо</b><span>Анемия: основной набор</span></button>
-          <button type="button" data-jump="cx-04.25.007"><b>Сахар в&nbsp;крови</b><span>Сахар и&nbsp;инсулин</span></button>
-          <button type="button" data-jump="cx-00-014"><b>Холестерин</b><span>Холестерин: основной профиль</span></button>
-          <button type="button" data-jump="cx-04.25.004"><b>Щитовидная железа</b><span>Основной набор гормонов</span></button>
-          <button type="button" data-jump="cx-04.25.011"><b>Женские гормоны</b><span>Основной набор</span></button>
-          <button type="button" data-jump="cx-04.25.012"><b>Мужские гормоны</b><span>Тестостерон и&nbsp;другие</span></button>
-        </div>
-        <p class="cx-note">Какой набор нужен именно вам, лучше решить с&nbsp;врачом.</p>
-      </section>
+
       <div id="cx-list"></div>
       <section class="faq cx-faq">
         <h2>Вопросы о&nbsp;чек-апах</h2>
-        <details><summary>Нужен ли чек-ап, если ничего не&nbsp;беспокоит?</summary><p>Ежегодную проверку как раз сдают, когда ничего не&nbsp;беспокоит: так проще заметить изменения показателей. Какой набор подойдёт вам, лучше обсудить с&nbsp;врачом.</p></details>
+        <details><summary>Нужен ли чек-ап, если ничего не&nbsp;беспокоит?</summary><p>Ежегодную проверку как раз сдают, когда ничего не&nbsp;беспокоит: так проще заметить изменения показателей. Какой набор нужен, определяет лечащий врач.</p></details>
         <details><summary>Как подготовиться?</summary><p>Подготовка указана у&nbsp;каждого набора и&nbsp;рассчитана по&nbsp;самому строгому анализу в&nbsp;составе. Чаще всего это 8–12 часов без еды. Приём лекарств перед анализом согласуйте с лечащим врачом.</p></details>
         <details><summary>Когда будет результат?</summary><p>Через 1–2 дня, срок указан у&nbsp;каждого набора. Результат появится в&nbsp;личном кабинете на&nbsp;сайте, его можно получить и&nbsp;в&nbsp;пункте.</p></details>
         <details><summary>Можно ли сдать чек-ап дома?</summary><p>Да. Медсестра приедет бесплатно при заказе от&nbsp;1&nbsp;500&nbsp;₽. <a href="#home-visit" data-go="home-visit">Об&nbsp;анализах на&nbsp;дому</a></p></details>
@@ -1325,7 +1345,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
         <div class="hvhero-grid">
           <div>
             <h1>Анализы на&nbsp;дому</h1>
-            <p class="lede">Медсестра CLD приедет домой и&nbsp;возьмёт анализы. Подготовка, сроки и&nbsp;результаты&nbsp;— такие&nbsp;же, как при сдаче в&nbsp;пункте.</p>
+            <p class="lede">Медсестра CLD приедет к&nbsp;вам домой и&nbsp;возьмёт анализы. Подготовка, сроки и&nbsp;результаты&nbsp;— такие&nbsp;же, как при сдаче в&nbsp;пункте.</p>
             <div class="acts"><a class="btn btn-navy" href="#catalog-blood" data-go="catalog:blood">Выбрать анализы</a><a class="btn btn-ghost" href="#checkups" data-go="checkups">Чек-апы</a></div>
             <a class="btn btn-lime hv-callbtn" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>Позвонить: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a>
           </div>
@@ -1340,11 +1360,17 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     </div>
     <div class="sec wrap">
       <div class="sec-h"><h2>Кому это удобно</h2></div>
-      <div class="hv-who">
-        <div><span class="opt-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Нет времени ехать в&nbsp;пункт</b><p>Не&nbsp;нужно отпрашиваться с&nbsp;работы и&nbsp;тратить время на&nbsp;дорогу.</p></div>
-        <div><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Пожилым родственникам</b><p>Не&nbsp;нужно везти человека в&nbsp;пункт: анализы можно заказать на&nbsp;его адрес.</p></div>
-        <div><span class="opt-ic"><svg class="ico"><use href="#i-drop"/></svg></span><b>С&nbsp;маленьким ребёнком</b><p>Ребёнку спокойнее дома, а&nbsp;вам не&nbsp;нужно собирать его в&nbsp;дорогу.</p></div>
-        <div><span class="opt-ic"><svg class="ico"><use href="#i-pin"/></svg></span><b>Если трудно выходить из&nbsp;дома</b><p>После болезни, при ограниченной подвижности или в&nbsp;непогоду.</p></div>
+      <ul class="hv-who">
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Нет времени ехать в&nbsp;пункт</b><p>Не&nbsp;нужно отпрашиваться с&nbsp;работы и&nbsp;тратить время на&nbsp;дорогу.</p></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-home"/></svg></span><b>Пожилым родственникам</b><p>Не&nbsp;нужно везти человека в&nbsp;пункт: анализы можно заказать на&nbsp;его адрес.</p></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-baby"/></svg></span><b>С&nbsp;маленьким ребёнком</b><p>Ребёнку спокойнее дома, а&nbsp;вам не&nbsp;нужно собирать его в&nbsp;дорогу.</p></li>
+        <li><span class="opt-ic"><svg class="ico"><use href="#i-chair"/></svg></span><b>Если трудно выходить из&nbsp;дома</b><p>После болезни, при ограниченной подвижности или в&nbsp;непогоду.</p></li>
+      </ul>
+    </div>
+    <div class="sec wrap hv-area">
+      <div class="hv-area-in">
+        <div><h2>Где работает выезд</h2><p>Медсестра выезжает из&nbsp;пунктов CLD. Список городов, станиц и&nbsp;сёл, куда приезжает медсестра:</p><p class="fill">[список населённых пунктов по&nbsp;районам — уточнить у&nbsp;лаборатории]</p></div>
+        <a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>Уточнить адрес: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a>
       </div>
     </div>
     <section class="how how-plain wrap">
@@ -1621,7 +1647,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
           <p><a href="#points" data-go="points">Черкесск, пр-т Ленина, 148</a><br>07:30–19:00</p>
           <a href="#points" data-go="points">Все 29 пунктов на карте</a>
         </div>
-        <nav class="f-col" aria-label="Пациентам"><h4>Пациентам</h4>
+        <nav class="f-col" aria-label="Пациентам"><h2 class="f-h">Пациентам</h2>
           <a href="#catalog-blood" data-go="catalog:blood">Анализы и цены</a>
           <a href="#checkups" data-go="checkups">Чек-апы</a>
           <a href="#" data-scroll="promos">Акции</a>
@@ -1629,12 +1655,12 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
           <a href="#points" data-go="points">Пункты</a>
           <a href="#results" data-go="results">Результаты анализов</a>
         </nav>
-        <nav class="f-col" aria-label="Врачам и клиникам"><h4>Врачам и клиникам</h4>
+        <nav class="f-col" aria-label="Врачам и клиникам"><h2 class="f-h">Врачам и клиникам</h2>
           <a href="#doctors" data-go="doctors">Врачам</a>
           <a href="#doctors" data-go="doctors:clinics">Клиникам и санаториям</a>
           <a href="#referral" data-go="referral">Бланк направления</a>
         </nav>
-        <nav class="f-col" aria-label="О компании"><h4>О компании</h4>
+        <nav class="f-col" aria-label="О компании"><h2 class="f-h">О компании</h2>
           <a href="#about" data-go="about">О лаборатории</a>
           <a href="#docs" data-go="docs">Лицензии и документы</a>
           <a href="#contacts" data-go="contacts">Контакты</a>
@@ -1737,7 +1763,57 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     "30-006": { n: "Общий Т3", off: "Трийодтиронин общий (Т3 общий)", d: "Покажет общий уровень Т3 — наиболее активного гормона щитовидной железы: связанного с белками и свободного", p: 330, bio: "Кровь из вены", days: 1, own: true, pop: 85 },
     "50-126": { n: "Антитела к ТГ", off: "АТ к тиреоглобулину (анти-ТГ)", d: "Покажет, есть ли в крови антитела к тиреоглобулину — белку-предшественнику гормонов щитовидной железы", p: 440, bio: "Кровь из вены", days: 1, own: true, pop: 87 },
     "28.145": { n: "Антитела к рецептору ТТГ", off: "Антитела к рецепторам ТТГ (АТ-ТТГ)", d: "Покажет, есть ли в крови антитела, которые могут вызывать избыточную выработку гормонов щитовидной железы", p: 1645, bio: "Кровь из вены", days: 3, own: false, pop: 88 },
-    "32.100": { n: "Паратгормон", off: "Паратгормон", d: "Покажет, как работают околощитовидные железы, которые регулируют уровень кальция в крови", p: 670, bio: "Кровь из вены", days: 1, own: false, pop: 89 }
+    "32.100": { n: "Паратгормон", off: "Паратгормон", d: "Покажет, как работают околощитовидные железы, которые регулируют уровень кальция в крови", p: 670, bio: "Кровь из вены", days: 1, own: false, pop: 89 },
+    "20-007": { n: "Тромбоциты (подсчёт по Фонио)", off: "Подсчёт тромбоцитов по Фонио", d: "", p: 200, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-107": { n: "Трансферрин", off: "Трансферрин", d: "", p: 380, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-028": { n: "Антистрептолизин-О (АСЛО)", off: "Антистрептолизин-О (АСЛО)", d: "", p: 450, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "50-056": { n: "Ревматоидный фактор", off: "Ревматоидный фактор", d: "", p: 320, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-013": { n: "Прокальцитонин (PCT)", off: "Прокальцитонин (PCT)", d: "", p: 1600, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-037": { n: "Инсулин через 120 минут после нагрузки", off: "Инсулин после нагрузки (120 минут)", d: "", p: 510, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-391": { n: "Индекс HOMA и индекс CARO", off: "Индекс HOMA + Индекс CARO", d: "", p: 640, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "50-125": { n: "Антитела к тиреопероксидазе (анти-ТПО)", off: "АТ к тиреоидной пероксидазе (анти-ТПО)", d: "", p: 440, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-040": { n: "Тиреоглобулин (ТГ)", off: "Тиреоглобулин (ТГ)", d: "", p: 800, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-001": { n: "Кальцитонин", off: "Кальцитонин", d: "", p: 820, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-072": { n: "Липопротеины высокой плотности (ЛПВП)", off: "Липопротеины высокой плотности (ЛПВП)", d: "", p: 210, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-073": { n: "Липопротеины низкой плотности (ЛПНП)", off: "Липопротеины низкой плотности (ЛПНП)", d: "", p: 190, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-042": { n: "Гамма-глютамилтранспептидаза (ГГТ)", off: "Гамма-глютамилтранспептидаза (ГГТ)", d: "", p: 155, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-067": { n: "Лактатдегидрогеназа (ЛДГ)", off: "Лактатдегидрогеназа (ЛДГ)", d: "", p: 170, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-054": { n: "Кальций в крови", off: "Кальций в крови", d: "", p: 180, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-075": { n: "Магний в крови", off: "Магний в крови", d: "", p: 200, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "40-112": { n: "Фосфор в крови", off: "Фосфор в крови", d: "", p: 160, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-021": { n: "Антимюллеров гормон (АМГ)", off: "Антимюллеров гормон (АМГ)", d: "", p: 1200, bio: "Кровь из вены", days: 4, own: true, pop: 60 },
+    "30-004": { n: "Лютеинизирующий гормон (ЛГ)", off: "Лютеинизирующий гормон (ЛГ)", d: "", p: 380, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-011": { n: "Фолликулостимулирующий гормон (ФСГ)", off: "Фолликулостимулирующий гормон (ФСГ)", d: "", p: 370, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-018": { n: "Эстрадиол (Е2)", off: "Эстрадиол (Е2)", d: "", p: 330, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-005": { n: "Прогестерон", off: "Прогестерон", d: "", p: 330, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-029": { n: "Пролактин", off: "Пролактин", d: "", p: 380, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-014": { n: "Тестостерон общий", off: "Тестостерон общий", d: "", p: 360, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-020": { n: "Тестостерон свободный", off: "Тестостерон свободный", d: "", p: 930, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-039": { n: "Глобулин, связывающий половые гормоны (ГСПГ)", off: "Глобулин, связывающий половые гормоны (ГСПГ)", d: "", p: 455, bio: "Кровь из вены", days: 2, own: true, pop: 60 },
+    "30-015": { n: "ДГЭА-С", off: "ДГЭА-С", d: "", p: 380, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "30-034": { n: "Кортизол", off: "Кортизол", d: "", p: 370, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "90-001": { n: "ВИЧ: антиген и антитела (ИХЛА)", off: "Антиген и антитела к вирусу иммунодефицита человека (ИХЛА)", d: "", p: 310, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "90-021": { n: "Сифилис: антитела к бледной трепонеме (ИХЛА)", off: "Антитела к бледной трепонеме (ИХЛА)", d: "", p: 360, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "90-279": { n: "Гепатит C: антитела (ИХЛА)", off: "АТ к вирусу гепатита С (ИХЛА)", d: "", p: 350, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "90-006": { n: "Гепатит B: HBsAg (ИХЛА)", off: "Поверхностный антиген вируса гепатита В (ИХЛА)", d: "", p: 240, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "90-046": { n: "Краснуха: антитела IgG", off: "АТ к вирусу краснухи (Rubella) IgG", d: "", p: 550, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "10-012": { n: "Анализ мочи по Нечипоренко", off: "Анализ мочи по нечипоренко", d: "", p: 280, bio: "Моча", days: 1, own: true, pop: 60 },
+    "80-041": { n: "Коагулограмма расширенная", off: "Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)", d: "", p: 1050, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "80-002": { n: "Активированное частичное тромбопластиновое время (АЧТВ)", off: "Активированное частичное тромбопластиновое время (АЧТВ)", d: "", p: 140, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "80-012": { n: "Протромбин по Квику и МНО", off: "Протромбин (по Квику) - МНО", d: "", p: 185, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "80-015": { n: "Протромбиновое время", off: "Протромбиновое время", d: "", p: 185, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "80-003": { n: "Тромбиновое время", off: "Тромбиновое время", d: "", p: 200, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "80-004": { n: "Фибриноген", off: "Фибриноген", d: "", p: 190, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "80-013": { n: "Антитромбин III", off: "Антитромбин III", d: "", p: 300, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "80-007": { n: "D-димер", off: "Д-Димер", d: "", p: 1085, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-017": { n: "ПСА свободный", off: "Простатический специфический антиген (ПСА) свободный", d: "", p: 390, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-018": { n: "ПСА: соотношение свободного и общего", off: "Простатический специфический антиген (ПСА), соотношение своб./общ.", d: "", p: 740, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-001": { n: "Раково-эмбриональный антиген (РЭА)", off: "Раково-эмбриональный антиген (РЭА)", d: "", p: 615, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-002": { n: "Альфа-фетопротеин (АФП)", off: "Альфа-фетопротеин (АФП)", d: "", p: 360, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-006": { n: "Раковый антиген 125 (CA 125)", off: "Раковый антиген 125 (CA 125)", d: "", p: 580, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-003": { n: "CA 15-3", off: "CA 15-3", d: "", p: 800, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-004": { n: "СА 19-9", off: "СА 19-9", d: "", p: 590, bio: "Кровь из вены", days: 1, own: true, pop: 60 },
+    "41-005": { n: "СА 72-4", off: "СА 72-4", d: "", p: 820, bio: "Кровь из вены", days: 1, own: true, pop: 60 }
   };
   var CHECKUPS = {
     anemia: { n: "Чек-ап «Анемия»", inc: "Общий анализ крови развёрнутый, железо, ферритин, трансферрин", count: 4, p: 1000, days: 2 },
@@ -1784,18 +1860,18 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     checkups:["#########","#.......#","#.ooooo.#","#.......#","#.ooo...#","#.......#","#.ooooo.#","#.......#","#########"]
   };
   var CATS = [
-    { id: "blood", n: "Кровь и анемия", s: "Гемоглобин, железо, воспаление", desc: "Гемоглобин, показатели обмена железа и признаки воспаления. Эти анализы часто назначают при слабости и бледности.", items: ["20-017", "40-111", "40-052", "40-041", "40-081", "20-001", "20-003", "40-060.", "40-062", "40-123", "25-018", "10.105"], checkup: "anemia" },
-    { id: "sugar", n: "Сахар и обмен веществ", s: "Глюкоза, гликированный гемоглобин", desc: "Уровень глюкозы на момент анализа и за последние месяцы. По ним врач выявляет нарушения углеводного обмена и контролирует лечение диабета.", items: ["40-047", "40-141", "30-035", "40-004", "30-043", "18.101", "18.103", "18.110", "40-390"], checkup: "diabetes" },
-    { id: "thyroid", n: "Щитовидная железа", s: "ТТГ, Т4, антитела", desc: "Обследование щитовидной железы обычно начинают с ТТГ. Остальные анализы назначают, если ТТГ отклоняется от нормы.", items: ["30-010", "30-009", "28.135", "30-007", "30-008", "30-006", "50-126", "28.145", "32.100"], checkup: "thyroid" },
-    { id: "heart", n: "Сердце и сосуды", s: "Холестерин, липидный профиль", desc: "Холестерин и его фракции помогают врачу оценить риск болезней сердца и сосудов.", items: ["00-014", "40-070", "40-081", "40-069", "40-044", "19.115", "19.100", "19.105", "40-104", "40-080", "17.130"] },
-    { id: "liver", n: "Печень и почки", s: "АЛТ, билирубин, креатинин", desc: "Биохимические показатели работы печени и почек. Их часто назначают при длительном приёме лекарств и перед операцией.", items: ["40-026", "40-035", "40-063", "40-077", "10-008", "17.167", "40-018.1", "40-056", "40-057", "40-058", "40.120", "40-010", "40-025", "21.120", "40-121", "40-036", "40-037", "40-001", "40-027"], checkup: "kidneys" },
-    { id: "vitamins", n: "Витамины и минералы", s: "Витамин D, B12, железо", desc: "Уровень витаминов D, B12, фолиевой кислоты и минералов. Решение о приёме добавок по результату принимает врач.", items: ["40-297", "40-041", "40-111", "40-052"] },
-    { id: "hormones", n: "Гормоны и беременность", s: "ХГЧ и женские гормоны", desc: "Гормоны сдают в день цикла, который назвал врач. ХГЧ подтверждает беременность на раннем сроке.", items: ["30-017"] },
-    { id: "infect", n: "Инфекции", s: "ВИЧ, гепатиты, ИППП, TORCH", desc: "Антитела к инфекциям, ПЦР и мазки.", items: [] },
+    { id: "blood", n: "Кровь и анемия", s: "Гемоглобин, железо, воспаление", desc: "Гемоглобин, показатели обмена железа и признаки воспаления. Эти анализы часто назначают при слабости и бледности.", items: ["20-017", "40-111", "40-052", "40-041", "40-081", "20-001", "20-003", "40-060.", "40-062", "40-123", "25-018", "10.105", "20-007", "40-107", "40-028", "50-056", "40-013"], checkup: "anemia" },
+    { id: "sugar", n: "Сахар и обмен веществ", s: "Глюкоза, гликированный гемоглобин", desc: "Уровень глюкозы на момент анализа и за последние месяцы. По ним врач выявляет нарушения углеводного обмена и контролирует лечение диабета.", items: ["40-047", "40-141", "30-035", "40-004", "30-043", "18.101", "18.103", "18.110", "40-390", "30-037", "40-391"], checkup: "diabetes" },
+    { id: "thyroid", n: "Щитовидная железа", s: "ТТГ, Т4, антитела", desc: "Обследование щитовидной железы обычно начинают с ТТГ. Остальные анализы назначают, если ТТГ отклоняется от нормы.", items: ["30-010", "30-009", "28.135", "30-007", "30-008", "30-006", "50-126", "28.145", "32.100", "50-125", "30-040", "30-001"], checkup: "thyroid" },
+    { id: "heart", n: "Сердце и сосуды", s: "Холестерин, липидный профиль", desc: "Холестерин и его фракции помогают врачу оценить риск болезней сердца и сосудов.", items: ["00-014", "40-070", "40-081", "40-069", "40-044", "19.115", "19.100", "19.105", "40-104", "40-080", "17.130", "40-072", "40-073"] },
+    { id: "liver", n: "Печень и почки", s: "АЛТ, билирубин, креатинин", desc: "Биохимические показатели работы печени и почек. Их часто назначают при длительном приёме лекарств и перед операцией.", items: ["40-026", "40-035", "40-063", "40-077", "10-008", "17.167", "40-018.1", "40-056", "40-057", "40-058", "40.120", "40-010", "40-025", "21.120", "40-121", "40-036", "40-037", "40-001", "40-027", "40-042", "40-067"], checkup: "kidneys" },
+    { id: "vitamins", n: "Витамины и минералы", s: "Витамин D, B12, железо", desc: "Уровень витаминов D, B12, фолиевой кислоты и минералов. Решение о приёме добавок по результату принимает врач.", items: ["40-297", "40-041", "40-111", "40-052", "40-123", "40-054", "40-075", "40-112"] },
+    { id: "hormones", n: "Гормоны и беременность", s: "ХГЧ и женские гормоны", desc: "Гормоны сдают в день цикла, который назвал врач. ХГЧ подтверждает беременность на раннем сроке.", items: ["30-017", "30-021", "30-004", "30-011", "30-018", "30-005", "30-029", "30-014", "30-020", "30-039", "30-015", "30-034"] },
+    { id: "infect", n: "Инфекции", s: "ВИЧ, гепатиты, ИППП, TORCH", desc: "Антитела к инфекциям, ПЦР и мазки.", items: ["90-001", "90-021", "90-279", "90-006", "90-046"] },
     { id: "allergy", n: "Аллергия", s: "IgE общий и аллергены", desc: "Помогают врачу установить, связаны ли насморк, сыпь или кашель с аллергией, и определить аллерген.", items: ["60-011"] },
-    { id: "urine", n: "Моча и кал", s: "Общий анализ мочи", desc: "Анализы мочи и кала: показатели работы почек, мочевых путей и кишечника.", items: ["10-008"] },
-    { id: "clotting", n: "Свёртываемость крови", s: "Коагулограмма, МНО", desc: "Показатели свёртываемости крови. Их назначают перед операцией, во время беременности и при приёме препаратов, снижающих свёртываемость.", items: ["80-049"] },
-    { id: "onco", n: "Онкомаркеры", s: "ПСА и другие", desc: "Онкомаркеры назначает врач: по одному анализу диагноз не ставят. Чаще их используют для наблюдения.", items: ["41-016"] }
+    { id: "urine", n: "Моча и кал", s: "Общий анализ мочи", desc: "Анализы мочи и кала: показатели работы почек, мочевых путей и кишечника.", items: ["10-008", "10-012"] },
+    { id: "clotting", n: "Свёртываемость крови", s: "Коагулограмма, МНО", desc: "Показатели свёртываемости крови. Их назначают перед операцией, во время беременности и при приёме препаратов, снижающих свёртываемость.", items: ["80-049", "80-041", "80-002", "80-012", "80-015", "80-003", "80-004", "80-013", "80-007"] },
+    { id: "onco", n: "Онкомаркеры", s: "ПСА и другие", desc: "Онкомаркеры назначает врач: по одному анализу диагноз не ставят. Чаще их используют для наблюдения.", items: ["41-016", "41-017", "41-018", "41-001", "41-002", "41-006", "41-003", "41-004", "41-005"] }
   ];
   var SITS = [
     { n: "Усталость и слабость", d: "Общий анализ крови, ферритин, ТТГ, витамин D, B12", codes: ["20-017", "40-111", "30-010", "40-297", "40-041"], go: "blood" },
@@ -1884,6 +1960,18 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var target = q; Object.keys(SYN).forEach(function (k) { if (q === k || q.indexOf(k) === 0) target = SYN[k]; });
     var qw = target.split(" ");
     var res = [];
+    var digits = /^[\d\s.\-]+$/.test(q) ? q.replace(/\D/g, "") : "";
+    if (digits.length >= 2) {
+      Object.keys(A).concat(Object.keys(CXX)).forEach(function (code) { if (code.replace(/\D/g, "").indexOf(digits) === 0) res.push({ code: code, cx: !A[code], score: 200 - code.length }); });
+      res.sort(function (x, y) { return y.score - x.score; });
+      return res.slice(0, 6);
+    }
+    Object.keys(CXX).forEach(function (code) {
+      var hay = norm(CXX[code].n + " " + cxMis(code) + " чек-ап"), score = 0;
+      if (hay.indexOf(target) >= 0) score = 90 - hay.indexOf(target);
+      else if (qw.filter(Boolean).every(function (w) { return hay.split(" ").some(function (x) { return x.indexOf(w) === 0; }); })) score = 45;
+      if (score) res.push({ code: code, cx: true, score: score });
+    });
     Object.keys(A).forEach(function (code) {
       var a = A[code], hay = norm(a.n + " " + a.off), words = hay.split(" "), score = 0, fuzzy = false;
       if (hay.indexOf(target) >= 0) score = 100 - hay.indexOf(target);
@@ -1908,7 +1996,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       items = search(q);
       if (!q.trim()) { box.hidden = true; return; }
       var fixed = items.some(function (r) { return r.fuzzy; }) || norm(q) !== norm(q) ;
-      box.innerHTML = (items.length ? items.map(function (r, i) { var a = A[r.code]; return '<button type="button" data-go="card:' + r.code + '" class="' + (i === idx ? "on" : "") + '"><span class="s-name">' + esc(a.n) + '</span><span class="s-hint">' + esc(a.d) + '</span><span class="s-price">' + rub(a.p) + "</span></button>"; }).join("") + (items.some(function (r) { return r.fuzzy; }) ? '<p class="fixnote">Показали похожие: исправили опечатку в запросе «' + esc(q) + '».</p>' : "")
+      box.innerHTML = (items.length ? items.map(function (r, i) { if (r.cx) { var x = CX[r.code]; return '<button type="button" data-go="cx:' + r.code + '" class="' + (i === idx ? "on" : "") + '"><span class="s-name">' + esc(CXX[r.code].n) + '</span><span class="s-hint">Чек-ап · код ' + esc(r.code) + " · " + esc(cxMis(r.code)) + '</span><span class="s-price">' + rub(x.p) + "</span></button>"; } var a = A[r.code]; return '<button type="button" data-go="card:' + r.code + '" class="' + (i === idx ? "on" : "") + '"><span class="s-name">' + esc(a.n) + '</span><span class="s-hint">' + esc(a.d || "Код " + r.code) + '</span><span class="s-price">' + rub(a.p) + "</span></button>"; }).join("") + (items.some(function (r) { return r.fuzzy; }) ? '<p class="fixnote">Показали похожие: исправили опечатку в запросе «' + esc(q) + '».</p>' : "")
         : '<p class="s-empty">Ничего не нашли по запросу «' + esc(q) + '». Попробуйте другое слово или позвоните: 8 800 201 78 30.</p>');
       box.hidden = false;
     }
@@ -1924,7 +2012,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       if (box.hidden) return;
       if (e.key === "ArrowDown") { idx = Math.min(idx + 1, items.length - 1); render(); e.preventDefault(); }
       else if (e.key === "ArrowUp") { idx = Math.max(idx - 1, 0); render(); e.preventDefault(); }
-      else if (e.key === "Enter" && items[idx < 0 ? 0 : idx]) { go("card:" + items[idx < 0 ? 0 : idx].code); }
+      else if (e.key === "Enter" && items[idx < 0 ? 0 : idx]) { var it = items[idx < 0 ? 0 : idx]; go((it.cx ? "cx:" : "card:") + it.code); }
       else if (e.key === "Escape") { box.hidden = true; }
     });
     document.addEventListener("click", function (e) { if (!e.target.closest(".search")) box.hidden = true; });
@@ -1983,7 +2071,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
         html += "<section><h2>" + esc(b.h) + "</h2>" + (b.p ? b.p.map(function (x) { return "<p>" + esc(x) + "</p>"; }).join("") : "") + (b.list ? "<ul>" + b.list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") + (b.note ? '<p class="b-note">' + esc(b.note) + "</p>" : "") + "</section>";
       });
     } else {
-      html += "<section><h2>Что это</h2><p>" + esc(a.d) + ".</p></section><section><h2>Как подготовиться</h2><p>Кровь сдают утром натощак: после еды должно пройти 8–12 часов, воду пить можно. Особые правила для этого анализа уточните у администратора.</p></section>";
+      html += (a.d ? "<section><h2>Что это</h2><p>" + esc(a.d) + ".</p></section>" : "") + "<section><h2>Как подготовиться</h2>" + (DPREP[code] ? prepList(DPREP[code]) : "<p>Особые правила подготовки уточните по телефону 8 800 201 78 30.</p>") + "<p>Приём лекарств перед анализом согласуйте с лечащим врачом.</p></section>";
     }
     var togHtml = "", tog = (t && t.together) || cat.items.filter(function (c) { return c !== code; }).slice(0, 3);
     if (tog.length) {
@@ -1994,7 +2082,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     if (togHtml) html += togHtml;
     if (t && t.src) html += '<details class="srcs"><summary>Источники для проверки врачом</summary><ul>' + t.src.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul></details>";
     $("#k-blocks").innerHTML = html;
-    var NPTS = {"28.135": 8, "80-049": 21, "30-017": 21, "10-008": 21, "40-062": 21, "10.105": 8, "19.115": 27, "19.100": 27, "19.105": 27, "40-080": 21, "17.130": 27, "17.167": 27, "40.120": 27, "21.120": 8, "18.101": 27, "18.103": 27, "18.110": 27, "50-126": 21, "28.145": 27, "32.100": 27}; // пункты из API, 22.10.2026; остальные — 24
+    var NPTS = {"28.135": 8, "80-049": 21, "30-017": 21, "10-008": 21, "40-062": 21, "10.105": 8, "19.115": 27, "19.100": 27, "19.105": 27, "40-080": 21, "17.130": 27, "17.167": 27, "40.120": 27, "21.120": 8, "18.101": 27, "18.103": 27, "18.110": 27, "50-126": 21, "28.145": 27, "32.100": 27, "20-001": 21, "20-017": 21, "20-003": 21, "20-007": 21, "25-018": 21, "40-052": 21, "40-060.": 21, "40-107": 21, "40-111": 21, "40-081": 21, "40-028": 21, "50-056": 21, "40-013": 21, "40-047": 21, "40-141": 21, "30-035": 21, "30-037": 21, "30-043": 21, "40-390": 21, "40-391": 20, "40-004": 21, "30-010": 21, "30-009": 21, "30-008": 21, "30-007": 21, "30-006": 21, "50-125": 21, "30-040": 21, "30-001": 21, "40-070": 21, "40-072": 21, "40-073": 21, "40-069": 21, "40-044": 21, "40-104": 21, "40-026": 21, "40-025": 21, "40-042": 21, "40-121": 21, "40-067": 21, "40-010": 21, "40-035": 21, "40-036": 21, "40-037": 21, "40-001": 21, "40-027": 21, "40-063": 21, "40-077": 21, "40-018.1": 21, "40-056": 21, "40-057": 21, "40-058": 21, "40-297": 21, "40-041": 21, "40-123": 21, "40-054": 21, "40-075": 21, "40-112": 21, "30-021": 21, "30-004": 21, "30-011": 21, "30-018": 21, "30-005": 21, "30-029": 21, "30-014": 21, "30-020": 20, "30-039": 21, "30-015": 21, "30-034": 21, "90-001": 21, "90-021": 21, "90-279": 21, "90-006": 21, "90-046": 21, "60-011": 20, "10-012": 21, "80-041": 21, "80-002": 21, "80-012": 21, "80-015": 21, "80-003": 21, "80-004": 21, "80-013": 21, "80-007": 21, "41-016": 21, "41-017": 21, "41-018": 21, "41-001": 21, "41-002": 21, "41-006": 21, "41-003": 21, "41-004": 21, "41-005": 21}; // пункты из API, 22.10.2026; остальные — 24
     var blood = a.bio.indexOf("Кровь") === 0;
     $("#k-panel").innerHTML = '<div><div class="p-price num">' + rub(a.p) + '</div><div class="p-online" style="margin-top:6px">' + rub(online(a.p)) + " при оплате на сайте</div></div>" +
       '<div class="lines" data-note="card3"><div><span>Анализ</span><span class="num">' + rub(a.p) + "</span></div>" + (blood ? "<div><span>Взятие крови</span><span class=\"num\">" + rub(BLOOD_DRAW) + "</span></div>" : "") + '<div class="tot"><span>Итого в пункте</span><span class="num">' + rub(a.p + (blood ? BLOOD_DRAW : 0)) + "</span></div></div>" +
@@ -2103,11 +2191,11 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var hay = norm(it.c + " " + it.n + " " + (it.m || "") + " " + (it.parts || []).join(" "));
     return docQ.split(" ").every(function (w) { return hay.indexOf(w) >= 0; });
   }
-  var PREPL = { "Н12": "Натощак 12 часов", "Н8": "Натощак 8 часов", "Е3": "2–3 часа без еды", "Г": "Гормоны", "К": "Без особой подготовки", "ПСА": "Для ПСА", "М": "Анализ мочи", "О": "Общие правила" };
+  var PREPL = { "Н12": "Утром, 12 часов без еды", "Н8": "Утром, 8 часов без еды", "Е3": "2–3 часа без еды", "Г": "2–3 часа без еды, сутки без нагрузок", "К": "Без особой подготовки", "ПСА": "Особые правила для ПСА", "М": "Особые правила для анализа мочи", "О": "Утром, 8 часов без еды" };
   function prepList(k) { return "<ul>" + DOC.prep[k].replace(/^Общие правила: /, "").split(/\.\s+/).map(function (x) { x = x.replace(/\.$/, ""); return x ? "<li>" + esc(x.charAt(0).toUpperCase() + x.slice(1)) + "</li>" : ""; }).join("") + "</ul>"; }
   function prepBtn(k) { return '<button class="prep" type="button" data-prep="' + esc(k) + '" aria-label="Подготовка: ' + esc(PREPL[k]) + '. ' + esc(DOC.prep[k]) + '">' + esc(PREPL[k]) + "</button>"; }
   function docRow(it) {
-    var name = A[it.c] ? '<a href="#card-' + esc(it.c) + '" data-go="card:' + esc(it.c) + '">' + esc(it.n) + "</a>" : "<b>" + esc(it.n) + "</b>";
+    var name = A[it.c] ? '<a href="#card-' + esc(it.c) + '" data-go="card:' + esc(it.c) + '">' + esc(it.n) + "</a>" : CXX[it.c] ? '<a href="#checkups" data-go="cx:' + esc(it.c) + '">' + esc(it.n) + "</a>" : "<b>" + esc(it.n) + "</b>";
     var parts = it.parts && it.parts.length ? '<details class="parts"><summary>Состав: ' + nAn(it.parts.length) + "</summary><ul>" + it.parts.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></details>" : "";
     return '<tr><td class="c-name">' + name + '<span class="code num">Код ' + esc(it.c) + "</span>" + (it.m ? "<small>Полное название: " + esc(it.m) + "</small>" : "") + parts + '</td><td class="c-mat">' + esc(it.mat) + '</td><td class="c-ready">' + esc(it.r || "срок не указан") + '</td><td class="c-prep">' + prepBtn(it.p) + (it.pn ? "<small>" + esc(it.pn) + "</small>" : "") + "</td></tr>";
   }
@@ -2165,20 +2253,25 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   function fmtPhone(d) { return "+7 " + d.slice(0, 3) + " " + d.slice(3, 6) + "-" + d.slice(6, 8) + "-" + d.slice(8); }
 
   // checkups: groups by audience and topic; parts in short names, savings against the same tests bought separately
-  var CXX = {"04.25.015": {"g": "all", "n": "Чек-ап всего организма", "d": "Основные показатели крови, сахар, холестерин, работа печени и почек, щитовидная железа и витамин D — за один визит.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "ТТГ", "Холестерин общий", "АЛТ", "АСТ", "Триглицериды", "Креатинин", "Мочевина", "Общий белок", "Билирубин общий", "ГГТ", "Кальций", "Гликированный гемоглобин", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Тиреотропный гормон (ТТГ)", "Холестерин общий", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)", "Триглицериды", "Креатинин в крови", "Мочевина в крови", "Общий белок в крови", "Билирубин общий", "Гамма-глютамилтранспептидаза (ГГТ)", "Кальций в крови", "Гликированный гемоглобин (HbA1c)", "Гомоцистеин"], "sum": 5380}, "04.25.005": {"g": "kids", "n": "Чек-ап для детей и подростков", "d": "Общий анализ крови, железо и витамин D, сахар и показатели работы печени — для ребёнка или подростка.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "Ферритин", "Гликированный гемоглобин", "Глюкоза", "ГГТ", "Билирубин общий", "Билирубин прямой", "Билирубин непрямой", "Общий белок", "Кальций"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Ферритин", "Гликированный гемоглобин (HbA1c)", "Глюкоза в крови", "Гамма-глютамилтранспептидаза (ГГТ)", "Билирубин общий", "Билирубин прямой (связанный)", "Билирубин непрямой (свободный)", "Общий белок в крови", "Кальций в крови"], "sum": 3820}, "04.25.011": {"g": "women", "n": "Женские гормоны: основной набор", "d": "Эстрадиол, прогестерон, ФСГ, ЛГ, пролактин и ТТГ. Сдают в день цикла, который назвал врач.", "parts": ["Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ"], "full": ["Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)"], "sum": 2140}, "04.25.010": {"g": "women", "n": "Женские гормоны: расширенный набор", "d": "Всё из основного набора, а также тестостерон, ДГЭА-С, ГСПГ и общий анализ крови. Сдают в день цикла, который назвал врач.", "parts": ["Общий анализ крови", "Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ", "ГСПГ", "ДГЭА-С", "Тестостерон общий"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)", "Глобулин, связывающий половые гормоны (ГСПГ)", "ДГЭА-С", "Тестостерон общий"], "sum": 3805}, "04.25.012": {"g": "men", "n": "Мужские гормоны", "d": "Тестостерон, эстрадиол, ГСПГ, пролактин, прогестерон и общий анализ крови.", "parts": ["Общий анализ крови", "Тестостерон общий", "Эстрадиол", "ГСПГ", "Пролактин", "Прогестерон"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тестостерон общий", "Эстрадиол (Е2)", "Глобулин, связывающий половые гормоны (ГСПГ)", "Пролактин", "Прогестерон"], "sum": 2325}, "04.25.002": {"g": "blood", "n": "Анемия: основной набор", "d": "Гемоглобин и показатели обмена железа: ферритин, железо, трансферрин.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "Трансферрин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Трансферрин"], "sum": 1485}, "04.25.001": {"g": "blood", "n": "Анемия: расширенный набор", "d": "Всё из основного набора, а также витамины B12 и D, фолиевая кислота и ОЖСС.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "ОЖСС", "Трансферрин", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe", "Трансферрин", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 4385}, "04.25.016": {"g": "blood", "n": "Витамины B12, D и фолиевая кислота", "d": "Витамины B12 и D, фолиевая кислота и общий анализ крови.", "parts": ["Общий анализ крови", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 3070}, "04.25.007": {"g": "sugar", "n": "Сахар и инсулин", "d": "Глюкоза и гликированный гемоглобин показывают уровень сахара сейчас и за последние месяцы, инсулин и С-пептид — как вырабатывается инсулин.", "parts": ["Общий анализ крови", "Гликированный гемоглобин", "Инсулин", "С-пептид", "Глюкоза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Гликированный гемоглобин (HbA1c)", "Инсулин", "С-пептид", "Глюкоза в крови"], "sum": 2165}, "00-014": {"g": "heart", "n": "Холестерин: основной профиль", "d": "Общий холестерин, его фракции ЛПВП и ЛПНП и триглицериды.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "sum": null}, "00-099.1": {"g": "heart", "n": "Холестерин: развёрнутый профиль", "d": "Всё из основного профиля и индекс атерогенности.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "sum": null}, "04.25.008": {"g": "heart", "n": "Сердце и сосуды: расширенный набор", "d": "Липидный профиль, свёртываемость крови, гомоцистеин и ферменты — набор, по которому врач оценивает риск болезней сердца и сосудов.", "parts": ["Общий анализ крови", "Липидный профиль", "ЛДГ", "АСТ", "Коагулограмма", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Липидный профиль развёрнутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)", "Лактатдегидрогеназа (ЛДГ)", "Аспартатаминотрансфераза (АСТ)", "Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)", "Гомоцистеин"], "sum": 3730}, "04.25.004": {"g": "thyroid", "n": "Щитовидная железа: основной набор", "d": "ТТГ и свободные гормоны Т3 и Т4.", "parts": ["ТТГ", "Т3 свободный", "Т4 свободный"], "full": ["Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)"], "sum": 1030}, "04.25.003": {"g": "thyroid", "n": "Щитовидная железа: расширенный набор", "d": "Всё из основного набора, а также антитела к ТПО и общий анализ крови.", "parts": ["Общий анализ крови", "ТТГ", "Т3 свободный", "Т4 свободный", "Антитела к ТПО"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)", "АТ к тиреоидной пероксидазе (анти-ТПО)"], "sum": 1940}, "04.25.009": {"g": "kidney", "n": "Почки", "d": "Креатинин и мочевина показывают, как почки выводят продукты обмена; в наборе также электролиты и щелочная фосфатаза.", "parts": ["Общий анализ крови", "Мочевина", "Креатинин", "Калий, натрий, хлор", "Щелочная фосфатаза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Мочевина в крови", "Креатинин в крови", "Калий, натрий, хлориды (K/Na/Cl)", "Щелочная фосфатаза"], "sum": 1180}, "04.25.006": {"g": "joints", "n": "Суставы и воспаление", "d": "Ревматоидный фактор, СРБ, АСЛО и мочевая кислота — анализы, которые врач назначает при болях и воспалении в суставах.", "parts": ["Общий анализ крови", "Ревматоидный фактор", "Мочевая кислота", "СРБ", "АСЛО", "АЛТ", "АСТ"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Ревматоидный фактор", "Мочевая кислота в крови", "С-реактивный белок (СРБ)", "Антистрептолизин-О (АСЛО)", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)"], "sum": 2100}, "04.25.013": {"g": "onco", "n": "Онкомаркеры для женщин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "РЭА", "АФП", "CA 15-3", "CA 19-9", "CA 72-4", "CA 125"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Раково-эмбриональный антиген (РЭА)", "Альфа-фетопротеин (АФП)", "CA 15-3", "СА 19-9", "СА 72-4", "Раковый антиген 125 (CA 125)"], "sum": 4235, "nosave": true}, "04.25.014": {"g": "onco", "n": "Онкомаркеры для мужчин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "АФП", "ПСА общий и свободный", "РЭА", "CA 19-9", "CA 72-4"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Альфа-фетопротеин (АФП)", "Простатический специфический антиген (ПСА), соотношение своб./общ.", "Раково-эмбриональный антиген (РЭА)", "СА 19-9", "СА 72-4"], "sum": 3595, "nosave": true, "prep2": "ПСА"}, "00-094": {"g": "hosp", "n": "Госпитальный скрининг", "d": "ВИЧ, гепатиты B и C, сифилис — анализы, которые обычно просят перед плановой госпитализацией.", "parts": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "full": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "sum": null}};
+  var CXX = {"04.25.015": {"g": "all", "n": "Чек-ап всего организма", "d": "Основные показатели крови, сахар, холестерин, работа печени и почек, щитовидная железа и витамин D — за один визит.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "ТТГ", "Холестерин общий", "АЛТ", "АСТ", "Триглицериды", "Креатинин", "Мочевина", "Общий белок", "Билирубин общий", "ГГТ", "Кальций", "Гликированный гемоглобин", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Тиреотропный гормон (ТТГ)", "Холестерин общий", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)", "Триглицериды", "Креатинин в крови", "Мочевина в крови", "Общий белок в крови", "Билирубин общий", "Гамма-глютамилтранспептидаза (ГГТ)", "Кальций в крови", "Гликированный гемоглобин (HbA1c)", "Гомоцистеин"], "sum": 5380, "pp": [470, 980, 215, 350, 170, 170, 170, 160, 160, 160, 140, 160, 155, 180, 490, 1250]}, "04.25.005": {"g": "kids", "n": "Чек-ап для детей и подростков", "d": "Общий анализ крови, железо и витамин D, сахар и показатели работы печени — для ребёнка или подростка.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "Ферритин", "Гликированный гемоглобин", "Глюкоза", "ГГТ", "Билирубин общий", "Билирубин прямой", "Билирубин непрямой", "Общий белок", "Кальций"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Ферритин", "Гликированный гемоглобин (HbA1c)", "Глюкоза в крови", "Гамма-глютамилтранспептидаза (ГГТ)", "Билирубин общий", "Билирубин прямой (связанный)", "Билирубин непрямой (свободный)", "Общий белок в крови", "Кальций в крови"], "sum": 3820, "pp": [470, 980, 215, 420, 490, 150, 155, 160, 160, 300, 140, 180]}, "04.25.011": {"g": "women", "n": "Женские гормоны: основной набор", "d": "Эстрадиол, прогестерон, ФСГ, ЛГ, пролактин и ТТГ. Сдают в день цикла, который назвал врач.", "parts": ["Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ"], "full": ["Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)"], "sum": 2140, "pp": [330, 330, 370, 380, 380, 350]}, "04.25.010": {"g": "women", "n": "Женские гормоны: расширенный набор", "d": "Всё из основного набора, а также тестостерон, ДГЭА-С, ГСПГ и общий анализ крови. Сдают в день цикла, который назвал врач.", "parts": ["Общий анализ крови", "Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ", "ГСПГ", "ДГЭА-С", "Тестостерон общий"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)", "Глобулин, связывающий половые гормоны (ГСПГ)", "ДГЭА-С", "Тестостерон общий"], "sum": 3805, "pp": [470, 330, 330, 370, 380, 380, 350, 455, 380, 360]}, "04.25.012": {"g": "men", "n": "Мужские гормоны", "d": "Тестостерон, эстрадиол, ГСПГ, пролактин, прогестерон и общий анализ крови.", "parts": ["Общий анализ крови", "Тестостерон общий", "Эстрадиол", "ГСПГ", "Пролактин", "Прогестерон"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тестостерон общий", "Эстрадиол (Е2)", "Глобулин, связывающий половые гормоны (ГСПГ)", "Пролактин", "Прогестерон"], "sum": 2325, "pp": [470, 360, 330, 455, 380, 330]}, "04.25.002": {"g": "blood", "n": "Анемия: основной набор", "d": "Гемоглобин и показатели обмена железа: ферритин, железо, трансферрин.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "Трансферрин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Трансферрин"], "sum": 1485, "pp": [470, 215, 420, 380]}, "04.25.001": {"g": "blood", "n": "Анемия: расширенный набор", "d": "Всё из основного набора, а также витамины B12 и D, фолиевая кислота и ОЖСС.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "ОЖСС", "Трансферрин", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe", "Трансферрин", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 4385, "pp": [470, 215, 420, 300, 380, 720, 980, 900]}, "04.25.016": {"g": "blood", "n": "Витамины B12, D и фолиевая кислота", "d": "Витамины B12 и D, фолиевая кислота и общий анализ крови.", "parts": ["Общий анализ крови", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 3070, "pp": [470, 720, 980, 900]}, "04.25.007": {"g": "sugar", "n": "Сахар и инсулин", "d": "Глюкоза и гликированный гемоглобин показывают уровень сахара сейчас и за последние месяцы, инсулин и С-пептид — как вырабатывается инсулин.", "parts": ["Общий анализ крови", "Гликированный гемоглобин", "Инсулин", "С-пептид", "Глюкоза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Гликированный гемоглобин (HbA1c)", "Инсулин", "С-пептид", "Глюкоза в крови"], "sum": 2165, "pp": [470, 490, 555, 500, 150]}, "00-014": {"g": "heart", "n": "Холестерин: основной профиль", "d": "Общий холестерин, его фракции ЛПВП и ЛПНП и триглицериды.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "sum": null}, "00-099.1": {"g": "heart", "n": "Холестерин: развёрнутый профиль", "d": "Всё из основного профиля и индекс атерогенности.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "sum": null}, "04.25.008": {"g": "heart", "n": "Сердце и сосуды: расширенный набор", "d": "Липидный профиль, свёртываемость крови, гомоцистеин и ферменты — набор, по которому врач оценивает риск болезней сердца и сосудов.", "parts": ["Общий анализ крови", "Липидный профиль", "ЛДГ", "АСТ", "Коагулограмма", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Липидный профиль развёрнутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)", "Лактатдегидрогеназа (ЛДГ)", "Аспартатаминотрансфераза (АСТ)", "Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)", "Гомоцистеин"], "sum": 3730, "pp": [470, 620, 170, 170, 1050, 1250]}, "04.25.004": {"g": "thyroid", "n": "Щитовидная железа: основной набор", "d": "ТТГ и свободные гормоны Т3 и Т4.", "parts": ["ТТГ", "Т3 свободный", "Т4 свободный"], "full": ["Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)"], "sum": 1030, "pp": [350, 340, 340]}, "04.25.003": {"g": "thyroid", "n": "Щитовидная железа: расширенный набор", "d": "Всё из основного набора, а также антитела к ТПО и общий анализ крови.", "parts": ["Общий анализ крови", "ТТГ", "Т3 свободный", "Т4 свободный", "Антитела к ТПО"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)", "АТ к тиреоидной пероксидазе (анти-ТПО)"], "sum": 1940, "pp": [470, 350, 340, 340, 440]}, "04.25.009": {"g": "kidney", "n": "Почки", "d": "Креатинин и мочевина показывают, как почки выводят продукты обмена; в наборе также электролиты и щелочная фосфатаза.", "parts": ["Общий анализ крови", "Мочевина", "Креатинин", "Калий, натрий, хлор", "Щелочная фосфатаза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Мочевина в крови", "Креатинин в крови", "Калий, натрий, хлориды (K/Na/Cl)", "Щелочная фосфатаза"], "sum": 1180, "pp": [470, 160, 160, 230, 160]}, "04.25.006": {"g": "joints", "n": "Суставы и воспаление", "d": "Ревматоидный фактор, СРБ, АСЛО и мочевая кислота — анализы, которые врач назначает при болях и воспалении в суставах.", "parts": ["Общий анализ крови", "Ревматоидный фактор", "Мочевая кислота", "СРБ", "АСЛО", "АЛТ", "АСТ"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Ревматоидный фактор", "Мочевая кислота в крови", "С-реактивный белок (СРБ)", "Антистрептолизин-О (АСЛО)", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)"], "sum": 2100, "pp": [470, 320, 140, 380, 450, 170, 170]}, "04.25.013": {"g": "onco", "n": "Онкомаркеры для женщин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "РЭА", "АФП", "CA 15-3", "CA 19-9", "CA 72-4", "CA 125"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Раково-эмбриональный антиген (РЭА)", "Альфа-фетопротеин (АФП)", "CA 15-3", "СА 19-9", "СА 72-4", "Раковый антиген 125 (CA 125)"], "sum": 4235, "nosave": true, "pp": [470, 615, 360, 800, 590, 820, 580]}, "04.25.014": {"g": "onco", "n": "Онкомаркеры для мужчин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "АФП", "ПСА общий и свободный", "РЭА", "CA 19-9", "CA 72-4"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Альфа-фетопротеин (АФП)", "Простатический специфический антиген (ПСА), соотношение своб./общ.", "Раково-эмбриональный антиген (РЭА)", "СА 19-9", "СА 72-4"], "sum": 3595, "nosave": true, "prep2": "ПСА", "pp": [470, 360, 740, 615, 590, 820]}, "00-094": {"g": "hosp", "n": "Госпитальный скрининг", "d": "ВИЧ, гепатиты B и C, сифилис — анализы, которые обычно просят перед плановой госпитализацией.", "parts": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "full": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "sum": null}};
   var CXG = [{"id": "all", "n": "Для всех", "c": ["04.25.015"]}, {"id": "kids", "n": "Детям", "c": ["04.25.005"]}, {"id": "women", "n": "Женщинам", "c": ["04.25.011", "04.25.010"]}, {"id": "men", "n": "Мужчинам", "c": ["04.25.012"]}, {"id": "blood", "n": "Кровь, железо и витамины", "c": ["04.25.002", "04.25.001", "04.25.016"]}, {"id": "sugar", "n": "Сахар", "c": ["04.25.007"]}, {"id": "heart", "n": "Сердце и сосуды", "c": ["00-014", "00-099.1", "04.25.008"]}, {"id": "thyroid", "n": "Щитовидная железа", "c": ["04.25.004", "04.25.003"]}, {"id": "kidney", "n": "Почки", "c": ["04.25.009"]}, {"id": "joints", "n": "Суставы", "c": ["04.25.006"]}, {"id": "onco", "n": "Онкомаркеры", "c": ["04.25.013", "04.25.014"]}, {"id": "hosp", "n": "Перед госпитализацией", "c": ["00-094"]}];
   function renderCheckups() {
     if ($("#cx-list").innerHTML) return; // static content; cart buttons are kept in sync by syncCart()
+    var R = CXX["04.25.015"], rl = R.parts.map(function (p, i) { return '<li><span>' + esc(p) + '</span><span class="num">' + rub(R.pp[i]) + "</span></li>"; });
+    $("#cx-receipt").innerHTML = '<div class="rc-h"><b>Чек-ап всего организма</b><span>' + nAn(R.parts.length) + ' · результат через 2 дня</span></div><ul class="rc-l">' + rl.slice(0, 8).join("") + '</ul><details class="rc-more"><summary>Ещё ' + nAn(rl.length - 8) + '</summary><ul class="rc-l">' + rl.slice(8).join("") + '</ul></details>' +
+      '<div class="rc-t"><span>Те же анализы по&nbsp;отдельности</span><span class="num">' + rub(R.sum) + '</span></div><div class="rc-t rc-big"><span>В наборе</span><b class="num">' + rub(CX["04.25.015"].p) + '</b></div><p class="rc-save">Экономия ' + rub(R.sum - CX["04.25.015"].p) + '</p><p class="rc-draw">+ взятие крови 200&nbsp;₽, оплачивается отдельно</p><div class="rc-act">' + buyBtn("04.25.015") + '<button class="linkbtn" type="button" data-jump="cx-04.25.015">Подготовка и&nbsp;описание</button></div>';
     $("#cx-nav").innerHTML = CXG.map(function (g) { return '<button class="chip" type="button" data-jump="cxg-' + g.id + '">' + esc(g.n) + "</button>"; }).join("");
     $("#cx-list").innerHTML = CXG.map(function (g) {
       return '<section class="cx-grp' + (g.id === "hosp" ? " cx-small" : "") + '" id="cxg-' + g.id + '"><h2>' + esc(g.n) + "</h2>" + g.c.map(cxCard).join("") + "</section>";
     }).join("");
   }
+  var EXPL = { "АЛТ": "АЛТ — фермент печени", "АСТ": "АСТ — фермент печени", "ГГТ": "ГГТ — фермент печени", "ЛДГ": "ЛДГ — фермент клеток", "ТТГ": "ТТГ — гормон, управляющий щитовидной железой", "Т3 свободный": "Т3 свободный — гормон щитовидной железы", "Т4 свободный": "Т4 свободный — гормон щитовидной железы", "Антитела к ТПО": "Антитела к ТПО (щитовидная железа)", "ГСПГ": "ГСПГ — белок, связывающий половые гормоны", "ДГЭА-С": "ДГЭА-С — гормон надпочечников", "ФСГ": "ФСГ — гормон гипофиза", "ЛГ": "ЛГ — гормон гипофиза", "ОЖСС": "ОЖСС — способность крови связывать железо", "СРБ": "СРБ — белок воспаления", "АСЛО": "АСЛО — антитела к стрептококку", "РЭА": "РЭА — онкомаркер", "АФП": "АФП — онкомаркер", "CA 125": "CA 125 — онкомаркер", "CA 15-3": "CA 15-3 — онкомаркер", "CA 19-9": "CA 19-9 — онкомаркер", "CA 72-4": "CA 72-4 — онкомаркер", "С-пептид": "С-пептид — показатель выработки инсулина", "Гликированный гемоглобин": "Гликированный гемоглобин — сахар за 2–3 месяца", "Коагулограмма": "Коагулограмма — свёртываемость крови", "Гомоцистеин": "Гомоцистеин — аминокислота крови", "ЛПВП": "ЛПВП — «хороший» холестерин", "ЛПНП": "ЛПНП — «плохой» холестерин" };
+  function cxMis(c) { return (CX[c].mis || "").split(":")[0].split(" (")[0].replace(/\s+/g, " ").trim(); }
   function cxCard(c) {
     var x = CX[c], e = CXX[c];
-    var parts = '<ul class="cxc-parts">' + e.parts.map(function (p, i) { return "<li" + (e.full[i] !== p ? ' title="' + esc(e.full[i]) + '"' : "") + ">" + esc(p) + "</li>"; }).join("") + "</ul>";
+    var parts = '<ul class="cxc-parts">' + e.parts.map(function (p) { return "<li>" + esc(EXPL[p] || p) + "</li>"; }).join("") + "</ul>";
     var save = e.sum && !e.nosave ? '<span class="num">по&nbsp;отдельности&nbsp;— ' + rub(e.sum) + '</span><span class="save num">экономия ' + rub(e.sum - x.p) + "</span>" : "";
-    return '<article class="cxc" id="cx-' + esc(c) + '"><div class="cxc-main"><h3>' + esc(e.n) + '</h3><p class="cxc-desc">' + typo(e.d) + "</p>" + parts + "</div>" +
+    return '<article class="cxc" id="cx-' + esc(c) + '"><div class="cxc-main"><h3>' + esc(e.n) + '</h3><p class="cxc-ref">Код ' + esc(c) + " · в направлении: «" + esc(cxMis(c)) + '»</p><p class="cxc-desc">' + typo(e.d) + "</p>" + parts + "</div>" +
       '<div class="cxc-side"><div class="cxc-price"><b class="num">' + rub(x.p) + "</b>" + save + "</div>" +
       '<p class="cxc-meta">' + nAn(e.parts.length) + " · " + (x.r ? typo("результат через " + x.r) : "срок — по телефону") + "</p>" +
       '<p class="cxc-prep">' + prepBtn(x.prep) + (e.prep2 ? " " + prepBtn(e.prep2) : "") + '</p><p class="cxc-draw">+ взятие крови 200&nbsp;₽</p>' + buyBtn(c) + "</div></article>";
@@ -2394,6 +2487,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   var curHash = null;
   function go(target, push) {
     var p = target.split(":"), v = p[0];
+    if (v === "cx") { go("checkups", push); var to = document.getElementById("cx-" + p[1]); if (to) { to.scrollIntoView({ block: "start" }); to.classList.remove("flash"); void to.offsetWidth; to.classList.add("flash"); } return; }
     if (v === "catalog" && p[1] === "checkups") v = "checkups"; // старые ссылки «catalog:checkups» ведут на экран чек-апов
     if (v === "catalog") { state.view = "catalog"; state.cat = p[1] || state.cat; }
     else if (v === "card") { state.view = "card"; state.code = p[1] || state.code; }
