@@ -647,27 +647,6 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
 .ok-ic .ico { width: 28px; height: 28px; stroke-width: 2.4; }
 .okh + .demo { max-width: 780px; margin-bottom: 8px; }
 
-/* checkups */
-.cx-grp { scroll-margin-top: calc(var(--sw-h, 0px) + 124px); }
-.cx-grp > h2 { font-size: 24px; padding: 36px 0 14px; }
-.cx { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 290px) 220px; gap: 12px 36px; align-items: start; padding: 22px 4px; border-top: 1px solid var(--line); }
-.cx:last-child { border-bottom: 1px solid var(--line); }
-.cx h3 { font: 700 19px/1.3 var(--text); letter-spacing: 0; }
-.cx-code { font-size: 13px; color: var(--muted); margin-top: 3px; overflow-wrap: anywhere; }
-.cx-meta { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14px; color: var(--muted); margin-top: 8px; }
-.cx-meta span { display: inline-flex; align-items: center; gap: 7px; }
-.cx-meta .ico { width: 16px; height: 16px; }
-.cx .parts summary { margin-top: 10px; }
-.cx-none { margin-top: 10px; font-size: 14px; color: var(--muted); }
-.cx-prep { font-size: 14px; line-height: 1.5; }
-.cx-lbl { font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
-.cx-prep .prep-k { margin-right: 6px; }
-.cx-buy { display: grid; justify-items: end; gap: 12px; }
-.cx-buy .price small { max-width: 24ch; margin-left: auto; margin-top: 3px; line-height: 1.35; }
-.cx-small > h2 { font-size: 19px; padding-top: 30px; }
-.cx-mini { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px 20px; align-items: center; padding: 14px 4px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 14.5px; }
-.cx-mini b { font-size: 15px; }
-.cx-mini .btn { padding: 9px 14px; font-size: 14px; }
 .cx-foot { margin-top: 26px; display: grid; gap: 6px; font-size: 14.5px; color: var(--muted); max-width: 80ch; }
 
 /* cart, checkout, order */
@@ -798,12 +777,6 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 960px) {
   .pg-h .lede { font-size: 17px; }
-  .cx { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 18px 0; }
-  .cx-buy { grid-template-columns: minmax(0, 1fr) auto; align-items: center; justify-items: start; }
-  .cx-buy .price { text-align: left; }
-  .cx-buy .price small { margin-left: 0; }
-  .cx-mini { grid-template-columns: minmax(0, 1fr) auto; }
-  .cx-mini .btn { grid-column: 1 / -1; justify-self: start; }
   .cart-g { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .citem { gap: 2px 10px; padding: 14px 0; }
   .cempty { padding: 26px 20px; }
@@ -875,9 +848,9 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .hv-cells i.l { background: var(--lime); }
 @media (max-width: 520px) { .hv-cells { display: none; } }
 .hv-who { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.hv-who > div, .cx-why > div { display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: 16px; background: var(--surface-2); }
-.hv-who b, .cx-why b { font-size: 18px; line-height: 1.3; }
-.hv-who p, .cx-why p { font-size: 15px; color: var(--muted); }
+.hv-who > div { display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: 16px; background: var(--surface-2); }
+.hv-who b { font-size: 18px; line-height: 1.3; }
+.hv-who p { font-size: 15px; color: var(--muted); }
 .how-plain .how-in { background: var(--surface-2); }
 .how-plain .how-n { background: var(--navy); color: #FFF; }
 .faq { max-width: 860px; }
@@ -889,96 +862,42 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .faq details[open] summary::after { content: "−"; }
 .faq details p { margin-top: 8px; color: var(--muted); max-width: 70ch; }
 
-/* ---------- checkups 2 ---------- */
-.cxhero { background: var(--navy-soft); }
-.cxhero .crumbs { padding-top: 22px; }
-.cxhero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-block: 18px 52px; }
-.cxhero h1 { font-size: clamp(34px, 4.4vw, 52px); }
-.cxhero .lede { margin-top: 14px; max-width: 50ch; }
-.cx-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 26px 0 0; padding: 0; }
-.cx-facts li { display: grid; gap: 2px; max-width: 17ch; }
-.cx-facts b { font: 800 28px/1.1 var(--text); }
-.cx-facts span { font-size: 14px; color: var(--muted); line-height: 1.4; }
-.cx-feature { display: grid; gap: 10px; padding: 28px 30px; border-radius: 24px; background: var(--navy); color: #FFF; text-decoration: none; transition: transform .2s var(--ease); }
-.cx-feature:hover { transform: translateY(-2px); }
-.cx-feature-k { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lime); }
-.cx-feature > b { font: 700 26px/1.15 var(--display); }
-.cx-feature > span:nth-of-type(2) { color: var(--on-navy-muted); font-size: 15px; }
-.cx-feature-p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 6px; }
-.cx-feature-p b { font-size: 30px; font-weight: 800; color: var(--lime); }
-.cx-feature-p span { color: var(--on-navy-muted); font-size: 14.5px; }
-.cx-feature-go { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px; margin-top: 4px; }
-.cx-qnav-wrap { position: sticky; top: calc(var(--sw-h, 0px) + 112px); z-index: 6; background: #FFF; box-shadow: 0 1px 0 var(--line); }
-@media (min-width: 961px) { .cx-qnav { flex-wrap: wrap; overflow: visible; } }
-.cx-qnav { display: flex; gap: 6px; overflow-x: auto; padding-block: 12px; scrollbar-width: none; }
-.cx-qnav::-webkit-scrollbar { display: none; }
-.cx-qnav .chip { flex: none; }
-.cx-why { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
-.cx-start { margin-top: 48px; }
-.cx-start h2, .cx-grp h2 { font-size: clamp(26px, 3vw, 34px); }
-.cx-start-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
-.cx-start-list button { display: grid; gap: 4px; text-align: left; padding: 16px 18px; border: 0; border-radius: var(--r-card); background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); cursor: pointer; transition: box-shadow .2s var(--ease); }
-.cx-start-list button:hover { box-shadow: inset 0 0 0 1.5px var(--navy); }
-.cx-start-list b { font-size: 16px; line-height: 1.3; }
-.cx-start-list span { font-size: 14px; color: var(--muted); }
-.cx-note { margin-top: 12px; font-size: 15px; color: var(--muted); }
-.cx-grp { margin-top: 48px; scroll-margin-top: calc(var(--sw-h, 0px) + 180px); }
-.cx-grp h2 { margin-bottom: 16px; }
-.cxc { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 28px; padding: 24px 26px; border-radius: 18px; box-shadow: inset 0 0 0 1.5px var(--line); margin-bottom: 14px; scroll-margin-top: calc(var(--sw-h, 0px) + 180px); }
-.cxc h3 { font-size: 22px; }
-.cxc h3 a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--line); }
-.cxc h3 a:hover { text-decoration-color: currentColor; }
-.cxc-desc { margin-top: 8px; color: var(--muted); font-size: 15.5px; max-width: 62ch; }
-.cxc-parts { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; }
-.cxc-parts li { font-size: 13.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); }
-.cxc-parts li[title] { cursor: help; }
-.cxc-side { display: grid; gap: 10px; align-content: start; }
-.cxc-price { display: grid; gap: 2px; }
-.cxc-price b { font-size: 26px; font-weight: 800; }
-.cxc-price span { font-size: 14px; color: var(--muted); }
-.cxc-price .save { color: var(--ok); font-weight: 700; }
-.cxc-meta { font-size: 14px; color: var(--muted); }
-.cxc-draw { font-size: 14px; color: var(--muted); margin-top: -4px; }
-.cxc-prep { display: flex; flex-wrap: wrap; gap: 6px; }
-.cxc-side .btn { justify-self: start; }
-.cx-small .cxc { background: var(--surface-2); box-shadow: none; }
+/* ---------- checkups: all sets at a glance ---------- */
+.cxhero { background: var(--navy); color: var(--on-navy); }
+.cxhero .crumbs { color: var(--on-navy-muted); }
+.cxhero-in { padding-block: 14px 40px; }
+.cxhero h1 { font-size: clamp(34px, 4.4vw, 52px); color: #FFF; }
+.cxhero .lede { margin-top: 12px; max-width: 58ch; color: var(--on-navy); }
+.cxhero .lede b { color: var(--lime); }
+.cxz { margin-top: 40px; }
+.cxz > h2 { font-size: clamp(24px, 2.6vw, 30px); margin-bottom: 18px; }
+.cxz-g { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 28px; align-items: start; }
+.cxb { border-top: 1px solid var(--navy); padding-top: 14px; }
+.cxb h3 { font: 700 19px/1.3 var(--text); letter-spacing: 0; }
+.cxb ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.cxr { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 4px 12px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.cxr:last-child { border-bottom: 0; }
+.cxr-n { font-weight: 700; font-size: 17px; line-height: 1.3; color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--line); }
+.cxr-n:hover { text-decoration-color: currentColor; }
+.cxr-m { grid-column: 1; display: flex; flex-wrap: wrap; gap: 2px 10px; font-size: 16px; color: var(--muted); }
+.cxr-m b { color: var(--ink); font-weight: 800; }
+.cxr-m .save { color: var(--ok); font-weight: 700; }
+.cxr .addbtn { grid-column: 2; grid-row: 1 / span 2; }
 .cx-faq { margin-top: 56px; }
+@media (max-width: 1100px) { .cxz-g { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 960px) {
   .dtasks a { padding: 14px 16px; }
-  .memos, .hv-who, .cx-why { grid-template-columns: minmax(0, 1fr); }
-  .hvhero-grid, .cxhero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 10px 32px; }
-  .cx-start-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .cx-qnav-wrap { top: calc(var(--sw-h, 0px) + 61px); }
-  .cxc { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 20px; }
-  .cxc h3 { font-size: 20px; }
-  .cx-facts b { font-size: 24px; }
+  .memos, .hv-who { grid-template-columns: minmax(0, 1fr); }
+  .hvhero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 10px 32px; }
+  .cxhero-in { padding-block: 10px 28px; }
 }
-@media (max-width: 520px) { .cx-start-list { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .cxz-g { grid-template-columns: minmax(0, 1fr); gap: 24px; } .cxz { margin-top: 28px; } }
 
 /* ---------- path & readability pass ---------- */
 .c-name .code { font-size: 14px; }
 .c-prep small, .dtab thead th { font-size: 14px; }
 .prep, .prep-k { font-size: 14px; }
-.dtasks span, .memo span:last-child, .hv-who p, .cxc-desc, .dlegend .lg ul, .faq details p, .docs2 p { font-size: 16px; }
-.cxc-parts li { font-size: 14px; }
-.cxc-ref { margin-top: 4px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.cxc.flash { box-shadow: inset 0 0 0 2px var(--navy); transition: box-shadow 1.2s var(--ease); }
-.rcpt { position: relative; background: #FFF; color: var(--ink); border-radius: 6px; padding: 24px 26px 22px; box-shadow: 0 10px 30px rgba(20,55,75,.14); font-size: 16px; }
-.rcpt::after { content: ""; position: absolute; left: 0; right: 0; bottom: -9px; height: 10px; background: radial-gradient(circle at 7px 0, transparent 6px, #FFF 6.5px) 0 0 / 14px 10px repeat-x; }
-.rc-h { display: grid; gap: 2px; padding-bottom: 12px; border-bottom: 1.5px dashed var(--line); }
-.rc-h b { font: 700 22px/1.2 var(--display); }
-.rc-h span { font-size: 15px; color: var(--muted); }
-.rc-l { list-style: none; margin: 0; padding: 8px 0 0; }
-.rc-l li { display: flex; justify-content: space-between; gap: 16px; padding: 4px 0; font-size: 15px; }
-.rc-l li span:last-child { color: var(--muted); white-space: nowrap; }
-.rc-more summary { cursor: pointer; padding: 6px 0 2px; font-size: 15px; font-weight: 700; color: var(--navy); }
-.rc-t { display: flex; justify-content: space-between; gap: 16px; padding-top: 10px; margin-top: 8px; border-top: 1.5px dashed var(--line); font-size: 15px; color: var(--muted); }
-.rc-big { border-top: 0; margin-top: 0; padding-top: 2px; color: var(--ink); align-items: baseline; }
-.rc-big span { font-weight: 700; font-size: 17px; }
-.rc-big b { font-size: 30px; font-weight: 800; }
-.rc-save { margin-top: 4px; font-size: 15px; font-weight: 700; color: var(--ok); }
-.rc-draw { font-size: 16px; color: var(--muted); margin-top: 2px; }
-.rc-act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 16px; }
+.dtasks span, .memo span:last-child, .hv-who p, .dlegend .lg ul, .faq details p, .docs2 p { font-size: 16px; }
 .hv-who { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 48px; }
 .hv-who li { display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; }
 .hv-who li .opt-ic { grid-row: span 2; }
@@ -991,7 +910,6 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 960px) {
   .hv-who { grid-template-columns: minmax(0, 1fr); }
   .hv-area-in { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; }
-  .rcpt { padding: 20px 18px 18px; }
 }
 
 /* cart: one blood draw, several results */
@@ -1014,9 +932,9 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 520px) { .samedraw { padding: 20px 16px 6px; } .sd-top { grid-template-columns: 1fr; gap: 12px; } }
 
 /* readability floor: running text >= 16px (Varvara, 26.10.2026) */
-.rc-h span, .rc-l li, .rc-more summary, .rc-t, .rc-save, .cxc-ref, .cxc-meta, .cxc-draw, .cx-foot p, .cxc-price span,
+.cx-foot p,
 .hv-card p, .dstat, .parts summary, .parts ul, .c-ready, .c-mat, .dtab td, .crumbs, .crumbs button { font-size: 16px; }
-.cxc-parts li, .c-name .code, .chip, .chip .n, .prep, .prep-k, .dtab thead th { font-size: 14px; }
+.c-name .code, .chip, .chip .n, .prep, .prep-k, .dtab thead th { font-size: 14px; }
 </style>
 </head>
 <body>
@@ -1063,9 +981,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
         <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
         <button type="button" data-go="checkups" data-nav="checkups">Чек-апы</button>
         <button type="button" data-go="home-visit" data-nav="home-visit">Анализы на дому</button>
-        <button type="button" data-go="points" data-nav="points">Пункты</button>
+        <button type="button" data-go="points" data-nav="points">Где сдать анализы</button>
         <button type="button" data-go="doctors" data-nav="doctors">Врачам</button>
-        <button type="button" data-go="doctors:clinics">Клиникам</button>
       </nav>
       <span class="grow"></span>
       <button class="cartbtn" type="button" data-go="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина <span class="count num" data-cart>0</span></button>
@@ -1080,9 +997,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     <button type="button" data-go="checkups">Чек-апы</button>
     <button type="button" data-go="home-visit">Анализы на дому</button>
     <button type="button" data-go="results">Результаты анализов</button>
-    <button type="button" data-go="points">Пункты</button>
+    <button type="button" data-go="points">Где сдать анализы</button>
     <button type="button" data-go="doctors">Врачам</button>
-    <button type="button" data-go="doctors:clinics">Клиникам</button>
     <a class="mm-phone" href="tel:88002017830">8 800 201 78 30</a>
   </div>
 </div>
@@ -1165,7 +1081,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
         <h2>Как сдать анализ</h2>
         <ol class="how-list">
           <li><span class="how-n num" aria-hidden="true">1</span><h3>Выберите анализ</h3><p>Найдите его по названию в поиске или в разделах. Если не знаете, какой анализ нужен, позвоните: 8 800 201 78 30.</p></li>
-          <li><span class="how-n num" aria-hidden="true">2</span><h3>Сдайте в пункте или дома</h3><p>Подготовка указана в описании анализа. Медсестра приедет домой бесплатно при заказе от 1&nbsp;500&nbsp;₽.</p></li>
+          <li><span class="how-n num" aria-hidden="true">2</span><h3>Сдайте в пункте или дома</h3><p>Подготовка указана в описании анализа. Выезд медсестры на&nbsp;дом&nbsp;— бесплатно при заказе от&nbsp;1&nbsp;500&nbsp;₽.</p></li>
           <li><span class="how-n num" aria-hidden="true">3</span><h3>Получите результат</h3><p>Срок указан у каждого анализа. Результат — в личном кабинете или в пункте.</p></li>
         </ol>
       </div>
@@ -1247,7 +1163,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     <div class="pts">
       <div class="pts-side">
         <div class="pts-head" data-note="pts1">
-          <h1>Пункты приёма анализов</h1>
+          <h1>Где сдать анализы</h1>
           <p>29&nbsp;пунктов в&nbsp;9&nbsp;регионах. Если часы не указаны, уточните их по&nbsp;телефону <a href="tel:88002017830" class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</a>.</p>
         </div>
         <div class="pts-list" id="pts-list" data-note="pts2"></div>
@@ -1331,20 +1247,14 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     <div class="cxhero">
       <div class="wrap">
         <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Чек-апы</span></div>
-        <div class="cxhero-grid">
-          <div data-note="cx1">
-            <h1>Чек-апы</h1>
-            <p class="lede">Набор анализов, который сдают за&nbsp;один визит в&nbsp;пункт. Одна подготовка, одна поездка и&nbsp;цена ниже, чем если сдавать те&nbsp;же анализы по&nbsp;отдельности.</p>
-
-          </div>
-          <div class="rcpt" id="cx-receipt" aria-label="Чек-ап всего организма: состав и цены"></div>
+        <div class="cxhero-in" data-note="cx1">
+          <h1>Чек-апы</h1>
+          <p class="lede">Наборы анализов, которые сдают за&nbsp;один визит и&nbsp;с&nbsp;одной подготовкой. В&nbsp;наборе до&nbsp;<b id="cx-max"></b> дешевле, чем те&nbsp;же анализы по&nbsp;отдельности.</p>
         </div>
       </div>
     </div>
-    <div class="cx-qnav-wrap"><div class="wrap"><nav class="cx-qnav" id="cx-nav" aria-label="Чек-апы по темам"></nav></div></div>
     <div class="wrap pg">
-
-      <div id="cx-list"></div>
+      <div id="cx-map"></div>
       <section class="faq cx-faq">
         <h2>Вопросы о&nbsp;чек-апах</h2>
         <details><summary>Нужен ли чек-ап, если ничего не&nbsp;беспокоит?</summary><p>Ежегодную проверку как раз сдают, когда ничего не&nbsp;беспокоит: так проще заметить изменения показателей. Какой набор нужен, определяет лечащий врач.</p></details>
@@ -1675,7 +1585,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
           <a href="#checkups" data-go="checkups">Чек-апы</a>
           <a href="#" data-scroll="promos">Акции</a>
           <a href="#home-visit" data-go="home-visit">Анализы на дому</a>
-          <a href="#points" data-go="points">Пункты</a>
+          <a href="#points" data-go="points">Где сдать анализы</a>
           <a href="#results" data-go="results">Результаты анализов</a>
         </nav>
         <nav class="f-col" aria-label="Врачам и клиникам"><h2 class="f-h">Врачам и клиникам</h2>
@@ -1698,7 +1608,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 <nav class="tabbar" aria-label="Быстрые разделы">
   <button type="button" data-go="catalog:blood" data-tab="catalog"><svg class="ico"><use href="#i-grid"/></svg>Анализы</button>
-  <button type="button" data-go="points" data-tab="points"><svg class="ico"><use href="#i-pin"/></svg>Пункты</button>
+  <button type="button" data-go="points" data-tab="points"><svg class="ico"><use href="#i-pin"/></svg>Где сдать</button>
   <button type="button" data-go="results" data-tab="results"><svg class="ico"><use href="#i-file"/></svg>Результаты</button>
   <button type="button" data-go="cart" data-tab="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина<span class="count num" data-cart>0</span></button>
 </nav>
@@ -2281,27 +2191,23 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   // checkups: groups by audience and topic; parts in short names, savings against the same tests bought separately
   var CXX = {"04.25.015": {"g": "all", "n": "Чек-ап всего организма", "d": "Основные показатели крови, сахар, холестерин, работа печени и почек, щитовидная железа и витамин D — за один визит.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "ТТГ", "Холестерин общий", "АЛТ", "АСТ", "Триглицериды", "Креатинин", "Мочевина", "Общий белок", "Билирубин общий", "ГГТ", "Кальций", "Гликированный гемоглобин", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Тиреотропный гормон (ТТГ)", "Холестерин общий", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)", "Триглицериды", "Креатинин в крови", "Мочевина в крови", "Общий белок в крови", "Билирубин общий", "Гамма-глютамилтранспептидаза (ГГТ)", "Кальций в крови", "Гликированный гемоглобин (HbA1c)", "Гомоцистеин"], "sum": 5380, "pp": [470, 980, 215, 350, 170, 170, 170, 160, 160, 160, 140, 160, 155, 180, 490, 1250]}, "04.25.005": {"g": "kids", "n": "Чек-ап для детей и подростков", "d": "Общий анализ крови, железо и витамин D, сахар и показатели работы печени — для ребёнка или подростка.", "parts": ["Общий анализ крови", "Витамин D", "Железо", "Ферритин", "Гликированный гемоглобин", "Глюкоза", "ГГТ", "Билирубин общий", "Билирубин прямой", "Билирубин непрямой", "Общий белок", "Кальций"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин D, 25-OH (25-гидроксикальциферол)", "Железо в крови", "Ферритин", "Гликированный гемоглобин (HbA1c)", "Глюкоза в крови", "Гамма-глютамилтранспептидаза (ГГТ)", "Билирубин общий", "Билирубин прямой (связанный)", "Билирубин непрямой (свободный)", "Общий белок в крови", "Кальций в крови"], "sum": 3820, "pp": [470, 980, 215, 420, 490, 150, 155, 160, 160, 300, 140, 180]}, "04.25.011": {"g": "women", "n": "Женские гормоны: основной набор", "d": "Эстрадиол, прогестерон, ФСГ, ЛГ, пролактин и ТТГ. Сдают в день цикла, который назвал врач.", "parts": ["Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ"], "full": ["Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)"], "sum": 2140, "pp": [330, 330, 370, 380, 380, 350]}, "04.25.010": {"g": "women", "n": "Женские гормоны: расширенный набор", "d": "Всё из основного набора, а также тестостерон, ДГЭА-С, ГСПГ и общий анализ крови. Сдают в день цикла, который назвал врач.", "parts": ["Общий анализ крови", "Эстрадиол", "Прогестерон", "ФСГ", "ЛГ", "Пролактин", "ТТГ", "ГСПГ", "ДГЭА-С", "Тестостерон общий"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Эстрадиол (Е2)", "Прогестерон", "Фолликулостимулирующий гормон (ФСГ)", "Лютеинизирующий гормон (ЛГ)", "Пролактин", "Тиреотропный гормон (ТТГ)", "Глобулин, связывающий половые гормоны (ГСПГ)", "ДГЭА-С", "Тестостерон общий"], "sum": 3805, "pp": [470, 330, 330, 370, 380, 380, 350, 455, 380, 360]}, "04.25.012": {"g": "men", "n": "Мужские гормоны", "d": "Тестостерон, эстрадиол, ГСПГ, пролактин, прогестерон и общий анализ крови.", "parts": ["Общий анализ крови", "Тестостерон общий", "Эстрадиол", "ГСПГ", "Пролактин", "Прогестерон"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тестостерон общий", "Эстрадиол (Е2)", "Глобулин, связывающий половые гормоны (ГСПГ)", "Пролактин", "Прогестерон"], "sum": 2325, "pp": [470, 360, 330, 455, 380, 330]}, "04.25.002": {"g": "blood", "n": "Анемия: основной набор", "d": "Гемоглобин и показатели обмена железа: ферритин, железо, трансферрин.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "Трансферрин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Трансферрин"], "sum": 1485, "pp": [470, 215, 420, 380]}, "04.25.001": {"g": "blood", "n": "Анемия: расширенный набор", "d": "Всё из основного набора, а также витамины B12 и D, фолиевая кислота и ОЖСС.", "parts": ["Общий анализ крови", "Железо", "Ферритин", "ОЖСС", "Трансферрин", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Железо в крови", "Ферритин", "Железосвязывающая способность сыворотки общая (ОЖСС), включ. Fe", "Трансферрин", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 4385, "pp": [470, 215, 420, 300, 380, 720, 980, 900]}, "04.25.016": {"g": "blood", "n": "Витамины B12, D и фолиевая кислота", "d": "Витамины B12 и D, фолиевая кислота и общий анализ крови.", "parts": ["Общий анализ крови", "Витамин B12", "Витамин D", "Фолиевая кислота"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Витамин B12 (цианокобаламин)", "Витамин D, 25-OH (25-гидроксикальциферол)", "Фолиевая кислота"], "sum": 3070, "pp": [470, 720, 980, 900]}, "04.25.007": {"g": "sugar", "n": "Сахар и инсулин", "d": "Глюкоза и гликированный гемоглобин показывают уровень сахара сейчас и за последние месяцы, инсулин и С-пептид — как вырабатывается инсулин.", "parts": ["Общий анализ крови", "Гликированный гемоглобин", "Инсулин", "С-пептид", "Глюкоза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Гликированный гемоглобин (HbA1c)", "Инсулин", "С-пептид", "Глюкоза в крови"], "sum": 2165, "pp": [470, 490, 555, 500, 150]}, "00-014": {"g": "heart", "n": "Холестерин: основной профиль", "d": "Общий холестерин, его фракции ЛПВП и ЛПНП и триглицериды.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий"], "sum": null}, "00-099.1": {"g": "heart", "n": "Холестерин: развёрнутый профиль", "d": "Всё из основного профиля и индекс атерогенности.", "parts": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "full": ["ЛПВП", "ЛПНП", "Триглицериды", "Холестерин общий", "Индекс атерогенности"], "sum": null}, "04.25.008": {"g": "heart", "n": "Сердце и сосуды: расширенный набор", "d": "Липидный профиль, свёртываемость крови, гомоцистеин и ферменты — набор, по которому врач оценивает риск болезней сердца и сосудов.", "parts": ["Общий анализ крови", "Липидный профиль", "ЛДГ", "АСТ", "Коагулограмма", "Гомоцистеин"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Липидный профиль развёрнутый (ЛПВП, ЛПНП, Триглицериды, Холестерин общий, Индекс атерогенности)", "Лактатдегидрогеназа (ЛДГ)", "Аспартатаминотрансфераза (АСТ)", "Коагулограмма (гемостаз) (АЧТВ, Протромбин (по Квику) + МНО, Протромбиновое время, Фибриноген, Антитромбин III)", "Гомоцистеин"], "sum": 3730, "pp": [470, 620, 170, 170, 1050, 1250]}, "04.25.004": {"g": "thyroid", "n": "Щитовидная железа: основной набор", "d": "ТТГ и свободные гормоны Т3 и Т4.", "parts": ["ТТГ", "Т3 свободный", "Т4 свободный"], "full": ["Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)"], "sum": 1030, "pp": [350, 340, 340]}, "04.25.003": {"g": "thyroid", "n": "Щитовидная железа: расширенный набор", "d": "Всё из основного набора, а также антитела к ТПО и общий анализ крови.", "parts": ["Общий анализ крови", "ТТГ", "Т3 свободный", "Т4 свободный", "Антитела к ТПО"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Тиреотропный гормон (ТТГ)", "Трийодтиронин свободный (Т3 свободный)", "Тироксин свободный (Т4 свободный)", "АТ к тиреоидной пероксидазе (анти-ТПО)"], "sum": 1940, "pp": [470, 350, 340, 340, 440]}, "04.25.009": {"g": "kidney", "n": "Почки", "d": "Креатинин и мочевина показывают, как почки выводят продукты обмена; в наборе также электролиты и щелочная фосфатаза.", "parts": ["Общий анализ крови", "Мочевина", "Креатинин", "Калий, натрий, хлор", "Щелочная фосфатаза"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Мочевина в крови", "Креатинин в крови", "Калий, натрий, хлориды (K/Na/Cl)", "Щелочная фосфатаза"], "sum": 1180, "pp": [470, 160, 160, 230, 160]}, "04.25.006": {"g": "joints", "n": "Суставы и воспаление", "d": "Ревматоидный фактор, СРБ, АСЛО и мочевая кислота — анализы, которые врач назначает при болях и воспалении в суставах.", "parts": ["Общий анализ крови", "Ревматоидный фактор", "Мочевая кислота", "СРБ", "АСЛО", "АЛТ", "АСТ"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Ревматоидный фактор", "Мочевая кислота в крови", "С-реактивный белок (СРБ)", "Антистрептолизин-О (АСЛО)", "Аланинаминотрансфераза (АЛТ)", "Аспартатаминотрансфераза (АСТ)"], "sum": 2100, "pp": [470, 320, 140, 380, 450, 170, 170]}, "04.25.013": {"g": "onco", "n": "Онкомаркеры для женщин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "РЭА", "АФП", "CA 15-3", "CA 19-9", "CA 72-4", "CA 125"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Раково-эмбриональный антиген (РЭА)", "Альфа-фетопротеин (АФП)", "CA 15-3", "СА 19-9", "СА 72-4", "Раковый антиген 125 (CA 125)"], "sum": 4235, "nosave": true, "pp": [470, 615, 360, 800, 590, 820, 580]}, "04.25.014": {"g": "onco", "n": "Онкомаркеры для мужчин", "d": "Онкомаркеры не ставят и не исключают диагноз. Набор назначает врач, чаще — для наблюдения.", "parts": ["Общий анализ крови", "АФП", "ПСА общий и свободный", "РЭА", "CA 19-9", "CA 72-4"], "full": ["Общий анализ крови (ОАК) развёрнутый", "Альфа-фетопротеин (АФП)", "Простатический специфический антиген (ПСА), соотношение своб./общ.", "Раково-эмбриональный антиген (РЭА)", "СА 19-9", "СА 72-4"], "sum": 3595, "nosave": true, "prep2": "ПСА", "pp": [470, 360, 740, 615, 590, 820]}, "00-094": {"g": "hosp", "n": "Госпитальный скрининг", "d": "ВИЧ, гепатиты B и C, сифилис — анализы, которые обычно просят перед плановой госпитализацией.", "parts": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "full": ["ВИЧ", "Гепатит B (HBsAg)", "Гепатит C", "Сифилис"], "sum": null}};
   var CXG = [{"id": "all", "n": "Для всех", "c": ["04.25.015"]}, {"id": "kids", "n": "Детям", "c": ["04.25.005"]}, {"id": "women", "n": "Женщинам", "c": ["04.25.011", "04.25.010"]}, {"id": "men", "n": "Мужчинам", "c": ["04.25.012"]}, {"id": "blood", "n": "Кровь, железо и витамины", "c": ["04.25.002", "04.25.001", "04.25.016"]}, {"id": "sugar", "n": "Сахар", "c": ["04.25.007"]}, {"id": "heart", "n": "Сердце и сосуды", "c": ["00-014", "00-099.1", "04.25.008"]}, {"id": "thyroid", "n": "Щитовидная железа", "c": ["04.25.004", "04.25.003"]}, {"id": "kidney", "n": "Почки", "c": ["04.25.009"]}, {"id": "joints", "n": "Суставы", "c": ["04.25.006"]}, {"id": "onco", "n": "Онкомаркеры", "c": ["04.25.013", "04.25.014"]}, {"id": "hosp", "n": "Перед госпитализацией", "c": ["00-094"]}];
+  // all sets on one screen: who it is for, then by topic; each row links to the set page
+  var CX_WHO = ["all", "kids", "women", "men"];
+  function cxSave(c) { var e = CXX[c]; return e.sum && !e.nosave ? Math.round((e.sum - CX[c].p) / e.sum * 100) : 0; }
+  function cxRow(c) {
+    var x = CX[c], e = CXX[c], sv = cxSave(c);
+    return '<li class="cxr"><a class="cxr-n" href="#card-' + esc(c) + '" data-go="card:' + esc(c) + '">' + esc(e.n) + '</a><span class="cxr-m"><b class="num">' + rub(x.p) + "</b><span>" + nAn(e.parts.length) + "</span>" + (sv ? '<span class="save">дешевле на&nbsp;' + sv + "&nbsp;%</span>" : "") + "</span>" + addBtn(c) + "</li>";
+  }
+  function cxZone(title, groups) {
+    return '<section class="cxz"><h2>' + title + '</h2><div class="cxz-g">' + groups.map(function (g) { return '<section class="cxb"><h3>' + esc(g.n) + "</h3><ul>" + g.c.map(cxRow).join("") + "</ul></section>"; }).join("") + "</div></section>";
+  }
   function renderCheckups() {
-    if ($("#cx-list").innerHTML) return; // static content; cart buttons are kept in sync by syncCart()
-    var R = CXX["04.25.015"], rl = R.parts.map(function (p, i) { return '<li><span>' + esc(p) + '</span><span class="num">' + rub(R.pp[i]) + "</span></li>"; });
-    $("#cx-receipt").innerHTML = '<div class="rc-h"><b>Чек-ап всего организма</b><span>' + nAn(R.parts.length) + ' · результат через 2 дня</span></div><ul class="rc-l">' + rl.slice(0, 8).join("") + '</ul><details class="rc-more"><summary>Ещё ' + nAn(rl.length - 8) + '</summary><ul class="rc-l">' + rl.slice(8).join("") + '</ul></details>' +
-      '<div class="rc-t"><span>Те же анализы по&nbsp;отдельности</span><span class="num">' + rub(R.sum) + '</span></div><div class="rc-t rc-big"><span>В наборе</span><b class="num">' + rub(CX["04.25.015"].p) + '</b></div><p class="rc-save">Экономия ' + rub(R.sum - CX["04.25.015"].p) + '</p><p class="rc-draw">+ взятие крови 200&nbsp;₽, оплачивается отдельно</p><div class="rc-act">' + buyBtn("04.25.015") + '<button class="linkbtn" type="button" data-jump="cx-04.25.015">Подготовка и&nbsp;описание</button></div>';
-    $("#cx-nav").innerHTML = CXG.map(function (g) { return '<button class="chip" type="button" data-jump="cxg-' + g.id + '">' + esc(g.n) + "</button>"; }).join("");
-    $("#cx-list").innerHTML = CXG.map(function (g) {
-      return '<section class="cx-grp' + (g.id === "hosp" ? " cx-small" : "") + '" id="cxg-' + g.id + '"><h2>' + esc(g.n) + "</h2>" + g.c.map(cxCard).join("") + "</section>";
-    }).join("");
+    if ($("#cx-map").innerHTML) return; // static content; cart buttons are kept in sync by syncCart()
+    var max = Math.max.apply(null, Object.keys(CXX).map(cxSave));
+    $("#cx-max").textContent = max + "\u00a0%";
+    $("#cx-map").innerHTML = cxZone("Для кого", CXG.filter(function (g) { return CX_WHO.indexOf(g.id) >= 0; })) + cxZone("По&nbsp;темам", CXG.filter(function (g) { return CX_WHO.indexOf(g.id) < 0; }));
   }
-  var EXPL = { "АЛТ": "АЛТ — фермент печени", "АСТ": "АСТ — фермент печени", "ГГТ": "ГГТ — фермент печени", "ЛДГ": "ЛДГ — фермент клеток", "ТТГ": "ТТГ — гормон, управляющий щитовидной железой", "Т3 свободный": "Т3 свободный — гормон щитовидной железы", "Т4 свободный": "Т4 свободный — гормон щитовидной железы", "Антитела к ТПО": "Антитела к ТПО (щитовидная железа)", "ГСПГ": "ГСПГ — белок, связывающий половые гормоны", "ДГЭА-С": "ДГЭА-С — гормон надпочечников", "ФСГ": "ФСГ — гормон гипофиза", "ЛГ": "ЛГ — гормон гипофиза", "ОЖСС": "ОЖСС — способность крови связывать железо", "СРБ": "СРБ — белок воспаления", "АСЛО": "АСЛО — антитела к стрептококку", "РЭА": "РЭА — онкомаркер", "АФП": "АФП — онкомаркер", "CA 125": "CA 125 — онкомаркер", "CA 15-3": "CA 15-3 — онкомаркер", "CA 19-9": "CA 19-9 — онкомаркер", "CA 72-4": "CA 72-4 — онкомаркер", "С-пептид": "С-пептид — показатель выработки инсулина", "Гликированный гемоглобин": "Гликированный гемоглобин — сахар за 2–3 месяца", "Коагулограмма": "Коагулограмма — свёртываемость крови", "Гомоцистеин": "Гомоцистеин — аминокислота крови", "ЛПВП": "ЛПВП — «хороший» холестерин", "ЛПНП": "ЛПНП — «плохой» холестерин" };
   function cxMis(c) { return (CX[c].mis || "").split(":")[0].split(" (")[0].replace(/\s+/g, " ").trim(); }
-  function cxCard(c) {
-    var x = CX[c], e = CXX[c];
-    var parts = '<ul class="cxc-parts">' + e.parts.map(function (p) { return "<li>" + esc(EXPL[p] || p) + "</li>"; }).join("") + "</ul>";
-    var save = e.sum && !e.nosave ? '<span class="num">по&nbsp;отдельности&nbsp;— ' + rub(e.sum) + '</span><span class="save num">экономия ' + rub(e.sum - x.p) + "</span>" : "";
-    return '<article class="cxc" id="cx-' + esc(c) + '"><div class="cxc-main"><h3><a href="#card-' + esc(c) + '" data-go="card:' + esc(c) + '">' + esc(e.n) + '</a></h3><p class="cxc-ref">Код ' + esc(c) + " · в направлении: «" + esc(cxMis(c)) + '»</p><p class="cxc-desc">' + typo(e.d) + "</p>" + parts + "</div>" +
-      '<div class="cxc-side"><div class="cxc-price"><b class="num">' + rub(x.p) + "</b>" + save + "</div>" +
-      '<p class="cxc-meta">' + nAn(e.parts.length) + " · " + (x.r ? typo("результат через " + x.r) : "срок — по телефону") + "</p>" +
-      '<p class="cxc-prep">' + prepBtn(x.prep) + (e.prep2 ? " " + prepBtn(e.prep2) : "") + '</p><p class="cxc-draw">+ взятие крови 200&nbsp;₽</p>' + buyBtn(c) + "</div></article>";
-  }
 
   // cart
   function totals() {
@@ -2639,7 +2545,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       ["doc3", "Клиникам — без форм", "Условия сотрудничества — у медицинского представителя по телефону. Врачу лично ничего не обещаем: так требует 323-ФЗ."]
     ],
     checkups: [
-      ["cx1", "Зачем чек-ап", "Первый экран объясняет пользу тому, кто чек-ап не планировал: один визит, одна подготовка и экономия против тех же анализов по отдельности (посчитано по ценам Черкесска). Ниже — быстрая навигация по темам и «С чего начать». Три набора без известного состава скрыты до уточнения у лаборатории."]
+      ["cx1", "Зачем чек-ап", "Первый экран объясняет пользу тому, кто чек-ап не планировал: один визит, одна подготовка и экономия против тех же анализов по отдельности (посчитано по ценам Черкесска). Ниже — все наборы на одном экране: сначала «Для кого», затем «По темам»; у каждого цена, число анализов, экономия и кнопка «В корзину», название ведёт на страницу набора. Три набора без известного состава скрыты до уточнения у лаборатории."]
     ],
     cart: [
       ["cart1", "Полный итог до оформления", "Позиции с ценами и отдельной строкой «Взятие крови — 200 ₽». Скидка 10 % считается только на анализы. Для выезда медсестры видно, сколько не хватает до бесплатного выезда от 1 500 ₽."],
@@ -2673,7 +2579,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       else { pin.style.left = (Math.max(0, 4 - el.getBoundingClientRect().left) + off * 32) + "px"; pin.style.top = "-32px"; } // phone: above the element, not over its text
       el.appendChild(pin);
     });
-    $("#drawer-title").textContent = ({ home: "Главная", catalog: "Раздел каталога", card: "Карточка анализа", points: "Пункты", doctors: "Врачам", checkups: "Чек-апы", cart: "Корзина", results: "Результаты", referral: "Бланк направления" }[state.view] || "Экран") + ": пояснения";
+    $("#drawer-title").textContent = ({ home: "Главная", catalog: "Раздел каталога", card: "Карточка анализа", points: "Где сдать анализы", doctors: "Врачам", checkups: "Чек-апы", cart: "Корзина", results: "Результаты", referral: "Бланк направления" }[state.view] || "Экран") + ": пояснения";
     $("#notes-list").innerHTML = viewNotes().map(function (n, i) { return '<li data-i="' + i + '"><span>' + (i + 1) + "</span><div><b>" + esc(n[1]) + "</b><p>" + esc(n[2]) + "</p></div></li>"; }).join("");
   }
   function setNotes(on) {
