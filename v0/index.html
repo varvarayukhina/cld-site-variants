@@ -926,6 +926,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .cx-grp h2 { margin-bottom: 16px; }
 .cxc { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 28px; padding: 24px 26px; border-radius: 18px; box-shadow: inset 0 0 0 1.5px var(--line); margin-bottom: 14px; scroll-margin-top: calc(var(--sw-h, 0px) + 180px); }
 .cxc h3 { font-size: 22px; }
+.cxc h3 a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--line); }
+.cxc h3 a:hover { text-decoration-color: currentColor; }
 .cxc-desc { margin-top: 8px; color: var(--muted); font-size: 15.5px; max-width: 62ch; }
 .cxc-parts { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; }
 .cxc-parts li { font-size: 13.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); }
@@ -1947,7 +1949,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   function item(code) {
     var a = A[code], x = CX[code];
     if (a) return { n: a.n, p: a.p, blood: a.bio.indexOf("Кровь") === 0, urine: /моч/i.test(a.bio), days: a.days, go: "card:" + code };
-    return { n: x.n, p: x.p, blood: true, urine: false, days: parseInt(x.r, 10) || 0, go: "checkups" };
+    return { n: x.n, p: x.p, blood: true, urine: false, days: parseInt(x.r, 10) || 0, go: "card:" + code };
   }
   function icon(id) { return '<svg class="ico"><use href="#' + id + '"/></svg>'; }
   function addBtn(code) {
@@ -2072,25 +2074,28 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   function nAn(n) { return plural(n, ["анализ", "анализа", "анализов"]); }
   if (matchMedia("(max-width: 520px)").matches) { $("#q-home").placeholder = "Ферритин, витамин D…"; $("#d-q").placeholder = "Название или код"; }
   function renderCard() {
-    var code = state.code, a = A[code]; if (!a) return;
-    var cat = CATS.filter(function (c) { return c.items.indexOf(code) >= 0; })[0] || CATS[0];
+    var code = state.code, a = A[code], cx = !a && CXX[code]; if (!a && !cx) return;
+    if (cx) a = { n: cx.n, off: cxMis(code), d: cx.d.replace(/\.$/, ""), p: CX[code].p, bio: "Кровь из вены", days: parseInt(CX[code].r, 10) || 0 };
+    var cat = cx ? { n: "Чек-апы", items: [] } : CATS.filter(function (c) { return c.items.indexOf(code) >= 0; })[0] || CATS[0];
     $("#k-title").textContent = a.n; $("#crumb-card").textContent = a.n;
-    var cc = $("#crumb-card-cat"); cc.textContent = cat.n; cc.dataset.go = "catalog:" + cat.id;
+    var cc = $("#crumb-card-cat"); cc.textContent = cat.n; cc.dataset.go = cx ? "checkups" : "catalog:" + cat.id;
     var t = CARDS[code];
     $("#k-lede").textContent = (t && t.lede) || a.d + ".";
-    $("#k-tags").innerHTML = '<span class="tag">' + esc(a.bio) + '</span><span class="tag ' + (a.own ? "own" : "partner") + '">' + (a.own ? "Собственная лаборатория CLD" : "Партнёрская лаборатория") + '</span><span class="tag">Код ' + esc(code) + '</span>' + (a.off !== a.n ? '<span class="tag" style="background:none;padding-left:0;font-weight:500;letter-spacing:0">' + esc(a.off) + "</span>" : "");
+    $("#k-tags").innerHTML = '<span class="tag">' + esc(a.bio) + '</span>' + (cx ? '<span class="tag">Набор · ' + nAn(cx.parts.length) + "</span>" : '<span class="tag ' + (a.own ? "own" : "partner") + '">' + (a.own ? "Собственная лаборатория CLD" : "Партнёрская лаборатория") + "</span>") + '<span class="tag">Код ' + esc(code) + '</span>' + (a.off !== a.n ? '<span class="tag" style="background:none;padding-left:0;font-weight:500;letter-spacing:0">' + esc(a.off) + "</span>" : "");
     var html = "";
+    if (cx) html += "<section><h2>Что входит в набор</h2><ul>" + (cx.full || cx.parts).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
+      (cx.sum && !cx.nosave ? '<p class="b-note">По отдельности эти анализы стоят ' + rub(cx.sum) + ", в наборе — " + rub(a.p) + ".</p>" : "") + "</section>";
     if (t) {
       t.blocks.forEach(function (b) {
         html += "<section><h2>" + esc(b.h) + "</h2>" + (b.p ? b.p.map(function (x) { return "<p>" + esc(x) + "</p>"; }).join("") : "") + (b.list ? "<ul>" + b.list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") + (b.note ? '<p class="b-note">' + esc(b.note) + "</p>" : "") + "</section>";
       });
     } else {
-      html += (a.d ? "<section><h2>Что это</h2><p>" + esc(a.d) + ".</p></section>" : "") + "<section><h2>Как подготовиться</h2>" + (DPREP[code] ? prepList(DPREP[code]) : "<p>Особые правила подготовки уточните по телефону 8 800 201 78 30.</p>") + "<p>Приём лекарств перед анализом согласуйте с лечащим врачом.</p></section>";
+      html += (a.d ? "<section><h2>Что это</h2><p>" + esc(a.d) + ".</p></section>" : "") + "<section><h2>Как подготовиться</h2>" + (DPREP[code] || cx ? prepList(cx ? CX[code].prep : DPREP[code]) : "<p>Особые правила подготовки уточните по телефону 8 800 201 78 30.</p>") + "<p>Приём лекарств перед анализом согласуйте с лечащим врачом.</p></section>";
     }
-    var togHtml = "", tog = (t && t.together) || cat.items.filter(function (c) { return c !== code; }).slice(0, 3);
+    var togHtml = "", tog = ((t && t.together) || cat.items.filter(function (c) { return c !== code; }).slice(0, 3)).filter(function (c) { return A[c] || CX[c]; });
     if (tog.length) {
-      var sum = tog.reduce(function (s, c) { return s + A[c].p; }, a.p);
-      togHtml = '<section class="together-sec" data-note="card5"><h2>Часто сдают вместе</h2><div class="together rows">' + tog.map(function (c) { var x = A[c]; return '<div class="arow"><div><button class="a-name" type="button" data-go="card:' + c + '">' + esc(x.n) + '</button><p class="a-desc">' + esc(x.d) + '</p></div><div class="a-buy"><div class="price"><b>' + rub(x.p) + "</b></div>" + addBtn(c) + "</div></div>"; }).join("") + '</div><p class="muted" style="margin-top:10px;font-size:15px">Вместе с этим анализом — ' + rub(sum) + " за " + nAn(tog.length + 1) + ", взятие крови оплачивается один раз.</p></section>";
+      var sum = tog.reduce(function (s, c) { return s + item(c).p; }, a.p);
+      togHtml = '<section class="together-sec" data-note="card5"><h2>Часто сдают вместе</h2><div class="together rows">' + tog.map(function (c) { var x = item(c), d = A[c] ? A[c].d : CXX[c].d; return '<div class="arow"><div><button class="a-name" type="button" data-go="' + x.go + '">' + esc(x.n) + '</button><p class="a-desc">' + esc(d) + '</p></div><div class="a-buy"><div class="price"><b>' + rub(x.p) + "</b></div>" + addBtn(c) + "</div></div>"; }).join("") + '</div><p class="muted" style="margin-top:10px;font-size:15px">Вместе с этим ' + (cx ? "набором" : "анализом") + " — " + rub(sum) + " за " + nAn(tog.length + 1) + ", взятие крови оплачивается один раз.</p></section>";
     }
     if (t && t.faq) html += '<section class="faq" data-note="card6"><h2>Вопросы</h2>' + t.faq.map(function (f) { return "<details><summary>" + esc(f.q) + "</summary><p>" + esc(f.a) + "</p></details>"; }).join("") + "</section>";
     if (togHtml) html += togHtml;
@@ -2099,10 +2104,10 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var NPTS = {"28.135": 8, "80-049": 21, "30-017": 21, "10-008": 21, "40-062": 21, "10.105": 8, "19.115": 27, "19.100": 27, "19.105": 27, "40-080": 21, "17.130": 27, "17.167": 27, "40.120": 27, "21.120": 8, "18.101": 27, "18.103": 27, "18.110": 27, "50-126": 21, "28.145": 27, "32.100": 27, "20-001": 21, "20-017": 21, "20-003": 21, "20-007": 21, "25-018": 21, "40-052": 21, "40-060.": 21, "40-107": 21, "40-111": 21, "40-081": 21, "40-028": 21, "50-056": 21, "40-013": 21, "40-047": 21, "40-141": 21, "30-035": 21, "30-037": 21, "30-043": 21, "40-390": 21, "40-391": 20, "40-004": 21, "30-010": 21, "30-009": 21, "30-008": 21, "30-007": 21, "30-006": 21, "50-125": 21, "30-040": 21, "30-001": 21, "40-070": 21, "40-072": 21, "40-073": 21, "40-069": 21, "40-044": 21, "40-104": 21, "40-026": 21, "40-025": 21, "40-042": 21, "40-121": 21, "40-067": 21, "40-010": 21, "40-035": 21, "40-036": 21, "40-037": 21, "40-001": 21, "40-027": 21, "40-063": 21, "40-077": 21, "40-018.1": 21, "40-056": 21, "40-057": 21, "40-058": 21, "40-297": 21, "40-041": 21, "40-123": 21, "40-054": 21, "40-075": 21, "40-112": 21, "30-021": 21, "30-004": 21, "30-011": 21, "30-018": 21, "30-005": 21, "30-029": 21, "30-014": 21, "30-020": 20, "30-039": 21, "30-015": 21, "30-034": 21, "90-001": 21, "90-021": 21, "90-279": 21, "90-006": 21, "90-046": 21, "60-011": 20, "10-012": 21, "80-041": 21, "80-002": 21, "80-012": 21, "80-015": 21, "80-003": 21, "80-004": 21, "80-013": 21, "80-007": 21, "41-016": 21, "41-017": 21, "41-018": 21, "41-001": 21, "41-002": 21, "41-006": 21, "41-003": 21, "41-004": 21, "41-005": 21}; // пункты из API, 22.10.2026; остальные — 24
     var blood = a.bio.indexOf("Кровь") === 0;
     $("#k-panel").innerHTML = '<div><div class="p-price num">' + rub(a.p) + '</div><div class="p-online" style="margin-top:6px">' + rub(online(a.p)) + " при оплате на сайте</div></div>" +
-      '<div class="lines" data-note="card3"><div><span>Анализ</span><span class="num">' + rub(a.p) + "</span></div>" + (blood ? "<div><span>Взятие крови</span><span class=\"num\">" + rub(BLOOD_DRAW) + "</span></div>" : "") + '<div class="tot"><span>Итого в пункте</span><span class="num">' + rub(a.p + (blood ? BLOOD_DRAW : 0)) + "</span></div></div>" +
-      '<div class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + daysLabel(a.days) + ' после сдачи</span><span><svg class="ico"><use href="#i-pin"/></svg>Есть в ' + (NPTS[code] || 24) + ' пунктах сети</span></div>' +
+      '<div class="lines" data-note="card3"><div><span>' + (cx ? "Набор" : "Анализ") + '</span><span class="num">' + rub(a.p) + "</span></div>" + (blood ? "<div><span>Взятие крови</span><span class=\"num\">" + rub(BLOOD_DRAW) + "</span></div>" : "") + '<div class="tot"><span>Итого в пункте</span><span class="num">' + rub(a.p + (blood ? BLOOD_DRAW : 0)) + "</span></div></div>" +
+      '<div class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + daysLabel(a.days) + ' после сдачи</span>' + (cx ? "" : '<span><svg class="ico"><use href="#i-pin"/></svg>Есть в ' + (NPTS[code] || 24) + " пунктах сети</span>") + "</div>" +
       '<label class="muted" style="font-size:13.5px;font-weight:600" for="k-point">Пункт</label>' + ptSelect("k-point") +
-      buyBtn(code) + '<button class="btn btn-ghost" type="button" data-go="book:' + esc(code) + '">' + icon("i-cal") + "Записаться на время</button>" +
+      buyBtn(code) + (cx ? "" : '<button class="btn btn-ghost" type="button" data-go="book:' + esc(code) + '">' + icon("i-cal") + "Записаться на время</button>") +
       '<p class="fine">Срочно (ЦИТО) — когда лаборатория утвердит список, здесь появится плашка «Сегодня» и время, до которого нужно сдать.</p>';
     $("#k-sticky").innerHTML = '<div class="price"><b>' + rub(a.p) + "</b><small>" + daysLabel(a.days).replace("Готово ", "") + (blood ? " · + взятие крови " + rub(BLOOD_DRAW) : "") + "</small></div>" + buyBtn(code);
   }
@@ -2209,7 +2214,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   function prepList(k) { return "<ul>" + DOC.prep[k].replace(/^Общие правила: /, "").split(/\.\s+/).map(function (x) { x = x.replace(/\.$/, ""); return x ? "<li>" + esc(x.charAt(0).toUpperCase() + x.slice(1)) + "</li>" : ""; }).join("") + "</ul>"; }
   function prepBtn(k) { return '<button class="prep" type="button" data-prep="' + esc(k) + '" aria-label="Подготовка: ' + esc(PREPL[k]) + '. ' + esc(DOC.prep[k]) + '">' + esc(PREPL[k]) + "</button>"; }
   function docRow(it) {
-    var name = A[it.c] ? '<a href="#card-' + esc(it.c) + '" data-go="card:' + esc(it.c) + '">' + esc(it.n) + "</a>" : CXX[it.c] ? '<a href="#checkups" data-go="cx:' + esc(it.c) + '">' + esc(it.n) + "</a>" : "<b>" + esc(it.n) + "</b>";
+    var name = A[it.c] ? '<a href="#card-' + esc(it.c) + '" data-go="card:' + esc(it.c) + '">' + esc(it.n) + "</a>" : CXX[it.c] ? '<a href="#card-' + esc(it.c) + '" data-go="card:' + esc(it.c) + '">' + esc(it.n) + "</a>" : "<b>" + esc(it.n) + "</b>";
     var parts = it.parts && it.parts.length ? '<details class="parts"><summary>Состав: ' + nAn(it.parts.length) + "</summary><ul>" + it.parts.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></details>" : "";
     return '<tr><td class="c-name">' + name + '<span class="code num">Код ' + esc(it.c) + "</span>" + (it.m ? "<small>Полное название: " + esc(it.m) + "</small>" : "") + parts + '</td><td class="c-mat">' + esc(it.mat) + '</td><td class="c-ready">' + esc(it.r || "срок не указан") + '</td><td class="c-prep">' + prepBtn(it.p) + (it.pn ? "<small>" + esc(it.pn) + "</small>" : "") + "</td></tr>";
   }
@@ -2285,7 +2290,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var x = CX[c], e = CXX[c];
     var parts = '<ul class="cxc-parts">' + e.parts.map(function (p) { return "<li>" + esc(EXPL[p] || p) + "</li>"; }).join("") + "</ul>";
     var save = e.sum && !e.nosave ? '<span class="num">по&nbsp;отдельности&nbsp;— ' + rub(e.sum) + '</span><span class="save num">экономия ' + rub(e.sum - x.p) + "</span>" : "";
-    return '<article class="cxc" id="cx-' + esc(c) + '"><div class="cxc-main"><h3>' + esc(e.n) + '</h3><p class="cxc-ref">Код ' + esc(c) + " · в направлении: «" + esc(cxMis(c)) + '»</p><p class="cxc-desc">' + typo(e.d) + "</p>" + parts + "</div>" +
+    return '<article class="cxc" id="cx-' + esc(c) + '"><div class="cxc-main"><h3><a href="#card-' + esc(c) + '" data-go="card:' + esc(c) + '">' + esc(e.n) + '</a></h3><p class="cxc-ref">Код ' + esc(c) + " · в направлении: «" + esc(cxMis(c)) + '»</p><p class="cxc-desc">' + typo(e.d) + "</p>" + parts + "</div>" +
       '<div class="cxc-side"><div class="cxc-price"><b class="num">' + rub(x.p) + "</b>" + save + "</div>" +
       '<p class="cxc-meta">' + nAn(e.parts.length) + " · " + (x.r ? typo("результат через " + x.r) : "срок — по телефону") + "</p>" +
       '<p class="cxc-prep">' + prepBtn(x.prep) + (e.prep2 ? " " + prepBtn(e.prep2) : "") + '</p><p class="cxc-draw">+ взятие крови 200&nbsp;₽</p>' + buyBtn(c) + "</div></article>";
@@ -2526,7 +2531,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   var curHash = null;
   function go(target, push) {
     var p = target.split(":"), v = p[0];
-    if (v === "cx") { go("checkups", push); var to = document.getElementById("cx-" + p[1]); if (to) { to.scrollIntoView({ block: "start" }); to.classList.remove("flash"); void to.offsetWidth; to.classList.add("flash"); } return; }
+    if (v === "cx") { go("card:" + p[1], push); return; } // у набора своя страница, как у анализа
     if (v === "catalog" && p[1] === "checkups") v = "checkups"; // старые ссылки «catalog:checkups» ведут на экран чек-апов
     if (v === "catalog") { state.view = "catalog"; state.cat = p[1] || state.cat; }
     else if (v === "card") { state.view = "card"; state.code = p[1] || state.code; }
