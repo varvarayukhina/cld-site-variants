@@ -1259,15 +1259,18 @@ button.mini-n:hover, .mini-sit:hover .mini-n { text-decoration: underline; text-
 .rail .seg { grid-template-columns: repeat(3, auto); }
 .rail .seg button { padding: 9px 6px; white-space: nowrap; }
 .seg button, .crow, .chip, .filters select, .crumbs, .crumbs button, .arow .a-desc, .arow .a-meta, .price small, .tag, .sugg .s-hint, .demo, .empty { font-size: 16px; }
-.c-common { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: -6px 0 18px; padding: 12px 16px; border-radius: 12px; background: var(--surface-2); color: var(--muted); font-size: 16px; }
+.c-common { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin: -4px 0 20px; padding: 12px 16px; border-radius: 12px; background: var(--lime-soft); color: var(--navy); font-size: 16px; }
 .c-common[hidden] { display: none; }
 .tag { padding: 5px 10px; }
-.c-common b { color: var(--ink); font-weight: 600; }
+.c-common b { color: var(--navy); font-weight: 600; }
+.c-common .cc-h { font-weight: 800; }
 .c-common span { display: inline-flex; align-items: center; gap: 7px; }
 .c-common .ico { width: 18px; height: 18px; }
-.xtabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px; background: var(--surface); }
-.xtabs button { border: 0; background: none; font: 600 16px var(--text); color: var(--ink); padding: 7px 14px; border-radius: 9px; cursor: pointer; }
-.xtabs button[aria-pressed="true"] { background: #FFF; box-shadow: 0 1px 3px rgba(20,55,75,.15); }
+.xtabs { display: inline-flex; gap: 0; padding: 0; border-radius: 999px; background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); overflow: hidden; }
+.xtabs button { border: 0; background: none; font: 600 16px var(--text); color: var(--ink); padding: 9px 16px; border-radius: 999px; cursor: pointer; }
+.xtabs button:hover { background: var(--navy-soft); }
+.xtabs button[aria-pressed="true"] { background: var(--navy); color: #FFF; }
+.filters .chip[hidden] { display: none; }
 .arow .a-meta .urg { display: inline-grid; grid-template-columns: auto 1fr; column-gap: 7px; align-items: center; justify-self: start; padding: 7px 12px; border-radius: 12px; background: var(--lime-soft); color: var(--navy); font-weight: 700; }
 .arow .a-meta .urg small { grid-column: 2; font-weight: 500; font-size: 16px; color: var(--muted); }
 .arow .na { font-size: 16px; font-weight: 600; color: var(--muted); text-align: right; max-width: 14ch; line-height: 1.3; }
@@ -1435,7 +1438,6 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         <div class="sugg" id="sugg-top" hidden></div>
       </div>
       <div class="bcont" data-note="h5"><a class="btel" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span><b class="num">8 800 201 78 30</b><small>Звонок бесплатный · 24/7</small></span></a><a class="bwa" href="#" data-stub="Номер WhatsApp появится после согласования" aria-label="Написать в WhatsApp" title="Написать в WhatsApp"><svg class="ico ico-fill"><use href="#i-wa"/></svg></a></div>
-      <a class="ilink" href="#results" data-go="results"><svg class="ico"><use href="#i-user"/></svg>Войти</a>
       <a class="resbtn" href="#results" data-go="results" data-note="h4"><svg class="ico"><use href="#i-file"/></svg>Результаты анализов</a>
       <button class="cartbtn" type="button" data-go="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина <span class="count num" data-cart>0</span></button>
       <button class="mbtn" type="button" aria-label="Меню" aria-controls="mmenu" aria-expanded="false" data-menu><svg class="ico" style="width:24px;height:24px"><use href="#i-menu"/></svg></button>
@@ -1479,7 +1481,6 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     <button type="button" data-go="doctors">Врачам</button>
     <button type="button" data-go="gifts">Подарочные сертификаты</button>
     <button type="button" data-go="about">О компании</button>
-    <button type="button" data-go="results">Войти в личный кабинет</button>
     <a class="mm-phone" href="tel:88002017830">8 800 201 78 30</a>
     <a class="mm-phone" href="#" data-stub="Номер WhatsApp появится после согласования">Написать в WhatsApp</a>
   </div>
@@ -2478,7 +2479,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     return { days: mode(codes.map(function (c) { return A[c].days; })), bio: mode(codes.map(function (c) { return A[c].bio; })), own: mode(codes.map(function (c) { return A[c].own; })) };
   }
   function commonHtml(cm) {
-    return '<span><svg class="ico"><use href="#i-drop"/></svg><b>' + esc(cm.bio) + '</b></span>' + (cm.own ? '<span><svg class="ico"><use href="#i-lab"/></svg><b>Собственная лаборатория</b></span>' : "") + '<span><svg class="ico"><use href="#i-clock"/></svg><b>Готово через ' + dLabel(cm.days) + "</b></span><span>Если у анализа не указано другое</span>";
+    return '<b class="cc-h">Общее для раздела:</b><span><svg class="ico"><use href="#i-drop"/></svg><b>' + esc(cm.bio) + '</b></span>' + (cm.own ? '<span><svg class="ico"><use href="#i-lab"/></svg><b>Собственная лаборатория</b></span>' : "") + '<span><svg class="ico"><use href="#i-clock"/></svg><b>Готово через ' + dLabel(cm.days) + "</b></span>";
   }
   function ptWarn(el, codes) {
     var none = ptEmpty(state.pt), n = codes.filter(function (c) { return item(c).na; }).length;
@@ -2675,7 +2676,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   }
   function renderCatalog() {
     var cat = CATS.filter(function (c) { return c.id === state.cat; })[0] || CATS[0];
-    if (cat.aud) state.seg = "aud"; else if (state.seg === "aud") state.seg = "organs";
+
     $("#clist").innerHTML = (state.seg !== "situations" ? CATS.filter(function (c) { return !c.aud === (state.seg === "organs"); }).map(function (c) {
       if (c.aud) return '<button class="crow" type="button" data-go="catalog:' + c.id + '"' + (c.id === cat.id ? ' aria-current="true"' : "") + '><div class="picto audi"><img src="../assets/img/aud/' + AUDIMG[c.id] + '" alt="" width="28" height="28"></div>' + esc(c.n) + "</button>"; return '<button class="crow" type="button" data-go="catalog:' + c.id + '"' + (c.id === cat.id ? ' aria-current="true"' : "") + '><div class="picto">' + picto(c.id) + "</div>" + esc(c.n) + "</button>"; }) :
       SITS.map(function (s) { return '<button class="crow" type="button" data-go="catalog:' + s.go + '"><div class="picto">' + picto("checkups") + "</div>" + esc(s.n) + "</button>"; })).join("");
@@ -2688,6 +2689,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     $$("[data-maxd]").forEach(function (b) { b.setAttribute("aria-pressed", +b.dataset.maxd === (state.maxd || 0) ? "true" : "false"); });
     var items = cat.items.filter(function (c) { return (!state.filters.own || A[c].own) && (!state.maxd || A[c].days <= state.maxd); });
     var cm = commonOf(cat.items);
+    $('[data-filter="own"]').hidden = cat.items.every(function (c) { return A[c].own; }) || cat.items.every(function (c) { return !A[c].own; });
     $("#c-common").hidden = !cm; if (cm) $("#c-common").innerHTML = commonHtml(cm);
     ptWarn($("#c-ptwarn"), cat.items);
     items.sort(function (a, b) { return state.sort === "cheap" ? A[a].p - A[b].p : A[a].pop - A[b].pop; });
@@ -3259,7 +3261,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     if (v === "organs" || v === "reasons") { state.seg = v === "organs" ? "organs" : "situations"; v = "catalog"; p[1] = "blood"; }
     if (v === "cx") { go("card:" + p[1], push); return; } // у набора своя страница, как у анализа
     if (v === "catalog" && p[1] === "checkups") v = "checkups"; // старые ссылки «catalog:checkups» ведут на экран чек-апов
-    if (v === "catalog") { state.view = "catalog"; state.cat = p[1] || state.cat; }
+    if (v === "catalog") { state.view = "catalog"; state.cat = p[1] || state.cat; var gc = CATS.filter(function (c) { return c.id === state.cat; })[0]; if (gc && gc.aud) state.seg = "aud"; else if (state.seg === "aud") state.seg = "organs"; } // вкладка рельса — по разделу, куда перешли; клик по вкладке её не сбрасывает
     else if (v === "card") { state.view = "card"; state.code = p[1] || state.code; }
     else if (v === "book") { if (state.view !== "book" || state.code !== p[1]) bk = { day: -1, slot: "", done: false }; state.view = "book"; if (A[p[1]]) state.code = p[1]; }
     else if (PAGES.indexOf(v) >= 0) state.view = v;
@@ -3294,7 +3296,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       ["h5", "Телефон и WhatsApp рядом", "Со встречи: WhatsApp на виду на всех страницах — зелёная кнопка сразу у телефона. Номер появится после согласования."],
       ["h3", "Поиск в шапке на всех страницах", "Со встречи: поиск всегда на одном месте, на любой странице. Понимает опечатки и бытовые слова: «витамн д», «ферретин», «оак», «сахар»."],
       ["h4", "«Результаты анализов» — крупно", "Со встречи: пациенты не находят результаты, поэтому кнопка — в шапке, на первом экране, плашкой под ним и в нижнем меню телефона."],
-      ["h2", "Те же пункты, что в нынешней шапке", "По просьбе лаборатории — набор нынешнего сайта: пункт; логотип, поиск, телефон, «Войти», корзина; «Экспресс», «Акции», «Популярные анализы», «Чек-апы», «Выезд на дом», «Результаты анализов»; «Анализы и цены», «Адреса и офисы», «Врачам», «Подарочные сертификаты», «О компании». Доработано по брендбуку: цвета, размеры, текст не мельче 16 px. При прокрутке закреплён только ряд с логотипом и поиском. «Врачи» на нынешнем сайте — приёмы врачей, у нас «Врачам» — раздел для врачей-партнёров."],
+      ["h2", "Те же пункты, что в нынешней шапке", "По просьбе лаборатории — набор нынешнего сайта: пункт; логотип, поиск, телефон и WhatsApp, «Результаты анализов», корзина (без «Войти»: кабинет и результаты — одна кнопка); «Экспресс», «Акции», «Популярные анализы», «Чек-апы», «Выезд на дом», «Результаты анализов»; «Анализы и цены», «Адреса и офисы», «Врачам», «Подарочные сертификаты», «О компании». Доработано по брендбуку: цвета, размеры, текст не мельче 16 px. При прокрутке закреплён только ряд с логотипом и поиском. «Врачи» на нынешнем сайте — приёмы врачей, у нас «Врачам» — раздел для врачей-партнёров."],
       ["h6", "Программы — кнопками", "Как на нынешнем сайте: «Экспресс» — анализы по сроку готовности, «Акции» — все предложения, «Популярные анализы» — частые анализы на главной, «Чек-апы»."],
       ["home1", "Первый экран", "Заголовок, выезд медсестры, поиск, кнопки «Выбрать анализы» и «Результаты анализов» и пункт, для которого показаны цены."],
       ["home2s", "Поиск с подсказками", "Второй поиск на первом экране: в строке сами печатаются 15 частых запросов — от ферритина до BRCA-скрининга, по одному в 3–4 секунды. Когда человек ставит курсор, подсказки останавливаются."],
