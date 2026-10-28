@@ -30,7 +30,7 @@ img { height: auto; }
 a { color: inherit; text-underline-offset: 3px; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; border-radius: 6px; }
-.dhero :focus-visible, .hv-card :focus-visible, footer :focus-visible, .tabbar :focus-visible, .util :focus-visible { outline-color: var(--lime); }
+.dhero :focus-visible, .cxhero :focus-visible, .hv-card :focus-visible, footer :focus-visible, .tabbar :focus-visible, .util :focus-visible { outline-color: var(--lime); }
 h1, h2, h3 { margin: 0; line-height: 1.15; text-wrap: balance; font-family: var(--display); font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0; }
 .num { font-variant-numeric: tabular-nums; }
@@ -863,7 +863,12 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .faq details p { margin-top: 8px; color: var(--muted); max-width: 70ch; }
 
 /* ---------- checkups: explained catalog ---------- */
-.cxhero-g { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 40px; align-items: center; padding-block: 4px 24px; }
+.cxhero { background: var(--navy); color: var(--on-navy); }
+.cxhero .crumbs { color: var(--on-navy-muted); }
+.cxhero h1 { color: #FFF; }
+.cxhero .lede { color: var(--on-navy); }
+.cx-band { background: var(--surface); padding-block: 32px 48px; }
+.cxhero-g { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 40px; align-items: center; padding-block: 4px 32px; }
 .cxhero h1 { font-size: 44px; line-height: 1.1; max-width: 20ch; }
 .cxhero .lede { margin-top: 16px; font-size: 18px; line-height: 1.6; max-width: 54ch; }
 .cxhero-img { width: 100%; max-width: 220px; height: auto; justify-self: center; }
@@ -1364,10 +1369,12 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
         </div>
       </div>
     </div>
-    <div class="wrap pg">
+    <div class="cx-band"><div class="wrap">
       <div class="search cx-search"><svg class="ico"><use href="#i-search"/></svg><input id="cx-q" type="search" autocomplete="off" placeholder="Найти набор или анализ" aria-label="Поиск по наборам и анализам в них"></div>
       <div class="cx-dirs" id="cx-dirs" role="group" aria-label="Направления"></div>
       <div class="cx-grid" id="cx-grid" aria-live="polite"></div>
+    </div></div>
+    <div class="wrap pg">
       <section class="cx-help">
         <div><h2>Врач дал список анализов?</h2><p>Помощь в&nbsp;выборе набора&nbsp;— по&nbsp;телефону <a class="num" href="tel:88002017830">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</a>. Сдать набор можно и&nbsp;дома: выезд медсестры на&nbsp;дом бесплатный при заказе от&nbsp;1&nbsp;500&nbsp;₽.</p></div>
         <div class="dacts"><a class="btn btn-navy" href="tel:88002017830">Позвонить</a><button class="btn btn-ghost" type="button" data-go="home-visit">Анализы на&nbsp;дому</button></div>
