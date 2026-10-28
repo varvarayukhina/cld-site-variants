@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Чек-апы</title>
+  <desc id="desc">Иллюстрация медицинского чек-листа</desc>
+  <defs>
+    <linearGradient id="sheet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dcecf0"/>
+    </linearGradient>
+    <linearGradient id="clip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cde935"/>
+      <stop offset="1" stop-color="#a6c716"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="512" cy="860" rx="270" ry="38" fill="#9eafba" opacity=".62"/>
+  <g transform="rotate(5 512 500)" stroke="#14374b" stroke-linejoin="round">
+    <rect x="260" y="210" width="500" height="600" rx="42" fill="url(#sheet)" stroke-width="22"/>
+    <rect x="350" y="165" width="320" height="120" rx="38" fill="url(#clip)" stroke-width="22"/>
+    <path d="M384 420h270M384 520h270M384 620h174" fill="none" stroke="#8ca2ad" stroke-width="20" stroke-linecap="round"/>
+    <path d="m314 414 30 31 58-72" fill="none" stroke="#a8c51d" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m314 514 30 31 58-72" fill="none" stroke="#a8c51d" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="330" cy="614" r="22" fill="#a8c51d" stroke-width="16"/>
+    <path d="M512 650v98M463 699h98" fill="none" stroke="#14374b" stroke-width="24" stroke-linecap="round"/>
+  </g>
+  <g fill="#b8d51e" stroke="#14374b" stroke-width="10" stroke-linejoin="round">
+    <path d="m195 315 13 34 34 13-34 13-13 34-13-34-34-13 34-13Z"/>
+    <path d="m808 393 11 29 29 11-29 11-11 29-11-29-29-11 29-11Z"/>
+    <path d="m778 735 12 31 31 12-31 12-12 31-12-31-31-12 31-12Z"/>
+  </g>
+</svg>
