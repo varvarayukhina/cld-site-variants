@@ -1032,7 +1032,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .util .state, .u-wa { white-space: nowrap; }
 .hero-cells { display: none; }
 .bar .wrap { min-height: 84px; gap: 20px; }
-.logo { width: 214px; background: none; border: 0; padding: 0; cursor: pointer; }
+.logo { width: 190px; flex: none; background: none; border: 0; padding: 0; cursor: pointer; }
 .top-search { flex: 1; max-width: 680px; display: flex; align-items: center; background: var(--surface-2); border-radius: 12px; box-shadow: inset 0 0 0 1.5px var(--line); padding: 5px; }
 .top-search:focus-within { box-shadow: inset 0 0 0 2px var(--navy); background: #FFF; }
 .top-search input { flex: 1; min-width: 0; background: transparent; box-shadow: none; padding: 12px 12px 12px 46px; font-size: 17px; }
@@ -1043,10 +1043,17 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .resbtn:hover { background: var(--navy-2); }
 .cartbtn { background: #FFF; color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--line); font-size: 16px; padding: 12px 16px; }
 .cartbtn:hover { box-shadow: inset 0 0 0 1.5px var(--navy); }
+.bcont { display: inline-flex; align-items: center; gap: 12px; }
+.bar .wrap { gap: 16px; }
+.top-search { min-width: 320px; }
+.bwa { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 50%; background: #25D366; color: #FFF; transition: transform .2s var(--ease); } /* логотип WhatsApp — в его цвете */
+.bwa:hover { transform: scale(1.06); }
+.bwa .ico { width: 24px; height: 24px; }
 .btel { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); white-space: nowrap; }
 .btel .ico { width: 22px; height: 22px; }
 .btel b { display: block; font-size: 18px; font-weight: 800; line-height: 1.2; }
 .btel small { display: block; font-size: 16px; color: var(--muted); line-height: 1.3; }
+@media (max-width: 1500px) { .btel small { display: none; } }
 .ilink { display: inline-flex; align-items: center; gap: 7px; padding: 10px 4px; font-weight: 700; color: var(--navy); text-decoration: none; white-space: nowrap; }
 .ilink:hover { text-decoration: underline; text-underline-offset: 4px; }
 .subnav { background: #FFF; border-bottom: 1px solid var(--line); }
@@ -1147,13 +1154,13 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .gf-hero .pg-h { margin-top: 0; }
 .gf-lead { font-size: 19px; color: var(--muted); max-width: 56ch; margin-top: 10px; }
 .gf-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 40px; margin: 32px 0 56px; align-items: start; }
-.gf-main { display: grid; gap: 12px; min-width: 0; }
+.gf-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; min-width: 0; }
 .gf-card { position: relative; aspect-ratio: 1.6; max-width: 620px; border-radius: 22px; background: var(--surface) center / cover no-repeat; box-shadow: 0 22px 46px rgba(20,55,75,.22); padding: 7% 7.5%; display: flex; flex-direction: column; justify-content: space-between; transition: background-image .2s ease; }
 .gfc-logo { width: 44%; max-width: 240px; height: auto; }
 .gfc-amt { font-size: clamp(34px, 5vw, 56px); font-weight: 800; line-height: 1.15; }
 .gf-h { font-size: 21px; margin-top: 18px; }
 .gf-car { display: flex; align-items: center; gap: 8px; }
-.gf-row { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 6px; }
+.gf-row { flex: 1; min-width: 0; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 6px; }
 .gf-row::-webkit-scrollbar { display: none; }
 .gf-des { flex: 0 0 150px; scroll-snap-align: start; display: grid; gap: 8px; justify-items: start; background: none; border: 0; padding: 0; font: 600 16px var(--text); color: var(--ink); cursor: pointer; text-align: left; }
 .gf-des span { width: 150px; aspect-ratio: 1.6; border-radius: 12px; background: center / cover no-repeat; box-shadow: inset 0 0 0 1.5px var(--line); transition: box-shadow .2s ease, transform .25s var(--ease); }
@@ -1162,14 +1169,24 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .gf-arrow { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--line); background: #FFF; color: var(--navy); cursor: pointer; }
 .gf-arrow:hover { border-color: var(--navy); }
 .gf-sum { max-width: 260px; }
+#k-tags .tag { white-space: normal; }
+.cxt-meta .prep { white-space: normal; text-align: left; }
 .gf-chipw { position: relative; display: inline-flex; }
+.gf-amts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+/* номиналы по нарастающей, 10 000 ₽ — лаймовый */
+.gf-amts .gf-a0 { font-size: 16px; padding: 8px 14px; }
+.gf-amts .gf-a1 { font-size: 17px; padding: 9px 16px; }
+.gf-amts .gf-a2 { font-size: 18.5px; padding: 10px 18px; }
+.gf-amts .gf-a3 { font-size: 20px; padding: 11px 21px; background: var(--lime); border-color: var(--lime); }
+.gf-amts .gf-a4 { font-size: 22.5px; padding: 13px 26px; }
+.gf-amts .chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #FFF; }
 .gf-tip { position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 5; width: max-content; max-width: 300px; padding: 10px 14px; border-radius: 12px; background: var(--navy); color: #FFF; font-size: 16px; line-height: 1.4; text-align: left; box-shadow: 0 12px 26px rgba(20,55,75,.25); opacity: 0; visibility: hidden; transform: translate(-50%, 4px); transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s; pointer-events: none; }
 .gf-tip::after { content: ""; position: absolute; left: 50%; top: 100%; margin-left: -7px; border: 7px solid transparent; border-top-color: var(--navy); }
 .gf-chipw:hover .gf-tip, .gf-chipw:has(:focus-visible) .gf-tip { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
 .gf-idea { padding: 12px 16px; border-radius: 12px; background: var(--lime-soft); max-width: 620px; }
 .gf-idea[hidden] { display: none; }
 .gf-info { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 72px; }
-.gf-form { position: sticky; top: calc(104px + var(--sw-h, 0px)); }
+.gf-form { position: static; }
 .gf-form h2 { font-size: 24px; }
 .gf-who { max-width: 280px; grid-template-columns: 1fr 1fr; }
 .gf-who button { font-size: 16px; }
@@ -1276,7 +1293,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .util .spacer, .util .u-tel, .util .u-wa, .util > .wrap > .state, .hero-point > .ico { display: none; }
   .util .wrap { min-height: 44px; gap: 12px; }
   .ptpick select { max-width: calc(100vw - 96px); }
-  .subnav, .btel, .ilink { display: none; }
+  .subnav, .bcont, .ilink, .bar .resbtn { display: none; }
   .bar .wrap { flex-wrap: wrap; row-gap: 0; min-height: 0; padding-top: 8px; }
   .logo { width: 168px; margin-right: auto; }
   .top-search { order: 3; flex: 1 1 100%; max-width: none; margin: 8px 0 10px; }
@@ -1299,7 +1316,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .fp-grid, .fp-org { grid-template-columns: minmax(0, 1fr); }
   .advs-6, .gf-grid, .gf-info { grid-template-columns: minmax(0, 1fr); }
   .gf-form { position: static; }
-  .gf-arrow { display: none; }
+  .gf-arrow, .gf-tip { display: none; }
   .gf-des, .gf-des span { flex-basis: 120px; width: 120px; }
   .gf-hero { align-items: flex-start; gap: 14px; }
   .gf-hero img { width: 72px; height: 72px; }
@@ -1313,6 +1330,47 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .arow .na { max-width: 11ch; }
   .cito-box { grid-template-columns: minmax(0, 1fr); }
   .cito-box .tag { grid-row: auto; justify-self: start; }
+}
+
+/* слайдер: 5 вариантов подачи картинки — по одному на слайд, чтобы выбрать лучший */
+.spot-card { position: relative; overflow: hidden; isolation: isolate; }
+.spot-card .spot-text, .spot-card .spot-buy { position: relative; z-index: 1; }
+/* 1 — бледная крупная картинка на фоне */
+.spot-card.sv-1 { grid-template-columns: minmax(0, 1fr); }
+.sv-1 .spot-img { position: absolute; right: -70px; bottom: -60px; width: 380px; height: 380px; margin: 0; opacity: .2; z-index: 0; }
+.sv-1 .spot-text { max-width: 38ch; }
+/* 2 — крупно справа на светлой подложке */
+.spot-card.sv-2 { grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 16px 24px; }
+.sv-2 .spot-img { grid-column: 2; grid-row: 1 / span 2; width: 100%; height: 100%; max-height: 340px; align-self: stretch; margin: 0; padding: 20px; border-radius: 16px; background: var(--lime-soft); object-fit: contain; }
+.sv-2 .spot-buy { grid-column: 1; }
+.sv-2 .spot-buy .btn-ghost { display: none; }
+/* 3 — картинка сверху широкой полосой */
+.spot-card.sv-3 { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; padding-top: 0; }
+.sv-3 .spot-img { grid-row: 1; width: calc(100% + 56px); max-width: none; height: 190px; margin: 0 -28px 6px; padding: 6px 0; background: var(--navy-soft); object-fit: contain; justify-self: stretch; }
+.sv-3 .spot-text { grid-row: 2; }
+.sv-3 .spot-buy { grid-row: 3; }
+/* 4 — лаймовая карточка, картинка крупно справа */
+.spot-card.sv-4 { background: var(--lime); grid-template-columns: minmax(0, 1fr); }
+.sv-4 .spot-img { position: absolute; right: -14px; top: 18px; width: 240px; height: 240px; margin: 0; z-index: 0; }
+.sv-4 .spot-text { max-width: 28ch; }
+.sv-4 .spot-tag { background: #FFF; }
+.sv-4 .spot-text p, .sv-4 .spot-meta { color: var(--navy); }
+.sv-4 .btn-lime { background: var(--navy); color: #FFF; }
+.sv-4 .btn-ghost { box-shadow: inset 0 0 0 1.5px var(--navy); }
+/* 5 — картинка в большом круге справа */
+.spot-card.sv-5 { grid-template-columns: minmax(0, 1fr); }
+.sv-5::before { content: ""; position: absolute; right: -100px; top: -80px; width: 420px; height: 420px; border-radius: 50%; background: var(--navy-soft); z-index: 0; }
+.sv-5 .spot-img { position: absolute; right: -4px; top: 18px; width: 214px; height: 214px; margin: 0; z-index: 0; }
+.sv-5 .spot-text { max-width: 25ch; }
+@media (max-width: 960px) {
+  .spot-card.sv-2 { grid-template-columns: minmax(0, 1fr) 110px; }
+  .sv-2 .spot-img { grid-row: 1; height: 110px; padding: 8px; }
+  .sv-2 .spot-buy { grid-column: 1 / -1; }
+  .sv-3 .spot-img { height: 120px; width: calc(100% + 44px); margin: 0 -22px 4px; }
+  .sv-1 .spot-img { width: 240px; height: 240px; right: -50px; bottom: -40px; }
+  .sv-4 .spot-img, .sv-5 .spot-img { width: 118px; height: 118px; right: 10px; top: 12px; }
+  .sv-4 .spot-text, .sv-5 .spot-text { max-width: none; padding-top: 104px; }
+  .sv-5::before { width: 210px; height: 210px; right: -50px; top: -60px; }
 }
 </style>
 </head>
@@ -1364,8 +1422,6 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       </div>
     </div>
     <span class="state" id="u-state">открыто до 19:00</span>
-    <span class="spacer"></span>
-    <a class="u-wa" href="#" data-stub="Номер WhatsApp появится после согласования" data-note="h5"><svg class="ico ico-fill"><use href="#i-wa"/></svg>Написать в WhatsApp</a>
   </div>
 </div>
 <header class="top" id="top">
@@ -1374,12 +1430,13 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       <button class="logo" data-go="home" type="button" aria-label="На главную"><img src="../assets/cld-logo-horizontal-navy.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276"></button>
       <div class="search top-search" data-note="h3">
         <svg class="ico"><use href="#i-search"/></svg>
-        <input id="q-top" type="search" autocomplete="off" placeholder="Анализ, чек-ап или код: ферритин, витамин D…" aria-label="Найти анализ">
+        <input id="q-top" type="search" autocomplete="off" placeholder="Найти анализ или чек-ап" aria-label="Найти анализ или чек-ап">
         <button class="btn btn-lime s-go" type="button" data-search-go>Найти</button>
         <div class="sugg" id="sugg-top" hidden></div>
       </div>
-      <a class="btel" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span><b class="num">8 800 201 78 30</b><small>Звонок бесплатный · 24/7</small></span></a>
+      <div class="bcont" data-note="h5"><a class="btel" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span><b class="num">8 800 201 78 30</b><small>Звонок бесплатный · 24/7</small></span></a><a class="bwa" href="#" data-stub="Номер WhatsApp появится после согласования" aria-label="Написать в WhatsApp" title="Написать в WhatsApp"><svg class="ico ico-fill"><use href="#i-wa"/></svg></a></div>
       <a class="ilink" href="#results" data-go="results"><svg class="ico"><use href="#i-user"/></svg>Войти</a>
+      <a class="resbtn" href="#results" data-go="results" data-note="h4"><svg class="ico"><use href="#i-file"/></svg>Результаты анализов</a>
       <button class="cartbtn" type="button" data-go="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина <span class="count num" data-cart>0</span></button>
       <button class="mbtn" type="button" aria-label="Меню" aria-controls="mmenu" aria-expanded="false" data-menu><svg class="ico" style="width:24px;height:24px"><use href="#i-menu"/></svg></button>
     </div>
@@ -1393,10 +1450,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         <button class="pill" type="button" data-go="promos" data-nav="promos"><svg class="ico"><use href="#i-percent"/></svg>Акции</button>
         <button class="pill" type="button" data-scroll="pop-common"><svg class="ico"><use href="#i-grid"/></svg>Популярные анализы</button>
         <button class="pill" type="button" data-go="checkups" data-nav="checkups"><svg class="ico"><use href="#i-file"/></svg>Чек-апы</button>
+        <button class="pill" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
       </div>
-      <span class="grow"></span>
-      <button class="btn btn-lime qb-home" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
-      <a class="resbtn" href="#results" data-go="results" data-note="h4"><svg class="ico"><use href="#i-file"/></svg>Результаты анализов</a>
     </div>
   </div>
   <div class="navrow">
@@ -2411,7 +2466,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var a = A[code], cito = citoOf(code), m = [];
     if (!cm || a.days !== cm.days) m.push('<span><svg class="ico"><use href="#i-clock"/></svg>' + dLabel(a.days) + "</span>");
     if (!cm || a.bio !== cm.bio) m.push('<span><svg class="ico"><use href="#i-drop"/></svg>' + esc(a.bio) + "</span>");
-    if (!cm || a.own !== cm.own) m.push('<span><svg class="ico"><use href="#i-lab"/></svg>' + (a.own ? "Собственная лаборатория" : "Партнёрская лаборатория") + "</span>");
+    if (a.own && (!cm || !cm.own)) m.push('<span><svg class="ico"><use href="#i-lab"/></svg>Собственная лаборатория</span>');
     if (cito) m.push('<span class="urg"><svg class="ico"><use href="#i-bolt"/></svg>ЦИТО — ' + rub(cito) + "<small>за несколько часов</small></span>");
     return '<div class="arow' + (a.na ? " is-na" : "") + '"><div><button class="a-name" type="button" data-go="card:' + code + '">' + esc(a.n) + '</button><p class="a-desc">' + esc(a.d) + '</p></div>' +
       '<div class="a-meta">' + m.join("") + "</div>" +
@@ -2423,7 +2478,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     return { days: mode(codes.map(function (c) { return A[c].days; })), bio: mode(codes.map(function (c) { return A[c].bio; })), own: mode(codes.map(function (c) { return A[c].own; })) };
   }
   function commonHtml(cm) {
-    return '<span><svg class="ico"><use href="#i-drop"/></svg><b>' + esc(cm.bio) + '</b></span><span><svg class="ico"><use href="#i-lab"/></svg><b>' + (cm.own ? "Собственная лаборатория" : "Партнёрская лаборатория") + '</b></span><span><svg class="ico"><use href="#i-clock"/></svg><b>Готово через ' + dLabel(cm.days) + "</b></span><span>Если у анализа не указано другое</span>";
+    return '<span><svg class="ico"><use href="#i-drop"/></svg><b>' + esc(cm.bio) + '</b></span>' + (cm.own ? '<span><svg class="ico"><use href="#i-lab"/></svg><b>Собственная лаборатория</b></span>' : "") + '<span><svg class="ico"><use href="#i-clock"/></svg><b>Готово через ' + dLabel(cm.days) + "</b></span><span>Если у анализа не указано другое</span>";
   }
   function ptWarn(el, codes) {
     var none = ptEmpty(state.pt), n = codes.filter(function (c) { return item(c).na; }).length;
@@ -2538,10 +2593,10 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   function renderSpot() {
     $("#spot-track").innerHTML = SPOT.map(function (x, i) {
       var a = A[x.c];
-      return '<article class="spot-card" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span>" +
-        "<h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.d)) + '.</p><p class="spot-meta">' + typo("Результат через " + dLabel(x.days) + " · " + x.bio.toLowerCase() + " · партнёрская лаборатория") + "</p></div>" +
+      return '<article class="spot-card sv-' + (i + 1) + '" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span>" +
+        "<h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.d)) + '.</p><p class="spot-meta">' + typo("Результат через " + dLabel(x.days) + " · " + x.bio.toLowerCase()) + "</p></div>" +
         '<img class="spot-img" src="../assets/img/spot/' + x.img + '.webp" alt="" width="400" height="400"' + (i ? ' loading="lazy"' : "") + ">" +
-        '<div class="spot-buy">' + (a.na ? '<span class="na">Нет в этом пункте</span>' : '<b class="pr num">' + rub(a.p) + "</b>") + '<button class="btn btn-ghost" type="button" data-go="card:' + x.c + '">Описание анализа</button>' + buyBtn(x.c) + "</div></article>";
+        '<div class="spot-buy">' + (a.na ? '<span class="na">Нет в этом пункте</span>' : '<b class="pr num">' + rub(a.p) + "</b>") + '<button class="btn btn-ghost" type="button" data-go="card:' + x.c + '">Описание</button>' + buyBtn(x.c) + "</div></article>";
     }).join("");
     $("#spot-dots").innerHTML = SPOT.map(function (x, i) { return '<button type="button" data-spot-i="' + i + '" aria-label="' + esc(x.n) + '"' + (i === spotI ? ' aria-current="true"' : "") + "></button>"; }).join("");
   }
@@ -2567,14 +2622,20 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   ];
   var GIFTA = [1000, 2500, 5000, 10000, 20000];
   // что можно сдать на номинал: наборы по ступеням, цены — выбранного пункта; не помещается или нет в пункте — не предлагаем
-  var GIFTI = { 1000: ["04.25.002"], 2500: ["04.25.016"], 5000: ["04.25.015"], 10000: ["04.25.015", "04.25.008", "04.25.016"], 20000: ["04.25.015", "04.25.008", "04.25.003", "04.25.016", "04.25.013"] };
+  var GIFTI = {
+    1000: { g: "проверки запасов железа", c: ["04.25.002"] },
+    2500: { g: "проверки уровня витаминов", c: ["04.25.016"] },
+    5000: { g: "общей проверки здоровья", c: ["04.25.015"] },
+    10000: { g: "расширенной проверки: кровь, сердце и сосуды, витамины", c: ["04.25.015", "04.25.008", "04.25.016"] },
+    20000: { g: "полной ежегодной проверки", c: ["04.25.015", "04.25.008", "04.25.003", "04.25.016", "04.25.013"] }
+  };
   function giftIdea(amt) {
     var tier = Object.keys(GIFTI).map(Number).filter(function (a) { return a <= amt; }).pop(), sum = 0, names = [];
     if (!tier) return "";
-    GIFTI[tier].forEach(function (c) { var x = item(c); if (x.na || sum + x.p > amt) return; sum += x.p; names.push(x.n); });
-    return names.length ? typo("Хватит на: " + names.join("; ") + " — " + rub(sum) + ".") : "";
+    GIFTI[tier].c.forEach(function (c) { var x = item(c); if (x.na || sum + x.p > amt) return; sum += x.p; names.push(x.n.charAt(0).toLowerCase() + x.n.slice(1)); });
+    return names.length ? typo("Подойдёт для " + GIFTI[tier].g + ": например, " + names.join(", ") + " — " + rub(sum) + ".") : "";
   }
-  var gs = { amt: 2500, des: 0, who: "self", phone: "", done: false, err: "" };
+  var gs = { amt: 2500, des: 0, phone: "", done: false, err: "" };
   function gfCard() {
     var d = GIFTD[gs.des], c = $("#gf-card");
     c.style.backgroundImage = "url(../assets/img/gift/" + d.id + ".webp)"; c.style.backgroundColor = d.bg; c.style.color = d.amt; // цвет фона — под суммой и на случай, если картинка не загрузится
@@ -2586,13 +2647,12 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   }
   function renderGifts() {
     $("#gf-des").innerHTML = GIFTD.map(function (d, i) { return '<button class="gf-des" type="button" data-gf-des="' + i + '" aria-pressed="' + (i === gs.des) + '"><span style="background-image:url(../assets/img/gift/' + d.id + '.webp)"></span>' + esc(d.n) + "</button>"; }).join("");
-    $("#gf-amts").innerHTML = GIFTA.map(function (a) { var t = giftIdea(a); return '<span class="gf-chipw"><button class="chip num" type="button" data-gf-amt="' + a + '" aria-pressed="' + (gs.amt === a) + '"' + (t ? ' aria-describedby="gft-' + a + '"' : "") + ">" + rub(a) + "</button>" + (t ? '<span class="gf-tip" role="tooltip" id="gft-' + a + '">' + t + "</span>" : "") + "</span>"; }).join("");
+    $("#gf-amts").innerHTML = GIFTA.map(function (a, i) { var t = giftIdea(a); return '<span class="gf-chipw"><button class="chip num gf-a' + i + '" type="button" data-gf-amt="' + a + '" aria-pressed="' + (gs.amt === a) + '"' + (t ? ' aria-describedby="gft-' + a + '"' : "") + ">" + rub(a) + "</button>" + (t ? '<span class="gf-tip" role="tooltip" id="gft-' + a + '">' + t + "</span>" : "") + "</span>"; }).join("");
     if (document.activeElement !== $("#gf-sum")) $("#gf-sum").value = gs.amt;
     var f = $("#gf-form");
-    if (gs.done) f.innerHTML = "<h2>Сертификат оформлен</h2><p>" + typo("Сертификат «" + GIFTD[gs.des].n + "» на " + rub(gs.amt) + " появится в личном кабинете " + (gs.who === "self" ? "после оплаты." : "получателя после оплаты. PDF можно скачать в вашем кабинете.")) + '</p><button class="btn btn-ghost" type="button" data-gf="again">Оформить ещё один</button>';
-    else f.innerHTML = "<h2>Кому</h2>" +
-      '<div class="seg gf-who" role="group" aria-label="Кому"><button type="button" data-gf-who="self" aria-pressed="' + (gs.who === "self") + '">Себе</button><button type="button" data-gf-who="other" aria-pressed="' + (gs.who === "other") + '">Другому</button></div>' +
-      '<label class="gf-l" for="gf-phone">' + (gs.who === "self" ? "Ваш телефон" : "Телефон получателя") + '</label><input class="gf-in" id="gf-phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value="' + esc(gs.phone) + '"><p class="gf-hint">' + (gs.who === "self" ? "По этому номеру найдём ваш личный кабинет." : "По этому номеру найдём личный кабинет получателя.") + "</p>" +
+    if (gs.done) f.innerHTML = "<h2>Сертификат оформлен</h2><p>" + typo("Сертификат «" + GIFTD[gs.des].n + "» на " + rub(gs.amt) + " появится в личном кабинете получателя после оплаты. PDF можно скачать в вашем кабинете.") + '</p><button class="btn btn-ghost" type="button" data-gf="again">Оформить ещё один</button>';
+    else f.innerHTML = "<h2>Кому подарить</h2>" +
+      '<label class="gf-l" for="gf-phone">Телефон получателя</label><input class="gf-in" id="gf-phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value="' + esc(gs.phone) + '"><p class="gf-hint">По этому номеру найдём личный кабинет получателя.</p>' +
       (gs.err ? '<p class="gf-err" role="alert">' + gs.err + "</p>" : "") +
       '<button class="btn btn-lime" type="submit" id="gf-pay"></button>';
     gfCard();
@@ -2645,7 +2705,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var cc = $("#crumb-card-cat"); cc.textContent = cat.n; cc.dataset.go = cx ? "checkups" : "catalog:" + cat.id;
     var t = CARDS[code];
     $("#k-lede").textContent = typo((t && t.lede) || a.d + ".");
-    $("#k-tags").innerHTML = '<span class="tag">' + esc(a.bio) + '</span>' + (cx ? '<span class="tag">Набор · ' + nAn(cx.parts.length) + "</span>" : '<span class="tag ' + (a.own ? "own" : "partner") + '">' + (a.own ? "Собственная лаборатория CLD" : "Партнёрская лаборатория") + "</span>") + '<span class="tag">Код ' + esc(code) + '</span>' + (a.off !== a.n ? '<span class="tag" style="background:none;padding-left:0;font-weight:500;letter-spacing:0">' + esc(a.off) + "</span>" : "");
+    $("#k-tags").innerHTML = '<span class="tag">' + esc(a.bio) + '</span>' + (cx ? '<span class="tag">Набор · ' + nAn(cx.parts.length) + "</span>" : (a.own ? '<span class="tag own">Собственная лаборатория CLD</span>' : "")) + '<span class="tag">Код ' + esc(code) + '</span>' + (a.off !== a.n ? '<span class="tag" style="background:none;padding-left:0;font-weight:500;letter-spacing:0">' + esc(a.off) + "</span>" : "");
     var html = "";
     if (cx) html += "<section><h2>Что входит в набор</h2><ul>" + (cx.full || cx.parts).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
       (cx.sum && !cx.nosave ? '<p class="b-note">По отдельности эти анализы стоят ' + rub(cx.sum) + ", в наборе — " + rub(a.p) + ".</p>" : "") + "</section>";
@@ -3231,14 +3291,14 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   var NOTES = {
     home: [
       ["h1", "Пункт выбирают списком с поиском", "Все 29 пунктов по регионам, поиск по городу и улице и кнопка «Ближайший ко мне» — по геолокации, как обсуждали на встрече. После выбора цены на всём сайте — в каталоге, чек-апах, слайдере и корзине — берутся из каталога этого пункта на lab.discript.ru (выгрузка 28.10.2026). Выбор запоминается. Если анализа нет в каталоге пункта, вместо кнопки — «Нет в этом пункте»."],
-      ["h5", "WhatsApp в шапке", "Со встречи: переписка в WhatsApp на виду на всех страницах. Номер появится после согласования."],
+      ["h5", "Телефон и WhatsApp рядом", "Со встречи: WhatsApp на виду на всех страницах — зелёная кнопка сразу у телефона. Номер появится после согласования."],
       ["h3", "Поиск в шапке на всех страницах", "Со встречи: поиск всегда на одном месте, на любой странице. Понимает опечатки и бытовые слова: «витамн д», «ферретин», «оак», «сахар»."],
       ["h4", "«Результаты анализов» — крупно", "Со встречи: пациенты не находят результаты, поэтому кнопка — в шапке, на первом экране, плашкой под ним и в нижнем меню телефона."],
       ["h2", "Те же пункты, что в нынешней шапке", "По просьбе лаборатории — набор нынешнего сайта: пункт; логотип, поиск, телефон, «Войти», корзина; «Экспресс», «Акции», «Популярные анализы», «Чек-апы», «Выезд на дом», «Результаты анализов»; «Анализы и цены», «Адреса и офисы», «Врачам», «Подарочные сертификаты», «О компании». Доработано по брендбуку: цвета, размеры, текст не мельче 16 px. При прокрутке закреплён только ряд с логотипом и поиском. «Врачи» на нынешнем сайте — приёмы врачей, у нас «Врачам» — раздел для врачей-партнёров."],
       ["h6", "Программы — кнопками", "Как на нынешнем сайте: «Экспресс» — анализы по сроку готовности, «Акции» — все предложения, «Популярные анализы» — частые анализы на главной, «Чек-апы»."],
       ["home1", "Первый экран", "Заголовок, выезд медсестры, поиск, кнопки «Выбрать анализы» и «Результаты анализов» и пункт, для которого показаны цены."],
       ["home2s", "Поиск с подсказками", "Второй поиск на первом экране: в строке сами печатаются 15 частых запросов — от ферритина до BRCA-скрининга, по одному в 3–4 секунды. Когда человек ставит курсор, подсказки останавливаются."],
-      ["home2", "Слайдер редких исследований", "Со встречи: вместо фото — 4–5 дорогих и интересных исследований, о которых пациенты часто не знают. Цены — пункта из шапки. Листается сам каждые 6 секунд, останавливается при наведении и кнопкой паузы; можно листать стрелками, точками и пальцем. Список утверждает лаборатория."],
+      ["home2", "Слайдер редких исследований — 5 подач картинки", "Каждый слайд показывает свой вариант: 1 — бледная крупная картинка на фоне, 2 — крупно справа на светлой подложке, 3 — сверху широкой полосой, 4 — лаймовая карточка, 5 — картинка в большом круге. Выберем один и сделаем так все слайды. Со встречи: вместо фото — 4–5 дорогих и интересных исследований, о которых пациенты часто не знают. Цены — пункта из шапки. Листается сам каждые 6 секунд, останавливается при наведении и кнопкой паузы; можно листать стрелками, точками и пальцем. Список утверждает лаборатория."],
       ["home3b", "Результаты и WhatsApp под первым экраном", "Две крупные плашки, как на нынешнем сайте, но заметнее шапки: лаймовая — результаты в личном кабинете, серо-голубая с логотипом WhatsApp — переписка. У каждой — действие глаголом."],
       ["promos", "Акции месяца", "Три акции крупно. Это примеры — акции утверждает лаборатория."],
       ["promos2", "Все предложения", "Со встречи: четвёртая карточка — переход, а не акция: стрелка и «Перейти к акциям». Ведёт на страницу со всеми акциями, чек-апами дешевле анализов по отдельности и постоянными скидками."],
@@ -3255,7 +3315,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       ["x3", "ЦИТО", "Со встречи: ЦИТО отмечают при регистрации, к цене добавляется 30%. Пример из МИС — общий анализ крови 470 ₽, с ЦИТО 615 ₽. Список ЦИТО и сроки по пунктам пришлёт лаборатория, тогда цена ЦИТО появится у каждого такого анализа."]
     ],
     gifts: [
-      ["gf1", "Как в «Золотом яблоке»", "Превью карты меняется сразу: шесть дизайнов в карусели — три фирменных (тёмно-синий, лаймовый, белый) и три необычных (горы Кавказа, ботаника, ризограф), номинал кнопками или своей суммой от 500 ₽ кратно 100. При наведении на номинал и под выбранной суммой — что на неё можно сдать: наборы по ценам выбранного пункта. Фон карты нарисован в Codex, логотип и сумма — поверх, поэтому всегда точные. Условия — как на lab.discript.ru: бессрочно, на любой анализ, чек-ап или выезд, остаток не сгорает."]
+      ["gf1", "Как в «Золотом яблоке»", "Сертификат — только в подарок другому человеку. Превью карты меняется сразу: шесть дизайнов в карусели — три фирменных (тёмно-синий, лаймовый, белый) и три необычных (горы Кавказа, ботаника, ризограф), номинал кнопками или своей суммой от 500 ₽ кратно 100. При наведении на номинал и под выбранной суммой — что на неё можно сдать: наборы по ценам выбранного пункта. Фон карты нарисован в Codex, логотип и сумма — поверх, поэтому всегда точные. Условия — как на lab.discript.ru: бессрочно, на любой анализ, чек-ап или выезд, остаток не сгорает."]
     ],
     promos: [
       ["pr1", "Выгода считается по ценам пункта", "Чек-апы, которые дешевле тех же анализов по отдельности хотя бы на 10 %. Сумма «по отдельности» — по ценам выбранного пункта, поэтому список меняется вместе с пунктом."]
@@ -3266,7 +3326,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       ["cat3", "Фильтр по сроку", "Со встречи и по разделу «Экспресс» нынешнего сайта: любой срок, 1 день, до 2 или до 3 дней. Рядом — «Собственная лаборатория». У анализов с ЦИТО под ценой — цена ЦИТО."],
       ["cat6", "Общее — один раз наверху", "Со встречи: «1 день», «кровь из вены» и «собственная лаборатория» не повторяются в каждой строке. Они указаны над списком, а в строке — только если у анализа по-другому."],
       ["cat4", "Чек-ап раздела — первым", "Готовый набор с составом, сроком и ценой. Выгоду показываем, только если она честно считается от цен каталога."],
-      ["cat5", "Строка анализа", "Название, что покажет, срок, биоматериал, собственная или партнёрская лаборатория, цена и цена онлайн. Партнёр не называется по имени."]
+      ["cat5", "Строка анализа", "Название, что покажет, срок, биоматериал, цена и цена онлайн. Пометка «Собственная лаборатория» — только там, где это так; про партнёрские лаборатории пациенту не пишем."]
     ],
     card: [
       ["card1", "Название и одна строка смысла", "Сначала простое название и что анализ покажет. Официальное название и код — мелко, для врача и поиска."],
@@ -3368,7 +3428,6 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var md = e.target.closest("[data-maxd]"); if (md) { state.maxd = +md.dataset.maxd; renderCatalog(); if (notesOn) placePins(); return; }
     if (e.target.closest("[data-xmore]")) { xs.lim += 24; renderExpress(); return; }
     var xm = e.target.closest("[data-xmax]"); if (xm) { xs.max = +xm.dataset.xmax; xs.lim = 24; renderExpress(); if (notesOn) placePins(); return; }
-    var gw = e.target.closest("[data-gf-who]"); if (gw) { gs.who = gw.dataset.gfWho; renderGifts(); return; }
     var ga = e.target.closest("[data-gf-amt]"); if (ga) { gs.amt = +ga.dataset.gfAmt; gs.err = ""; $("#gf-sum").value = gs.amt; gfCard(); return; }
     var gd = e.target.closest("[data-gf-des]"); if (gd) { gs.des = +gd.dataset.gfDes; $$("[data-gf-des]").forEach(function (b, i) { b.setAttribute("aria-pressed", i === gs.des ? "true" : "false"); }); gfCard(); return; }
     var gsc = e.target.closest("[data-gf-scroll]"); if (gsc) { var row = $("#gf-des"); row.scrollBy({ left: +gsc.dataset.gfScroll * row.clientWidth * .8, behavior: reduceMotion ? "auto" : "smooth" }); return; }
