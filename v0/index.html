@@ -2248,7 +2248,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var hay = norm(it.c + " " + it.n + " " + (it.m || "") + " " + (it.parts || []).join(" "));
     return docQ.split(" ").every(function (w) { return hay.indexOf(w) >= 0; });
   }
-  var PREPL = { "Н12": "Утром, не есть 12 часов", "Н8": "Утром, не есть 8 часов", "Е3": "Не есть 2–3 часа", "Г": "Не есть 2–3 часа, сутки без нагрузок", "К": "Без особой подготовки", "ПСА": "Особые правила для ПСА", "М": "Особые правила для анализа мочи", "О": "Утром, не есть 8 часов" };
+  var PREPL = { "Н12": "Утром натощак (12 часов)", "Н8": "Утром натощак (8 часов)", "Е3": "Через 2–3 часа после еды", "Г": "Через 2–3 часа после еды, сутки без нагрузок", "К": "Без особой подготовки", "ПСА": "Особые правила для ПСА", "М": "Особые правила для анализа мочи", "О": "Утром натощак (8 часов)" };
   function prepList(k) { return "<ul>" + DOC.prep[k].replace(/^Общие правила: /, "").split(/\.\s+/).map(function (x) { x = x.replace(/\.$/, ""); return x ? "<li>" + esc(x.charAt(0).toUpperCase() + x.slice(1)) + "</li>" : ""; }).join("") + "</ul>"; }
   function prepBtn(k) { return '<button class="prep" type="button" data-prep="' + esc(k) + '" aria-label="Подготовка: ' + esc(PREPL[k]) + '. ' + esc(DOC.prep[k]) + '">' + esc(PREPL[k]) + "</button>"; }
   function docRow(it) {
