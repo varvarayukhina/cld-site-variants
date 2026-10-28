@@ -867,11 +867,9 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .cxhero h1 { font-size: 44px; line-height: 1.1; max-width: 20ch; }
 .cxhero .lede { margin-top: 16px; font-size: 18px; line-height: 1.6; max-width: 54ch; }
 .cxhero-img { width: 100%; max-width: 220px; height: auto; justify-self: center; }
-.cx-tools { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px 32px; align-items: start; }
+.cx-search { max-width: 620px; }
 .cx-search input { box-shadow: inset 0 0 0 1.5px var(--line); font-size: 17px; padding-block: 16px; }
 .cx-search input:focus { box-shadow: inset 0 0 0 2px var(--navy); outline: none; }
-.cx-terms { list-style: none; margin: 0; padding: 14px 20px; border-radius: var(--r-card); background: var(--surface); display: grid; gap: 4px; font-size: 16px; line-height: 1.5; }
-.cx-terms a { font-weight: 600; }
 .cx-dirs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .cx-dirs .chip { font-size: 16px; padding: 9px 16px; }
 .cx-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
@@ -891,10 +889,14 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .cxt-parts b, .cxt-meta b { color: var(--ink); font-weight: 600; }
 .cxt-parts mark { background: var(--lime-soft); color: var(--ink); padding: 0; border-radius: 3px; box-shadow: 0 0 0 3px var(--lime-soft); }
 .cxt-meta .prep { font-size: 16px; vertical-align: 1px; }
-.cxt-foot { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 20px; align-items: center; }
+.cxt-meta + .cxt-meta { margin-top: -8px; }
+.cxt-foot { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 16px; align-items: center; }
 .cxt-p { font-size: 28px; font-weight: 700; line-height: 1.15; }
-.cxt-act { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
-.cxt-pnote { grid-column: 1 / -1; font-size: 16px; line-height: 1.5; color: var(--muted); }
+.cxt-act { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.cxt-act .btn { padding-inline: 14px; }
+.cxt-pr { display: grid; gap: 2px; }
+.cxt-pr s { font-size: 17px; color: var(--muted); text-decoration-thickness: 1.5px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .cxt .nw, .cxt-parts span { white-space: nowrap; }
 .cx-help { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; align-items: center; margin-top: 48px; padding: 28px 32px; border-radius: var(--r-card); background: var(--navy-soft); }
 .cx-help h2 { font-size: 28px; }
@@ -905,7 +907,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   .dtasks a { padding: 14px 16px; }
   .memos, .hv-who { grid-template-columns: minmax(0, 1fr); }
   .hvhero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 10px 32px; }
-  .cx-tools, .cx-grid, .cx-help { grid-template-columns: minmax(0, 1fr); }
+  .cx-grid, .cx-help { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
   .cxhero-g { grid-template-columns: minmax(0, 1fr) 96px; gap: 16px; align-items: start; }
@@ -915,7 +917,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   .cxhero-img { grid-column: 2; grid-row: 1; max-width: 96px; }
   .cxt { padding: 20px 18px; }
   .cxt-foot { grid-template-columns: minmax(0, 1fr); }
-  .cxt-act { justify-content: flex-start; grid-row: 3; }
+  .cxt-act { justify-content: flex-start; }
   .cx-help { padding: 24px 20px; }
 }
 
@@ -1363,14 +1365,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       </div>
     </div>
     <div class="wrap pg">
-      <div class="cx-tools">
-        <div class="search cx-search"><svg class="ico"><use href="#i-search"/></svg><input id="cx-q" type="search" autocomplete="off" placeholder="Найти набор или анализ" aria-label="Поиск по наборам и анализам в них"></div>
-        <ul class="cx-terms">
-          <li>Цены указаны для пунктов в&nbsp;Черкесске, в&nbsp;других городах могут отличаться. <a href="#points" data-go="points">Где сдать</a></li>
-          <li>Взятие крови стоит 200&nbsp;₽ и&nbsp;оплачивается отдельно.</li>
-          <li>При оплате на&nbsp;сайте скидка 10&nbsp;%.</li>
-        </ul>
-      </div>
+      <div class="search cx-search"><svg class="ico"><use href="#i-search"/></svg><input id="cx-q" type="search" autocomplete="off" placeholder="Найти набор или анализ" aria-label="Поиск по наборам и анализам в них"></div>
       <div class="cx-dirs" id="cx-dirs" role="group" aria-label="Направления"></div>
       <div class="cx-grid" id="cx-grid" aria-live="polite"></div>
       <section class="cx-help">
@@ -2349,10 +2344,10 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var prep = prepBtn(x.prep) + (e.prep2 ? " " + prepBtn(e.prep2) : "");
     return '<article class="cxt" id="cx-' + esc(c) + '"><h2>' + esc(t.n) + "</h2>" + seg + '<p class="cxt-d">' + typo(t.d) + "</p>" + add +
       '<p class="cxt-parts"><b>Состав:</b> ' + parts + ".</p>" +
-      '<p class="cxt-meta"><b>Результат</b> ' + (x.r ? typo("через " + x.r) : "— срок по телефону") + ". <b>Подготовка:</b> " + prep + "</p>" +
-      '<div class="cxt-foot"><b class="cxt-p num">' + rub(x.p) + "</b>" +
+      '<p class="cxt-meta"><b>Результат:</b> ' + (x.r ? typo("через " + x.r) : "срок по телефону") + '</p><p class="cxt-meta"><b>Подготовка:</b> ' + prep + "</p>" +
+      '<div class="cxt-foot"><p class="cxt-pr">' + (sv ? '<s class="num"><span class="vh">По отдельности </span>' + rub(e.sum) + "</s>" : "") + '<b class="cxt-p num">' + (sv ? '<span class="vh">В наборе </span>' : "") + rub(x.p) + "</b></p>" +
       '<div class="cxt-act"><a class="btn btn-ghost" href="#card-' + esc(c) + '" data-go="card:' + esc(c) + '">Описание и&nbsp;подготовка</a>' + buyBtn(c) + "</div>" +
-      '<p class="cxt-pnote">+ взятие крови 200&nbsp;₽, оплачивается отдельно.' + (sv ? " Те&nbsp;же анализы по&nbsp;отдельности стоят " + rub(e.sum) + ", в&nbsp;наборе дешевле на&nbsp;" + sv + "&nbsp;%." : "") + "</p></div></article>";
+      "</div></article>";
   }
   function cxList() {
     var q = norm(cxs.q), html = CXT.map(function (t, i) {
