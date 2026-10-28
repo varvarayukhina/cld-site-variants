@@ -574,7 +574,7 @@ button.prep:hover, button.prep[aria-expanded="true"] { background: var(--navy); 
 .parts li { break-inside: avoid; margin-bottom: 2px; }
 .dempty { padding: 24px; margin-top: 8px; background: var(--surface-2); border-radius: var(--r-card); color: var(--muted); }
 .dlegend-wrap { margin-top: 40px; padding: 28px 30px; border-radius: 20px; background: var(--surface-2); }
-.dlegend-wrap h3 { font-size: 22px; }
+.dlegend-wrap h2 { font-size: 22px; }
 .dlegend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 40px; margin: 18px 0 0; }
 .dlegend div { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 12px; align-items: start; }
 .dlegend dt .prep-k { background: #FFF; }
@@ -938,6 +938,55 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   .hv-area-in { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; }
 }
 
+/* ---------- doctors: partnership first, catalog on its own page ---------- */
+.dochero .crumbs { padding-top: 22px; }
+.dochero-in { padding-block: 8px 36px; max-width: 780px; }
+.dochero h1 { font-size: 44px; line-height: 1.1; }
+.dochero .lede { margin-top: 16px; font-size: 18px; line-height: 1.6; max-width: 62ch; }
+.dochero .dacts { margin-top: 24px; }
+.dsec { padding-block: 36px; }
+.dsec > h2 { font-size: 28px; margin-bottom: 20px; }
+.dways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.dway { display: flex; flex-direction: column; gap: 14px; padding: 26px 28px; border-radius: var(--r-card); box-shadow: inset 0 0 0 1px var(--line); scroll-margin-top: 140px; }
+.dway h3 { font: 600 23px/1.25 var(--text); letter-spacing: 0; }
+.dway p { font-size: 17px; line-height: 1.6; }
+.dsteps { margin: 2px 0 0; padding: 0; list-style: none; counter-reset: ds; display: grid; gap: 10px; }
+.dsteps li { counter-increment: ds; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 17px; line-height: 1.5; }
+.dsteps li::before { content: counter(ds); display: grid; place-items: center; width: 32px; height: 32px; margin-top: -4px; border-radius: 50%; background: var(--navy); color: #FFF; font: 700 16px/1 var(--text); }
+.dwhy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; margin: 0; }
+.dwhy > div { padding-top: 16px; border-top: 1px solid var(--line); }
+.dwhy dt { font-weight: 700; font-size: 19px; line-height: 1.35; }
+.dwhy dd { margin: 6px 0 0; font-size: 17px; line-height: 1.6; color: var(--muted); max-width: 52ch; }
+.dwhy dd a { font-weight: 600; }
+.dfind { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 18px 40px; align-items: center; padding: 28px 32px; border-radius: var(--r-card); background: var(--surface); }
+.dfind h2 { font-size: 28px; }
+.dfind p { margin-top: 6px; font-size: 17px; line-height: 1.6; color: var(--muted); }
+.dfind-f { display: flex; gap: 10px; }
+.dfind-f .search { flex: 1; }
+.dfind-f .search input { box-shadow: inset 0 0 0 1.5px var(--line); padding-block: 14px; font-size: 17px; }
+.dfind-f .search input:focus { box-shadow: inset 0 0 0 2px var(--navy); outline: none; }
+.dfind .dacts { grid-column: 2; margin-top: 0; }
+.dsec .memo span:last-child { font-size: 16px; }
+.drep { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; align-items: center; padding: 28px 32px; border-radius: var(--r-card); background: var(--navy-soft); }
+.drep h2 { font-size: 28px; }
+.drep p { margin-top: 8px; font-size: 17px; line-height: 1.6; max-width: 62ch; }
+.drep .dacts { margin-top: 0; }
+.dcat-h { margin-top: 18px; }
+#d-chips .chip, #d-chips .chip .n { font-size: 16px; }
+#d-tab thead th, #d-tab th small, #d-tab .code, #d-tab .prep, #d-tab td small { font-size: 16px; }
+.dcat-h h1 { font-size: 40px; }
+.dcat-h p { margin-top: 10px; }
+@media (max-width: 960px) {
+  .dways, .dwhy, .dfind, .drep { grid-template-columns: minmax(0, 1fr); }
+  .dfind .dacts { grid-column: auto; }
+}
+@media (max-width: 640px) {
+  .dochero h1, .dcat-h h1 { font-size: 32px; }
+  .dway { padding: 20px 18px; }
+  .dfind, .drep { padding: 22px 18px; }
+  .dfind-f { flex-direction: column; }
+}
+
 /* cart: one blood draw, several results */
 .samedraw { margin-top: 28px; padding: 26px 26px 10px; border-radius: var(--r-card); background: var(--lime-soft); }
 .sd-top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
@@ -1206,37 +1255,83 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   <!-- ============ DOCTORS ============ -->
   <section id="v-doctors" data-view="doctors" hidden>
-    <div class="dhero">
-      <div class="wrap dhero-grid">
-        <div data-note="doc1">
-          <h1>Врачам</h1>
-          <p class="dsub">Всё, что нужно, чтобы направить пациента в&nbsp;CLD: бланк направления, каталог исследований собственной лаборатории и&nbsp;памятки по&nbsp;подготовке для пациентов.</p>
-          <div class="dacts">
-            <a class="btn btn-lime" href="#referral" data-go="referral"><svg class="ico"><use href="#i-print"/></svg>Бланк направления</a>
-            <a class="btn btn-line" href="../print/cld-katalog-dlya-vrachey.pdf" download><svg class="ico"><use href="#i-file"/></svg>Каталог для печати (PDF)</a>
-          </div>
+    <div class="dochero">
+      <div class="wrap">
+        <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Врачам</span></div>
+        <div class="dochero-in" data-note="doc1">
+          <h1>Лабораторные исследования для&nbsp;ваших пациентов</h1>
+          <p class="lede">CLD&nbsp;— центр лабораторной диагностики с&nbsp;собственной лабораторией в&nbsp;Черкесске. Как направлять пациентов и&nbsp;на&nbsp;каких условиях работать врачам, клиникам и&nbsp;санаториям, расскажет медицинский представитель.</p>
+          <div class="dacts"><a class="btn btn-lime" href="#d-rep" data-jump="d-rep"><svg class="ico"><use href="#i-phone"/></svg>Связаться с&nbsp;представителем</a><a class="btn btn-ghost" href="#d-docs" data-jump="d-docs">Материалы для&nbsp;работы</a></div>
         </div>
-        <nav class="dtasks" aria-label="Разделы страницы">
-          <a href="#d-cat" data-jump="d-cat"><b>Каталог исследований</b><span>Что сдаёт пациент, срок и&nbsp;подготовка к&nbsp;каждому анализу</span></a>
-          <a href="#d-memo" data-jump="d-memo"><b>Памятки для пациентов</b><span>Подготовка к&nbsp;анализам: распечатать и&nbsp;отдать на&nbsp;приёме</span></a>
-          <a href="#d-clinics" data-jump="d-clinics"><b>Клиникам и&nbsp;санаториям</b><span>Сотрудничество с&nbsp;лабораторией</span></a>
-        </nav>
       </div>
     </div>
 
-    <section class="how wrap">
-      <div class="how-in">
-        <h2>Как направить пациента</h2>
-        <ol class="how-list">
-          <li><span class="how-n num" aria-hidden="true">1</span><h3>Выпишите направление</h3><p>На&nbsp;бланке CLD или на&nbsp;своём: название анализа или его код из&nbsp;каталога.</p></li>
-          <li><span class="how-n num" aria-hidden="true">2</span><h3>Дайте памятку по&nbsp;подготовке</h3><p>Подготовка зависит от&nbsp;анализа. Памятки для печати&nbsp;— ниже на&nbsp;этой странице.</p></li>
-          <li><span class="how-n num" aria-hidden="true">3</span><h3>Пациент сдаёт анализы в&nbsp;пункте CLD</h3><p>Адреса и&nbsp;часы&nbsp;— на&nbsp;<a href="#points" data-go="points">карте пунктов</a>. Результат пациент получает в&nbsp;личном кабинете или в&nbsp;пункте.</p></li>
-        </ol>
+    <section class="wrap dsec" aria-labelledby="d-ways-h" data-note="doc3">
+      <h2 id="d-ways-h">Как можно работать с&nbsp;CLD</h2>
+      <div class="dways">
+        <article class="dway">
+          <h3>Направлять пациентов в&nbsp;пункты CLD</h3>
+          <p>Врач выписывает направление на&nbsp;бланке CLD или на&nbsp;своём, пациент сдаёт анализы в&nbsp;пункте CLD. Результат приходит в&nbsp;личный кабинет пациента, его можно получить и&nbsp;в&nbsp;пункте.</p>
+          <ol class="dsteps">
+            <li><span>Свяжитесь с&nbsp;медицинским представителем</span></li>
+            <li><span>Распечатайте бланк направления и&nbsp;памятки ниже на&nbsp;этой странице</span></li>
+            <li><span>Направляйте пациентов в&nbsp;пункты: их&nbsp;29 в&nbsp;9 регионах</span></li>
+          </ol>
+        </article>
+        <article class="dway" id="d-clinics">
+          <h3>Передавать пробы из&nbsp;клиники</h3>
+          <p>Для клиник и&nbsp;санаториев, где пробы берут на&nbsp;месте. <span class="fill">[уточнить у&nbsp;лаборатории: как передают пробы, в&nbsp;каких городах и&nbsp;за&nbsp;какой срок готов результат]</span></p>
+          <ol class="dsteps">
+            <li><span>Свяжитесь с&nbsp;медицинским представителем</span></li>
+            <li><span>Обсудите условия и&nbsp;порядок передачи проб <span class="fill">[уточнить: нужен ли договор]</span></span></li>
+            <li><span>Начните работу <span class="fill">[уточнить: с&nbsp;чего начинается работа]</span></span></li>
+          </ol>
+        </article>
       </div>
     </section>
 
-    <div class="sec wrap" id="d-cat">
-      <div class="sec-h"><h2>Каталог исследований</h2><p>Анализы, которые выполняет собственная лаборатория CLD в&nbsp;Черкесске. Нажмите на&nbsp;подготовку, чтобы увидеть правила целиком. Цены&nbsp;— в&nbsp;карточках анализов для пациентов.</p></div>
+    <section class="wrap dsec" aria-labelledby="d-why-h" data-note="doc4">
+      <h2 id="d-why-h">Почему CLD</h2>
+      <dl class="dwhy">
+        <div><dt>Собственная лаборатория в&nbsp;Черкесске</dt><dd><span id="d-own">99 анализов и&nbsp;22 комплекса</span> выполняются на&nbsp;месте, без&nbsp;отправки проб в&nbsp;другой город. Остальные анализы выполняют партнёрские лаборатории.</dd></div>
+        <div><dt>Результат через 1 день</dt><dd id="d-days">Такой срок у&nbsp;большинства анализов собственной лаборатории. Срок каждого указан в&nbsp;каталоге.</dd></div>
+        <div><dt>29 пунктов в&nbsp;9 регионах</dt><dd>Пациент сдаёт анализы рядом с&nbsp;домом. <a href="#points" data-go="points">Адреса и&nbsp;часы работы</a></dd></div>
+        <div><dt>Подготовка к&nbsp;каждому анализу</dt><dd>Правила подготовки есть в&nbsp;каталоге и&nbsp;в&nbsp;памятках, которые можно отдать пациенту.</dd></div>
+        <div><dt>Контроль качества</dt><dd><span class="fill">[уточнить у&nbsp;лаборатории: внешний контроль качества и&nbsp;документы]</span></dd></div>
+      </dl>
+    </section>
+
+    <section class="wrap dsec" aria-labelledby="d-find-h">
+      <div class="dfind">
+        <div><h2 id="d-find-h">Найти исследование</h2><p>Каталог собственной лаборатории: код, что сдаёт пациент, срок и&nbsp;подготовка.</p></div>
+        <form class="dfind-f" id="d-find" role="search"><div class="search"><svg class="ico"><use href="#i-search"/></svg><input id="d-q0" type="search" autocomplete="off" placeholder="Название или код: ферритин, 40-111" aria-label="Найти исследование по названию или коду"></div><button class="btn btn-navy" type="submit">Найти</button></form>
+        <div class="dacts"><a class="btn btn-ghost" href="#dcat" data-go="dcat">Открыть каталог</a><a class="btn btn-ghost" href="../print/cld-katalog-dlya-vrachey.pdf" download><svg class="ico"><use href="#i-down"/></svg>Скачать каталог (PDF)</a></div>
+      </div>
+    </section>
+
+    <section class="wrap dsec" id="d-docs" aria-labelledby="d-docs-h">
+      <h2 id="d-docs-h">Материалы для&nbsp;работы</h2>
+      <div class="memos">
+        <a class="memo" href="#referral" data-go="referral"><span class="memo-ic"><svg class="ico"><use href="#i-print"/></svg></span><b>Бланк направления</b><span>Заполнить на&nbsp;сайте и&nbsp;распечатать: анализы, код врача, данные пациента</span></a>
+        <a class="memo" href="../print/cld-katalog-dlya-vrachey.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-file"/></svg></span><b>Каталог для&nbsp;врачей</b><span>PDF для&nbsp;печати: исследования собственной лаборатории, коды, сроки и&nbsp;подготовка</span></a>
+        <a class="memo" href="../print/pamyatka-kak-podgotovitsya.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Как подготовиться к&nbsp;анализам</b><span>Листовка А5 для&nbsp;пациента: сколько не&nbsp;есть перед разными анализами, подготовка детей, анализы мочи</span></a>
+        <a class="memo" href="../print/buklet-kak-sdat-analizy.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-file"/></svg></span><b>Как сдать анализы</b><span>Буклет для&nbsp;пациента: подготовка, пункты и&nbsp;результат</span></a>
+        <a class="memo" href="../print/buklet-beremennost-i-deti.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-baby"/></svg></span><b>Беременность и&nbsp;дети</b><span>Буклет для&nbsp;пациентки: анализы во&nbsp;время беременности и&nbsp;детский чек-ап</span></a>
+      </div>
+    </section>
+
+    <section class="wrap dsec" id="d-rep" aria-labelledby="d-rep-h">
+      <div class="drep">
+        <div><h2 id="d-rep-h">Медицинский представитель</h2><p><span class="fill">[имя представителя]</span>, <span class="fill">[районы и&nbsp;города, где работает]</span>. Расскажет, как направлять пациентов, и&nbsp;ответит на&nbsp;вопросы о&nbsp;работе с&nbsp;лабораторией.</p></div>
+        <div class="dacts"><a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a><a class="btn btn-ghost" href="#" data-stub="Номер WhatsApp появится после согласования"><svg class="ico"><use href="#i-chat"/></svg>Написать в&nbsp;WhatsApp</a></div>
+      </div>
+    </section>
+  </section>
+
+  <section id="v-dcat" data-view="dcat" hidden>
+    <div class="wrap pg" id="d-cat">
+      <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" data-go="doctors">Врачам</button><span>/</span><span>Каталог исследований</span></div>
+      <div class="sec-h dcat-h"><div><h1>Каталог исследований</h1><p>Анализы, которые выполняет собственная лаборатория CLD в&nbsp;Черкесске. Нажмите на&nbsp;подготовку, чтобы увидеть правила целиком. Цены&nbsp;— в&nbsp;карточках анализов для пациентов.</p></div><a class="btn btn-ghost" href="../print/cld-katalog-dlya-vrachey.pdf" download><svg class="ico"><use href="#i-down"/></svg>Скачать каталог (PDF)</a></div>
       <div class="dtool" data-note="doc2">
         <div class="search"><svg class="ico"><use href="#i-search"/></svg><input id="d-q" type="search" autocomplete="off" placeholder="Название или код: ферритин, 40-111" aria-label="Найти исследование по названию или коду"></div>
         <div class="dchips" id="d-chips" role="group" aria-label="Раздел каталога"></div>
@@ -1246,26 +1341,11 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
         <thead><tr><th scope="col">Исследование</th><th scope="col">Что сдаёт пациент</th><th scope="col">Срок</th><th scope="col">Подготовка</th></tr></thead>
       </table>
       <div class="dlegend-wrap">
-        <h3>Правила подготовки</h3>
+        <h2>Правила подготовки</h2>
         <div class="dlegend" id="d-legend"></div>
       </div>
     </div>
 
-    <div class="sec wrap" id="d-memo">
-      <div class="sec-h"><h2>Памятки для пациентов</h2><p>Их можно распечатать и&nbsp;отдать пациенту вместе с&nbsp;направлением.</p></div>
-      <div class="memos">
-        <a class="memo" href="../print/pamyatka-kak-podgotovitsya.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-clock"/></svg></span><b>Как подготовиться к&nbsp;анализам</b><span>Листовка А5: сколько не&nbsp;есть перед разными анализами, подготовка детей, анализы мочи</span></a>
-        <a class="memo" href="../print/buklet-kak-sdat-analizy.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-file"/></svg></span><b>Как сдать анализы</b><span>Буклет: выбор анализа, подготовка, пункты и&nbsp;результат</span></a>
-        <a class="memo" href="../print/buklet-beremennost-i-deti.pdf" download><span class="memo-ic"><svg class="ico"><use href="#i-baby"/></svg></span><b>Беременность и&nbsp;дети</b><span>Буклет: анализы во&nbsp;время беременности и&nbsp;детский чек-ап</span></a>
-      </div>
-    </div>
-
-    <div class="sec wrap" id="d-clinics">
-      <div class="docs2" data-note="doc3">
-        <div><h2>Клиникам и&nbsp;санаториям</h2><p>Условия сотрудничества для клиник, санаториев и&nbsp;частных врачей&nbsp;— у&nbsp;медицинского представителя CLD. Телефон: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span>.</p></div>
-        <a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</a>
-      </div>
-    </div>
   </section>
 
   <!-- ============ CHECKUPS ============ -->
@@ -2028,7 +2108,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   }
   function plural(n, f) { var m = n % 10, h = n % 100; return n + " " + (m === 1 && h !== 11 ? f[0] : m >= 2 && m <= 4 && (h < 12 || h > 14) ? f[1] : f[2]); }
   function nAn(n) { return plural(n, ["анализ", "анализа", "анализов"]); }
-  if (matchMedia("(max-width: 520px)").matches) { $("#q-home").placeholder = "Ферритин, витамин D…"; $("#d-q").placeholder = "Название или код"; }
+  if (matchMedia("(max-width: 520px)").matches) { $("#q-home").placeholder = "Ферритин, витамин D…"; $("#d-q").placeholder = "Название или код"; $("#d-q0").placeholder = "Название или код"; }
   function renderCard() {
     var code = state.code, a = A[code], cx = !a && CXX[code]; if (!a && !cx) return;
     if (cx) a = { n: cx.n, off: cxMis(code), d: cx.d.replace(/\.$/, ""), p: CX[code].p, bio: "Кровь из вены", days: parseInt(CX[code].r, 10) || 0 };
@@ -2207,10 +2287,18 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
   document.addEventListener("focusout", function (e) { if (e.target.matches("button.prep") && tipPinned !== e.target) tip.hidden = true; });
   window.addEventListener("scroll", function () { if (!tip.hidden) hideTip(); }, { passive: true });
   $("#d-q").addEventListener("input", function (e) { docQ = norm(e.target.value); renderDocRows(); });
+  // «Врачам»: поиск ведёт в каталог с уже введённым запросом; срок «1 день» считается по каталогу
+  $("#d-find").addEventListener("submit", function (e) { e.preventDefault(); var v = $("#d-q0").value.trim(); $("#d-q").value = v; docQ = norm(v); go("dcat"); });
+  (function () {
+    var all = DOC.sections.reduce(function (a, sec) { return a.concat(sec.items); }, []), one = all.filter(function (i) { return i.r === "1 день"; }).length;
+    var ncx = DOC.complexes.reduce(function (n, c) { return n + c.items.length; }, 0);
+    $("#d-own").innerHTML = plural(all.length, ["анализ", "анализа", "анализов"]) + " и&nbsp;" + plural(ncx, ["комплекс", "комплекса", "комплексов"]);
+    $("#d-days").innerHTML = "Такой срок у&nbsp;" + one + " из&nbsp;" + all.length + " анализов собственной лаборатории. Срок каждого указан в&nbsp;каталоге.";
+  })();
 
   // ---------- screens 2.0: checkups, cart, checkout, order, booking, results. Demo: everything stays in this browser tab, nothing is sent ----------
-  var PAGES = ["points", "doctors", "checkups", "home-visit", "cart", "checkout", "order", "results", "about", "contacts", "docs", "privacy", "referral"];
-  var NAVOF = { card: "catalog", book: "catalog", checkout: "cart", order: "cart" };
+  var PAGES = ["points", "doctors", "dcat", "checkups", "home-visit", "cart", "checkout", "order", "results", "about", "contacts", "docs", "privacy", "referral"];
+  var NAVOF = { card: "catalog", book: "catalog", checkout: "cart", order: "cart", dcat: "doctors" };
   var RENDER = { checkups: renderCheckups, cart: renderCart, checkout: renderCheckout, order: renderOrder, book: renderBook, results: renderResults };
   var HOME_FREE = 1500;
   var co = { mode: "point", pay: "online", addr: "" }, lastOrder = null;
@@ -2565,7 +2653,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     if (state.view === "catalog") renderCatalog();
     if (state.view === "card") renderCard();
     if (state.view === "points") { renderPoints(); initMap(); }
-    if (state.view === "doctors") renderDoctors();
+    if (state.view === "dcat") renderDoctors();
     if (RENDER[state.view]) RENDER[state.view]();
     hideTip();
     $$(".sugg").forEach(function (b) { b.hidden = true; });
@@ -2619,9 +2707,12 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       ["pts3", "Карта без тяжёлых виджетов", "Свободная карта Leaflet на светлой подложке и фирменные маркеры. Скрипт карты грузится, только когда открыта эта страница. Повторное нажатие на регион снимает фильтр."]
     ],
     doctors: [
-      ["doc1", "Задачи врача, а не прайс", "Первый экран ведёт к тому, что нужно врачу и чего нет у пациента: бланк направления, каталог с биоматериалом и подготовкой, памятки для печати, сотрудничество для клиник."],
-      ["doc2", "Подготовка словами", "Поиск по названию и коду, разделы как в печатном каталоге. Код — мелко под названием. Подготовка — словами («Натощак 8 часов»), правила целиком — списком по наведению или нажатию и в блоке под таблицей."],
-      ["doc3", "Клиникам — без форм", "Условия сотрудничества — у медицинского представителя по телефону. Врачу лично ничего не обещаем: так требует 323-ФЗ."]
+      ["doc1", "Предложение, а не прайс", "Первый экран говорит, что CLD предлагает врачам и клиникам, и ведёт к медицинскому представителю. Полная таблица исследований — на отдельной странице, здесь только поиск и PDF."],
+      ["doc3", "Два формата работы", "Направлять пациентов в пункты и передавать пробы из клиники. Во втором формате всё в заглушках: порядок, договор, города и сроки нужно подтвердить в лаборатории. Связь — по телефону, без форм; врачу лично ничего не обещаем, так требует 323-ФЗ."],
+      ["doc4", "Только проверенные факты", "Собственная лаборатория, число анализов и срок «1 день» считаются по каталогу, пункты — по реестру. Контроль качества — заглушка, пока лаборатория не даст данные."]
+    ],
+    dcat: [
+      ["doc2", "Подготовка словами", "Поиск по названию и коду, разделы как в печатном каталоге. Код — мелко под названием. Подготовка — словами («Натощак 8 часов»), правила целиком — списком по наведению или нажатию и в блоке под таблицей."]
     ],
     checkups: [
       ["cx1", "Зачем чек-ап", "Первый экран объясняет пользу тому, кто чек-ап не планировал: один визит, одна подготовка и экономия против тех же анализов по отдельности (посчитано по ценам Черкесска). Ниже — условия цены, поиск по наборам и анализам в них, направления и каталог в две колонки: у каждой темы пояснение, переключатель основного и расширенного варианта с блоком «Что добавлено», состав, срок, подготовка, цена со взятием крови и кнопки «Описание и подготовка» и «В корзину». Три набора без известного состава скрыты до уточнения у лаборатории."]
@@ -2658,7 +2749,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       else { pin.style.left = (Math.max(0, 4 - el.getBoundingClientRect().left) + off * 32) + "px"; pin.style.top = "-32px"; } // phone: above the element, not over its text
       el.appendChild(pin);
     });
-    $("#drawer-title").textContent = ({ home: "Главная", catalog: "Раздел каталога", card: "Карточка анализа", points: "Где сдать анализы", doctors: "Врачам", checkups: "Чек-апы", cart: "Корзина", results: "Результаты", referral: "Бланк направления" }[state.view] || "Экран") + ": пояснения";
+    $("#drawer-title").textContent = ({ home: "Главная", catalog: "Раздел каталога", card: "Карточка анализа", points: "Где сдать анализы", doctors: "Врачам", dcat: "Каталог для врачей", checkups: "Чек-апы", cart: "Корзина", results: "Результаты", referral: "Бланк направления" }[state.view] || "Экран") + ": пояснения";
     $("#notes-list").innerHTML = viewNotes().map(function (n, i) { return '<li data-i="' + i + '"><span>' + (i + 1) + "</span><div><b>" + esc(n[1]) + "</b><p>" + esc(n[2]) + "</p></div></li>"; }).join("");
   }
   function setNotes(on) {
