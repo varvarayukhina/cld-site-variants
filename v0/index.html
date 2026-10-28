@@ -1382,7 +1382,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
       <section class="faq cx-faq">
         <h2>Вопросы о&nbsp;чек-апах</h2>
         <details><summary>Нужен ли чек-ап, если ничего не&nbsp;беспокоит?</summary><p>Ежегодную проверку как раз сдают, когда ничего не&nbsp;беспокоит: так проще заметить изменения показателей. Какой набор нужен, определяет лечащий врач.</p></details>
-        <details><summary>Как подготовиться?</summary><p>Подготовка указана у&nbsp;каждого набора и&nbsp;рассчитана по&nbsp;самому строгому анализу в&nbsp;составе. Чаще всего это 8–12 часов без еды. Приём лекарств перед анализом согласуйте с лечащим врачом.</p></details>
+        <details><summary>Как подготовиться?</summary><p>Подготовка указана у&nbsp;каждого набора и&nbsp;рассчитана по&nbsp;самому строгому анализу в&nbsp;составе. Чаще всего перед анализом не едят 8–12 часов. Приём лекарств перед анализом согласуйте с лечащим врачом.</p></details>
         <details><summary>Когда будет результат?</summary><p>Через 1–2 дня, срок указан у&nbsp;каждого набора. Результат появится в&nbsp;личном кабинете на&nbsp;сайте, его можно получить и&nbsp;в&nbsp;пункте.</p></details>
         <details><summary>Можно ли сдать чек-ап дома?</summary><p>Да. Медсестра приедет бесплатно при заказе от&nbsp;1&nbsp;500&nbsp;₽. <a href="#home-visit" data-go="home-visit">Об&nbsp;анализах на&nbsp;дому</a></p></details>
       </section>
@@ -2248,7 +2248,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
     var hay = norm(it.c + " " + it.n + " " + (it.m || "") + " " + (it.parts || []).join(" "));
     return docQ.split(" ").every(function (w) { return hay.indexOf(w) >= 0; });
   }
-  var PREPL = { "Н12": "Утром, 12 часов без еды", "Н8": "Утром, 8 часов без еды", "Е3": "2–3 часа без еды", "Г": "2–3 часа без еды, сутки без нагрузок", "К": "Без особой подготовки", "ПСА": "Особые правила для ПСА", "М": "Особые правила для анализа мочи", "О": "Утром, 8 часов без еды" };
+  var PREPL = { "Н12": "Утром, не есть 12 часов", "Н8": "Утром, не есть 8 часов", "Е3": "Не есть 2–3 часа", "Г": "Не есть 2–3 часа, сутки без нагрузок", "К": "Без особой подготовки", "ПСА": "Особые правила для ПСА", "М": "Особые правила для анализа мочи", "О": "Утром, не есть 8 часов" };
   function prepList(k) { return "<ul>" + DOC.prep[k].replace(/^Общие правила: /, "").split(/\.\s+/).map(function (x) { x = x.replace(/\.$/, ""); return x ? "<li>" + esc(x.charAt(0).toUpperCase() + x.slice(1)) + "</li>" : ""; }).join("") + "</ul>"; }
   function prepBtn(k) { return '<button class="prep" type="button" data-prep="' + esc(k) + '" aria-label="Подготовка: ' + esc(PREPL[k]) + '. ' + esc(DOC.prep[k]) + '">' + esc(PREPL[k]) + "</button>"; }
   function docRow(it) {
