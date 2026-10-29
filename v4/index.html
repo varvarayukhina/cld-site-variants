@@ -1588,7 +1588,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .spot-card .spot-text h2 { font-size: 36px; }
   .spot-card .spot-text > p:not(.spot-meta) { font-size: 19px; line-height: 1.5; display: block; overflow: visible; -webkit-line-clamp: unset; }
 }
-@media (max-width: 1180px) and (min-width: 961px) { .sv-3 .spot-img { height: 80px; } .spot-card .spot-text > p:not(.spot-meta) { font-size: 19px; } .spot-card .spot-text h2 { font-size: 32px; } }
+@media (max-width: 1180px) and (min-width: 961px) { .sv-2 .spot-img { position: static; grid-row: 1; justify-self: start; width: 110px; height: 110px; } .sv-2 .spot-text h2, .sv-2 .spot-text > p:not(.spot-meta) { max-width: none; } .sv-3 .spot-img { height: 80px; } .spot-card .spot-text > p:not(.spot-meta) { font-size: 19px; } .spot-card .spot-text h2 { font-size: 32px; } }
 .spot .spot-dots { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); margin: 0; }
 .spot .spot-dots button::before { background: var(--muted); opacity: .45; }
 .spot .spot-dots button[aria-current="true"]::before { background: var(--navy); opacity: 1; }
@@ -1600,6 +1600,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .spot .spot-dots button::before { background: #FFF; opacity: .45; }
   .spot .spot-dots button[aria-current="true"]::before { background: var(--lime); opacity: 1; }
   .spot-card { padding-bottom: 22px; }
+  .spot-card .spot-text > p:not(.spot-meta) { display: block; -webkit-line-clamp: unset; overflow: visible; }
 }
 /* шапка: без линии между строкой поиска и меню; «Анализы и цены» раскрывает большое меню под нижней строкой */
 .top { box-shadow: none; }
@@ -1651,6 +1652,20 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
 @media (max-width: 1180px) and (min-width: 961px) { .mega-g { grid-template-columns: minmax(0, 1fr); } .mega-side { display: none; } .mg-cols { gap: 24px; } }
 @media (max-width: 960px) { .mega, .mega-dim { display: none !important; } }
 .quick button { font-size: 16px; }
+/* без «нейросетевых» ховеров (29.10): ничего не подпрыгивает, не увеличивается, не поворачивается и не отбрасывает большую тень —
+   на наведение меняется только цвет или обводка. Подпрыгивающие иллюстрации «Для кого» оставлены: их просил Алибек, как на нынешнем сайте */
+.promo:hover, .tile:hover, .sitcard:hover, a.hp-chip:hover, .qa-card:hover, .gf-des:hover span, .bwa:hover, .qa-dc:hover .dc-mini { transform: none; }
+.organ:hover .picto rect, .crow:hover .picto rect, .tile:hover .picto rect, .mg-col button:hover .picto rect, .mg-card:hover .picto rect { transform: none; }
+.qa-card:hover .qa-go .ico, .promo-all:hover .pa-arrow, button.mg-ch:hover .ico { transform: none; }
+.promo:hover, .promo-soft:hover, .promo-all:hover, .qa-card:hover, .qa-dc:hover { box-shadow: inset 0 0 0 2px var(--navy); }
+.promo-main:hover { box-shadow: inset 0 0 0 2px var(--lime); }
+.audt:hover, .audt:focus-visible { box-shadow: none; }
+/* слайд BRCA: картинка бледно на фоне и крупнее, текст во всю ширину (29.10) */
+.spot-card.sv-2 { grid-template-columns: minmax(0, 1fr); }
+.spot-card.sv-2 .spot-img { position: absolute; top: auto; left: auto; right: -50px; bottom: -40px; width: 380px; height: 380px; margin: 0; padding: 0; opacity: .16; z-index: 0; object-fit: contain; grid-row: auto; }
+.spot-card.sv-2 .spot-text h2, .spot-card.sv-2 .spot-text > p:not(.spot-meta) { max-width: none; }
+@media (max-width: 960px) { .spot-card.sv-2 .spot-img { width: 240px; height: 240px; right: -30px; bottom: -20px; } }
+.spot-buy .btn-ghost { background: #FFF; }
 /* выпадающее меню «Экспресс»: карточки */
 .mega-body { display: flex; flex-direction: column; }
 .mg-cols.mg-x { flex: 1; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); align-items: stretch; }
@@ -2695,7 +2710,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
   };
   var SPOT = [
     { c: "66.300", ds: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи, плесень и яды насекомых. Помогает отличить истинную аллергию от перекрёстной реакции на похожие белки", img: "spot-allergy", tag: "Аллергология", pic: "allergy", n: "Аллергочип ALEX", off: "Аллергочип ALEX (300 аллергокомпонентов + IgE общий)", d: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи домашней пыли, плесень и яды насекомых", days: 8, bio: "Кровь из вены" },
-    { c: "55.240", img: "spot-brca", tag: "Генетика", pic: "onco", n: "BRCA-скрининг", off: "BRCA-скрин: профиль генетического исследования «Рак молочной железы и/или яичников»", d: "Мутации в генах BRCA1 и BRCA2, связанные с повышенным риском рака молочной железы и яичников", days: 10, bio: "Кровь из вены" },
+    { c: "55.240", ds: "Мутации в генах BRCA1 и BRCA2, связанные с повышенным риском рака молочной железы и яичников. Гены не меняются в течение жизни, поэтому анализ сдают один раз", img: "spot-brca", tag: "Генетика", pic: "onco", n: "BRCA-скрининг", off: "BRCA-скрин: профиль генетического исследования «Рак молочной железы и/или яичников»", d: "Мутации в генах BRCA1 и BRCA2, связанные с повышенным риском рака молочной железы и яичников", days: 10, bio: "Кровь из вены" },
     { c: "56.376", img: "spot-thrombo", tag: "Генетика", pic: "clotting", n: "Генетический тест на тромбофилию", off: "Генетический тест на тромбофилии (12 полиморфизмов)", d: "12 вариантов генов свёртывания крови и обмена фолиевой кислоты", days: 6, bio: "Кровь из вены" },
     { c: "50.525", ds: "Генетическая предрасположенность к целиакии — непереносимости глютена. Глютен повреждает слизистую тонкой кишки: возможны боль и вздутие живота, диарея", img: "spot-celiac", tag: "Генетика", pic: "sugar", n: "Гены целиакии HLA-DQ2 и DQ8", off: "Типирование HLA DQ2/DQ8 при целиакии", d: "Генетическая предрасположенность к целиакии — непереносимости глютена. При целиакии глютен повреждает слизистую тонкой кишки, возможны боль и вздутие живота, диарея, потеря веса и анемия", days: 16, bio: "Кровь из вены" },
     { c: "52.370", ds: "Состав микрофлоры влагалища: 16 показателей методом ПЦР. Назначают при выделениях, зуде и дискомфорте и при планировании беременности", img: "spot-femoflor", tag: "Женское здоровье", pic: "women", n: "Фемофлор-16", off: "Фемофлор-16", d: "Состав микрофлоры влагалища: 16 показателей методом ПЦР. Анализ назначают при выделениях, зуде и дискомфорте, при планировании беременности и для контроля лечения", days: 2, bio: "Мазок" }
@@ -4044,7 +4059,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     if (window.innerWidth < 961 || !cards.length) return;
     tr.style.alignItems = "flex-start";
     var H = Math.max.apply(null, cards.map(function (c) { return c.offsetHeight; }));
-    cards.forEach(function (c, i) { var p = ps[i]; if (!p) return; for (var fs = 20; fs <= 26; fs++) { p.style.fontSize = fs + "px"; if (c.offsetHeight > H) { p.style.fontSize = (fs - 1) + "px"; break; } } });
+    cards.forEach(function (c, i) { var p = ps[i]; if (!p) return; var cap = Math.min(26, parseFloat(getComputedStyle(c.querySelector("h2")).fontSize) - 6); for (var fs = 20; fs <= cap; fs++) { p.style.fontSize = fs + "px"; if (c.offsetHeight > H) { p.style.fontSize = (fs - 1) + "px"; break; } } });
     tr.style.alignItems = "";
   }
   var spotFitT = null;
