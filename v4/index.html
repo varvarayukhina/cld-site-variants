@@ -1190,6 +1190,7 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .gf-arrow { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--line); background: #FFF; color: var(--navy); cursor: pointer; }
 .gf-arrow:hover { border-color: var(--navy); }
 .gf-sum { max-width: 260px; }
+.notes-toggle, .drawer, .pin { display: none !important; }
 .cityq { position: absolute; left: -12px; top: calc(100% + 10px); z-index: 61; width: 300px; padding: 16px; border-radius: 14px; background: #FFF; color: var(--ink); box-shadow: 0 18px 44px rgba(20,55,75,.28); display: grid; gap: 12px; font-size: 17px; }
 .cityq[hidden] { display: none; }
 .cityq::before { content: ""; position: absolute; left: 30px; top: -7px; width: 14px; height: 14px; background: #FFF; transform: rotate(45deg); }
@@ -1417,12 +1418,21 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .spot-card { position: relative; overflow: hidden; isolation: isolate; }
 .spot-card .spot-text, .spot-card .spot-buy { position: relative; z-index: 1; }
 /* 1 — бледная крупная картинка на фоне */
+.spot-card.sv-cx { grid-template-columns: minmax(0, 1fr) 190px; gap: 14px 16px; padding-right: 20px; }
+.sv-cx .spot-text h2 { font-size: 32px; line-height: 1.1; }
+.sv-cx .spot-text p { font-size: 18px; }
+.sv-cx .spot-img { grid-column: 2; grid-row: 1 / span 2; width: 190px; height: auto; max-height: 300px; align-self: end; justify-self: end; margin: 0 0 -6px; object-fit: contain; }
+.sv-cx .spot-buy { grid-column: 1; }
 .spot-card.sv-1 { grid-template-columns: minmax(0, 1fr); }
-.sv-1 .spot-img { position: absolute; right: -70px; bottom: -60px; width: 380px; height: 380px; margin: 0; opacity: .2; z-index: 0; }
-.sv-1 .spot-text { max-width: 38ch; }
+.sv-1 .spot-img { position: absolute; right: -60px; bottom: -40px; width: 400px; height: 400px; margin: 0; opacity: .16; z-index: 0; object-fit: contain; }
+.sv-1 .spot-text { max-width: 40ch; gap: 14px; }
+.spot-card .spot-text h2 { font-size: 32px; line-height: 1.12; }
+.spot-card .spot-text p { font-size: 18px; line-height: 1.5; color: var(--navy); }
+.spot-card .spot-meta { font-size: 17px; }
 /* 2 — крупно справа на светлой подложке */
-.spot-card.sv-2 { grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 16px 24px; }
-.sv-2 .spot-img { grid-column: 2; grid-row: 1 / span 2; width: 100%; height: 100%; max-height: 340px; align-self: stretch; margin: 0; padding: 20px; border-radius: 16px; background: var(--lime-soft); object-fit: contain; }
+.spot-card.sv-2 { grid-template-columns: minmax(0, 1fr); }
+.sv-2 .spot-img { position: absolute; right: -10px; bottom: 70px; width: 38%; height: 250px; margin: 0; z-index: 0; object-fit: contain; }
+.sv-2 .spot-text { max-width: 62%; }
 .sv-2 .spot-buy { grid-column: 1; }
 .sv-2 .spot-buy .btn-ghost { display: none; }
 /* 3 — картинка сверху широкой полосой */
@@ -1444,7 +1454,13 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .sv-5 .spot-img { position: absolute; right: -4px; top: 18px; width: 214px; height: 214px; margin: 0; z-index: 0; }
 .sv-5 .spot-text { max-width: 25ch; }
 @media (max-width: 960px) {
-  .spot-card.sv-2 { grid-template-columns: minmax(0, 1fr) 110px; }
+  .spot-card.sv-2, .spot-card.sv-cx { grid-template-columns: minmax(0, 1fr) 110px; }
+  .sv-2 .spot-img { position: static; width: 110px; height: 110px; }
+  .sv-2 .spot-text { max-width: none; }
+  .spot-card .spot-text h2 { font-size: 26px; }
+  .sv-cx .spot-img { grid-row: 1; width: 110px; max-height: 146px; align-self: start; margin: 0; }
+  .sv-cx .spot-text h2 { font-size: 26px; }
+  .sv-cx .spot-buy { grid-column: 1 / -1; }
   .sv-2 .spot-img { grid-row: 1; height: 110px; padding: 8px; }
   .sv-2 .spot-buy { grid-column: 1 / -1; }
   .sv-3 .spot-img { height: 120px; width: calc(100% + 44px); margin: 0 -22px 4px; }
@@ -2424,7 +2440,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     "00-094": ["Госпитальный скрининг", 990]
   };
   SPOT.forEach(function (x, i) { x.sv = i + 1; A[x.c] = { n: x.n, off: x.off, d: x.d, p: 0, bio: x.bio, days: x.days, own: false, pop: 300 + i }; });
-  SPOT.unshift({ cx: true, sv: 2, img: "../assets/img/clipboard.webp", tag: "Чек-апы", n: "Чек-апы: несколько анализов за один визит", d: "Готовые наборы с одной подготовкой: общий чек-ап, анемия, щитовидная железа, сердце, гормоны. В наборе дешевле, чем те же анализы по отдельности" });
+  SPOT.unshift({ cx: true, sv: 1, img: "../assets/img/clipboard.webp", tag: "Чек-апы", n: "Несколько анализов за один визит", d: "Готовые наборы с одной подготовкой: общий чек-ап, анемия, щитовидная железа, сердце, гормоны. В наборе дешевле, чем те же анализы по отдельности" });
   var CX = {};
   DOC.complexes.forEach(function (g) { g.items.forEach(function (it) { var x = CXI[it.c]; CX[it.c] = { c: it.c, n: x[0], p: x[1], mis: it.m || it.n, parts: it.parts && it.parts.length ? it.parts : x[2] || null, r: it.r || "", prep: it.p }; }); });
   // 9x9 cell pictograms on the brand grid: '#' navy, 'o' lime accent
@@ -3425,7 +3441,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       ["h6", "Программы — кнопками", "Как на нынешнем сайте: «Экспресс» — анализы по сроку готовности, «Акции» — все предложения, «Популярные анализы» — частые анализы на главной, «Чек-апы»."],
       ["home1", "Первый экран", "Левая часть — как в прошлой версии: заголовок, выезд медсестры, поиск, три частых анализа с ценами пункта и строка пункта. Подсказки в поиске печатаются сами."],
       ["home2s", "Поиск с подсказками", "Второй поиск на первом экране: в строке сами печатаются 15 частых запросов — от ферритина до BRCA-скрининга, по одному в 3–4 секунды. Когда человек ставит курсор, подсказки останавливаются."],
-      ["home2", "Слайдер редких исследований — 5 подач картинки", "Каждый слайд показывает свой вариант: 1 — бледная крупная картинка на фоне, 2 — крупно справа на светлой подложке, 3 — сверху широкой полосой, 4 — лаймовая карточка, 5 — картинка в большом круге. Выберем один и сделаем так все слайды. Со встречи: вместо фото — 4–5 дорогих и интересных исследований, о которых пациенты часто не знают. Цены — пункта из шапки. Листается сам каждые 6 секунд, останавливается при наведении и кнопкой паузы; можно листать стрелками, точками и пальцем. Список утверждает лаборатория."],
+      ["home2", "Слайдер: чек-апы и редкие исследования", "Выбран вариант с крупной бледной картинкой на фоне и крупным текстом. Первый слайд — чек-апы от минимальной цены пункта, кнопка ведёт на страницу чек-апов. Со встречи: вместо фото — 4–5 дорогих и интересных исследований, о которых пациенты часто не знают. Цены — пункта из шапки. Листается сам каждые 6 секунд, останавливается при наведении и кнопкой паузы; можно листать стрелками, точками и пальцем. Список утверждает лаборатория."],
       ["h1b", "«Ваш город — …?»", "Как договорились на встрече: при первом заходе сайт спрашивает город под выбором пункта. Если браузер уже разрешил геолокацию — сразу подставляет ближайший пункт. Внизу — баннер о cookie и Яндекс Метрике: Метрика сама его не показывает, он нужен по 152-ФЗ."],
       ["home3b", "Результаты и скидочная карта под первым экраном", "Как на нынешнем сайте: «Результаты анализов» и «Получить скидочную карту». Карта нарисована в фирменном стиле, её можно добавить в Apple Wallet и Google Wallet. WhatsApp — у телефона в шапке.", "", "Две крупные плашки, как на нынешнем сайте, но заметнее шапки: лаймовая — результаты в личном кабинете, серо-голубая с логотипом WhatsApp — переписка. У каждой — действие глаголом."],
       ["promos", "Акции месяца", "Три акции крупно. Это примеры — акции утверждает лаборатория."],
