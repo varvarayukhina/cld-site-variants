@@ -1206,9 +1206,14 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .fam-sum span { color: var(--muted); }
 .fam-note { margin-top: 10px; font-size: 16px; color: var(--muted); }
 .gcx { margin: 0 0 56px; }
+.gift-tag { display: inline-flex; align-items: center; gap: 8px; justify-self: start; align-self: flex-start; margin: 4px 0; padding: 7px 14px 7px 10px; border: 0; border-radius: 999px; background: var(--lime-soft); color: var(--navy); font: 600 16px var(--text); cursor: pointer; text-align: left; }
+.gift-tag:hover { background: var(--lime); }
+.gift-tag[hidden] { display: none; }
+.c-gift { margin: -6px 0 18px; }
+.gift-tag .ico { width: 20px; height: 20px; flex: none; }
 .gcx h2 { font-size: 28px; }
 .gcx-l { color: var(--muted); margin: 8px 0 18px; max-width: 60ch; }
-.gcx-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.gcx-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
 .gcx-card { display: grid; grid-template-rows: auto 1fr auto auto; gap: 8px; padding: 22px; border-radius: var(--r-card); background: var(--lime-soft); }
 .gcx-card h3 { font-size: 20px; }
 .gcx-card p { font-size: 16px; color: var(--muted); }
@@ -1532,6 +1537,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="m8.6 13.6-1.6 7 5-2.6 5 2.6-1.6-7"/></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
   <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6Z"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-1.5-3-5-3.5-5-1.2C7 8 9.5 8 12 8Zm0 0c1.5-3 5-3.5 5-1.2C17 8 14.5 8 12 8Z"/></symbol>
   <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5Z"/></symbol>
   <symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
@@ -1791,6 +1797,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         <div>
           <div class="chead" data-note="cat2"><div class="picto" id="c-picto"></div><div><h1 id="c-title">Кровь и анемия</h1><p id="c-desc"></p></div></div>
           <p class="c-common" id="c-common" data-note="cat6"></p>
+          <button class="gift-tag c-gift" type="button" id="c-gift" data-gift-sum="0" hidden></button>
           <div class="pt-warn" id="c-ptwarn" hidden></div>
           <div class="filters" data-note="cat3">
             <button class="chip" type="button" aria-pressed="false" data-filter="own">Собственная лаборатория</button>
@@ -2783,13 +2790,16 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   }
   // «Подарить чек-ап близким»: сертификат на сумму чек-апа (номинал кратен 100 ₽ — округляем вверх)
   var GIFTCX = ["04.25.015", "04.25.011", "04.25.012", "04.25.005"];
+  function giftTag(c) { return GIFTCX.indexOf(c) >= 0 && CX[c] && !CX[c].na ? '<button class="gift-tag" type="button" data-gift-cx="' + esc(c) + '">' + icon("i-gift") + "<span>Подарок близким: сертификат на " + rub(Math.ceil(CX[c].p / 100) * 100) + "</span></button>" : ""; }
+  var GIFTPREG = ["30-017", "25-018", "20-017", "10-008", "40-047", "30-010", "40-111"];
+  function pregGift() { var cs = GIFTPREG.filter(function (c) { return A[c] && !A[c].na; }); return { n: cs.length, sum: Math.ceil(cs.reduce(function (t, c) { return t + A[c].p; }, 0) / 100) * 100 }; }
   function giftCxHtml() {
     var cs = GIFTCX.filter(function (c) { return CX[c] && !CX[c].na; });
     if (!cs.length) return "";
     return '<section class="gcx" aria-labelledby="gcx-h"><h2 id="gcx-h">Подарить чек-ап близким</h2><p class="gcx-l">' + typo("Сертификат на сумму чек-апа: получатель сам выберет пункт и время, а остаток не сгорит.") + '</p><div class="gcx-grid">' + cs.map(function (c) {
       var e = CXX[c], x = CX[c], amt = Math.ceil(x.p / 100) * 100;
       return '<article class="gcx-card"><h3>' + esc(x.n) + "</h3><p>" + typo(nAn((e && e.parts || []).length) + ", результат через " + (x.r || "1–2 дня")) + '</p><b class="num">' + rub(amt) + '</b><button class="btn btn-navy" type="button" data-gift-cx="' + esc(c) + '">Подарить</button></article>';
-    }).join("") + "</div></section>";
+    }).join("") + (function () { var g = pregGift(); return g.n ? '<article class="gcx-card"><h3>Будущей маме</h3><p>' + typo(nAn(g.n) + " при беременности: ХГЧ, группа крови, кровь, моча, сахар, ТТГ, ферритин") + '</p><b class="num">' + rub(g.sum) + '</b><button class="btn btn-navy" type="button" data-gift-sum="' + g.sum + '">Подарить</button></article>' : ""; })() + "</div></section>";
   }
   // «Анализы для всей семьи»: члены семьи → 5–7 анализов (общие для нескольких — выше), сумма за всех
   var FAM = [["woman", "Женщина", "women", "женщине"], ["man", "Мужчина", "men", "мужчине"], ["kid", "Ребёнок", "kids", "ребёнку"], ["preg", "Беременная", "pregnant", "беременной"], ["senior", "Старше 50 лет", "senior", "человеку старше 50"]];
@@ -2893,7 +2903,10 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var items = cat.items.filter(function (c) { return (!state.filters.own || A[c].own) && (!state.maxd || A[c].days <= state.maxd); });
     var cm = commonOf(cat.items);
     $('[data-filter="own"]').hidden = cat.items.every(function (c) { return A[c].own; }) || cat.items.every(function (c) { return !A[c].own; });
-    $("#c-common").hidden = !cm; if (cm) $("#c-common").innerHTML = commonHtml(cm);
+    $("#c-common").hidden = !cm;
+    var pg0 = cat.id === "pregnant" ? pregGift() : null, gt = $("#c-gift");
+    gt.hidden = !(pg0 && pg0.n); gt.innerHTML = pg0 && pg0.n ? icon("i-gift") + "<span>" + typo("Подарок будущей маме: сертификат на " + rub(pg0.sum) + " — на основные анализы при беременности") + "</span>" : "";
+    if (pg0) gt.dataset.giftSum = pg0.sum; if (cm) $("#c-common").innerHTML = commonHtml(cm);
     ptWarn($("#c-ptwarn"), cat.items);
     items.sort(function (a, b) { return state.sort === "cheap" ? A[a].p - A[b].p : A[a].pop - A[b].pop; });
     items.sort(function (a, b) { return A[a].na - A[b].na; });
@@ -2937,7 +2950,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       '<div class="lines" data-note="card3"><div><span>' + (cx ? "Набор" : "Анализ") + '</span><span class="num">' + rub(a.p) + "</span></div>" + (blood ? "<div><span>Взятие крови</span><span class=\"num\">" + rub(BLOOD_DRAW) + "</span></div>" : "") + '<div class="tot"><span>Итого в пункте</span><span class="num">' + rub(a.p + (blood ? BLOOD_DRAW : 0)) + "</span></div></div>") +
       '<div class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>' + daysLabel(a.days) + ' после сдачи</span>' + (cx ? "" : '<span><svg class="ico"><use href="#i-pin"/></svg>Есть в ' + plural(npts, ["пункте", "пунктах", "пунктах"]) + " сети</span>") + "</div>" +
       '<label class="muted" style="font-weight:600" for="k-point">Пункт</label>' + ptSelect("k-point") +
-      buyBtn(code) + (cx ? "" : '<button class="btn btn-ghost" type="button" data-go="book:' + esc(code) + '">' + icon("i-cal") + "Записаться на время</button>") +
+      buyBtn(code) + (cx ? giftTag(code) : "") + (cx ? "" : '<button class="btn btn-ghost" type="button" data-go="book:' + esc(code) + '">' + icon("i-cal") + "Записаться на время</button>") +
       (cito ? '<p class="fine"><b>ЦИТО — ' + rub(cito) + ".</b> " + typo("Срочно, через несколько часов. Отметку ставят при регистрации в пункте.") + "</p>" : "");
     $("#k-sticky").innerHTML = '<div class="price"><b>' + rub(a.p) + "</b><small>" + daysLabel(a.days).replace("Готово ", "") + (blood ? " · + взятие крови " + rub(BLOOD_DRAW) : "") + "</small></div>" + buyBtn(code);
   }
@@ -3176,7 +3189,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var add = added.length ? '<p class="cxt-add"><b>Что добавлено:</b> ' + typo(added.map(function (p) { var t = EXPL[p] || p; return /^[А-ЯЁ][а-яё]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t; }).join("; ")) + "." + (x.p === CX[t.v[0]].p ? " Цена та&nbsp;же." : "") + "</p>" : "";
     var parts = e.parts.map(function (p) { return "<span>" + (added.indexOf(p) >= 0 ? "<mark>" + esc(p) + "</mark>" : esc(p)) + "</span>"; }).join(", ");
     var prep = prepBtn(x.prep) + (e.prep2 ? " " + prepBtn(e.prep2) : "");
-    return '<article class="cxt" id="cx-' + esc(c) + '"><h2>' + esc(t.n) + "</h2>" + seg + '<p class="cxt-d">' + typo(t.d) + "</p>" + add +
+    return '<article class="cxt" id="cx-' + esc(c) + '"><h2>' + esc(t.n) + "</h2>" + giftTag(c) + seg + '<p class="cxt-d">' + typo(t.d) + "</p>" + add +
       '<p class="cxt-parts"><b>Состав:</b> ' + parts + ".</p>" +
       '<p class="cxt-meta"><b>Результат:</b> ' + (x.r ? typo("через " + x.r) : "срок по телефону") + '</p><p class="cxt-meta"><b>Подготовка:</b> ' + prep + "</p>" +
       '<div class="cxt-foot"><p class="cxt-pr">' + (sv ? '<s class="num"><span class="vh">По отдельности </span>' + rub(e.sum) + "</s>" : "") + '<b class="cxt-p num">' + (sv ? '<span class="vh">В наборе </span>' : "") + rub(x.p) + "</b></p>" +
@@ -3651,7 +3664,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     if (e.target.closest('[data-gf="again"]')) { gs.done = false; gs.rname = gs.phone = gs.email = gs.note = ""; renderGifts(); return; }
     var fm = e.target.closest("[data-fam]"); if (fm) { fam[fm.dataset.fam] = !fam[fm.dataset.fam]; renderFam(); return; }
     if (e.target.closest("[data-fam-all]")) { var fc = $$("#fam-res [data-add]").map(function (b) { return b.dataset.add; }); fc.forEach(function (c) { cart[c] = 1; }); syncCart(); renderFam(); toast("Добавили в корзину: " + nAn(fc.length)); return; }
-    var gx = e.target.closest("[data-gift-cx]"); if (gx) { gs.amt = Math.ceil(CX[gx.dataset.giftCx].p / 100) * 100; gs.done = false; if (state.view !== "gifts") go("gifts"); else renderGifts(); $("#gf-card").scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); return; }
+    var gx = e.target.closest("[data-gift-cx], [data-gift-sum]"); if (gx) { gs.amt = gx.dataset.giftSum ? +gx.dataset.giftSum : Math.ceil(CX[gx.dataset.giftCx].p / 100) * 100; gs.done = false; if (state.view !== "gifts") go("gifts"); else renderGifts(); $("#gf-card").scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); return; }
     var wb = e.target.closest("[data-wallet]"); if (wb) { toast("Карта добавлена в " + wb.dataset.wallet); return; }
     if (e.target.closest("[data-pick-pt]")) { window.scrollTo(0, 0); ptPop(true); return; }
     if (e.target.closest("#ptbtn")) { cityDone(); ptPop($("#ptpop").hidden); return; }
