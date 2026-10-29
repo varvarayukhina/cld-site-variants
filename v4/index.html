@@ -1057,7 +1057,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .ptband .pill:hover, .ptband .pill[aria-current="page"] { background: var(--lime); }
 .ptband .nav { margin-left: 12px; display: flex; gap: 0; flex: none; }
 .ptband .nav button { padding: 8px 8px; border-radius: 9px; font-weight: 600; white-space: nowrap; }
-@media (max-width: 1360px) { .ptband .pill .ico { display: none; } .ptband .nav { margin-left: 6px; } }
+@media (max-width: 1500px) { .ptband .pill .ico { display: none; } }
+@media (max-width: 1360px) { .ptband .nav { margin-left: 6px; } }
 @media (max-width: 1200px) { .ptband .ptbtn { max-width: 24ch; } }
 .ptband .nav button:hover { background: #FFF; }
 .ptband .nav button[aria-current="page"] { background: #FFF; }
@@ -1397,6 +1398,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .util .spacer, .util .u-tel, .util .u-wa, .util > .wrap > .state, .hero-point > .ico { display: none; }
   .util .wrap { min-height: 44px; gap: 12px; }
   .ptpick select { max-width: calc(100vw - 96px); }
+  .ptband .ptpick { flex: 1; margin-right: 0; }
+  .ptband .ptbtn { max-width: none; }
+  .ptband .ptbtn b { overflow: visible; text-overflow: clip; }
   .subnav, .bcont, .ilink, .bar .resbtn, .ptband .pills, .ptband .nav { display: none; }
   .bar .wrap { flex-wrap: wrap; row-gap: 0; min-height: 0; padding-top: 8px; }
   .logo { width: 168px; margin-right: auto; }
@@ -1465,10 +1469,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .spot-card .spot-meta { margin-top: auto; padding-top: 10px; font-size: 18px; }
 .sv-4 .spot-text, .sv-5 .spot-text { max-width: 31ch; }
 /* 2 — крупно справа на светлой подложке */
-.spot-card.sv-2 { grid-template-columns: minmax(0, 1fr) 200px; grid-template-rows: 1fr auto; gap: 16px 20px; }
-.sv-2 .spot-img { position: static; grid-column: 2; grid-row: 1; width: 200px; height: 250px; align-self: start; margin: 0; object-fit: contain; }
-.sv-2 .spot-text { grid-column: 1; grid-row: 1; max-width: none; }
-.sv-2 .spot-buy { grid-column: 1 / -1; }
+.spot-card.sv-2 { grid-template-columns: minmax(0, 1fr); }
+.sv-2 .spot-img { position: absolute; right: 24px; top: 26px; width: 180px; height: 230px; margin: 0; z-index: 0; object-fit: contain; }
+.sv-2 .spot-text h2, .sv-2 .spot-text > p:not(.spot-meta) { max-width: calc(100% - 196px); }
 /* 3 — картинка сверху широкой полосой */
 .spot-card.sv-3 { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; padding-top: 0; }
 .sv-3 .spot-img { grid-row: 1; width: calc(100% + 56px); max-width: none; height: 190px; margin: 0 -28px 6px; padding: 6px 0; background: var(--navy-soft); object-fit: contain; justify-self: stretch; }
@@ -1490,6 +1493,11 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 @media (max-width: 960px) {
   .spot-card.sv-2, .spot-card.sv-cx { grid-template-columns: minmax(0, 1fr) 110px; }
   .sv-2 .spot-img { position: static; width: 110px; height: 110px; }
+  .sv-2 .spot-text h2, .sv-2 .spot-text > p:not(.spot-meta) { max-width: none; }
+  .spot-card .spot-text h2 { font-size: 24px; }
+  .spot-card .spot-text > p:not(.spot-meta) { font-size: 16px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .spot-card .spot-meta { font-size: 16px; margin-top: 0; }
+  .spot-track { align-items: flex-start; }
   .sv-2 .spot-text { max-width: none; }
   .spot-card .spot-text h2 { font-size: 26px; }
   .sv-cx .spot-img { grid-row: 1; width: 110px; max-height: 146px; align-self: start; margin: 0; }
