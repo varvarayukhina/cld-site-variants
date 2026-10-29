@@ -1566,21 +1566,29 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 @media (max-width: 1280px) and (min-width: 961px) { .gcx-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .fam-who { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* слайдер: стрелки по бокам карточки, точки внутри карточки снизу */
-.spot { grid-template-rows: 1fr; }
+.spot { grid-template-rows: auto; align-self: center; }
 .spot-nav { position: absolute; inset: 0; display: block; pointer-events: none; z-index: 3; }
 .spot-nav > * { pointer-events: auto; }
 .spot .spot-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: #FFF; color: var(--navy); box-shadow: 0 6px 18px rgba(20,55,75,.28); }
 .spot .spot-btn:hover { background: var(--lime); }
-.spot .spot-btn[data-spot="-1"] { left: -14px; }
-.spot .spot-btn[data-spot="1"] { right: -14px; }
+.spot .spot-btn[data-spot="-1"] { left: -52px; }
+.spot .spot-btn[data-spot="1"] { right: -52px; }
+@media (min-width: 961px) { .spot { margin-right: 52px; } .spot-card .spot-text > p:not(.spot-meta) { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; } .sv-3 .spot-img { height: 150px; } }
 .spot .spot-dots { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); margin: 0; }
 .spot .spot-dots button::before { background: var(--muted); opacity: .45; }
 .spot .spot-dots button[aria-current="true"]::before { background: var(--navy); opacity: 1; }
-.spot-card { padding-bottom: 50px; }
-@media (max-width: 960px) { .spot .spot-btn { display: none; } .spot-card { padding-bottom: 46px; } }
+.spot-card { padding-bottom: 46px; min-height: 0; }
+@media (max-width: 960px) {
+  .spot .spot-btn { display: none; }
+  .spot-nav { position: static; display: flex; justify-content: center; margin-top: 12px; }
+  .spot .spot-dots { position: static; transform: none; }
+  .spot .spot-dots button::before { background: #FFF; opacity: .45; }
+  .spot .spot-dots button[aria-current="true"]::before { background: var(--lime); opacity: 1; }
+  .spot-card { padding-bottom: 22px; }
+}
 /* шапка: без линии между строкой поиска и меню; «Анализы и цены» раскрывает большое меню под нижней строкой */
 .top { box-shadow: none; }
-.tnav-box { position: relative; z-index: 41; }
+.tnav-box { position: relative; z-index: 39; } /* ниже липкой шапки (40), выше затемнения */
 .tnav .hn-dd { display: inline-flex; align-items: center; gap: 6px; }
 .tnav .hn-dd:hover, .tnav .hn-dd[aria-expanded="true"] { background: none; }
 .tnav .pill[aria-expanded="true"] { background: var(--lime); }
@@ -1591,7 +1599,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .hn-dd[aria-expanded="true"] .chev { transform: rotate(180deg); }
 .mega { position: absolute; left: 0; right: 0; top: 100%; z-index: 41; background: #FFF; border-top: 1px solid var(--line); box-shadow: 0 30px 60px rgba(20,55,75,.2); max-height: calc(100vh - var(--sw-h, 0px) - 150px); overflow: auto; overscroll-behavior: contain; }
 .mega[hidden], .mega-dim[hidden] { display: none; }
-.mega-dim { position: fixed; inset: 0; z-index: 39; background: rgba(20,55,75,.35); }
+.mega-dim { position: fixed; inset: 0; z-index: 38; background: rgba(20,55,75,.35); }
 .mega-g { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 40px; padding-block: 28px 32px; }
 .mg-cols { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
 .mg-col.two .mg-l { columns: 2; column-gap: 28px; }
@@ -1603,7 +1611,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .mg-col button:hover .picto rect:nth-child(3n) { transform: scale(1); }
 .mg-hi { display: inline-grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 50%; background: var(--lime); color: var(--navy); }
 .mg-col .mg-ch .mg-hi .ico { width: 18px; height: 18px; }
-.mg-col .mg-ch { width: auto; justify-content: flex-start; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px; background: none; border: 0; padding: 0; font: 700 19px/1.25 var(--display); color: var(--ink); text-align: left; cursor: pointer; }
+.mg-col .mg-ch, .mg-note .mg-ch { width: auto; min-height: 32px; justify-content: flex-start; display: inline-flex; align-items: center; gap: 10px; margin: 0 0 12px; background: none; border: 0; padding: 0; font: 700 19px/1.25 var(--display); color: var(--ink); text-align: left; cursor: pointer; }
 .mg-ch .ico { width: 18px; height: 18px; flex: none; color: var(--navy); transition: transform .2s var(--ease); }
 button.mg-ch:hover { text-decoration: underline; text-underline-offset: 4px; }
 button.mg-ch:hover .ico { transform: translateX(3px); }
@@ -1618,7 +1626,8 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
 .mg-strip .ico { width: 22px; height: 22px; flex: none; }
 .mg-strip .ico:last-child { margin-left: auto; }
 .mg-strip:hover { background: var(--lime-soft); }
-.mega-side { display: grid; align-content: start; gap: 12px; }
+.mega-side { display: flex; flex-direction: column; }
+.mega-side .pcard { flex: 1; grid-template-rows: auto 1fr auto; }
 .mg-side-l { display: flex; align-items: center; gap: 12px; text-align: left; background: none; border: 0; padding: 8px 4px; cursor: pointer; color: var(--ink); }
 .mg-side-l .ico { width: 40px; height: 40px; flex: none; padding: 9px; border-radius: 12px; background: var(--lime-soft); color: var(--navy); }
 .mg-side-l b { display: block; font: 700 16px var(--text); text-decoration: underline; text-underline-offset: 3px; }
@@ -1627,6 +1636,44 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
 @media (max-width: 1180px) and (min-width: 961px) { .mega-g { grid-template-columns: minmax(0, 1fr); } .mega-side { display: none; } .mg-cols { gap: 24px; } }
 @media (max-width: 960px) { .mega, .mega-dim { display: none !important; } }
 .quick button { font-size: 16px; }
+/* выпадающее меню «Экспресс»: карточки */
+.mega-body { display: flex; flex-direction: column; }
+.mg-cols.mg-x { flex: 1; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); align-items: stretch; }
+.mg-x .mg-col { display: flex; flex-direction: column; }
+.mg-grid { flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 10px; }
+.mg-col .mg-card { display: flex; width: 100%; align-items: center; gap: 12px; padding: 12px 14px; border: 0; border-radius: 14px; background: var(--navy-soft); text-align: left; cursor: pointer; color: var(--ink); transition: background .2s var(--ease), box-shadow .2s var(--ease); }
+.mg-col .mg-card:hover { background: var(--lime-soft); box-shadow: inset 0 0 0 1.5px var(--lime); text-decoration: none; }
+.mg-card:hover .picto rect { transform: scale(.72); }
+.mg-card:hover .picto rect:nth-child(3n) { transform: scale(1); }
+.mg-card .mg-pi { background: #FFF; }
+.mg-ct { min-width: 0; display: grid; gap: 2px; }
+.mg-ct > b { font: 600 16px/1.3 var(--text); }
+.mg-ct small { font-size: 16px; color: var(--muted); }
+.mg-ct small b { color: var(--ink); font-weight: 700; }
+.mg-note { padding: 20px; border-radius: 16px; background: var(--lime-soft); }
+.mg-note .mg-ch { margin-bottom: 10px; }
+.mg-note p { margin-bottom: 10px; font-size: 16px; line-height: 1.5; color: var(--ink); }
+.mg-note .mg-l, .mg-note > button { background: none; border: 0; padding: 0; font: 700 16px var(--text); color: var(--ink); text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--lime-dark, #8FA318); text-underline-offset: 4px; cursor: pointer; text-align: left; }
+@media (max-width: 1180px) { .mg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* правки по визуальной проверке 29.10 */
+.arow .a-buy > .addbtn { flex: none; }
+.dtab thead th { top: calc(var(--sw-h, 0px) + 84px); }
+@media (min-width: 1200px) { .c-prep .prep { white-space: nowrap; } }
+.gf-card.gf-top { justify-content: flex-start; gap: 5%; }
+@media (max-width: 960px) {
+  .stickybuy { bottom: calc(73px + env(safe-area-inset-bottom, 0px)); }
+  body:has(#v-card:not([hidden])) { padding-bottom: 170px; }
+  .spot-card.sv-2 { grid-template-columns: minmax(0, 1fr); }
+  .sv-2 .spot-img { grid-column: 1; justify-self: start; }
+  .sv-2 .spot-text h2, .sv-2 .spot-text p { max-width: none; }
+  .aud { scroll-padding-inline: 20px; }
+}
+@media (max-width: 600px) {
+  .dc-name { max-width: 60%; }
+  .hv-x { display: none; }
+  .cito-line summary { border-radius: 16px; }
+  .filters .xtabs { flex-wrap: wrap; overflow: visible; border-radius: 18px; }
+}
 /* строка анализа на телефоне: название и описание во всю ширину, цена и «+» строкой ниже */
 @media (max-width: 600px) {
   .arow, .together .arow { grid-template-columns: minmax(0, 1fr); }
@@ -1635,7 +1682,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
 }
 /* баннер с анализом: в большом меню и наверху раздела каталога */
 .pcard { display: grid; overflow: hidden; border-radius: 18px; background: var(--navy); color: #FFF; }
-.pcard > img, .pcard > .picto { display: block; width: 100%; height: 150px; object-fit: contain; background: var(--navy-soft); }
+.pcard > img, .pcard > .picto { display: block; width: 100%; height: 112px; object-fit: contain; background: var(--navy-soft); }
 .pcard > .picto { display: grid; place-items: center; }
 .pcard > .picto svg { width: 80px; height: 80px; }
 .pc-tag { display: inline-block; margin-bottom: 8px; padding: 3px 10px; border-radius: 999px; background: var(--lime); color: var(--navy); font: 700 16px var(--text); }
@@ -1891,7 +1938,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     </div>
     <div class="wrap x-body">
       <div class="filters" data-note="x2"><span class="xtabs" role="group" aria-label="Срок готовности"><button type="button" data-xmax="1" aria-pressed="true">За 1 день</button><button type="button" data-xmax="2" aria-pressed="false">До 2 дней</button><button type="button" data-xmax="3" aria-pressed="false">До 3 дней</button></span><label class="vh" for="x-cat">Раздел</label><select id="x-cat"></select><span class="grow"></span><div class="search x-search"><svg class="ico"><use href="#i-search"/></svg><input id="x-q" type="search" autocomplete="off" placeholder="Найти в разделе" aria-label="Найти среди экспресс-анализов"></div></div>
-      <details class="cito-line" id="x-cito" data-note="x3"><summary><svg class="ico"><use href="#i-bolt"/></svg>Нужен результат через несколько часов? Как работает ЦИТО</summary><div id="x-cito-in"></div></details>
+      <details class="cito-line" id="x-cito" data-note="x3"><summary><svg class="ico"><use href="#i-bolt"/></svg>Нужен результат через несколько часов? Как работает&nbsp;ЦИТО</summary><div id="x-cito-in"></div></details>
       <p class="x-count" id="x-count"></p>
       <div class="pt-warn" id="x-ptwarn" hidden></div>
       <div class="rows" id="x-rows"></div>
@@ -2191,7 +2238,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     <div class="sec wrap hv-area">
       <div class="hv-area-in">
         <div><h2>Куда приезжает медсестра</h2><p>Медсестра выезжает из&nbsp;пунктов CLD. Приедет&nbsp;ли она в&nbsp;ваш населённый пункт, уточняйте по&nbsp;телефону.</p></div>
-        <a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>Уточнить адрес: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a>
+        <a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span class="hv-x">Уточнить адрес:</span> <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a>
       </div>
     </div>
     <section class="wrap fam" id="fam" aria-labelledby="fam-h">
@@ -3001,7 +3048,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
       '<p class="fam-note">' + typo("Если анализ нужен нескольким людям, количество уточнит медицинский консультант при подтверждении выезда.") + "</p>";
   }
   var GIFTD = [
-    { id: "navy", n: "Тёмно-синий", logo: "white", amt: "#FFFFFF", bg: "#14374B" }, { id: "lime", n: "Лаймовый", logo: "navy", amt: "#14374B", bg: "#AFC81E" }, { id: "white", n: "Белый", logo: "navy", amt: "#14374B", bg: "#FFFFFF" },
+    { id: "navy", n: "Тёмно-синий", logo: "white", amt: "#FFFFFF", bg: "#14374B" }, { id: "lime", n: "Лаймовый", logo: "navy", amt: "#14374B", bg: "#AFC81E" }, { id: "white", top: true, n: "Белый", logo: "navy", amt: "#14374B", bg: "#FFFFFF" },
     { id: "mountains", n: "Горы Кавказа", logo: "navy", amt: "#FFFFFF", bg: "#14374B" }, { id: "botanic", n: "Ботаника", logo: "navy", amt: "#14374B", bg: "#FAF7EE" }, { id: "riso", n: "Ризограф", logo: "navy", amt: "#14374B", bg: "#F7F5EE" }
   ];
   var GIFTA = [1000, 2500, 5000, 10000, 20000];
@@ -3022,7 +3069,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
   var gs = { amt: 2500, des: 0, rname: "", phone: "", email: "", sms: true, mail: false, note: "", sname: "", sphone: "", done: false, err: "", errf: "" };
   function gfCard() {
     var d = GIFTD[gs.des], c = $("#gf-card");
-    c.style.backgroundImage = "url(../assets/img/gift/" + d.id + ".webp)"; c.style.backgroundColor = d.bg; c.style.color = d.amt; // цвет фона — под суммой и на случай, если картинка не загрузится
+    c.style.backgroundImage = "url(../assets/img/gift/" + d.id + ".webp)"; c.style.backgroundColor = d.bg; c.style.color = d.amt; c.classList.toggle("gf-top", !!d.top); // цвет фона — под суммой и на случай, если картинка не загрузится
     c.setAttribute("aria-label", "Подарочный сертификат «" + d.n + "» на " + rub(gs.amt));
     c.innerHTML = '<img class="gfc-logo" src="../assets/cld-logo-horizontal-' + d.logo + '.svg" alt="" width="1778" height="276"><b class="gfc-amt num">' + rub(gs.amt) + "</b>";
     $$("[data-gf-amt]").forEach(function (b) { b.setAttribute("aria-pressed", +b.dataset.gfAmt === gs.amt ? "true" : "false"); });
@@ -3107,9 +3154,11 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
   function mgPic(id) { return '<span class="picto mg-pi">' + picto(id) + "</span>"; }
   function megaHtml(k) {
     if (k === "x") {
-      var x1 = Object.keys(A).filter(function (c) { return avail(c) && A[c].days <= 1; }).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 14);
-      return '<div class="mg-cols mg-2">' + mgCol("Экспресс-анализы: готовы за 1 день", x1.map(function (c) { return mgLink("card:" + c, A[c].n, rub(online(A[c].p))); }), "express", true, "i-bolt") +
-        mgCol("Нужно через несколько часов", [mgP("Часть анализов можно сделать срочно, с доплатой. Такой режим называется ЦИТО."), mgLink("express", "Какие анализы можно сделать срочно")], "", false, "i-clock") + "</div>";
+      var x1 = Object.keys(A).filter(function (c) { return avail(c) && A[c].days <= 1; }).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 12);
+      var catOf = function (c) { var f = CATS.filter(function (x) { return !x.aud && x.items.indexOf(c) >= 0; })[0]; return f ? f.id : "checkups"; };
+      return '<div class="mg-cols mg-x"><div class="mg-col"><button class="mg-ch" type="button" data-go="express"><span class="mg-hi">' + icon("i-bolt") + "</span>Экспресс-анализы: готовы за 1 день" + icon("i-arrow") + '</button><div class="mg-grid">' +
+        x1.map(function (c) { return '<button class="mg-card" type="button" data-go="card:' + c + '"><span class="picto mg-pi">' + picto(catOf(c)) + '</span><span class="mg-ct"><b>' + esc(A[c].n) + '</b><small><b class="num">' + rub(online(A[c].p)) + "</b> · 1 день</small></span></button>"; }).join("") + "</div></div>" +
+        '<div class="mg-note"><h3 class="mg-ch"><span class="mg-hi">' + icon("i-clock") + "</span>Нужно через несколько часов</h3>" + mgP("Часть анализов можно сделать срочно, с доплатой. Такой режим называется ЦИТО.") + mgLink("express", "Какие анализы можно сделать срочно") + "</div></div>";
     }
     if (k === "cx") return '<div class="mg-cols mg-2">' + mgCol("Чек-апы", Object.keys(CXX).filter(function (c) { return CX[c] && !CX[c].na; }).map(function (c) { return mgLink("cx:" + c, CXX[c].n, rub(CX[c].p)); }), "checkups", true, "i-file") +
       mgCol("Как это работает", [mgP("Несколько анализов за один визит, с одной подготовкой. Состав и подготовка указаны у каждого набора."), mgLink("home-visit", "Сдать чек-ап дома")], "", false, "i-check") + "</div>";
@@ -3119,7 +3168,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
       mgCol("Все анализы", CATS.filter(function (c) { return !c.aud; }).map(function (c) { return mgLink("catalog:" + c.id, c.n, "", mgPic(c.id)); }), "catalog:blood", true, "i-lab") +
       mgCol("Для кого", CATS.filter(function (c) { return c.aud; }).map(function (c) { return mgLink("catalog:" + c.id, c.n, "", '<span class="picto audi mg-pi"><img src="../assets/img/aud/' + AUDIMG[c.id] + '" alt="" width="64" height="64"></span>'); }), "", false, "i-users") +
       mgCol("По поводу", SITS.map(function (x) { return mgLink("catalog:" + x.go, x.n, "", mgPic(x.pic || "checkups")); }), "", false, "i-cal") + "</div>" +
-      '<div class="mg-strips">' + mgStrip("home-visit", "i-home", "Выезд на дом", "бесплатно при заказе от 1 500 ₽") + mgStrip("checkups", "i-file", "Чек-апы", "несколько анализов за один визит") + "</div>";
+      '<div class="mg-strips">' + mgStrip("home-visit", "i-home", "Выезд на дом", "бесплатно при заказе от 1 500 ₽") + mgStrip("checkups", "i-file", "Чек-апы", "несколько анализов за один визит") + mgStrip("gifts", "i-gift", "Подарочный сертификат", "на анализы и чек-апы") + mgStrip("dcard", "i-wallet", "Скидочная карта −10%", "хранится в телефоне") + "</div>";
   }
   function megaOpen(on, k) {
     clearTimeout(megaT); var m = $("#mega");
@@ -3128,9 +3177,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
       if (m.hidden) megaN++;
       if (m.hidden || k !== megaK) {
         var gen = SPOT.filter(function (x) { return x.c && avail(x.c) && x.tag === "Генетика"; }), sc = gen.length ? gen[megaN % gen.length].c : null, se = (k === "x" || k === "pr") && seasonPick();
-        $("#mega-side").innerHTML = (se ? promoCard(se.c, "pc-v", se.tag, "vitamins", se.p) : sc ? promoCard(sc, "pc-v") : "") +
-          '<button class="mg-side-l" type="button" data-go="gifts">' + icon("i-gift") + "<span><b>Подарочный сертификат</b><small>на анализы и чек-апы</small></span></button>" +
-          '<button class="mg-side-l" type="button" data-go="dcard">' + icon("i-wallet") + "<span><b>Скидочная карта −10%</b><small>хранится в телефоне</small></span></button>";
+        $("#mega-side").innerHTML = se ? promoCard(se.c, "pc-v", se.tag, "vitamins", se.p) : sc ? promoCard(sc, "pc-v") : "";
       }
       megaK = k; $("#mega-body").innerHTML = megaHtml(k);
     } else if (m.hidden) return;
