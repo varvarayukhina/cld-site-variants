@@ -1061,22 +1061,6 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .tnav button { position: relative; background: none; border: 0; padding: 0; border-radius: 0; font: 600 16px var(--text); color: var(--ink); cursor: pointer; white-space: nowrap; }
 .tnav button:hover { color: var(--navy-2); text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--line); }
 .tnav button[aria-current="page"] { background: none; }
-/* шапка на тёмно-синем */
-.util.srow { background: var(--navy-2); color: #FFF; border-bottom: 0; }
-.util.srow > .wrap > a, .srow .ptbtn { color: #FFF; }
-.srow .ptbtn:focus-visible, .top :focus-visible, .tnav :focus-visible { outline-color: var(--lime); }
-.srow .s-tel span { color: var(--on-navy-muted); }
-.top { background: var(--navy); box-shadow: none; }
-.top .top-search { background: #FFF; box-shadow: none; }
-.top .top-search:focus-within { box-shadow: inset 0 0 0 2px var(--lime); }
-.top .resbtn { background: var(--lime); color: var(--navy); }
-.top .resbtn:hover { background: #FFF; }
-.top .cartbtn { background: transparent; color: #FFF; box-shadow: inset 0 0 0 1.5px var(--on-navy-muted); }
-.top .cartbtn:hover { box-shadow: inset 0 0 0 1.5px #FFF; }
-.top .mbtn { color: #FFF; }
-.tnav { background: var(--navy); border-top: 1px solid var(--navy-2); border-bottom: 0; }
-.tnav button { color: #FFF; }
-.tnav button:hover { color: #FFF; text-decoration-color: var(--on-navy-muted); }
 .tnav button[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--lime); }
 .bar .top-search { max-width: none; }
 /* лаймовая лента под шапкой: пункт, программы, разделы */
@@ -1421,10 +1405,11 @@ button.mini-n:hover, .mini-sit:hover .mini-n { text-decoration: underline; text-
 .cito-box .tag { grid-row: 1 / span 2; align-self: start; font-size: 16px; padding: 6px 12px; }
 .cito-box p { font-size: 16px; }
 .x-count { color: var(--muted); margin-bottom: 8px; }
-.xhead { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 8px 0 24px; }
-.xhead h1 { font-size: clamp(34px, 4vw, 44px); }
-.xhead p { margin-top: 10px; font-size: 19px; color: var(--muted); }
-.xhead p .linkbtn { font-size: 19px; }
+.xhead { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 8px 0 24px; padding: 28px 40px; border-radius: 22px; background: var(--navy); color: #FFF; }
+.xhead h1 { font-size: clamp(34px, 4vw, 44px); color: #FFF; }
+.xhead p { margin-top: 10px; font-size: 19px; color: var(--on-navy-muted); }
+.xhead p .linkbtn { font-size: 19px; color: var(--lime); text-decoration-color: var(--lime); }
+.xhead :focus-visible { outline-color: var(--lime); }
 .xhead img { width: 120px; height: auto; flex: none; }
 .x-search { flex: 0 1 320px; }
 .x-search input { padding: 10px 12px 10px 42px; font-size: 16px; border-radius: 10px; background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); }
@@ -1510,6 +1495,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .arow .na { max-width: 11ch; }
   .cito-box { grid-template-columns: minmax(0, 1fr); }
   .xhead img { width: 72px; }
+  .xhead { padding: 20px; border-radius: 18px; }
   .x-search { flex: 1 1 100%; }
   .cito-box .tag { grid-row: auto; justify-self: start; }
 }
@@ -1634,7 +1620,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 <header class="top" id="top">
   <div class="bar">
     <div class="wrap">
-      <button class="logo" data-go="home" type="button" aria-label="На главную"><img src="../assets/cld-logo-horizontal-white.svg" alt="CLD · Центр лабораторной диагностики" width="1085" height="169"></button>
+      <button class="logo" data-go="home" type="button" aria-label="На главную"><img src="../assets/cld-logo-horizontal-navy.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276"></button>
       <div class="search top-search" data-note="h3">
         <svg class="ico"><use href="#i-search"/></svg>
         <input id="q-top" type="search" autocomplete="off" placeholder="Найти анализ или чек-ап" aria-label="Найти анализ или чек-ап">
