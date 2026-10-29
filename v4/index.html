@@ -3161,7 +3161,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     if (cxs.length) secs.push('<section class="gd-sec" id="chek-apy"><h2>Чек-апы</h2><p>' + typo("Несколько анализов за один визит, с одной подготовкой. В наборе дешевле, чем те же анализы по отдельности.") + "</p>" + cxs.join("") + "</section>");
     var items = cat.items.filter(function (c, i, a) { return a.indexOf(c) === i && A[c]; });
     secs.push('<section class="gd-sec" id="vse-analizy"><h2>Все анализы: ' + esc(g.crumb.toLowerCase()) + '</h2><div class="rows">' + items.map(function (c) { return row(c); }).join("") + "</div></section>");
-    if (g.sources) secs.push('<section class="gd-sec gd-src" id="istochniki"><h2>Источники</h2><ol>' + g.sources.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></section>");
+    // источники хранятся в guides_cld.py для проверки фактов, на странице их не показываем (решение Варвары 30.10)
     $("#g-art").innerHTML = secs.join("") + '<p class="gd-note">' + typo("Результат оценивает лечащий врач. Помощь в выборе анализа — по телефону 8 800 201 78 30.") + "</p>";
     $("#g-toc").innerHTML = $$("#g-art .gd-sec").map(function (s) { return '<a href="#' + s.id + '" data-toc="' + s.id + '">' + esc(s.querySelector("h2").textContent) + "</a>"; }).join("");
     if (gSpy) gSpy.disconnect();
