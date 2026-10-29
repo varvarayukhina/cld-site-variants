@@ -1190,6 +1190,19 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .gf-arrow { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--line); background: #FFF; color: var(--navy); cursor: pointer; }
 .gf-arrow:hover { border-color: var(--navy); }
 .gf-sum { max-width: 260px; }
+.cityq { position: absolute; left: -12px; top: calc(100% + 10px); z-index: 61; width: 300px; padding: 16px; border-radius: 14px; background: #FFF; color: var(--ink); box-shadow: 0 18px 44px rgba(20,55,75,.28); display: grid; gap: 12px; font-size: 17px; }
+.cityq[hidden] { display: none; }
+.cityq::before { content: ""; position: absolute; left: 30px; top: -7px; width: 14px; height: 14px; background: #FFF; transform: rotate(45deg); }
+.cityq div { display: flex; gap: 8px; }
+.util .cityq .btn { padding: 10px 16px; border-radius: 10px; font-weight: 700; }
+.util .cityq .btn-lime { background: var(--lime); color: var(--navy); }
+.util .cityq .btn-ghost { box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink); }
+.ckb { position: fixed; right: 16px; bottom: 16px; z-index: 75; max-width: 540px; display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 14px; background: var(--navy); color: #FFF; box-shadow: 0 18px 44px rgba(20,55,75,.35); }
+.ckb[hidden] { display: none; }
+.ckb p { font-size: 16px; line-height: 1.45; }
+.ckb a { color: #FFF; text-decoration: underline; text-underline-offset: 3px; }
+.ckb .btn { flex: none; }
+.ckb :focus-visible { outline-color: var(--lime); }
 .qa-dc { background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); }
 .qa-dc:hover { box-shadow: inset 0 0 0 1.5px var(--navy), 0 16px 34px rgba(20,55,75,.10); }
 .dc-mini { position: relative; flex: none; width: 112px; aspect-ratio: 1.6; border-radius: 10px; background: #14374B url(../assets/img/gift/navy.webp) center / cover; box-shadow: 0 10px 22px rgba(20,55,75,.28); transform: rotate(-6deg); display: flex; flex-direction: column; justify-content: space-between; padding: 9px 10px; }
@@ -1375,6 +1388,11 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .fpanel { padding: 14px; }
   .fp-grid, .fp-org { grid-template-columns: minmax(0, 1fr); }
   .advs-6, .gf-grid, .gf-info, .dc-grid { grid-template-columns: minmax(0, 1fr); }
+  .spot-nav { gap: 6px; }
+  .spot-dots { gap: 0; }
+  .spot-dots button { width: 22px; }
+  .ckb { left: 8px; right: 8px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); max-width: none; flex-direction: column; align-items: stretch; }
+  .cityq { left: 0; width: calc(100vw - 40px); }
   .dc-mini { width: 84px; padding: 7px; }
   .dc-mini img { width: 46px; }
   .dc-mini b { font-size: 16px; }
@@ -1497,6 +1515,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   <div class="wrap">
     <div class="ptpick" data-note="h1">
       <button class="ptbtn" id="ptbtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ptpop"><svg class="ico"><use href="#i-pin"/></svg><b id="u-point">Черкесск, пр-т Ленина, 148</b><svg class="ico chev"><use href="#i-chev"/></svg></button>
+      <div class="cityq" id="cityq" role="dialog" aria-labelledby="cityq-t" hidden><p id="cityq-t">Ваш город — <b id="cityq-n">Черкесск</b>?</p><div><button class="btn btn-lime" type="button" data-city="yes">Да, верно</button><button class="btn btn-ghost" type="button" data-city="change">Изменить</button></div></div>
       <div class="ptpop" id="ptpop" role="dialog" aria-label="Выбор пункта" hidden>
         <div class="ptpop-h"><div class="search pt-search"><svg class="ico"><use href="#i-search"/></svg><input id="pt-q" type="search" autocomplete="off" placeholder="Город, станица или улица" aria-label="Найти пункт"></div><button class="btn btn-ghost pt-geo" type="button" data-pt-geo><svg class="ico"><use href="#i-pin"/></svg>Ближайший ко мне</button></div>
         <div class="ptpop-list" id="pt-list"></div>
@@ -2229,6 +2248,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   <button type="button" data-go="cart" data-tab="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина<span class="count num" data-cart>0</span></button>
 </nav>
 
+<div class="ckb" id="ckb" role="region" aria-label="Файлы cookie" hidden><p>Сайт использует файлы cookie и&nbsp;Яндекс Метрику, чтобы работать удобнее. Подробнее&nbsp;— в&nbsp;<a href="#privacy" data-go="privacy">политике обработки персональных данных</a>.</p><button class="btn btn-lime" type="button" data-ck>Принять</button></div>
 <button class="notes-toggle" id="notes-toggle" type="button" aria-pressed="false"><svg class="ico"><use href="#i-info"/></svg>Пояснения</button>
 <aside class="drawer" id="drawer" aria-label="Пояснения к экрану">
   <header><b id="drawer-title">Пояснения</b><button type="button" id="drawer-close" aria-label="Закрыть"><svg class="ico"><use href="#i-x"/></svg></button></header>
@@ -2403,7 +2423,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     "04.25.013": ["Онкомаркеры для женщин", 2500], "04.25.014": ["Онкомаркеры для мужчин", 2500],
     "00-094": ["Госпитальный скрининг", 990]
   };
-  SPOT.forEach(function (x, i) { A[x.c] = { n: x.n, off: x.off, d: x.d, p: 0, bio: x.bio, days: x.days, own: false, pop: 300 + i }; });
+  SPOT.forEach(function (x, i) { x.sv = i + 1; A[x.c] = { n: x.n, off: x.off, d: x.d, p: 0, bio: x.bio, days: x.days, own: false, pop: 300 + i }; });
+  SPOT.unshift({ cx: true, sv: 2, img: "../assets/img/clipboard.webp", tag: "Чек-апы", n: "Чек-апы: несколько анализов за один визит", d: "Готовые наборы с одной подготовкой: общий чек-ап, анемия, щитовидная железа, сердце, гормоны. В наборе дешевле, чем те же анализы по отдельности" });
   var CX = {};
   DOC.complexes.forEach(function (g) { g.items.forEach(function (it) { var x = CXI[it.c]; CX[it.c] = { c: it.c, n: x[0], p: x[1], mis: it.m || it.n, parts: it.parts && it.parts.length ? it.parts : x[2] || null, r: it.r || "", prep: it.p }; }); });
   // 9x9 cell pictograms on the brand grid: '#' navy, 'o' lime accent
@@ -2664,8 +2685,14 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   var spotI = 0;
   function renderSpot() {
     $("#spot-track").innerHTML = SPOT.map(function (x, i) {
+      if (x.cx) {
+        var cs = Object.keys(CXX).filter(function (c) { return CX[c] && !CX[c].na; }), mn = cs.length ? Math.min.apply(null, cs.map(function (c) { return CX[c].p; })) : 0;
+        return '<article class="spot-card sv-' + x.sv + '" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span><h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.d)) + '.</p><p class="spot-meta">' + typo(plural(cs.length, ["набор", "набора", "наборов"]) + " · результат через 1–2 дня") + "</p></div>" +
+          '<img class="spot-img" src="' + x.img + '" alt="" width="542" height="720">' +
+          '<div class="spot-buy">' + (mn ? '<b class="pr num">от ' + rub(mn) + "</b>" : "") + '<button class="btn btn-lime" type="button" data-go="checkups">Все чек-апы</button></div></article>';
+      }
       var a = A[x.c];
-      return '<article class="spot-card sv-' + (i + 1) + '" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span>" +
+      return '<article class="spot-card sv-' + x.sv + '" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span>" +
         "<h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.d)) + '.</p><p class="spot-meta">' + typo("Результат через " + dLabel(x.days) + " · " + x.bio.toLowerCase()) + "</p></div>" +
         '<img class="spot-img" src="../assets/img/spot/' + x.img + '.webp" alt="" width="400" height="400"' + (i ? ' loading="lazy"' : "") + ">" +
         '<div class="spot-buy">' + (a.na ? '<span class="na">Нет в этом пункте</span>' : '<b class="pr num">' + rub(a.p) + "</b>") + '<button class="btn btn-ghost" type="button" data-go="card:' + x.c + '">Описание</button>' + buyBtn(x.c) + "</div></article>";
@@ -3011,6 +3038,12 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     pp.hidden = !open; $("#ptbtn").setAttribute("aria-expanded", open ? "true" : "false");
     if (open) { $("#pt-q").value = ""; renderPtList(); $("#pt-q").focus(); }
   }
+  function nearestPt(pos) {
+    var best = 0, bd = Infinity;
+    POINTS.forEach(function (pt, i) { if (pt.lat == null) return; var dy = pt.lat - pos.coords.latitude, dx = (pt.lng - pos.coords.longitude) * Math.cos(pt.lat * Math.PI / 180), d = dx * dx + dy * dy; if (d < bd) { bd = d; best = i; } });
+    return best;
+  }
+  function cityDone() { $("#cityq").hidden = true; try { localStorage.setItem("cldCity", "1"); } catch (e) { /* без хранилища спросим снова */ } }
   function setPoint(i) {
     state.pt = i;
     try { localStorage.setItem("cldPt4", String(i)); } catch (e) { /* хранилище недоступно — пункт сбросится при перезагрузке */ }
@@ -3393,6 +3426,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       ["home1", "Первый экран", "Левая часть — как в прошлой версии: заголовок, выезд медсестры, поиск, три частых анализа с ценами пункта и строка пункта. Подсказки в поиске печатаются сами."],
       ["home2s", "Поиск с подсказками", "Второй поиск на первом экране: в строке сами печатаются 15 частых запросов — от ферритина до BRCA-скрининга, по одному в 3–4 секунды. Когда человек ставит курсор, подсказки останавливаются."],
       ["home2", "Слайдер редких исследований — 5 подач картинки", "Каждый слайд показывает свой вариант: 1 — бледная крупная картинка на фоне, 2 — крупно справа на светлой подложке, 3 — сверху широкой полосой, 4 — лаймовая карточка, 5 — картинка в большом круге. Выберем один и сделаем так все слайды. Со встречи: вместо фото — 4–5 дорогих и интересных исследований, о которых пациенты часто не знают. Цены — пункта из шапки. Листается сам каждые 6 секунд, останавливается при наведении и кнопкой паузы; можно листать стрелками, точками и пальцем. Список утверждает лаборатория."],
+      ["h1b", "«Ваш город — …?»", "Как договорились на встрече: при первом заходе сайт спрашивает город под выбором пункта. Если браузер уже разрешил геолокацию — сразу подставляет ближайший пункт. Внизу — баннер о cookie и Яндекс Метрике: Метрика сама его не показывает, он нужен по 152-ФЗ."],
       ["home3b", "Результаты и скидочная карта под первым экраном", "Как на нынешнем сайте: «Результаты анализов» и «Получить скидочную карту». Карта нарисована в фирменном стиле, её можно добавить в Apple Wallet и Google Wallet. WhatsApp — у телефона в шапке.", "", "Две крупные плашки, как на нынешнем сайте, но заметнее шапки: лаймовая — результаты в личном кабинете, серо-голубая с логотипом WhatsApp — переписка. У каждой — действие глаголом."],
       ["promos", "Акции месяца", "Три акции крупно. Это примеры — акции утверждает лаборатория."],
       ["promos2", "Все предложения", "Со встречи: четвёртая карточка — переход, а не акция: стрелка и «Перейти к акциям». Ведёт на страницу со всеми акциями, чек-апами дешевле анализов по отдельности и постоянными скидками."],
@@ -3411,6 +3445,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     gifts: [
       ["gf1", "Как в «Золотом яблоке»", "Получатель — имя, телефон или e-mail, способ отправки — SMS, e-mail или оба, поздравление и данные покупателя для чека. Сертификат — только в подарок другому человеку. Превью карты меняется сразу: шесть дизайнов в карусели — три фирменных (тёмно-синий, лаймовый, белый) и три необычных (горы Кавказа, ботаника, ризограф), номинал кнопками или своей суммой от 500 ₽ кратно 100. При наведении на номинал и под выбранной суммой — что на неё можно сдать: наборы по ценам выбранного пункта. Фон карты нарисован в Codex, логотип и сумма — поверх, поэтому всегда точные. Условия — как на lab.discript.ru: бессрочно, на любой анализ, чек-ап или выезд, остаток не сгорает."]
     ],
+    cityq: [],
     dcard: [
       ["dc1", "Карта любимого клиента", "Условия — как на lab.discript.ru: скидка 10 % на анализы, приём врача, чек-апы и комплексы, код приходит по SMS. Карта нарисована в фирменном стиле; после активации — кнопки «Добавить в Apple Wallet» и «Добавить в Google Wallet»."]
     ],
@@ -3532,7 +3567,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     if (e.target.closest('[data-gf="again"]')) { gs.done = false; gs.rname = gs.phone = gs.email = gs.note = ""; renderGifts(); return; }
     var wb = e.target.closest("[data-wallet]"); if (wb) { toast("Карта добавлена в " + wb.dataset.wallet); return; }
     if (e.target.closest("[data-pick-pt]")) { window.scrollTo(0, 0); ptPop(true); return; }
-    if (e.target.closest("#ptbtn")) { ptPop($("#ptpop").hidden); return; }
+    if (e.target.closest("#ptbtn")) { cityDone(); ptPop($("#ptpop").hidden); return; }
+    var cq = e.target.closest("[data-city]"); if (cq) { cityDone(); if (cq.dataset.city === "change") ptPop(true); return; }
+    if (e.target.closest("[data-ck]")) { $("#ckb").hidden = true; try { localStorage.setItem("cldCookie", "1"); } catch (er) { /* баннер покажется снова */ } return; }
     var pk = e.target.closest("[data-pt-pick]"); if (pk) { ptPop(false); setPoint(+pk.dataset.ptPick); $("#ptbtn").focus(); return; }
     if (e.target.closest("[data-pt-geo]")) {
       if (!navigator.geolocation) { toast("Браузер не определяет местоположение. Выберите пункт из списка."); return; }
@@ -3607,6 +3644,18 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   ["mouseenter", "focusin"].forEach(function (ev) { spotEl.addEventListener(ev, function () { spotHold = true; spotTick(); }); });
   ["mouseleave", "focusout"].forEach(function (ev) { spotEl.addEventListener(ev, function (e) { if (ev === "focusout" && spotEl.contains(e.relatedTarget)) return; spotHold = false; spotTick(); }); });
   spotTick();
+  // первый заход: спросить город; если геолокация уже разрешена — сразу ближайший пункт
+  var seen = { city: false, ck: false };
+  try { seen.city = !!localStorage.getItem("cldCity"); seen.ck = !!localStorage.getItem("cldCookie"); } catch (e) { /* без хранилища — показываем */ }
+  if (!seen.ck) $("#ckb").hidden = false;
+  if (!seen.city) {
+    var showQ = function () { $("#cityq-n").textContent = POINTS[state.pt].city; $("#cityq").hidden = false; };
+    if (navigator.permissions && navigator.geolocation) navigator.permissions.query({ name: "geolocation" }).then(function (st) {
+      if (st.state === "granted") navigator.geolocation.getCurrentPosition(function (pos) { state.pt = nearestPt(pos); applyPrices(); renderHome(); showQ(); }, showQ, { timeout: 5000, maximumAge: 600000 });
+      else setTimeout(showQ, 700);
+    }, function () { setTimeout(showQ, 700); });
+    else setTimeout(showQ, 700);
+  }
 
   window.CLD_PROTO = { A: A, CARDS: CARDS, go: go, setNotes: setNotes };
   renderHome();
