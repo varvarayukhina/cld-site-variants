@@ -1045,6 +1045,24 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .cartbtn { background: #FFF; color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--line); font-size: 16px; padding: 12px 16px; }
 .cartbtn:hover { box-shadow: inset 0 0 0 1.5px var(--navy); }
 .bcont { display: inline-flex; align-items: center; gap: 12px; }
+/* шапка по разбору: служебная строка, основная, текстовое меню */
+.util.srow { background: var(--surface-2); color: var(--ink); border-bottom: 1px solid var(--line); }
+.util.srow .wrap { min-height: 42px; gap: 18px; }
+.util.srow a { color: var(--ink); }
+.srow .ptbtn { color: var(--navy); }
+.srow .ptbtn:focus-visible { outline-color: var(--navy); }
+.s-tel, .s-wa { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap; }
+.s-tel b { font-weight: 700; }
+.s-tel span { color: var(--muted); }
+.s-wa .ico { width: 20px; height: 20px; color: #25D366; }
+.s-wa span { font-weight: 600; }
+.tnav { display: block; margin: 0; background: #FFF; border-bottom: 1px solid var(--line); }
+.tnav .wrap { display: flex; gap: 28px; min-height: 50px; align-items: stretch; }
+.tnav button { position: relative; background: none; border: 0; padding: 0; border-radius: 0; font: 600 16px var(--text); color: var(--ink); cursor: pointer; white-space: nowrap; }
+.tnav button:hover { color: var(--navy-2); text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--line); }
+.tnav button[aria-current="page"] { background: none; }
+.tnav button[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--lime); }
+.bar .top-search { max-width: none; }
 /* лаймовая лента под шапкой: пункт, программы, разделы */
 .util.ptband { background: var(--lime-soft); color: var(--navy); border-bottom: 1px solid var(--line); }
 .util.ptband .wrap { min-height: 54px; gap: 8px; }
@@ -1369,6 +1387,14 @@ button.mini-n:hover, .mini-sit:hover .mini-n { text-decoration: underline; text-
 .xtabs button:hover { background: var(--navy-soft); }
 .xtabs button[aria-pressed="true"] { background: var(--navy); color: #FFF; }
 .filters .chip[hidden] { display: none; }
+.arow { padding: 20px 4px; gap: 6px 32px; }
+.arow .a-name { font-size: 20px; font-weight: 600; }
+.arow .a-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-width: 62ch; color: var(--muted); }
+.arow .a-meta { color: var(--muted); gap: 6px; }
+@media (min-width: 961px) { .arow { grid-template-columns: minmax(0, 1fr) 220px 260px; } }
+.arow .price b { font-size: 24px; font-weight: 700; }
+.arow .price small { white-space: nowrap; }
+.arow .price small { color: var(--muted); margin-top: 2px; }
 .arow .a-meta .urg { display: inline-grid; grid-template-columns: auto 1fr; column-gap: 7px; align-items: center; justify-self: start; padding: 7px 12px; border-radius: 12px; background: var(--lime-soft); color: var(--navy); font-weight: 700; }
 .arow .a-meta .urg small { grid-column: 2; font-weight: 500; font-size: 16px; color: var(--muted); }
 .arow .na { font-size: 16px; font-weight: 600; color: var(--muted); text-align: right; max-width: 14ch; line-height: 1.3; }
@@ -1379,6 +1405,21 @@ button.mini-n:hover, .mini-sit:hover .mini-n { text-decoration: underline; text-
 .cito-box .tag { grid-row: 1 / span 2; align-self: start; font-size: 16px; padding: 6px 12px; }
 .cito-box p { font-size: 16px; }
 .x-count { color: var(--muted); margin-bottom: 8px; }
+.xhead { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 8px 0 24px; }
+.xhead h1 { font-size: clamp(34px, 4vw, 44px); }
+.xhead p { margin-top: 10px; font-size: 19px; color: var(--muted); }
+.xhead p .linkbtn { font-size: 19px; }
+.xhead img { width: 120px; height: auto; flex: none; }
+.x-search { flex: 0 1 320px; }
+.x-search input { padding: 10px 12px 10px 42px; font-size: 16px; border-radius: 10px; background: #FFF; box-shadow: inset 0 0 0 1.5px var(--line); }
+.x-search input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--navy); }
+.x-search .ico { left: 14px; width: 18px; height: 18px; }
+.cito-line { margin: 0 0 20px; }
+.cito-line summary { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; color: var(--navy); list-style: none; padding: 8px 14px; border-radius: 999px; background: var(--lime-soft); }
+.cito-line summary::-webkit-details-marker { display: none; }
+.cito-line summary .ico { width: 18px; height: 18px; }
+.cito-line[open] summary { background: var(--lime); }
+.cito-line > div { margin-top: 12px; padding: 16px 18px; border-left: 3px solid var(--lime); display: grid; gap: 8px; max-width: 70ch; }
 .x-more { margin-top: 20px; }
 .x-more[hidden] { display: none; }
 #x-cat { font: 600 16px var(--text); color: var(--ink); border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 10px; background: #FFF; }
@@ -1392,16 +1433,20 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 @media (max-width: 1080px) and (min-width: 961px) { .navrow .nav { display: flex; } .bar .mbtn[data-menu] { display: none; } .resbtn .ico { display: none; } }
 @media (max-width: 1300px) { .rs-x { display: none; } .top-search { min-width: 240px; } }
 @media (max-width: 1200px) { .logo { width: 190px; } .top-search { min-width: 200px; } }
-@media (max-width: 1300px) and (min-width: 961px) { .ptband .nav { display: none; } .bar .mbtn[data-menu] { display: inline-grid !important; place-items: center; } }
+@media (max-width: 1300px) and (min-width: 961px) { .tnav .wrap { gap: 20px; } .ptband .nav { display: none; } .bar .mbtn[data-menu] { display: inline-grid !important; place-items: center; } }
 @media (max-width: 960px) {
   .util { display: block; }
   .util .spacer, .util .u-tel, .util .u-wa, .util > .wrap > .state, .hero-point > .ico { display: none; }
   .util .wrap { min-height: 44px; gap: 12px; }
   .ptpick select { max-width: calc(100vw - 96px); }
-  .ptband .ptpick { flex: 1; margin-right: 0; }
+  .ptband .ptpick, .srow .ptpick { flex: 1 1 auto; min-width: 0; margin-right: 0; }
+  .util.srow .s-tel, .util.srow .s-wa span { display: none; }
+  .srow .ptbtn { max-width: 100%; min-width: 0; }
+  .srow .ptbtn b { min-width: 0; }
+  .srow .s-wa { flex: none; }
   .ptband .ptbtn { max-width: none; }
   .ptband .ptbtn b { overflow: visible; text-overflow: clip; }
-  .subnav, .bcont, .ilink, .bar .resbtn, .ptband .pills, .ptband .nav { display: none; }
+  .subnav, .bcont, .ilink, .bar .resbtn, .ptband .pills, .ptband .nav, .tnav, .s-tel, .s-wa span { display: none; }
   .bar .wrap { flex-wrap: wrap; row-gap: 0; min-height: 0; padding-top: 8px; }
   .logo { width: 168px; margin-right: auto; }
   .top-search { order: 3; flex: 1 1 100%; max-width: none; margin: 8px 0 10px; }
@@ -1448,6 +1493,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .xtabs button { white-space: nowrap; }
   .arow .na { max-width: 11ch; }
   .cito-box { grid-template-columns: minmax(0, 1fr); }
+  .xhead img { width: 72px; }
+  .x-search { flex: 1 1 100%; }
   .cito-box .tag { grid-row: auto; justify-self: start; }
 }
 
@@ -1553,6 +1600,21 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14"/></symbol>
 </svg>
 
+<div class="util srow" id="util">
+  <div class="wrap">
+    <div class="ptpick" data-note="h1">
+      <button class="ptbtn" id="ptbtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ptpop"><svg class="ico"><use href="#i-pin"/></svg><b id="u-point">Черкесск, пр-т Ленина, 148</b><svg class="ico chev"><use href="#i-chev"/></svg></button>
+      <div class="cityq" id="cityq" role="dialog" aria-labelledby="cityq-t" hidden><p id="cityq-t">Ваш город — <b id="cityq-n">Черкесск</b>?</p><div><button class="btn btn-lime" type="button" data-city="yes">Да, верно</button><button class="btn btn-ghost" type="button" data-city="change">Изменить</button></div></div>
+      <div class="ptpop" id="ptpop" role="dialog" aria-label="Выбор пункта" hidden>
+        <div class="ptpop-h"><div class="search pt-search"><svg class="ico"><use href="#i-search"/></svg><input id="pt-q" type="search" autocomplete="off" placeholder="Город, станица или улица" aria-label="Найти пункт"></div><button class="btn btn-ghost pt-geo" type="button" data-pt-geo><svg class="ico"><use href="#i-pin"/></svg>Ближайший ко мне</button></div>
+        <div class="ptpop-list" id="pt-list"></div>
+      </div>
+    </div>
+    <span class="spacer"></span>
+    <a class="s-tel" href="tel:88002017830" data-note="h5"><svg class="ico"><use href="#i-phone"/></svg><b class="num">8 800 201 78 30</b><span>звонок бесплатный</span></a>
+    <a class="s-wa" href="#" data-stub="Номер WhatsApp появится после согласования" aria-label="Написать в WhatsApp"><svg class="ico ico-fill"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+  </div>
+</div>
 <header class="top" id="top">
   <div class="bar">
     <div class="wrap">
@@ -1563,37 +1625,24 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         <button class="btn btn-lime s-go" type="button" data-search-go>Найти</button>
         <div class="sugg" id="sugg-top" hidden></div>
       </div>
-      <div class="bcont" data-note="h5"><a class="btel" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span><b class="num">8 800 201 78 30</b><small>Звонок бесплатный · 24/7</small></span></a><a class="bwa" href="#" data-stub="Номер WhatsApp появится после согласования" aria-label="Написать в WhatsApp" title="Написать в WhatsApp"><svg class="ico ico-fill"><use href="#i-wa"/></svg></a></div>
       <a class="resbtn" href="#results" data-go="results" data-note="h4"><svg class="ico"><use href="#i-file"/></svg>Результаты<span class="rs-x">анализов</span></a>
       <button class="cartbtn" type="button" data-go="cart" aria-label="Корзина"><svg class="ico"><use href="#i-cart"/></svg><span class="rs-x">Корзина </span><span class="count num" data-cart>0</span></button>
       <button class="mbtn" type="button" aria-label="Меню" aria-controls="mmenu" aria-expanded="false" data-menu><svg class="ico" style="width:24px;height:24px"><use href="#i-menu"/></svg></button>
     </div>
   </div>
 </header>
-<div class="util ptband" id="util">
+<nav class="nav tnav" aria-label="Разделы" data-note="h2">
   <div class="wrap">
-    <div class="ptpick" data-note="h1">
-      <button class="ptbtn" id="ptbtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ptpop"><svg class="ico"><use href="#i-pin"/></svg><b id="u-point">Черкесск, пр-т Ленина, 148</b><svg class="ico chev"><use href="#i-chev"/></svg></button>
-      <div class="cityq" id="cityq" role="dialog" aria-labelledby="cityq-t" hidden><p id="cityq-t">Ваш город — <b id="cityq-n">Черкесск</b>?</p><div><button class="btn btn-lime" type="button" data-city="yes">Да, верно</button><button class="btn btn-ghost" type="button" data-city="change">Изменить</button></div></div>
-      <div class="ptpop" id="ptpop" role="dialog" aria-label="Выбор пункта" hidden>
-        <div class="ptpop-h"><div class="search pt-search"><svg class="ico"><use href="#i-search"/></svg><input id="pt-q" type="search" autocomplete="off" placeholder="Город, станица или улица" aria-label="Найти пункт"></div><button class="btn btn-ghost pt-geo" type="button" data-pt-geo><svg class="ico"><use href="#i-pin"/></svg>Ближайший ко мне</button></div>
-        <div class="ptpop-list" id="pt-list"></div>
-      </div>
-    </div>
-    <nav class="nav" aria-label="Разделы" data-note="h2">
-      <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
-      <button type="button" data-go="points" data-nav="points">Адреса</button>
-      <button type="button" data-go="gifts" data-nav="gifts">Сертификаты</button>
-      <button type="button" data-go="about" data-nav="about">О компании</button>
-    </nav>
-    <div class="pills" data-note="h6">
-      <button class="pill" type="button" data-go="express" data-nav="express"><svg class="ico"><use href="#i-bolt"/></svg>Экспресс</button>
-      <button class="pill" type="button" data-go="promos" data-nav="promos"><svg class="ico"><use href="#i-percent"/></svg>Акции</button>
-      <button class="pill" type="button" data-go="checkups" data-nav="checkups"><svg class="ico"><use href="#i-file"/></svg>Чек-апы</button>
-      <button class="pill" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
-    </div>
+    <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
+    <button type="button" data-go="express" data-nav="express">Экспресс</button>
+    <button type="button" data-go="checkups" data-nav="checkups">Чек-апы</button>
+    <button type="button" data-go="promos" data-nav="promos">Акции</button>
+    <button type="button" data-go="home-visit" data-nav="home-visit">Выезд на дом</button>
+    <button type="button" data-go="points" data-nav="points">Адреса</button>
+    <button type="button" data-go="gifts" data-nav="gifts">Сертификаты</button>
+    <button type="button" data-go="about" data-nav="about">О компании</button>
   </div>
-</div>
+</nav>
 <div class="mmenu" id="mmenu" hidden>
   <div class="wrap">
     <button type="button" data-go="catalog:blood">Анализы и цены</button>
@@ -1718,9 +1767,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   <section id="v-express" data-view="express" hidden>
     <div class="wrap">
       <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Экспресс-анализы</span></div>
-      <div class="chead" data-note="x1"><div class="picto"><svg viewBox="0 0 24 24" class="ico" style="width:100%;height:100%;stroke:var(--navy)"><use href="#i-bolt"/></svg></div><div><h1>Экспресс-анализы</h1><p>Анализы с результатом через 1–3 дня после сдачи. Срок готовности указан у каждого анализа.</p></div></div>
-      <div class="filters" data-note="x2"><span class="xtabs" role="group" aria-label="Срок готовности"><button type="button" data-xmax="1" aria-pressed="true">За 1 день</button><button type="button" data-xmax="2" aria-pressed="false">До 2 дней</button><button type="button" data-xmax="3" aria-pressed="false">До 3 дней</button></span><span class="grow"></span><label class="vh" for="x-cat">Раздел</label><select id="x-cat"></select></div>
-      <div class="cito-box" id="x-cito" data-note="x3"></div>
+      <div class="xhead" data-note="x1"><div><h1>Экспресс-анализы</h1><p>Результат за&nbsp;1–3 дня после сдачи. Нужно за&nbsp;несколько часов&nbsp;— <button class="linkbtn" type="button" data-x-cito>ЦИТО</button>.</p></div><img src="../assets/img/budilnik.webp" alt="" width="240" height="314"></div>
+      <div class="filters" data-note="x2"><span class="xtabs" role="group" aria-label="Срок готовности"><button type="button" data-xmax="1" aria-pressed="true">За 1 день</button><button type="button" data-xmax="2" aria-pressed="false">До 2 дней</button><button type="button" data-xmax="3" aria-pressed="false">До 3 дней</button></span><label class="vh" for="x-cat">Раздел</label><select id="x-cat"></select><span class="grow"></span><div class="search x-search"><svg class="ico"><use href="#i-search"/></svg><input id="x-q" type="search" autocomplete="off" placeholder="Найти в разделе" aria-label="Найти среди экспресс-анализов"></div></div>
+      <details class="cito-line" id="x-cito" data-note="x3"><summary><svg class="ico"><use href="#i-bolt"/></svg>Нужно быстрее? Узнать о&nbsp;ЦИТО</summary><div id="x-cito-in"></div></details>
       <p class="x-count" id="x-count"></p>
       <div class="pt-warn" id="x-ptwarn" hidden></div>
       <div class="rows" id="x-rows"></div>
@@ -2632,7 +2681,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     if (cito) m.push('<span class="urg"><svg class="ico"><use href="#i-bolt"/></svg>ЦИТО — ' + rub(cito) + "<small>за несколько часов</small></span>");
     return '<div class="arow' + (a.na ? " is-na" : "") + '"><div><button class="a-name" type="button" data-go="card:' + code + '">' + esc(a.n) + '</button><p class="a-desc">' + esc(a.d) + '</p></div>' +
       '<div class="a-meta">' + m.join("") + "</div>" +
-      '<div class="a-buy">' + (a.na ? "" : '<div class="price"><b>' + rub(a.p) + "</b><small>онлайн " + rub(online(a.p)) + "</small></div>" + addBtn(code)) + "</div></div>";
+      '<div class="a-buy">' + (a.na ? "" : '<div class="price"><b>' + rub(online(a.p)) + "</b><small>на сайте · в пункте " + rub(a.p) + "</small></div>" + addBtn(code)) + "</div></div>";
   }
   function mode(arr) { var c = {}, best = arr[0], n = 0; arr.forEach(function (v) { c[v] = (c[v] || 0) + 1; if (c[v] > n) { n = c[v]; best = v; } }); return best; }
   function commonOf(codes) {
@@ -2881,21 +2930,22 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       '<button class="btn btn-lime" type="submit" id="gf-pay"></button>';
     gfCard();
   }
-  var xs = { max: 1, cat: "", lim: 24 };
+  var xs = { max: 1, cat: "", lim: 10 };
   function renderExpress() {
     var sel = $("#x-cat");
     if (!sel.options.length) sel.innerHTML = '<option value="">Все разделы</option>' + CATS.filter(function (c) { return !c.aud; }).map(function (c) { return '<option value="' + c.id + '">' + esc(c.n) + "</option>"; }).join("");
     $$("[data-xmax]").forEach(function (b) { b.setAttribute("aria-pressed", +b.dataset.xmax === xs.max ? "true" : "false"); });
     var pool = xs.cat ? CATS.filter(function (c) { return c.id === xs.cat; })[0].items : Object.keys(A);
-    var codes = pool.filter(function (c, i, a) { return a.indexOf(c) === i && A[c] && A[c].days <= xs.max; }).sort(function (a, b) { return (A[a].na - A[b].na) || A[a].pop - A[b].pop; });
+    var xq = norm($("#x-q").value || "");
+    var codes = pool.filter(function (c, i, a) { return a.indexOf(c) === i && A[c] && A[c].days <= xs.max && (!xq || norm(A[c].n + " " + A[c].off).indexOf(xq) >= 0); }).sort(function (a, b) { return (A[a].na - A[b].na) || A[a].pop - A[b].pop; });
     var cito = Object.keys(CITO).filter(citoOf);
-    $("#x-cito").innerHTML = '<span class="tag cito">ЦИТО</span><p><b>Срочно — через несколько часов.</b> ' + typo("Отметку ЦИТО ставят при регистрации в пункте, к цене анализа добавляется 30%. Точный срок зависит от пункта.") + "</p><p>" +
-      (cito.length ? typo("Сейчас доступно: " + cito.map(function (c) { return A[c].n + " — " + rub(citoOf(c)); }).join(", ") + ". Полный список ЦИТО лаборатория пришлёт отдельно.") : typo("В этом пункте ЦИТО пока недоступно. Список ЦИТО по пунктам лаборатория пришлёт отдельно.")) + "</p>";
+    $("#x-cito-in").innerHTML = "<p>" + typo("ЦИТО — срочное выполнение анализа: результат через несколько часов, точный срок зависит от пункта. Отметку ставят при регистрации в пункте, к цене анализа добавляется 30%.") + "</p>" +
+      (cito.length ? "<p>" + typo("Доступно: " + cito.map(function (c) { return A[c].n + " — " + rub(citoOf(c)); }).join(", ") + ".") + "</p>" : "<p>" + typo("В этом пункте ЦИТО сейчас недоступно, срочность уточняйте по телефону 8 800 201 78 30.") + "</p>");
     $("#x-count").textContent = (xs.max === 1 ? "За 1 день — " : "До " + xs.max + " дней — ") + nAn(codes.length);
     ptWarn($("#x-ptwarn"), codes);
     var cm = commonOf(codes);
     $("#x-rows").innerHTML = codes.slice(0, xs.lim).map(function (c) { return row(c, cm && { days: -1, bio: cm.bio, own: cm.own }); }).join("");
-    $("#x-more").hidden = codes.length <= xs.lim; $("#x-more").textContent = "Показать ещё " + Math.min(24, codes.length - xs.lim);
+    $("#x-more").hidden = codes.length <= xs.lim; $("#x-more").textContent = "Показать ещё " + Math.min(10, codes.length - xs.lim);
   }
   function renderCatalog() {
     var cat = CATS.filter(function (c) { return c.id === state.cat; })[0] || CATS[0];
@@ -3665,8 +3715,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var spi = e.target.closest("[data-spot-i]"); if (spi) { spotGo(+spi.dataset.spotI); spotTick(); return; }
     if (e.target.closest("[data-spot-pause]")) { spotPaused = !spotPaused; spotTick(); return; }
     var md = e.target.closest("[data-maxd]"); if (md) { state.maxd = +md.dataset.maxd; renderCatalog(); if (notesOn) placePins(); return; }
-    if (e.target.closest("[data-xmore]")) { xs.lim += 24; renderExpress(); return; }
-    var xm = e.target.closest("[data-xmax]"); if (xm) { xs.max = +xm.dataset.xmax; xs.lim = 24; renderExpress(); if (notesOn) placePins(); return; }
+    if (e.target.closest("[data-xmore]")) { xs.lim += 10; renderExpress(); return; }
+    if (e.target.closest("[data-x-cito]")) { var xc = $("#x-cito"); xc.open = true; xc.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); return; }
+    var xm = e.target.closest("[data-xmax]"); if (xm) { xs.max = +xm.dataset.xmax; xs.lim = 10; renderExpress(); if (notesOn) placePins(); return; }
     var ga = e.target.closest("[data-gf-amt]"); if (ga) { gs.amt = +ga.dataset.gfAmt; gs.err = ""; $("#gf-sum").value = gs.amt; gfCard(); return; }
     var gd = e.target.closest("[data-gf-des]"); if (gd) { if (+gd.dataset.gfDes === gs.des) return; gs.des = +gd.dataset.gfDes; $$("[data-gf-des]").forEach(function (b, i) { b.setAttribute("aria-pressed", i === gs.des ? "true" : "false"); }); gfCard(); return; }
     var gv = e.target.closest("[data-gf-via]"); if (gv) { var k = gv.dataset.gfVia; if (gs[k] && !gs[k === "sms" ? "mail" : "sms"]) return; gs[k] = !gs[k]; gs.err = ""; renderGifts(); return; } // хотя бы один способ отправки
@@ -3746,7 +3797,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     if (!bad) { dc.done = true; dc.code = "CLD " + String(1000 + Math.floor(Math.random() * 9000)) + " " + String(1000 + Math.floor(Math.random() * 9000)); }
     renderDcard(); var fe = bad ? $("#" + bad[0]) : $("#dc-form .wbtn"); if (fe) fe.focus();
   });
-  $("#x-cat").addEventListener("change", function (e) { xs.cat = e.target.value; xs.lim = 24; renderExpress(); });
+  $("#x-cat").addEventListener("change", function (e) { xs.cat = e.target.value; xs.lim = 10; renderExpress(); });
+  $("#x-q").addEventListener("input", function () { xs.lim = 10; renderExpress(); });
   $("#spot-track").addEventListener("scroll", function () { var tr = this, i = Math.round(tr.scrollLeft / tr.clientWidth); if (i !== spotI) { spotI = i; $$("#spot-dots button").forEach(function (b, j) { b.setAttribute("aria-current", j === i ? "true" : "false"); }); } }, { passive: true });
   try { var sp0 = +localStorage.getItem("cldPt4"); if (sp0 > 0 && sp0 < POINTS.length) state.pt = sp0; } catch (e) { /* без хранилища — пункт по умолчанию */ }
   applyPrices();
