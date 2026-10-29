@@ -1640,6 +1640,8 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
 .pc-t p { margin-top: 6px; font-size: 16px; line-height: 1.45; color: var(--on-navy-muted); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 .pc-buy { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
 .pc-buy b { font: 800 24px var(--text); color: #FFF; }
+.pc-sum { display: grid; }
+.pc-sum small { font-size: 16px; color: var(--on-navy-muted); }
 .pc-v .pc-t { padding: 16px 18px 0; }
 .pc-v .pc-buy { padding: 14px 18px 18px; }
 .cat-ban { margin: 20px 0 4px; }
@@ -3064,23 +3066,33 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     $("#x-rows").innerHTML = codes.slice(0, xs.lim).map(function (c) { return row(c, cm && { days: -1, bio: cm.bio, own: cm.own }); }).join("");
     $("#x-more").hidden = codes.length <= xs.lim; $("#x-more").textContent = "Показать ещё " + Math.min(10, codes.length - xs.lim);
   }
-  // ---------- баннер с анализом: самый дорогой анализ раздела от 1 500 ₽, иначе — генетика из слайдера по кругу ----------
+  // ---------- баннер наверху раздела: то, что вероятнее купят ----------
+  // 1) к заказу — что часто сдают вместе с анализом из корзины; 2) повод раздела — набор, который обычно назначают; 3) самые популярные анализы раздела одним заказом
   function avail(c) { return A[c] && !A[c].na && A[c].p > 0; }
   function spotOf(c) { return SPOT.filter(function (x) { return x.c === c; })[0]; }
-  function bannerPick(codes, k) {
-    var pool = codes.filter(function (c, i, a) { return a.indexOf(c) === i && avail(c); }).sort(function (a, b) { return A[b].p - A[a].p; });
-    if (pool.length && A[pool[0]].p >= 1500) return pool[0];
-    var gen = SPOT.filter(function (x) { return x.c && avail(x.c); });
-    return gen.length ? gen[k % gen.length].c : null;
-  }
-  function promoCard(c, cls, tag, pic) {
+  // сезонная рекомендация в выпадающих меню: октябрь–март — витамин D, апрель–июнь — аллергочип; иначе — генетика
+  var SEASON = [{ m: [9, 10, 11, 0, 1, 2], c: "40-297", tag: "Сезонное", p: "Осенью и зимой солнца меньше, и уровень витамина D часто снижается" },
+    { m: [3, 4, 5], c: "66.300", tag: "Сезон цветения", p: "300 аллергокомпонентов по одной пробе крови: пыльца, пища, животные, клещи домашней пыли" }];
+  function seasonPick() { var mo = new Date().getMonth(); return SEASON.filter(function (x) { return x.m.indexOf(mo) >= 0 && avail(x.c); })[0]; }
+  function promoCard(c, cls, tag, pic, note) {
     var a = A[c], x = spotOf(c);
     return '<div class="pcard ' + cls + '">' + (x ? '<img src="../assets/img/spot/' + x.img + '.webp" alt="" width="400" height="400" loading="lazy">' : '<div class="picto">' + picto(pic || "checkups") + "</div>") +
-      '<div class="pc-t"><span class="pc-tag">' + esc(x ? x.tag : tag) + "</span><b>" + esc(a.n) + "</b><p>" + typo(esc(a.d)) + '.</p></div><div class="pc-buy"><b class="num">' + rub(online(a.p)) + '</b><button class="btn btn-lime" type="button" data-go="card:' + c + '">Подробнее</button></div></div>';
+      '<div class="pc-t"><span class="pc-tag">' + esc(tag || (x ? x.tag : "")) + "</span><b>" + esc(a.n) + "</b><p>" + typo(esc(note || a.d)) + '.</p></div><div class="pc-buy"><b class="num">' + rub(online(a.p)) + '</b><button class="btn btn-lime" type="button" data-go="card:' + c + '">Подробнее</button></div></div>';
+  }
+  function setCard(tag, title, codes, pic) {
+    var sum = codes.reduce(function (s, c) { return s + A[c].p; }, 0), left = codes.filter(function (c) { return !cart[c]; });
+    return '<div class="pcard pc-h"><div class="picto">' + picto(pic) + '</div><div class="pc-t"><span class="pc-tag">' + esc(tag) + "</span><b>" + esc(title) + "</b><p>" + esc(codes.map(function (c) { return A[c].n; }).join(", ")) + '.</p></div><div class="pc-buy"><span class="pc-sum"><b class="num">' + rub(online(sum)) + '</b><small>на сайте · в пункте ' + rub(sum) + "</small></span>" +
+      (left.length ? '<button class="btn btn-lime" type="button" data-add-all="' + left.join(",") + '">Добавить все</button>' : '<button class="btn btn-lime" type="button" data-go="cart">Все в корзине</button>') + "</div></div>";
   }
   function catBanner(cat) {
-    var codes = cat.items.concat(SPOT.filter(function (x) { return x.c && x.pic === cat.id; }).map(function (x) { return x.c; })), c = bannerPick(codes, CATS.indexOf(cat));
-    $("#cat-ban").innerHTML = c ? promoCard(c, "pc-h", cat.n, cat.id) : ""; $("#cat-ban").hidden = !c;
+    var h = "", inCart = Object.keys(cart).filter(function (c) { return A[c]; });
+    for (var i = 0; i < inCart.length && !h; i++) {
+      var tg = ((CARDS[inCart[i]] || {}).together || []).filter(function (c) { return avail(c) && !cart[c]; });
+      if (tg.length) { var a = A[tg[0]]; h = '<div class="pcard pc-h"><div class="picto">' + picto(cat.id) + '</div><div class="pc-t"><span class="pc-tag">К вашему заказу</span><b>' + esc(a.n) + "</b><p>" + typo(esc("Часто сдают вместе с анализом «" + A[inCart[i]].n + "». " + a.d)) + '.</p></div><div class="pc-buy"><b class="num">' + rub(online(a.p)) + "</b>" + buyBtn(tg[0]) + "</div></div>"; }
+    }
+    if (!h) { var s = SITS.filter(function (x) { return x.go === cat.id && x.codes; })[0], sc = s ? s.codes.filter(avail) : []; if (sc.length > 1) h = setCard("Повод", s.n + ": " + nAn(sc.length), sc, s.pic || cat.id); }
+    if (!h) { var top = cat.items.filter(function (c, j, x) { return x.indexOf(c) === j && avail(c); }).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 3); if (top.length > 1) h = setCard("Часто сдают", cat.n + ": " + nAn(top.length) + " одним заказом", top, cat.id); }
+    $("#cat-ban").innerHTML = h; $("#cat-ban").hidden = !h;
   }
 
   // ---------- выпадающие меню шапки: «Анализы и цены» — большое полотно с разделами; «Экспресс», «Чек-апы», «Акции» — свои ----------
@@ -3110,10 +3122,10 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     clearTimeout(megaT); var m = $("#mega");
     if (on) {
       if (!m.hidden && k === megaK) return;
-      if (m.hidden) {
-        megaN++;
-        var gen = SPOT.filter(function (x) { return x.c && avail(x.c); }), sc = gen.length ? gen[megaN % gen.length].c : null;
-        $("#mega-side").innerHTML = (sc ? promoCard(sc, "pc-v") : "") +
+      if (m.hidden) megaN++;
+      if (m.hidden || k !== megaK) {
+        var gen = SPOT.filter(function (x) { return x.c && avail(x.c) && x.tag === "Генетика"; }), sc = gen.length ? gen[megaN % gen.length].c : null, se = (k === "x" || k === "pr") && seasonPick();
+        $("#mega-side").innerHTML = (se ? promoCard(se.c, "pc-v", se.tag, "vitamins", se.p) : sc ? promoCard(sc, "pc-v") : "") +
           '<button class="mg-side-l" type="button" data-go="gifts">' + icon("i-gift") + "<span><b>Подарочный сертификат</b><small>на анализы и чек-апы</small></span></button>" +
           '<button class="mg-side-l" type="button" data-go="dcard">' + icon("i-wallet") + "<span><b>Скидочная карта −10%</b><small>хранится в телефоне</small></span></button>";
       }
@@ -3960,6 +3972,12 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
   $("#tnav-box").addEventListener("click", function (e) { if (e.target.closest("[data-go]")) megaOpen(false); });
   $("#mega-btn").addEventListener("click", function () { megaOpen($("#mega").hidden || megaK !== "an", "an"); });
   $("#mega-dim").addEventListener("click", function () { megaOpen(false); });
+  // «Добавить все» в баннере раздела; после любого изменения корзины баннер пересчитывается
+  document.addEventListener("click", function (e) {
+    var all = e.target.closest("[data-add-all]");
+    if (all) { all.dataset.addAll.split(",").forEach(function (c) { if (!cart[c] && avail(c)) cart[c] = 1; }); syncCart(); toast("Добавили в корзину: " + nAn(all.dataset.addAll.split(",").length)); }
+    if ((all || e.target.closest("[data-add]")) && state.view === "catalog") catBanner(CATS.filter(function (c) { return c.id === state.cat; })[0] || CATS[0]);
+  });
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     if (!$("#mega").hidden) { megaOpen(false); $("#mega-btn").focus(); }
