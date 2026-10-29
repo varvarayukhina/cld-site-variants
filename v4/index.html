@@ -1190,6 +1190,16 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .gf-arrow { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--line); background: #FFF; color: var(--navy); cursor: pointer; }
 .gf-arrow:hover { border-color: var(--navy); }
 .gf-sum { max-width: 260px; }
+.gcx { margin: 0 0 56px; }
+.gcx h2 { font-size: 28px; }
+.gcx-l { color: var(--muted); margin: 8px 0 18px; max-width: 60ch; }
+.gcx-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.gcx-card { display: grid; grid-template-rows: auto 1fr auto auto; gap: 8px; padding: 22px; border-radius: var(--r-card); background: var(--lime-soft); }
+.gcx-card h3 { font-size: 20px; }
+.gcx-card p { font-size: 16px; color: var(--muted); }
+.gcx-card b { font-size: 24px; font-weight: 800; }
+.gcx-card .btn { justify-self: start; }
+#pr-gcx .gcx { margin-top: 56px; }
 .notes-toggle, .drawer, .pin { display: none !important; }
 .cityq { position: absolute; left: -12px; top: calc(100% + 10px); z-index: 61; width: 300px; padding: 16px; border-radius: 14px; background: #FFF; color: var(--ink); box-shadow: 0 18px 44px rgba(20,55,75,.28); display: grid; gap: 12px; font-size: 17px; }
 .cityq[hidden] { display: none; }
@@ -1388,7 +1398,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .audt { flex: 0 0 116px; scroll-snap-align: start; padding: 14px 6px 10px; }
   .fpanel { padding: 14px; }
   .fp-grid, .fp-org { grid-template-columns: minmax(0, 1fr); }
-  .advs-6, .gf-grid, .gf-info, .dc-grid { grid-template-columns: minmax(0, 1fr); }
+  .advs-6, .gf-grid, .gf-info, .dc-grid, .gcx-grid { grid-template-columns: minmax(0, 1fr); }
   .spot-nav { gap: 6px; }
   .spot-dots { gap: 0; }
   .spot-dots button { width: 22px; }
@@ -1720,6 +1730,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         </div>
         <form class="panel gf-form" id="gf-form" novalidate></form>
       </div>
+      <div id="gf-cx"></div>
       <div class="gf-info">
         <section><h2>Как это работает</h2><ol class="gf-steps"><li>Выберите дизайн и&nbsp;сумму.</li><li>Укажите получателя и&nbsp;оплатите сертификат онлайн.</li><li>Сертификат сразу пополнит баланс получателя.</li><li>PDF-сертификат можно скачать в&nbsp;личном кабинете.</li><li>Получатель оплатит заказ балансом из&nbsp;личного кабинета.</li></ol></section>
         <section><h2>Важно</h2><ul class="gf-list"><li>Сертификат действует бессрочно.</li><li>Подходит на&nbsp;любой анализ, чек-ап или выезд медсестры.</li><li>Баланс можно тратить в&nbsp;несколько визитов, остаток не&nbsp;сгорает.</li><li>Номинал или остаток можно вернуть по&nbsp;заявлению покупателя.</li></ul></section>
@@ -1736,6 +1747,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       <div class="promos promos-3" id="pr-month"></div>
       <div class="sec-h" style="margin-top:56px" data-note="pr1"><h2>Чек-апы дешевле анализов по отдельности</h2></div>
       <div class="pr-sets" id="pr-sets"></div>
+      <div id="pr-gcx"></div>
       <div class="sec-h" style="margin-top:56px"><h2>Всегда</h2></div>
       <div class="pr-always">
         <div class="adv"><span class="adv-ic"><svg class="ico"><use href="#i-percent"/></svg></span><b class="num">−10% на сайте</b><p>На анализы из каталога при оплате заказа онлайн.</p></div>
@@ -2725,6 +2737,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   function spotGo(i) { var tr = $("#spot-track"); spotI = (i + SPOT.length) % SPOT.length; tr.scrollTo({ left: tr.clientWidth * spotI, behavior: reduceMotion ? "auto" : "smooth" }); $$("#spot-dots button").forEach(function (b, j) { b.setAttribute("aria-current", j === spotI ? "true" : "false"); }); }
   function promoSets() { return Object.keys(CXX).filter(function (c) { return CX[c] && !CX[c].na && cxSave(c) >= 10; }).sort(function (a, b) { return cxSave(b) - cxSave(a); }); }
   function renderPromos() {
+    $("#pr-gcx").innerHTML = giftCxHtml();
     $("#pr-month").innerHTML = $$("#promos .promo:not(.promo-all)").map(function (p) { return p.outerHTML.replace(/ id="promo-cells"/, ""); }).join("");
     $("#pr-sets").innerHTML = promoSets().map(function (c) {
       var e = CXX[c], x = CX[c];
@@ -2742,6 +2755,16 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       '<label class="gf-l" for="dc-name">Имя</label><input class="gf-in' + (dc.errf === "dc-name" ? " bad" : "") + '" id="dc-name" type="text" autocomplete="name" value="' + esc(dc.name) + '">' +
       '<label class="gf-l" for="dc-phone">Телефон</label><input class="gf-in' + (dc.errf === "dc-phone" ? " bad" : "") + '" id="dc-phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value="' + esc(dc.phone) + '">' +
       (dc.err ? '<p class="gf-err" role="alert">' + dc.err + "</p>" : "") + '<button class="btn btn-lime" type="submit">Активировать карту</button>';
+  }
+  // «Подарить чек-ап близким»: сертификат на сумму чек-апа (номинал кратен 100 ₽ — округляем вверх)
+  var GIFTCX = ["04.25.015", "04.25.011", "04.25.012", "04.25.005"];
+  function giftCxHtml() {
+    var cs = GIFTCX.filter(function (c) { return CX[c] && !CX[c].na; });
+    if (!cs.length) return "";
+    return '<section class="gcx" aria-labelledby="gcx-h"><h2 id="gcx-h">Подарить чек-ап близким</h2><p class="gcx-l">' + typo("Сертификат на сумму чек-апа: получатель сам выберет пункт и время, а остаток не сгорит.") + '</p><div class="gcx-grid">' + cs.map(function (c) {
+      var e = CXX[c], x = CX[c], amt = Math.ceil(x.p / 100) * 100;
+      return '<article class="gcx-card"><h3>' + esc(x.n) + "</h3><p>" + typo(nAn((e && e.parts || []).length) + ", результат через " + (x.r || "1–2 дня")) + '</p><b class="num">' + rub(amt) + '</b><button class="btn btn-navy" type="button" data-gift-cx="' + esc(c) + '">Подарить</button></article>';
+    }).join("") + "</div></section>";
   }
   var GIFTD = [
     { id: "navy", n: "Тёмно-синий", logo: "white", amt: "#FFFFFF", bg: "#14374B" }, { id: "lime", n: "Лаймовый", logo: "navy", amt: "#14374B", bg: "#AFC81E" }, { id: "white", n: "Белый", logo: "navy", amt: "#14374B", bg: "#FFFFFF" },
@@ -2776,6 +2799,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     return '<label class="gf-l" for="' + id + '">' + label + '</label><input class="gf-in' + (gs.errf === id ? " bad" : "") + '" id="' + id + '" type="' + type + '" autocomplete="' + ac + '"' + (ph ? ' placeholder="' + ph + '"' : "") + ' value="' + esc(val) + '">' + (hint ? '<p class="gf-hint">' + hint + "</p>" : "");
   }
   function renderGifts() {
+    $("#gf-cx").innerHTML = giftCxHtml();
     $("#gf-des").innerHTML = GIFTD.map(function (d, i) { return '<button class="gf-des" type="button" data-gf-des="' + i + '" aria-pressed="' + (i === gs.des) + '"><span style="background-image:url(../assets/img/gift/' + d.id + '.webp)"></span>' + esc(d.n) + "</button>"; }).join("");
     $("#gf-amts").innerHTML = GIFTA.map(function (a, i) { var t = giftIdea(a); return '<span class="gf-chipw"><button class="chip num gf-a' + i + '" type="button" data-gf-amt="' + a + '" aria-pressed="' + (gs.amt === a) + '"' + (t ? ' aria-describedby="gft-' + a + '"' : "") + ">" + rub(a) + "</button>" + (t ? '<span class="gf-tip" role="tooltip" id="gft-' + a + '">' + t + "</span>" : "") + "</span>"; }).join("");
     if (document.activeElement !== $("#gf-sum")) $("#gf-sum").value = gs.amt;
@@ -3582,6 +3606,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var gv = e.target.closest("[data-gf-via]"); if (gv) { var k = gv.dataset.gfVia; if (gs[k] && !gs[k === "sms" ? "mail" : "sms"]) return; gs[k] = !gs[k]; gs.err = ""; renderGifts(); return; } // хотя бы один способ отправки
     var gsc = e.target.closest("[data-gf-scroll]"); if (gsc) { var row = $("#gf-des"); row.scrollBy({ left: +gsc.dataset.gfScroll * row.clientWidth * .8, behavior: reduceMotion ? "auto" : "smooth" }); return; }
     if (e.target.closest('[data-gf="again"]')) { gs.done = false; gs.rname = gs.phone = gs.email = gs.note = ""; renderGifts(); return; }
+    var gx = e.target.closest("[data-gift-cx]"); if (gx) { gs.amt = Math.ceil(CX[gx.dataset.giftCx].p / 100) * 100; gs.done = false; if (state.view !== "gifts") go("gifts"); else renderGifts(); $("#gf-card").scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); return; }
     var wb = e.target.closest("[data-wallet]"); if (wb) { toast("Карта добавлена в " + wb.dataset.wallet); return; }
     if (e.target.closest("[data-pick-pt]")) { window.scrollTo(0, 0); ptPop(true); return; }
     if (e.target.closest("#ptbtn")) { cityDone(); ptPop($("#ptpop").hidden); return; }
