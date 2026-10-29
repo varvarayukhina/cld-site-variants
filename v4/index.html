@@ -1584,6 +1584,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .tnav .hn-dd { display: inline-flex; align-items: center; gap: 6px; }
 .tnav .hn-dd:hover, .tnav .hn-dd[aria-expanded="true"] { background: none; }
 .tnav .pill[aria-expanded="true"] { background: var(--lime); }
+.tnav .pill .ico.chev { display: inline-block; width: 15px; height: 15px; margin-left: -2px; transition: transform .2s var(--ease); }
+.tnav .pill[aria-expanded="true"] .chev { transform: rotate(180deg); }
+@media (max-width: 1060px) and (min-width: 961px) { .tnav.nav .wrap { gap: 6px; } .tnav .pills { gap: 4px; } .tnav .pill { padding: 9px 8px; gap: 3px; } .tnav .pill .ico.chev { width: 12px; height: 12px; margin-left: 0; } .tnav .hn-dd { gap: 2px; } }
 .hn-dd .chev { width: 16px; height: 16px; transition: transform .2s var(--ease); }
 .hn-dd[aria-expanded="true"] .chev { transform: rotate(180deg); }
 .mega { position: absolute; left: 0; right: 0; top: 100%; z-index: 41; background: #FFF; border-top: 1px solid var(--line); box-shadow: 0 30px 60px rgba(20,55,75,.2); max-height: calc(100vh - var(--sw-h, 0px) - 150px); overflow: auto; overscroll-behavior: contain; }
@@ -1737,9 +1740,9 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     <button type="button" data-go="gifts" data-nav="gifts">Сертификаты</button>
     <button type="button" data-go="about" data-nav="about">О компании</button>
     <div class="pills">
-      <button class="pill" type="button" data-go="express" data-nav="express" data-mega="x" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-bolt"/></svg>Экспресс</button>
-      <button class="pill" type="button" data-go="checkups" data-nav="checkups" data-mega="cx" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-file"/></svg>Чек-апы</button>
-      <button class="pill" type="button" data-go="promos" data-nav="promos" data-mega="pr" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-percent"/></svg>Акции</button>
+      <button class="pill" type="button" data-go="express" data-nav="express" data-mega="x" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-bolt"/></svg>Экспресс<svg class="ico chev"><use href="#i-chev"/></svg></button>
+      <button class="pill" type="button" data-go="checkups" data-nav="checkups" data-mega="cx" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-file"/></svg>Чек-апы<svg class="ico chev"><use href="#i-chev"/></svg></button>
+      <button class="pill" type="button" data-go="promos" data-nav="promos" data-mega="pr" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-percent"/></svg>Акции<svg class="ico chev"><use href="#i-chev"/></svg></button>
       <button class="pill" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
     </div>
   </div>
