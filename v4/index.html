@@ -1032,18 +1032,35 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .util .state, .u-wa { white-space: nowrap; }
 .hero-cells { display: none; }
 .bar .wrap { min-height: 84px; gap: 20px; }
-.logo { width: 190px; flex: none; background: none; border: 0; padding: 0; cursor: pointer; }
+.logo { width: 230px; flex: none; background: none; border: 0; padding: 0; cursor: pointer; }
 .top-search { flex: 1; max-width: 680px; display: flex; align-items: center; background: var(--surface-2); border-radius: 12px; box-shadow: inset 0 0 0 1.5px var(--line); padding: 5px; }
 .top-search:focus-within { box-shadow: inset 0 0 0 2px var(--navy); background: #FFF; }
 .top-search input { flex: 1; min-width: 0; background: transparent; box-shadow: none; padding: 12px 12px 12px 46px; font-size: 17px; }
 .top-search input:focus { outline: none; }
 .top-search .ico { left: 18px; }
 .top-search .s-go { padding: 11px 20px; }
+.resbtn .rs-x { margin-left: -3px; }
 .resbtn { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: #FFF; border-radius: 10px; padding: 13px 18px; font-weight: 700; font-size: 16px; text-decoration: none; white-space: nowrap; }
 .resbtn:hover { background: var(--navy-2); }
 .cartbtn { background: #FFF; color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--line); font-size: 16px; padding: 12px 16px; }
 .cartbtn:hover { box-shadow: inset 0 0 0 1.5px var(--navy); }
 .bcont { display: inline-flex; align-items: center; gap: 12px; }
+/* лаймовая лента под шапкой: пункт, программы, разделы */
+.util.ptband { background: var(--lime-soft); color: var(--navy); border-bottom: 1px solid var(--line); }
+.util.ptband .wrap { min-height: 54px; gap: 8px; }
+.ptband .ptbtn { color: var(--navy); }
+.ptband .ptbtn:focus-visible { outline-color: var(--navy); }
+.ptband .pills { margin-left: auto; display: flex; gap: 6px; flex: none; }
+.ptband .ptpick { flex: 0 1 auto; min-width: 0; margin-right: 16px; }
+.ptband .ptbtn { max-width: 100%; }
+.ptband .pill { padding: 6px 11px; background: #FFF; border-radius: 999px; gap: 7px; font-weight: 600; white-space: nowrap; }
+.ptband .pill:hover, .ptband .pill[aria-current="page"] { background: var(--lime); }
+.ptband .nav { margin-left: 12px; display: flex; gap: 0; flex: none; }
+.ptband .nav button { padding: 8px 8px; border-radius: 9px; font-weight: 600; white-space: nowrap; }
+@media (max-width: 1360px) { .ptband .pill .ico { display: none; } .ptband .nav { margin-left: 6px; } }
+@media (max-width: 1200px) { .ptband .ptbtn { max-width: 24ch; } }
+.ptband .nav button:hover { background: #FFF; }
+.ptband .nav button[aria-current="page"] { background: #FFF; }
 .bar .wrap { gap: 16px; }
 .top-search { min-width: 320px; }
 .bwa { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 50%; background: #25D366; color: #FFF; transition: transform .2s var(--ease); } /* логотип WhatsApp — в его цвете */
@@ -1328,12 +1345,15 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 @media (max-width: 1300px) { .aud { grid-template-columns: repeat(4, minmax(0, 1fr)); } .advs-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .fp-org { grid-template-columns: repeat(3, minmax(0, 1fr)); } .u-tel span { display: none; } }
 @media (max-width: 1180px) { .btel small { display: none; } .resbtn { padding: 13px 14px; } .pills .pill { padding: 9px 12px; } .nav button { padding: 10px 8px; } }
 @media (max-width: 1080px) and (min-width: 961px) { .navrow .nav { display: flex; } .bar .mbtn[data-menu] { display: none; } .resbtn .ico { display: none; } }
+@media (max-width: 1300px) { .rs-x { display: none; } .top-search { min-width: 240px; } }
+@media (max-width: 1200px) { .logo { width: 190px; } .top-search { min-width: 200px; } }
+@media (max-width: 1300px) and (min-width: 961px) { .ptband .nav { display: none; } .bar .mbtn[data-menu] { display: inline-grid !important; place-items: center; } }
 @media (max-width: 960px) {
   .util { display: block; }
   .util .spacer, .util .u-tel, .util .u-wa, .util > .wrap > .state, .hero-point > .ico { display: none; }
   .util .wrap { min-height: 44px; gap: 12px; }
   .ptpick select { max-width: calc(100vw - 96px); }
-  .subnav, .bcont, .ilink, .bar .resbtn { display: none; }
+  .subnav, .bcont, .ilink, .bar .resbtn, .ptband .pills, .ptband .nav { display: none; }
   .bar .wrap { flex-wrap: wrap; row-gap: 0; min-height: 0; padding-top: 8px; }
   .logo { width: 168px; margin-right: auto; }
   .top-search { order: 3; flex: 1 1 100%; max-width: none; margin: 8px 0 10px; }
@@ -1456,18 +1476,6 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14"/></symbol>
 </svg>
 
-<div class="util" id="util">
-  <div class="wrap">
-    <div class="ptpick" data-note="h1">
-      <button class="ptbtn" id="ptbtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ptpop"><svg class="ico"><use href="#i-pin"/></svg><b id="u-point">Черкесск, пр-т Ленина, 148</b><svg class="ico chev"><use href="#i-chev"/></svg></button>
-      <div class="ptpop" id="ptpop" role="dialog" aria-label="Выбор пункта" hidden>
-        <div class="ptpop-h"><div class="search pt-search"><svg class="ico"><use href="#i-search"/></svg><input id="pt-q" type="search" autocomplete="off" placeholder="Город, станица или улица" aria-label="Найти пункт"></div><button class="btn btn-ghost pt-geo" type="button" data-pt-geo><svg class="ico"><use href="#i-pin"/></svg>Ближайший ко мне</button></div>
-        <div class="ptpop-list" id="pt-list"></div>
-      </div>
-    </div>
-    <span class="state" id="u-state">открыто до 19:00</span>
-  </div>
-</div>
 <header class="top" id="top">
   <div class="bar">
     <div class="wrap">
@@ -1479,34 +1487,33 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         <div class="sugg" id="sugg-top" hidden></div>
       </div>
       <div class="bcont" data-note="h5"><a class="btel" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span><b class="num">8 800 201 78 30</b><small>Звонок бесплатный · 24/7</small></span></a><a class="bwa" href="#" data-stub="Номер WhatsApp появится после согласования" aria-label="Написать в WhatsApp" title="Написать в WhatsApp"><svg class="ico ico-fill"><use href="#i-wa"/></svg></a></div>
-      <a class="resbtn" href="#results" data-go="results" data-note="h4"><svg class="ico"><use href="#i-file"/></svg>Результаты анализов</a>
-      <button class="cartbtn" type="button" data-go="cart"><svg class="ico"><use href="#i-cart"/></svg>Корзина <span class="count num" data-cart>0</span></button>
+      <a class="resbtn" href="#results" data-go="results" data-note="h4"><svg class="ico"><use href="#i-file"/></svg>Результаты<span class="rs-x">анализов</span></a>
+      <button class="cartbtn" type="button" data-go="cart" aria-label="Корзина"><svg class="ico"><use href="#i-cart"/></svg><span class="rs-x">Корзина </span><span class="count num" data-cart>0</span></button>
       <button class="mbtn" type="button" aria-label="Меню" aria-controls="mmenu" aria-expanded="false" data-menu><svg class="ico" style="width:24px;height:24px"><use href="#i-menu"/></svg></button>
     </div>
   </div>
 </header>
-<div class="subnav" id="subnav">
-  <div class="qbar">
-    <div class="wrap">
-      <div class="pills" data-note="h6">
-        <button class="pill" type="button" data-go="express" data-nav="express"><svg class="ico"><use href="#i-bolt"/></svg>Экспресс</button>
-        <button class="pill" type="button" data-go="promos" data-nav="promos"><svg class="ico"><use href="#i-percent"/></svg>Акции</button>
-        <button class="pill" type="button" data-scroll="pop-sec"><svg class="ico"><use href="#i-grid"/></svg>Популярные анализы</button>
-        <button class="pill" type="button" data-go="checkups" data-nav="checkups"><svg class="ico"><use href="#i-file"/></svg>Чек-апы</button>
-        <button class="pill" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
+<div class="util ptband" id="util">
+  <div class="wrap">
+    <div class="ptpick" data-note="h1">
+      <button class="ptbtn" id="ptbtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ptpop"><svg class="ico"><use href="#i-pin"/></svg><b id="u-point">Черкесск, пр-т Ленина, 148</b><svg class="ico chev"><use href="#i-chev"/></svg></button>
+      <div class="ptpop" id="ptpop" role="dialog" aria-label="Выбор пункта" hidden>
+        <div class="ptpop-h"><div class="search pt-search"><svg class="ico"><use href="#i-search"/></svg><input id="pt-q" type="search" autocomplete="off" placeholder="Город, станица или улица" aria-label="Найти пункт"></div><button class="btn btn-ghost pt-geo" type="button" data-pt-geo><svg class="ico"><use href="#i-pin"/></svg>Ближайший ко мне</button></div>
+        <div class="ptpop-list" id="pt-list"></div>
       </div>
     </div>
-  </div>
-  <div class="navrow">
-    <div class="wrap">
-      <nav class="nav" aria-label="Разделы" data-note="h2">
-        <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
-        <button type="button" data-go="points" data-nav="points">Адреса и офисы</button>
-        <button type="button" data-go="doctors" data-nav="doctors">Врачам</button>
-        <button type="button" data-go="gifts" data-nav="gifts">Подарочные сертификаты</button>
-        <button type="button" data-go="about" data-nav="about">О компании</button>
-      </nav>
+    <div class="pills" data-note="h6">
+      <button class="pill" type="button" data-go="express" data-nav="express"><svg class="ico"><use href="#i-bolt"/></svg>Экспресс</button>
+      <button class="pill" type="button" data-go="promos" data-nav="promos"><svg class="ico"><use href="#i-percent"/></svg>Акции</button>
+      <button class="pill" type="button" data-go="checkups" data-nav="checkups"><svg class="ico"><use href="#i-file"/></svg>Чек-апы</button>
+      <button class="pill" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
     </div>
+    <nav class="nav" aria-label="Разделы" data-note="h2">
+      <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
+      <button type="button" data-go="points" data-nav="points">Адреса</button>
+      <button type="button" data-go="gifts" data-nav="gifts">Сертификаты</button>
+      <button type="button" data-go="about" data-nav="about">О компании</button>
+    </nav>
   </div>
 </div>
 <div class="mmenu" id="mmenu" hidden>
@@ -1514,12 +1521,10 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     <button type="button" data-go="catalog:blood">Анализы и цены</button>
     <button type="button" data-go="express">Экспресс</button>
     <button type="button" data-go="promos">Акции</button>
-    <button type="button" data-scroll="pop-sec">Популярные анализы</button>
     <button type="button" data-go="checkups">Чек-апы</button>
     <button type="button" data-go="home-visit">Выезд на дом</button>
     <button type="button" data-go="results">Результаты анализов</button>
     <button type="button" data-go="points">Адреса и офисы</button>
-    <button type="button" data-go="doctors">Врачам</button>
     <button type="button" data-go="gifts">Подарочные сертификаты</button>
     <button type="button" data-go="about">О компании</button>
     <a class="mm-phone" href="tel:88002017830">8 800 201 78 30</a>
@@ -2635,7 +2640,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var pop = Object.keys(A).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 7);
     var popc = commonOf(pop);
     $("#popular").innerHTML = pop.map(function (c) { return row(c, popc); }).join("");
-    var st = pointState(POINTS[state.pt]); ["#u-state", "#h-state"].forEach(function (id) { var u = $(id); u.textContent = st.label; u.classList.toggle("closed", st.open === false); u.classList.toggle("unknown", st.open === null); });
+    var st = pointState(POINTS[state.pt]); ["#h-state"].forEach(function (id) { var u = $(id); u.textContent = st.label; u.classList.toggle("closed", st.open === false); u.classList.toggle("unknown", st.open === null); });
     $("#h-point").textContent = ptName(POINTS[state.pt]); $("#u-point").textContent = ptName(POINTS[state.pt]);
     // hero motif: "brackets" from the brand pattern, in negative
     var W = ["2,4","3,4","4,4","5,4","6,4","7,4","8,4","8,5","8,6","8,7","8,9","8,10"], L = ["4,2","4,3","4,5","4,6","4,7","4,8","5,8","6,8","7,8","8,8","9,8","10,8"], h = "";
@@ -3383,7 +3388,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       ["h5", "Телефон и WhatsApp рядом", "Со встречи: WhatsApp на виду на всех страницах — зелёная кнопка сразу у телефона. Номер появится после согласования."],
       ["h3", "Поиск в шапке на всех страницах", "Со встречи: поиск всегда на одном месте, на любой странице. Понимает опечатки и бытовые слова: «витамн д», «ферретин», «оак», «сахар»."],
       ["h4", "«Результаты анализов» — крупно", "Со встречи: пациенты не находят результаты, поэтому кнопка — в шапке, на первом экране, плашкой под ним и в нижнем меню телефона."],
-      ["h2", "Те же пункты, что в нынешней шапке", "По просьбе лаборатории — набор нынешнего сайта: пункт; логотип, поиск, телефон и WhatsApp, «Результаты анализов», корзина (без «Войти»: кабинет и результаты — одна кнопка); «Экспресс», «Акции», «Популярные анализы», «Чек-апы», «Выезд на дом», «Результаты анализов»; «Анализы и цены», «Адреса и офисы», «Врачам», «Подарочные сертификаты», «О компании». Доработано по брендбуку: цвета, размеры, текст не мельче 16 px. При прокрутке закреплён только ряд с логотипом и поиском. «Врачи» на нынешнем сайте — приёмы врачей, у нас «Врачам» — раздел для врачей-партнёров."],
+      ["h2", "Шапка: вариант 5 — лаймовая лента", "Выбран из пяти вариантов: сверху логотип, поиск, телефон, WhatsApp, «Результаты анализов», корзина; на лаймовой ленте — пункт, «Экспресс», «Акции», «Чек-апы», «Выезд на дом» и разделы. «Популярные анализы» убраны, «Врачам» — в подвале. При прокрутке закреплена только верхняя строка.", "", "По просьбе лаборатории — набор нынешнего сайта: пункт; логотип, поиск, телефон и WhatsApp, «Результаты анализов», корзина (без «Войти»: кабинет и результаты — одна кнопка); «Экспресс», «Акции», «Популярные анализы», «Чек-апы», «Выезд на дом», «Результаты анализов»; «Анализы и цены», «Адреса и офисы», «Врачам», «Подарочные сертификаты», «О компании». Доработано по брендбуку: цвета, размеры, текст не мельче 16 px. При прокрутке закреплён только ряд с логотипом и поиском. «Врачи» на нынешнем сайте — приёмы врачей, у нас «Врачам» — раздел для врачей-партнёров."],
       ["h6", "Программы — кнопками", "Как на нынешнем сайте: «Экспресс» — анализы по сроку готовности, «Акции» — все предложения, «Популярные анализы» — частые анализы на главной, «Чек-апы»."],
       ["home1", "Первый экран", "Левая часть — как в прошлой версии: заголовок, выезд медсестры, поиск, три частых анализа с ценами пункта и строка пункта. Подсказки в поиске печатаются сами."],
       ["home2s", "Поиск с подсказками", "Второй поиск на первом экране: в строке сами печатаются 15 частых запросов — от ферритина до BRCA-скрининга, по одному в 3–4 секунды. Когда человек ставит курсор, подсказки останавливаются."],
