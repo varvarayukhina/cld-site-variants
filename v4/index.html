@@ -1061,6 +1061,10 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .tnav button { position: relative; background: none; border: 0; padding: 0; border-radius: 0; font: 600 16px var(--text); color: var(--ink); cursor: pointer; white-space: nowrap; }
 .tnav button:hover { color: var(--navy-2); text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--line); }
 .tnav button[aria-current="page"] { background: none; }
+.tnav .pills { display: flex; align-items: center; gap: 8px; margin-left: 4px; }
+.tnav .pill { padding: 9px 16px; border-radius: 999px; background: var(--lime-soft); }
+.tnav .pill:hover, .tnav .pill[aria-current="page"] { background: var(--lime); color: var(--navy); text-decoration: none; }
+.tnav .pill[aria-current="page"]::after { content: none; }
 .tnav button[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--lime); }
 .bar .top-search { max-width: none; }
 /* лаймовая лента под шапкой: пункт, программы, разделы */
@@ -1432,9 +1436,11 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 @media (max-width: 1300px) { .aud { grid-template-columns: repeat(4, minmax(0, 1fr)); } .advs-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .fp-org { grid-template-columns: repeat(3, minmax(0, 1fr)); } .u-tel span { display: none; } }
 @media (max-width: 1180px) { .btel small { display: none; } .resbtn { padding: 13px 14px; } .pills .pill { padding: 9px 12px; } .nav button { padding: 10px 8px; } }
 @media (max-width: 1080px) and (min-width: 961px) { .navrow .nav { display: flex; } .bar .mbtn[data-menu] { display: none; } .resbtn .ico { display: none; } }
+@media (max-width: 1120px) and (min-width: 961px) { .tnav.nav .wrap { gap: 14px; } .tnav .pills { gap: 6px; margin-left: 0; } .tnav .pill { padding: 9px 12px; } }
+@media (max-width: 1060px) and (min-width: 961px) { .tnav.nav .wrap { gap: 12px; } .tnav button { padding-left: 4px; padding-right: 4px; } .tnav .pill { padding: 9px 10px; } }
 @media (max-width: 1300px) { .rs-x { display: none; } .top-search { min-width: 240px; } }
 @media (max-width: 1200px) { .logo { width: 190px; } .top-search { min-width: 200px; } }
-@media (max-width: 1300px) and (min-width: 961px) { .tnav .wrap { gap: 20px; } .ptband .nav { display: none; } .bar .mbtn[data-menu] { display: inline-grid !important; place-items: center; } }
+@media (max-width: 1300px) and (min-width: 961px) { .tnav .wrap { gap: 20px; } .tnav .pill .ico { display: none; } .ptband .nav { display: none; } .bar .mbtn[data-menu] { display: inline-grid !important; place-items: center; } }
 @media (max-width: 960px) {
   .util { display: block; }
   .util .spacer, .util .u-tel, .util .u-wa, .util > .wrap > .state, .hero-point > .ico { display: none; }
@@ -1636,13 +1642,15 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 <nav class="nav tnav" aria-label="Разделы" data-note="h2">
   <div class="wrap">
     <button type="button" data-go="catalog:blood" data-nav="catalog">Анализы и цены</button>
-    <button type="button" data-go="express" data-nav="express">Экспресс</button>
-    <button type="button" data-go="checkups" data-nav="checkups">Чек-апы</button>
-    <button type="button" data-go="promos" data-nav="promos">Акции</button>
-    <button type="button" data-go="home-visit" data-nav="home-visit">Выезд на дом</button>
     <button type="button" data-go="points" data-nav="points">Адреса</button>
     <button type="button" data-go="gifts" data-nav="gifts">Сертификаты</button>
     <button type="button" data-go="about" data-nav="about">О компании</button>
+    <div class="pills">
+      <button class="pill" type="button" data-go="express" data-nav="express"><svg class="ico"><use href="#i-bolt"/></svg>Экспресс</button>
+      <button class="pill" type="button" data-go="checkups" data-nav="checkups"><svg class="ico"><use href="#i-file"/></svg>Чек-апы</button>
+      <button class="pill" type="button" data-go="promos" data-nav="promos"><svg class="ico"><use href="#i-percent"/></svg>Акции</button>
+      <button class="pill" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
+    </div>
   </div>
 </nav>
 <div class="mmenu" id="mmenu" hidden>
