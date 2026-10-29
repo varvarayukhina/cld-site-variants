@@ -1573,7 +1573,22 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .spot .spot-btn:hover { background: var(--lime); }
 .spot .spot-btn[data-spot="-1"] { left: -52px; }
 .spot .spot-btn[data-spot="1"] { right: -52px; }
-@media (min-width: 961px) { .spot { margin-right: 52px; } .spot-card .spot-text > p:not(.spot-meta) { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; } .sv-3 .spot-img { height: 150px; } }
+@media (min-width: 961px) {
+  .spot { margin-right: 52px; }
+  .sv-3 .spot-img { height: 110px; }
+  .sv-2 .spot-img { width: 140px; height: 180px; }
+  .sv-2 .spot-text h2, .sv-2 .spot-text > p:not(.spot-meta) { max-width: calc(100% - 150px); }
+  /* без пустоты: шрифт крупнее, а остаток места — поровну над текстом и под ним */
+  .spot-card .spot-text { display: flex; flex-direction: column; gap: 12px; }
+  .spot-card .spot-text > .spot-tag { margin-top: auto; align-self: flex-start; }
+  .spot-card .spot-text > .spot-meta { margin-top: auto; }
+  .spot-buy { gap: 10px; }
+  .spot-buy > .pr { font-size: 28px; margin-right: auto; }
+  .spot-buy .btn { padding-inline: 14px; }
+  .spot-card .spot-text h2 { font-size: 36px; }
+  .spot-card .spot-text > p:not(.spot-meta) { font-size: 19px; line-height: 1.5; display: block; overflow: visible; -webkit-line-clamp: unset; }
+}
+@media (max-width: 1180px) and (min-width: 961px) { .sv-3 .spot-img { height: 80px; } .spot-card .spot-text > p:not(.spot-meta) { font-size: 19px; } .spot-card .spot-text h2 { font-size: 32px; } }
 .spot .spot-dots { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); margin: 0; }
 .spot .spot-dots button::before { background: var(--muted); opacity: .45; }
 .spot .spot-dots button[aria-current="true"]::before { background: var(--navy); opacity: 1; }
@@ -2679,11 +2694,11 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     "41-005": { n: "СА 72-4", off: "СА 72-4", d: "Отражает уровень белка СА 72-4, по которому врач может следить за лечением некоторых опухолей желудка", p: 820, bio: "Кровь из вены", days: 1, own: true, pop: 60 }
   };
   var SPOT = [
-    { c: "66.300", img: "spot-allergy", tag: "Аллергология", pic: "allergy", n: "Аллергочип ALEX", off: "Аллергочип ALEX (300 аллергокомпонентов + IgE общий)", d: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи домашней пыли, плесень и яды насекомых", days: 8, bio: "Кровь из вены" },
+    { c: "66.300", ds: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи, плесень и яды насекомых. Помогает отличить истинную аллергию от перекрёстной реакции на похожие белки", img: "spot-allergy", tag: "Аллергология", pic: "allergy", n: "Аллергочип ALEX", off: "Аллергочип ALEX (300 аллергокомпонентов + IgE общий)", d: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи домашней пыли, плесень и яды насекомых", days: 8, bio: "Кровь из вены" },
     { c: "55.240", img: "spot-brca", tag: "Генетика", pic: "onco", n: "BRCA-скрининг", off: "BRCA-скрин: профиль генетического исследования «Рак молочной железы и/или яичников»", d: "Мутации в генах BRCA1 и BRCA2, связанные с повышенным риском рака молочной железы и яичников", days: 10, bio: "Кровь из вены" },
     { c: "56.376", img: "spot-thrombo", tag: "Генетика", pic: "clotting", n: "Генетический тест на тромбофилию", off: "Генетический тест на тромбофилии (12 полиморфизмов)", d: "12 вариантов генов свёртывания крови и обмена фолиевой кислоты", days: 6, bio: "Кровь из вены" },
-    { c: "50.525", img: "spot-celiac", tag: "Генетика", pic: "sugar", n: "Гены целиакии HLA-DQ2 и DQ8", off: "Типирование HLA DQ2/DQ8 при целиакии", d: "Генетическая предрасположенность к целиакии — непереносимости глютена. При целиакии глютен повреждает слизистую тонкой кишки, возможны боль и вздутие живота, диарея, потеря веса и анемия", days: 16, bio: "Кровь из вены" },
-    { c: "52.370", img: "spot-femoflor", tag: "Женское здоровье", pic: "women", n: "Фемофлор-16", off: "Фемофлор-16", d: "Состав микрофлоры влагалища: 16 показателей методом ПЦР. Анализ назначают при выделениях, зуде и дискомфорте, при планировании беременности и для контроля лечения", days: 2, bio: "Мазок" }
+    { c: "50.525", ds: "Генетическая предрасположенность к целиакии — непереносимости глютена. Глютен повреждает слизистую тонкой кишки: возможны боль и вздутие живота, диарея", img: "spot-celiac", tag: "Генетика", pic: "sugar", n: "Гены целиакии HLA-DQ2 и DQ8", off: "Типирование HLA DQ2/DQ8 при целиакии", d: "Генетическая предрасположенность к целиакии — непереносимости глютена. При целиакии глютен повреждает слизистую тонкой кишки, возможны боль и вздутие живота, диарея, потеря веса и анемия", days: 16, bio: "Кровь из вены" },
+    { c: "52.370", ds: "Состав микрофлоры влагалища: 16 показателей методом ПЦР. Назначают при выделениях, зуде и дискомфорте и при планировании беременности", img: "spot-femoflor", tag: "Женское здоровье", pic: "women", n: "Фемофлор-16", off: "Фемофлор-16", d: "Состав микрофлоры влагалища: 16 показателей методом ПЦР. Анализ назначают при выделениях, зуде и дискомфорте, при планировании беременности и для контроля лечения", days: 2, bio: "Мазок" }
   ];
   var CHECKUPS = {
     anemia: { n: "Чек-ап «Анемия»", inc: "Общий анализ крови развёрнутый, железо, ферритин, трансферрин", count: 4, p: 1000, days: 2 },
@@ -2976,13 +2991,13 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
     $("#spot-track").innerHTML = SPOT.map(function (x, i) {
       if (x.cx) {
         var cs = Object.keys(CXX).filter(function (c) { return CX[c] && !CX[c].na; }), mn = cs.length ? Math.min.apply(null, cs.map(function (c) { return CX[c].p; })) : 0;
-        return '<article class="spot-card sv-' + x.sv + '" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span><h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.d)) + '.</p><p class="spot-meta">' + typo(plural(cs.length, ["набор", "набора", "наборов"]) + " · результат через 1–2 дня") + "</p></div>" +
+        return '<article class="spot-card sv-' + x.sv + '" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span><h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.ds || x.d)) + '.</p><p class="spot-meta">' + typo(plural(cs.length, ["набор", "набора", "наборов"]) + " · результат через 1–2 дня") + "</p></div>" +
           '<img class="spot-img" src="' + x.img + '" alt="" width="542" height="720">' +
           '<div class="spot-buy">' + (mn ? '<b class="pr num">от ' + rub(mn) + "</b>" : "") + '<button class="btn btn-lime" type="button" data-go="checkups">Все чек-апы</button></div></article>';
       }
       var a = A[x.c];
       return '<article class="spot-card sv-' + x.sv + '" id="spot-' + i + '" aria-roledescription="слайд" aria-label="' + (i + 1) + " из " + SPOT.length + '"><div class="spot-text"><span class="spot-tag">' + esc(x.tag) + "</span>" +
-        "<h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.d)) + '.</p><p class="spot-meta">' + typo("Результат через " + dLabel(x.days) + " · " + x.bio.toLowerCase()) + "</p></div>" +
+        "<h2>" + esc(x.n) + "</h2><p>" + typo(esc(x.ds || x.d)) + '.</p><p class="spot-meta">' + typo("Результат через " + dLabel(x.days) + " · " + x.bio.toLowerCase()) + "</p></div>" +
         '<img class="spot-img" src="../assets/img/spot/' + x.img + '.webp" alt="" width="400" height="400"' + (i ? ' loading="lazy"' : "") + ">" +
         '<div class="spot-buy">' + (a.na ? '<span class="na">Нет в этом пункте</span>' : '<b class="pr num">' + rub(a.p) + "</b>") + '<button class="btn btn-ghost" type="button" data-go="card:' + x.c + '">Описание</button>' + buyBtn(x.c) + "</div></article>";
     }).join("");
@@ -4022,6 +4037,20 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
   $("#tnav-box").addEventListener("click", function (e) { if (e.target.closest("[data-go]")) megaOpen(false); });
   $("#mega-btn").addEventListener("click", function () { megaOpen($("#mega").hidden || megaK !== "an", "an"); });
   $("#mega-dim").addEventListener("click", function () { megaOpen(false); });
+  // слайдер: без пустоты — описание в каждом слайде крупнее, пока текст не займёт свободное место (высоту задаёт самый длинный слайд)
+  function spotFit() {
+    var tr = $("#spot-track"), cards = $$("#spot-track .spot-card"), ps = cards.map(function (c) { return c.querySelector(".spot-text > p:not(.spot-meta)"); });
+    ps.forEach(function (p) { if (p) p.style.fontSize = ""; });
+    if (window.innerWidth < 961 || !cards.length) return;
+    tr.style.alignItems = "flex-start";
+    var H = Math.max.apply(null, cards.map(function (c) { return c.offsetHeight; }));
+    cards.forEach(function (c, i) { var p = ps[i]; if (!p) return; for (var fs = 20; fs <= 26; fs++) { p.style.fontSize = fs + "px"; if (c.offsetHeight > H) { p.style.fontSize = (fs - 1) + "px"; break; } } });
+    tr.style.alignItems = "";
+  }
+  var spotFitT = null;
+  new MutationObserver(function () { clearTimeout(spotFitT); spotFitT = setTimeout(spotFit, 30); }).observe($("#spot-track"), { childList: true });
+  window.addEventListener("resize", function () { clearTimeout(spotFitT); spotFitT = setTimeout(spotFit, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(spotFit); else spotFit();
   // «Добавить все» в баннере раздела; после любого изменения корзины баннер пересчитывается
   document.addEventListener("click", function (e) {
     var all = e.target.closest("[data-add-all]");
