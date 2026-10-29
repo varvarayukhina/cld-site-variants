@@ -1669,7 +1669,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         <article class="promo promo-all" data-note="promos2">
           <span class="pa-arrow" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span>
           <h3>Все акции и&nbsp;предложения</h3>
-          <p><span class="num" id="promo-n">19 предложений</span>: акции месяца, чек-апы дешевле анализов по&nbsp;отдельности и&nbsp;постоянные скидки.</p>
+          <p><span class="num" id="promo-n">19 предложений</span>: акции месяца, выгодные чек-апы и&nbsp;постоянные скидки.</p>
           <button class="pa-go" type="button" data-go="promos">Перейти к&nbsp;акциям</button>
         </article>
       </div>
@@ -1777,7 +1777,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       <h1 class="pg-h">Акции и предложения</h1>
       <div class="sec-h" style="margin-top:28px"><h2>Акции месяца</h2></div>
       <div class="promos promos-3" id="pr-month"></div>
-      <div class="sec-h" style="margin-top:56px" data-note="pr1"><h2>Чек-апы дешевле анализов по отдельности</h2></div>
+      <div class="sec-h" style="margin-top:56px" data-note="pr1"><h2 id="pr-sets-h">Выгодные чек-апы</h2></div>
       <div class="pr-sets" id="pr-sets"></div>
       <div id="pr-gcx"></div>
       <div class="sec-h" style="margin-top:56px"><h2>Всегда</h2></div>
@@ -2780,10 +2780,11 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   function renderPromos() {
     $("#pr-gcx").innerHTML = giftCxHtml();
     $("#pr-month").innerHTML = $$("#promos .promo:not(.promo-all)").map(function (p) { return p.outerHTML.replace(/ id="promo-cells"/, ""); }).join("");
-    $("#pr-sets").innerHTML = promoSets().map(function (c) {
+    var ps = promoSets(); $("#pr-sets-h").textContent = ps.length ? "Чек-апы со скидкой до " + cxSave(ps[0]) + "%" : "Выгодные чек-апы";
+    $("#pr-sets").innerHTML = ps.map(function (c) {
       var e = CXX[c], x = CX[c];
       return '<article class="pr-set"><h3>' + esc(e.n) + "</h3><p>" + typo(nAn(e.parts.length) + ", результат через " + (x.r || "—")) + '</p><div class="pr-line"><b class="num">' + rub(x.p) + '</b><s class="num"><span class="vh">По отдельности </span>' + rub(e.sum) + '</s><span class="save num">−' + cxSave(c) + '%</span></div><div class="acts"><button class="btn btn-ghost" type="button" data-go="card:' + esc(c) + '">Состав и подготовка</button>' + buyBtn(c) + "</div></article>";
-    }).join("") || '<p class="empty">' + typo("В этом пункте нет чек-апов дешевле анализов по отдельности.") + "</p>";
+    }).join("") || '<p class="empty">' + typo("В этом пункте пока нет чек-апов со скидкой.") + "</p>";
   }
   // дизайны — фон карты (Codex), логотип и сумма — поверх, чтобы были точными; ink — цвет логотипа и суммы на этом фоне
   // скидочная карта: условия — как на lab.discript.ru («Карта любимого клиента», 10 %, код по SMS)
