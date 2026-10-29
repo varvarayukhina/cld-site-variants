@@ -1652,6 +1652,15 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
 @media (max-width: 1180px) and (min-width: 961px) { .mega-g { grid-template-columns: minmax(0, 1fr); } .mega-side { display: none; } .mg-cols { gap: 24px; } }
 @media (max-width: 960px) { .mega, .mega-dim { display: none !important; } }
 .quick button { font-size: 16px; }
+/* каталог: меньше одинаковых лаймовых плашек (30.10) — чек-ап тёмно-синим баннером, «Общее для раздела» в лаймовой рамке */
+.checkup { background: var(--navy); color: #FFF; padding: 22px 26px; }
+.checkup b { color: #FFF; font-size: 20px; }
+.checkup p { color: var(--on-navy-muted); }
+.checkup .price b { font-size: 24px; }
+.checkup .price small { color: var(--on-navy-muted); }
+.checkup :focus-visible { outline-color: var(--lime); }
+.c-common { background: #FFF; box-shadow: inset 0 0 0 2px var(--lime); }
+.c-guide { font-size: inherit; font-weight: 700; color: var(--navy); }
 /* без «нейросетевых» ховеров (29.10): ничего не подпрыгивает, не увеличивается, не поворачивается и не отбрасывает большую тень —
    на наведение меняется только цвет или обводка. Подпрыгивающие иллюстрации «Для кого» оставлены: их просил Алибек, как на нынешнем сайте */
 .promo:hover, .tile:hover, .sitcard:hover, a.hp-chip:hover, .qa-card:hover, .gf-des:hover span, .bwa:hover, .qa-dc:hover .dc-mini { transform: none; }
@@ -3359,7 +3368,7 @@ button.mg-ch:hover .ico { transform: translateX(3px); }
       SITS.map(function (s) { return '<button class="crow" type="button" data-go="catalog:' + s.go + '"><div class="picto">' + picto(s.pic || "checkups") + "</div>" + esc(s.n) + "</button>"; })).join("");
     $$("[data-seg]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.seg === state.seg ? "true" : "false"); });
     $("#c-picto").innerHTML = cat.aud ? '<img src="../assets/img/aud/' + AUDIMG[cat.id] + '" alt="" width="60" height="60">' : picto(cat.id); $("#c-picto").classList.toggle("audi", !!cat.aud);
-    $("#c-title").textContent = cat.n; $("#crumb-cat").textContent = cat.n; $("#c-desc").textContent = cat.desc;
+    $("#c-title").textContent = cat.n; $("#crumb-cat").textContent = cat.n; $("#c-desc").textContent = cat.desc; if (GUIDES[cat.id]) $("#c-desc").insertAdjacentHTML("beforeend", ' <button class="linkbtn c-guide" type="button" data-go="guide:' + cat.id + '">Подробно: какие анализы и когда сдавать</button>');
     var ck = cat.checkup ? CHECKUPS[cat.checkup] : null, ckc = ck ? CK2CX[cat.checkup] : cat.cx;
     if (!ck && cat.cx) ck = { n: CXX[cat.cx].n, count: CXX[cat.cx].parts.length, inc: CXX[cat.cx].parts.join(", "), p: CX[cat.cx].p, days: parseInt(CX[cat.cx].r, 10) || 2 };
     $("#c-checkup").innerHTML = ck && !item(ckc).na ? '<div class="checkup"><b>' + esc(ck.n) + " · " + nAn(ck.count) + "</b><p>" + esc(ck.inc) + ". Готово через " + dLabel(ck.days) + '.</p><div class="price"><div><b>' + rub(ck.p) + "</b><small>онлайн " + rub(online(ck.p)) + "</small></div>" + addBtn(ckc) + "</div></div>" : "";
