@@ -5,6 +5,7 @@
     { id: "v0", n: "До встречи", d: "Прототип, который показывали 28.10" },
     { id: "v4", n: "После встречи 28.10", d: "Поиск в шапке, цены выбранного пункта, экспресс и ЦИТО" }
   ];
+  var EXTRA = '<a href="../v4/headers.html" data-x="headers"' + (/headers\.html/.test(location.pathname) ? ' aria-current="page"' : "") + ">5 шапок</a>"; // страница с вариантами шапки
   var m = location.pathname.match(/\/(v\d)\//), cur = m ? m[1] : "v0", H = 40;
   document.documentElement.style.setProperty("--sw-h", H + "px");
   var css = document.createElement("style");
@@ -21,8 +22,8 @@
   var bar = document.createElement("div");
   bar.className = "cldsw"; bar.setAttribute("role", "navigation"); bar.setAttribute("aria-label", "Варианты дизайна");
   bar.innerHTML = '<b class="t">Прототип CLD</b><b>Вариант:</b><nav>' + V.map(function (v, i) {
-    return '<a href="../' + v.id + '/" data-v="' + v.id + '"' + (v.id === cur ? ' aria-current="page"' : "") + ">" + v.n + "</a>";
-  }).join("") + '</nav><span class="d">' + V.filter(function (v) { return v.id === cur; })[0].d + "</span>";
+    return '<a href="../' + v.id + '/" data-v="' + v.id + '"' + (v.id === cur && !/headers\.html/.test(location.pathname) ? ' aria-current="page"' : "") + ">" + v.n + "</a>";
+  }).join("") + EXTRA + '</nav><span class="d">' + (/headers\.html/.test(location.pathname) ? "Пять вариантов шапки — выбрать один" : V.filter(function (v) { return v.id === cur; })[0].d) + "</span>";
   function sync() { bar.querySelectorAll("a[data-v]").forEach(function (a) { a.href = "../" + a.dataset.v + "/" + location.hash; }); /* only variant links, not «Отчёт»/«PDF» */ }
   function mount() { var gap = document.createElement("div"); gap.className = "cldsw-gap"; document.body.prepend(gap); document.body.prepend(bar); sync(); }
   window.addEventListener("hashchange", sync);
