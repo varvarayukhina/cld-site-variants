@@ -1311,6 +1311,7 @@ button.mini-n:hover, .mini-sit:hover .mini-n { text-decoration: underline; text-
 .arow .a-meta .urg small { grid-column: 2; font-weight: 500; font-size: 16px; color: var(--muted); }
 .arow .na { font-size: 16px; font-weight: 600; color: var(--muted); text-align: right; max-width: 14ch; line-height: 1.3; }
 .arow.is-na .a-name { color: var(--muted); }
+.arow .a-meta .na-m { color: var(--danger); font-weight: 600; }
 .pt-warn { padding: 14px 18px; border-radius: 12px; background: var(--lime-soft); margin-bottom: 18px; font-size: 16px; }
 .cito-box { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; padding: 18px 20px; border-radius: var(--r-card); background: var(--navy-soft); margin-bottom: 22px; }
 .cito-box .tag { grid-row: 1 / span 2; align-self: start; font-size: 16px; padding: 6px 12px; }
@@ -2531,10 +2532,11 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     if (!cm || a.days !== cm.days) m.push('<span><svg class="ico"><use href="#i-clock"/></svg>' + dLabel(a.days) + "</span>");
     if (!cm || a.bio !== cm.bio) m.push('<span><svg class="ico"><use href="#i-drop"/></svg>' + esc(a.bio) + "</span>");
     if (a.own && (!cm || !cm.own)) m.push('<span><svg class="ico"><use href="#i-lab"/></svg>Собственная лаборатория</span>');
+    if (a.na) m.unshift('<span class="na-m"><svg class="ico"><use href="#i-pin"/></svg>Нет в этом пункте — есть в других пунктах CLD</span>');
     if (cito) m.push('<span class="urg"><svg class="ico"><use href="#i-bolt"/></svg>ЦИТО — ' + rub(cito) + "<small>за несколько часов</small></span>");
     return '<div class="arow' + (a.na ? " is-na" : "") + '"><div><button class="a-name" type="button" data-go="card:' + code + '">' + esc(a.n) + '</button><p class="a-desc">' + esc(a.d) + '</p></div>' +
       '<div class="a-meta">' + m.join("") + "</div>" +
-      '<div class="a-buy">' + (a.na ? "" : '<div class="price"><b>' + rub(a.p) + "</b><small>онлайн " + rub(online(a.p)) + "</small>" + "" + "</div>") + addBtn(code) + "</div></div>";
+      '<div class="a-buy">' + (a.na ? "" : '<div class="price"><b>' + rub(a.p) + "</b><small>онлайн " + rub(online(a.p)) + "</small></div>" + addBtn(code)) + "</div></div>";
   }
   function mode(arr) { var c = {}, best = arr[0], n = 0; arr.forEach(function (v) { c[v] = (c[v] || 0) + 1; if (c[v] > n) { n = c[v]; best = v; } }); return best; }
   function commonOf(codes) {
@@ -2545,8 +2547,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     return '<b class="cc-h">Общее для раздела:</b><span><svg class="ico"><use href="#i-drop"/></svg><b>' + esc(cm.bio) + '</b></span>' + (cm.own ? '<span><svg class="ico"><use href="#i-lab"/></svg><b>Собственная лаборатория</b></span>' : "") + '<span><svg class="ico"><use href="#i-clock"/></svg><b>Готово через ' + dLabel(cm.days) + "</b></span>";
   }
   function ptWarn(el, codes) {
-    var none = ptEmpty(state.pt), n = codes.filter(function (c) { return item(c).na; }).length;
-    el.hidden = !none && !n;
+    var none = ptEmpty(state.pt), n = 0; // недоступность отдельного анализа — в его строке, здесь — только если у пункта нет цен совсем
+    el.hidden = !none;
     el.innerHTML = none ? typo("Цены пункта " + ptName(POINTS[state.pt]) + " пока не загружены на сайт. Стоимость уточняйте по телефону 8 800 201 78 30.") : n ? typo((n === codes.length ? "Анализов из этого списка нет в каталоге пункта " : nAn(n) + " из этого списка нет в каталоге пункта ") + ptName(POINTS[state.pt]) + ". Их можно сдать в других пунктах CLD.") : "";
   }
 
