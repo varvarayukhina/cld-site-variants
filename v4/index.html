@@ -1578,37 +1578,39 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .spot .spot-dots button[aria-current="true"]::before { background: var(--navy); opacity: 1; }
 .spot-card { padding-bottom: 50px; }
 @media (max-width: 960px) { .spot .spot-btn { display: none; } .spot-card { padding-bottom: 46px; } }
-/* шапка №2: одна строка, «Анализы и цены ▾» — большое меню, «Ещё ▾» */
-.hnav { display: flex; align-items: center; gap: 2px; flex: none; }
-.hnav > button, .hn-more > button { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; padding: 10px 12px; border-radius: 10px; font: 600 16px var(--text); color: var(--ink); cursor: pointer; white-space: nowrap; }
-.hnav > button:hover, .hn-more > button:hover, .hn-dd[aria-expanded="true"] { background: var(--navy-soft); }
-.hnav button[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 8px; }
+/* шапка: без линии между строкой поиска и меню; «Анализы и цены» раскрывает большое меню под нижней строкой */
+.top { box-shadow: none; }
+.tnav-box { position: relative; z-index: 41; }
+.tnav .hn-dd { display: inline-flex; align-items: center; gap: 6px; }
+.tnav .hn-dd:hover, .tnav .hn-dd[aria-expanded="true"] { background: none; }
+.tnav .pill[aria-expanded="true"] { background: var(--lime); }
 .hn-dd .chev { width: 16px; height: 16px; transition: transform .2s var(--ease); }
 .hn-dd[aria-expanded="true"] .chev { transform: rotate(180deg); }
-.hn-more { position: relative; }
-.more-pop { position: absolute; top: calc(100% + 8px); left: 0; z-index: 62; min-width: 270px; padding: 8px; display: grid; background: #FFF; border-radius: 14px; box-shadow: 0 18px 44px rgba(20,55,75,.22); }
-.more-pop[hidden] { display: none; }
-.more-pop button { text-align: left; background: none; border: 0; padding: 12px 14px; border-radius: 10px; font: 600 16px var(--text); color: var(--ink); cursor: pointer; }
-.more-pop button:hover, .more-pop button[aria-current="page"] { background: var(--navy-soft); }
 .mega { position: absolute; left: 0; right: 0; top: 100%; z-index: 41; background: #FFF; border-top: 1px solid var(--line); box-shadow: 0 30px 60px rgba(20,55,75,.2); max-height: calc(100vh - var(--sw-h, 0px) - 150px); overflow: auto; overscroll-behavior: contain; }
 .mega[hidden], .mega-dim[hidden] { display: none; }
 .mega-dim { position: fixed; inset: 0; z-index: 39; background: rgba(20,55,75,.35); }
-.mega-g { display: grid; grid-template-columns: 250px minmax(0, 1fr) 300px; gap: 36px; padding-block: 28px 32px; }
-.mega-rail { display: grid; align-content: start; gap: 2px; padding-right: 20px; border-right: 1px solid var(--line); }
-.mega-rail button { display: flex; align-items: center; gap: 12px; text-align: left; background: none; border: 0; padding: 11px 12px; border-radius: 10px; font: 600 16px var(--text); color: var(--ink); cursor: pointer; }
-.mega-rail button .ico { width: 22px; height: 22px; flex: none; color: var(--navy); }
-.mega-rail button:hover { background: var(--navy-soft); }
-.mega-rail button[aria-current="true"] { background: var(--lime-soft); }
-.mg-h { display: inline-block; margin-bottom: 22px; background: none; border: 0; padding: 0; font: 700 28px/1.2 var(--display); color: var(--ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; cursor: pointer; }
-.mg-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-.mg-cols.mg-2 { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
-.mg-col h3 { margin-bottom: 10px; font: 700 16px var(--text); color: var(--muted); }
-.mg-col.two .mg-l { columns: 2; column-gap: 24px; }
-.mg-col button { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; width: 100%; break-inside: avoid; text-align: left; background: none; border: 0; padding: 6px 0; font: 500 16px/1.35 var(--text); color: var(--ink); cursor: pointer; }
+.mega-g { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 40px; padding-block: 28px 32px; }
+.mg-cols { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
+.mg-col.two .mg-l { columns: 2; column-gap: 28px; }
+.mg-cols.mg-2 { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.mg-pi { width: 34px; height: 34px; flex: none; padding: 5px; border-radius: 10px; }
+.mg-pi.audi img { width: 26px; height: 26px; }
+.mg-col button .mg-t { flex: 1; min-width: 0; }
+.mg-col button:hover .picto rect { transform: scale(.72); }
+.mg-col button:hover .picto rect:nth-child(3n) { transform: scale(1); }
+.mg-hi { display: inline-grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 50%; background: var(--lime); color: var(--navy); }
+.mg-col .mg-ch .mg-hi .ico { width: 18px; height: 18px; }
+.mg-col .mg-ch { width: auto; justify-content: flex-start; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px; background: none; border: 0; padding: 0; font: 700 19px/1.25 var(--display); color: var(--ink); text-align: left; cursor: pointer; }
+.mg-ch .ico { width: 18px; height: 18px; flex: none; color: var(--navy); transition: transform .2s var(--ease); }
+button.mg-ch:hover { text-decoration: underline; text-underline-offset: 4px; }
+button.mg-ch:hover .ico { transform: translateX(3px); }
+.mg-col .mg-more { margin-top: 6px; font-weight: 700; text-decoration: underline; text-decoration-color: var(--lime-dark, #8FA318); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.mg-col button { display: flex; align-items: center; gap: 10px; width: 100%; break-inside: avoid; text-align: left; background: none; border: 0; padding: 6px 0; font: 500 16px/1.35 var(--text); color: var(--ink); cursor: pointer; }
 .mg-col button:hover { text-decoration: underline; text-underline-offset: 3px; }
 .mg-col small { flex: none; font-size: 16px; color: var(--muted); white-space: nowrap; }
 .mg-col p { margin-bottom: 8px; font-size: 16px; line-height: 1.5; color: var(--muted); max-width: 46ch; }
-.mg-strip { margin-top: 26px; width: 100%; display: flex; align-items: center; gap: 12px; padding: 16px 20px; border: 0; border-radius: 14px; background: var(--surface-2); font: 500 16px var(--text); color: var(--ink); text-align: left; cursor: pointer; }
+.mg-strips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 26px; }
+.mg-strip { width: 100%; display: flex; align-items: center; gap: 12px; padding: 16px 20px; border: 0; border-radius: 14px; background: var(--surface-2); font: 500 16px var(--text); color: var(--ink); text-align: left; cursor: pointer; }
 .mg-strip b { font-weight: 700; }
 .mg-strip .ico { width: 22px; height: 22px; flex: none; }
 .mg-strip .ico:last-child { margin-left: auto; }
@@ -1618,15 +1620,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .mg-side-l .ico { width: 40px; height: 40px; flex: none; padding: 9px; border-radius: 12px; background: var(--lime-soft); color: var(--navy); }
 .mg-side-l b { display: block; font: 700 16px var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .mg-side-l small { display: block; font-size: 16px; color: var(--muted); }
-.more-pop .mp-x { display: none; }
 .util.srow { position: relative; z-index: 42; }
-@media (min-width: 961px) { .rs-x { display: none; } .logo { width: 200px; } .bar .wrap { gap: 14px; } .top-search { min-width: 220px; } }
-@media (max-width: 1200px) and (min-width: 961px) { .logo { width: 176px; } }
-@media (max-width: 1010px) and (min-width: 961px) { .logo { width: 160px; } }
-@media (max-width: 1280px) and (min-width: 961px) { .hnav > [data-go="home-visit"], .hnav > [data-go="points"] { display: none; } .more-pop .mp-x { display: block; } }
-@media (max-width: 1180px) and (min-width: 961px) { .mega-g { grid-template-columns: 240px minmax(0, 1fr); } .mega-side { display: none; } }
-@media (min-width: 961px) { .bar .mbtn[data-menu] { display: none !important; } }
-@media (max-width: 960px) { .hnav, .mega, .mega-dim { display: none !important; } }
+@media (max-width: 1180px) and (min-width: 961px) { .mega-g { grid-template-columns: minmax(0, 1fr); } .mega-side { display: none; } .mg-cols { gap: 24px; } }
+@media (max-width: 960px) { .mega, .mega-dim { display: none !important; } }
 .quick button { font-size: 16px; }
 /* строка анализа на телефоне: название и описание во всю ширину, цена и «+» строкой ниже */
 @media (max-width: 600px) {
@@ -1719,25 +1715,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   <div class="bar">
     <div class="wrap">
       <button class="logo" data-go="home" type="button" aria-label="На главную"><img src="../assets/cld-logo-horizontal-navy.svg" alt="CLD · Центр лабораторной диагностики" width="1778" height="276"></button>
-      <nav class="nav hnav" aria-label="Разделы" data-note="h2">
-        <button class="hn-dd" type="button" id="mega-btn" aria-expanded="false" aria-controls="mega" data-nav="catalog">Анализы и цены<svg class="ico chev"><use href="#i-chev"/></svg></button>
-        <button type="button" data-go="home-visit" data-nav="home-visit">Выезд на дом</button>
-        <button type="button" data-go="points" data-nav="points">Адреса</button>
-        <div class="hn-more">
-          <button class="hn-dd" type="button" id="more-btn" aria-expanded="false" aria-controls="more-pop">Ещё<svg class="ico chev"><use href="#i-chev"/></svg></button>
-          <div class="more-pop" id="more-pop" hidden>
-            <button class="mp-x" type="button" data-go="home-visit">Выезд на дом</button>
-            <button class="mp-x" type="button" data-go="points">Адреса</button>
-            <button type="button" data-go="gifts" data-nav="gifts">Подарочные сертификаты</button>
-            <button type="button" data-go="dcard" data-nav="dcard">Скидочная карта −10%</button>
-            <button type="button" data-go="about" data-nav="about">О компании</button>
-            <button type="button" data-go="contacts" data-nav="contacts">Контакты</button>
-          </div>
-        </div>
-      </nav>
       <div class="search top-search" data-note="h3">
         <svg class="ico"><use href="#i-search"/></svg>
-        <input id="q-top" type="search" autocomplete="off" placeholder="Найти анализ" aria-label="Найти анализ или чек-ап">
+        <input id="q-top" type="search" autocomplete="off" placeholder="Найти анализ или чек-ап" aria-label="Найти анализ или чек-ап">
         <button class="btn btn-lime s-go" type="button" data-search-go>Найти</button>
         <div class="sugg" id="sugg-top" hidden></div>
       </div>
@@ -1746,14 +1726,29 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       <button class="mbtn" type="button" aria-label="Меню" aria-controls="mmenu" aria-expanded="false" data-menu><svg class="ico" style="width:24px;height:24px"><use href="#i-menu"/></svg></button>
     </div>
   </div>
-  <div class="mega" id="mega" hidden>
-    <div class="wrap mega-g">
-      <div class="mega-rail" id="mega-rail"></div>
-      <div class="mega-body" id="mega-body"></div>
-      <aside class="mega-side" id="mega-side"></aside>
+</header>
+<div class="tnav-box" id="tnav-box">
+<nav class="nav tnav" aria-label="Разделы" data-note="h2">
+  <div class="wrap">
+    <button class="hn-dd" type="button" id="mega-btn" aria-expanded="false" aria-controls="mega" data-nav="catalog" data-mega="an">Анализы и цены<svg class="ico chev"><use href="#i-chev"/></svg></button>
+    <button type="button" data-go="points" data-nav="points">Адреса</button>
+    <button type="button" data-go="gifts" data-nav="gifts">Сертификаты</button>
+    <button type="button" data-go="about" data-nav="about">О компании</button>
+    <div class="pills">
+      <button class="pill" type="button" data-go="express" data-nav="express" data-mega="x" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-bolt"/></svg>Экспресс</button>
+      <button class="pill" type="button" data-go="checkups" data-nav="checkups" data-mega="cx" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-file"/></svg>Чек-апы</button>
+      <button class="pill" type="button" data-go="promos" data-nav="promos" data-mega="pr" aria-expanded="false" aria-controls="mega"><svg class="ico"><use href="#i-percent"/></svg>Акции</button>
+      <button class="pill" type="button" data-go="home-visit" data-nav="home-visit"><svg class="ico"><use href="#i-home"/></svg>Выезд на дом</button>
     </div>
   </div>
-</header>
+</nav>
+<div class="mega" id="mega" hidden>
+  <div class="wrap mega-g">
+    <div class="mega-body" id="mega-body"></div>
+    <aside class="mega-side" id="mega-side"></aside>
+  </div>
+</div>
+</div>
 <div class="mega-dim" id="mega-dim" hidden></div>
 <div class="mmenu" id="mmenu" hidden>
   <div class="wrap">
@@ -3088,49 +3083,45 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     $("#cat-ban").innerHTML = c ? promoCard(c, "pc-h", cat.n, cat.id) : ""; $("#cat-ban").hidden = !c;
   }
 
-  // ---------- большое меню «Анализы и цены» (шапка №2) ----------
-  var MEGA = [["an", "Анализы и цены", "i-lab"], ["x", "Экспресс-анализы", "i-bolt"], ["cx", "Чек-апы", "i-file"], ["pr", "Акции", "i-percent"], ["hv", "Выезд на дом", "i-home"], ["gf", "Сертификаты", "i-gift"]];
-  var megaK = "an", megaN = 0, megaT = null;
-  function mgLink(go, t, sm) { return '<button type="button" data-go="' + go + '">' + esc(t) + (sm ? '<small class="num">' + sm + "</small>" : "") + "</button>"; }
-  function mgCol(h, items, two) { return '<div class="mg-col' + (two ? " two" : "") + '"><h3>' + h + '</h3><div class="mg-l">' + items.join("") + "</div></div>"; }
-  function mgHead(go, t) { return '<button class="mg-h" type="button" data-go="' + go + '">' + esc(t) + "</button>"; }
-  function megaBody() {
-    var cxs = Object.keys(CXX).filter(function (c) { return CX[c] && !CX[c].na; });
-    if (megaK === "an") return mgHead("catalog:blood", "Все анализы и цены") + '<div class="mg-cols">' +
-      mgCol("Разделы", CATS.filter(function (c) { return !c.aud; }).map(function (c) { return mgLink("catalog:" + c.id, c.n); })) +
-      mgCol("Для кого", CATS.filter(function (c) { return c.aud; }).map(function (c) { return mgLink("catalog:" + c.id, c.n); })) +
-      mgCol("По поводу", SITS.map(function (x) { return mgLink("catalog:" + x.go, x.n); })) + "</div>" +
-      '<button class="mg-strip" type="button" data-go="home-visit">' + icon("i-home") + "<span><b>Бесплатный выезд медсестры</b> при заказе от&nbsp;1&nbsp;500&nbsp;₽</span>" + icon("i-arrow") + "</button>";
-    if (megaK === "x") {
-      var x1 = Object.keys(A).filter(function (c) { return avail(c) && A[c].days <= 1; }).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 12);
-      return mgHead("express", "Все экспресс-анализы") + '<div class="mg-cols mg-2">' + mgCol("Готовы за 1 день", x1.map(function (c) { return mgLink("card:" + c, A[c].n, rub(online(A[c].p))); })) +
-        mgCol("Нужно через несколько часов", ["<p>" + typo("Часть анализов можно сделать срочно, с доплатой. Такой режим называется ЦИТО.") + "</p>", mgLink("express", "Какие анализы можно срочно")]) + "</div>";
+  // ---------- выпадающие меню шапки: «Анализы и цены» — большое полотно с разделами; «Экспресс», «Чек-апы», «Акции» — свои ----------
+  var megaN = 0, megaT = null, megaK = "";
+  function mgLink(go, t, sm, ic) { return '<button type="button" data-go="' + go + '">' + (ic || "") + '<span class="mg-t">' + esc(t) + "</span>" + (sm ? '<small class="num">' + sm + "</small>" : "") + "</button>"; }
+  function mgCol(h, items, go, two, ic) { var hh = (ic ? '<span class="mg-hi">' + icon(ic) + "</span>" : "") + esc(h); return '<div class="mg-col' + (two ? " two" : "") + '">' + (go ? '<button class="mg-ch" type="button" data-go="' + go + '">' + hh + icon("i-arrow") + "</button>" : '<h3 class="mg-ch">' + hh + "</h3>") + '<div class="mg-l">' + items.join("") + "</div></div>"; }
+  function mgStrip(go, ic, b, t) { return '<button class="mg-strip" type="button" data-go="' + go + '">' + icon(ic) + "<span><b>" + b + "</b> " + typo(t) + "</span>" + icon("i-arrow") + "</button>"; }
+  function mgP(t) { return "<p>" + typo(t) + "</p>"; }
+  function mgPic(id) { return '<span class="picto mg-pi">' + picto(id) + "</span>"; }
+  function megaHtml(k) {
+    if (k === "x") {
+      var x1 = Object.keys(A).filter(function (c) { return avail(c) && A[c].days <= 1; }).sort(function (a, b) { return A[a].pop - A[b].pop; }).slice(0, 14);
+      return '<div class="mg-cols mg-2">' + mgCol("Экспресс-анализы: готовы за 1 день", x1.map(function (c) { return mgLink("card:" + c, A[c].n, rub(online(A[c].p))); }), "express", true, "i-bolt") +
+        mgCol("Нужно через несколько часов", [mgP("Часть анализов можно сделать срочно, с доплатой. Такой режим называется ЦИТО."), mgLink("express", "Какие анализы можно сделать срочно")], "", false, "i-clock") + "</div>";
     }
-    if (megaK === "cx") return mgHead("checkups", "Все чек-апы") + '<div class="mg-cols mg-2">' + mgCol("Наборы", cxs.map(function (c) { return mgLink("cx:" + c, CXX[c].n, rub(CX[c].p)); }), true) +
-      mgCol("Как это работает", ["<p>" + typo("Несколько анализов за один визит, с одной подготовкой. Состав и подготовка указаны у каждого набора.") + "</p>"]) + "</div>";
-    if (megaK === "pr") return mgHead("promos", "Все акции") + '<div class="mg-cols mg-2">' + mgCol("Чек-апы со скидкой", promoSets().slice(0, 8).map(function (c) { return mgLink("cx:" + c, CXX[c].n, "−" + cxSave(c) + "%"); }), true) +
-      mgCol("Всегда", [mgLink("promos", "−10% при оплате на сайте"), mgLink("dcard", "Скидочная карта −10%")]) + "</div>";
-    if (megaK === "hv") return mgHead("home-visit", "Выезд на дом") + '<div class="mg-cols mg-2">' + mgCol("Медсестра возьмёт анализы дома", ["<p>" + typo("Подготовка, сроки и результаты — такие же, как при сдаче в пункте. Выезд бесплатный при заказе от 1 500 ₽.") + "</p>", mgLink("home-visit", "Подобрать анализы для семьи"), mgLink("checkups", "Чек-апы на дому")]) + "</div>";
-    return mgHead("gifts", "Подарочные сертификаты") + '<div class="mg-cols mg-2">' + mgCol("Подарить", [mgLink("gifts", "Сертификат на любую сумму"), mgLink("gifts", "Чек-ап близким")]) + mgCol("Для себя", [mgLink("dcard", "Скидочная карта −10%")]) + "</div>";
+    if (k === "cx") return '<div class="mg-cols mg-2">' + mgCol("Чек-апы", Object.keys(CXX).filter(function (c) { return CX[c] && !CX[c].na; }).map(function (c) { return mgLink("cx:" + c, CXX[c].n, rub(CX[c].p)); }), "checkups", true, "i-file") +
+      mgCol("Как это работает", [mgP("Несколько анализов за один визит, с одной подготовкой. Состав и подготовка указаны у каждого набора."), mgLink("home-visit", "Сдать чек-ап дома")], "", false, "i-check") + "</div>";
+    if (k === "pr") return '<div class="mg-cols mg-2">' + mgCol("Акции: чек-апы со скидкой", promoSets().slice(0, 10).map(function (c) { return mgLink("cx:" + c, CXX[c].n, "−" + cxSave(c) + "%"); }), "promos", true, "i-percent") +
+      mgCol("Всегда", [mgLink("promos", "−10% при оплате на сайте"), mgLink("dcard", "Скидочная карта −10%"), mgLink("gifts", "Подарочные сертификаты")], "", false, "i-wallet") + "</div>";
+    return '<div class="mg-cols">' +
+      mgCol("Все анализы", CATS.filter(function (c) { return !c.aud; }).map(function (c) { return mgLink("catalog:" + c.id, c.n, "", mgPic(c.id)); }), "catalog:blood", true, "i-lab") +
+      mgCol("Для кого", CATS.filter(function (c) { return c.aud; }).map(function (c) { return mgLink("catalog:" + c.id, c.n, "", '<span class="picto audi mg-pi"><img src="../assets/img/aud/' + AUDIMG[c.id] + '" alt="" width="64" height="64"></span>'); }), "", false, "i-users") +
+      mgCol("По поводу", SITS.map(function (x) { return mgLink("catalog:" + x.go, x.n, "", mgPic(x.pic || "checkups")); }), "", false, "i-cal") + "</div>" +
+      '<div class="mg-strips">' + mgStrip("home-visit", "i-home", "Выезд на дом", "бесплатно при заказе от 1 500 ₽") + mgStrip("checkups", "i-file", "Чек-апы", "несколько анализов за один визит") + "</div>";
   }
-  function megaSet(k) {
-    megaK = k; $$("#mega-rail [data-mega]").forEach(function (b) { b.setAttribute("aria-current", b.dataset.mega === k ? "true" : "false"); });
-    $("#mega-body").innerHTML = megaBody();
-  }
-  function megaOpen(on) {
-    clearTimeout(megaT); var m = $("#mega"); if (m.hidden === !on) return;
+  function megaOpen(on, k) {
+    clearTimeout(megaT); var m = $("#mega");
     if (on) {
-      megaN++; moreOpen(false);
-      $("#mega-rail").innerHTML = MEGA.map(function (x) { return '<button type="button" data-mega="' + x[0] + '">' + icon(x[2]) + esc(x[1]) + "</button>"; }).join("");
-      megaSet(megaK);
-      var gen = SPOT.filter(function (x) { return x.c && avail(x.c); }), sc = gen.length ? gen[megaN % gen.length].c : null;
-      $("#mega-side").innerHTML = (sc ? promoCard(sc, "pc-v") : "") +
-        '<button class="mg-side-l" type="button" data-go="gifts">' + icon("i-gift") + "<span><b>Подарочный сертификат</b><small>на анализы и чек-апы</small></span></button>" +
-        '<button class="mg-side-l" type="button" data-go="dcard">' + icon("i-wallet") + "<span><b>Скидочная карта −10%</b><small>хранится в телефоне</small></span></button>";
-    }
-    m.hidden = !on; $("#mega-dim").hidden = !on; $("#mega-btn").setAttribute("aria-expanded", on ? "true" : "false");
+      if (!m.hidden && k === megaK) return;
+      if (m.hidden) {
+        megaN++;
+        var gen = SPOT.filter(function (x) { return x.c && avail(x.c); }), sc = gen.length ? gen[megaN % gen.length].c : null;
+        $("#mega-side").innerHTML = (sc ? promoCard(sc, "pc-v") : "") +
+          '<button class="mg-side-l" type="button" data-go="gifts">' + icon("i-gift") + "<span><b>Подарочный сертификат</b><small>на анализы и чек-апы</small></span></button>" +
+          '<button class="mg-side-l" type="button" data-go="dcard">' + icon("i-wallet") + "<span><b>Скидочная карта −10%</b><small>хранится в телефоне</small></span></button>";
+      }
+      megaK = k; $("#mega-body").innerHTML = megaHtml(k);
+    } else if (m.hidden) return;
+    m.hidden = !on; $("#mega-dim").hidden = !on;
+    $$(".tnav [data-mega]").forEach(function (b) { b.setAttribute("aria-expanded", on && b.dataset.mega === megaK ? "true" : "false"); });
   }
-  function moreOpen(on) { $("#more-pop").hidden = !on; $("#more-btn").setAttribute("aria-expanded", on ? "true" : "false"); }
   function renderCatalog() {
     var cat = CATS.filter(function (c) { return c.id === state.cat; })[0] || CATS[0];
     catBanner(cat);
@@ -3959,21 +3950,19 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("#ptpop").hidden) { ptPop(false); $("#ptbtn").focus(); } });
   // большое меню: наведение на компьютере, нажатие — везде; Esc, клик мимо и переход закрывают
   var canHover = window.matchMedia("(hover: hover) and (min-width: 961px)");
-  $("#mega-btn").addEventListener("mouseenter", function () { if (!canHover.matches) return; clearTimeout(megaT); megaT = setTimeout(function () { megaOpen(true); }, 120); });
-  $("#mega-btn").addEventListener("mouseleave", function () { if ($("#mega").hidden) clearTimeout(megaT); });
-  $("#top").addEventListener("mouseleave", function () { if (!canHover.matches || $("#mega").hidden) return; clearTimeout(megaT); megaT = setTimeout(function () { megaOpen(false); }, 250); });
-  $("#top").addEventListener("mouseenter", function () { if (!$("#mega").hidden) clearTimeout(megaT); });
-  $("#mega-rail").addEventListener("mouseover", function (e) { var b = e.target.closest("[data-mega]"); if (b && b.dataset.mega !== megaK) megaSet(b.dataset.mega); });
-  $("#mega-rail").addEventListener("focusin", function (e) { var b = e.target.closest("[data-mega]"); if (b && b.dataset.mega !== megaK) megaSet(b.dataset.mega); });
-  $("#mega").addEventListener("click", function (e) { var b = e.target.closest("[data-mega]"); if (b) { megaSet(b.dataset.mega); return; } if (e.target.closest("[data-go]")) megaOpen(false); });
-  $("#mega-btn").addEventListener("click", function () { megaOpen($("#mega").hidden); });
+  $("#tnav-box").addEventListener("mouseover", function (e) {
+    if (!canHover.matches) return;
+    var b = e.target.closest(".tnav [data-mega]"); clearTimeout(megaT);
+    if (b) { var k = b.dataset.mega; if ($("#mega").hidden) megaT = setTimeout(function () { megaOpen(true, k); }, 120); else megaOpen(true, k); }
+    else if (e.target.closest(".tnav button") && !$("#mega").hidden) megaT = setTimeout(function () { megaOpen(false); }, 150);
+  });
+  $("#tnav-box").addEventListener("mouseleave", function () { if (!canHover.matches) return; clearTimeout(megaT); if (!$("#mega").hidden) megaT = setTimeout(function () { megaOpen(false); }, 250); });
+  $("#tnav-box").addEventListener("click", function (e) { if (e.target.closest("[data-go]")) megaOpen(false); });
+  $("#mega-btn").addEventListener("click", function () { megaOpen($("#mega").hidden || megaK !== "an", "an"); });
   $("#mega-dim").addEventListener("click", function () { megaOpen(false); });
-  $("#more-btn").addEventListener("click", function () { megaOpen(false); moreOpen($("#more-pop").hidden); });
-  document.addEventListener("click", function (e) { if (!e.target.closest(".hn-more") || e.target.closest(".more-pop [data-go]")) moreOpen(false); });
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     if (!$("#mega").hidden) { megaOpen(false); $("#mega-btn").focus(); }
-    if (!$("#more-pop").hidden) { moreOpen(false); $("#more-btn").focus(); }
   });
   var GFF = { "gf-rname": "rname", "gf-phone": "phone", "gf-email": "email", "gf-note": "note", "gf-sname": "sname", "gf-sphone": "sphone" };
   $("#v-gifts").addEventListener("input", function (e) { if (e.target.id === "gf-sum") { var v = +e.target.value; if (v) { gs.amt = v; gfCard(); } } if (GFF[e.target.id]) { gs[GFF[e.target.id]] = e.target.value; e.target.classList.remove("bad"); } });
