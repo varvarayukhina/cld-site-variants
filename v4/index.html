@@ -1190,6 +1190,21 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .gf-arrow { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--line); background: #FFF; color: var(--navy); cursor: pointer; }
 .gf-arrow:hover { border-color: var(--navy); }
 .gf-sum { max-width: 260px; }
+.fam { padding-block: 48px 24px; }
+.fam h2 { font-size: clamp(26px, 3vw, 34px); }
+.fam-l { color: var(--muted); margin: 10px 0 20px; max-width: 64ch; }
+.fam-who { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; max-width: 900px; }
+.fam-who .audt[aria-pressed="true"] { background: var(--lime-soft); border-color: var(--lime); }
+.fam-who .audt[aria-pressed="true"]::before { opacity: 1; }
+.fam-res:not(:empty) { margin-top: 24px; padding: 22px; border-radius: 20px; background: var(--surface-2); max-width: 900px; }
+.fam-list { display: grid; }
+.fam-it { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.fam-it .a-name { font-weight: 700; font-size: 18px; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; color: var(--ink); }
+.fam-it .a-desc { font-size: 16px; color: var(--muted); margin-top: 2px; }
+.fam-sum { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 18px; }
+.fam-sum b { font-size: 28px; font-weight: 800; margin-right: 10px; }
+.fam-sum span { color: var(--muted); }
+.fam-note { margin-top: 10px; font-size: 16px; color: var(--muted); }
 .gcx { margin: 0 0 56px; }
 .gcx h2 { font-size: 28px; }
 .gcx-l { color: var(--muted); margin: 8px 0 18px; max-width: 60ch; }
@@ -1399,6 +1414,9 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .fpanel { padding: 14px; }
   .fp-grid, .fp-org { grid-template-columns: minmax(0, 1fr); }
   .advs-6, .gf-grid, .gf-info, .dc-grid, .gcx-grid { grid-template-columns: minmax(0, 1fr); }
+  .fam-who { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .fam-it { grid-template-columns: minmax(0, 1fr) auto; }
+  .fam-it .price { grid-row: 2; }
   .spot-nav { gap: 6px; }
   .spot-dots { gap: 0; }
   .spot-dots button { width: 22px; }
@@ -1989,6 +2007,13 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
         <a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg>Уточнить адрес: <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a>
       </div>
     </div>
+    <section class="wrap fam" id="fam" aria-labelledby="fam-h">
+      <h2 id="fam-h">Анализы для всей семьи&nbsp;— медсестра приедет один раз</h2>
+      <p class="fam-l">Отметьте, о&nbsp;ком хотите позаботиться. Подберём анализы для ежегодной проверки; если есть назначение врача, сдают по&nbsp;нему.</p>
+      <div class="fam-who" id="fam-who" role="group" aria-label="Кого проверить"></div>
+      <div class="fam-res" id="fam-res" aria-live="polite"></div>
+    </section>
+
     <section class="how how-plain wrap">
       <div class="how-in">
         <h2>Как заказать</h2>
@@ -2766,6 +2791,24 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
       return '<article class="gcx-card"><h3>' + esc(x.n) + "</h3><p>" + typo(nAn((e && e.parts || []).length) + ", результат через " + (x.r || "1–2 дня")) + '</p><b class="num">' + rub(amt) + '</b><button class="btn btn-navy" type="button" data-gift-cx="' + esc(c) + '">Подарить</button></article>';
     }).join("") + "</div></section>";
   }
+  // «Анализы для всей семьи»: члены семьи → 5–7 анализов (общие для нескольких — выше), сумма за всех
+  var FAM = [["woman", "Женщина", "women", "женщине"], ["man", "Мужчина", "men", "мужчине"], ["kid", "Ребёнок", "kids", "ребёнку"], ["preg", "Беременная", "pregnant", "беременной"], ["senior", "Старше 50 лет", "senior", "человеку старше 50"]];
+  var FREC = { woman: ["20-017", "40-111", "30-010", "40-297"], man: ["20-017", "00-014", "40-047", "41-016"], kid: ["20-017", "10-008", "40-111", "40-297"], preg: ["20-017", "10-008", "40-047", "30-010", "40-111"], senior: ["20-017", "40-141", "00-014", "40-063", "40-041"] };
+  var fam = {};
+  function renderFam() {
+    $("#fam-who").innerHTML = FAM.map(function (m) { return '<button class="audt" type="button" data-fam="' + m[0] + '" aria-pressed="' + !!fam[m[0]] + '">' + audIll(m[2]) + '<span class="audt-l">' + m[1] + "</span></button>"; }).join("");
+    var who = FAM.filter(function (m) { return fam[m[0]]; }), box = $("#fam-res");
+    if (!who.length) { box.innerHTML = ""; return; }
+    var need = {};
+    who.forEach(function (m) { FREC[m[0]].forEach(function (c) { (need[c] = need[c] || []).push(m); }); });
+    var codes = Object.keys(need).filter(function (c) { return A[c] && !A[c].na; }).sort(function (a, b) { return need[b].length - need[a].length || A[a].pop - A[b].pop; }).slice(0, 7);
+    var sum = codes.reduce(function (t, c) { return t + A[c].p * need[c].length; }, 0), left = Math.max(0, HOME_FREE - sum);
+    box.innerHTML = '<div class="fam-list">' + codes.map(function (c) {
+      var a = A[c], n = need[c].length;
+      return '<div class="fam-it"><div><button class="a-name" type="button" data-go="card:' + c + '">' + esc(a.n) + '</button><p class="a-desc">' + typo("Нужен: " + need[c].map(function (m) { return m[3]; }).join(", ")) + '</p></div><div class="price"><b>' + rub(a.p) + "</b>" + (n > 1 ? "<small>× " + n + " = " + rub(a.p * n) + "</small>" : "") + "</div>" + addBtn(c) + "</div>";
+    }).join("") + '</div><div class="fam-sum"><div><b class="num">' + rub(sum) + "</b><span>" + typo("за всех" + (left ? ". До бесплатного выезда — " + rub(left) : ". Выезд медсестры — бесплатно")) + '</span></div><button class="btn btn-lime" type="button" data-fam-all>Добавить всё в корзину</button></div>' +
+      '<p class="fam-note">' + typo("Если анализ нужен нескольким людям, количество уточнит медицинский консультант при подтверждении выезда.") + "</p>";
+  }
   var GIFTD = [
     { id: "navy", n: "Тёмно-синий", logo: "white", amt: "#FFFFFF", bg: "#14374B" }, { id: "lime", n: "Лаймовый", logo: "navy", amt: "#14374B", bg: "#AFC81E" }, { id: "white", n: "Белый", logo: "navy", amt: "#14374B", bg: "#FFFFFF" },
     { id: "mountains", n: "Горы Кавказа", logo: "navy", amt: "#FFFFFF", bg: "#14374B" }, { id: "botanic", n: "Ботаника", logo: "navy", amt: "#14374B", bg: "#FAF7EE" }, { id: "riso", n: "Ризограф", logo: "navy", amt: "#14374B", bg: "#F7F5EE" }
@@ -3050,7 +3093,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   // ---------- screens 2.0: checkups, cart, checkout, order, booking, results. Demo: everything stays in this browser tab, nothing is sent ----------
   var PAGES = ["express", "promos", "gifts", "dcard", "points", "doctors", "dcat", "checkups", "home-visit", "cart", "checkout", "order", "results", "about", "contacts", "docs", "privacy", "referral"];
   var NAVOF = { card: "catalog", book: "catalog", checkout: "cart", order: "cart", dcat: "doctors" };
-  var RENDER = { express: renderExpress, promos: renderPromos, gifts: renderGifts, dcard: renderDcard, checkups: renderCheckups, cart: renderCart, checkout: renderCheckout, order: renderOrder, book: renderBook, results: renderResults };
+  var RENDER = { "home-visit": renderFam, express: renderExpress, promos: renderPromos, gifts: renderGifts, dcard: renderDcard, checkups: renderCheckups, cart: renderCart, checkout: renderCheckout, order: renderOrder, book: renderBook, results: renderResults };
   var HOME_FREE = 1500;
   var co = { mode: "point", pay: "online", addr: "" }, lastOrder = null;
   var bk = { day: -1, slot: "", done: false };
@@ -3606,6 +3649,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
     var gv = e.target.closest("[data-gf-via]"); if (gv) { var k = gv.dataset.gfVia; if (gs[k] && !gs[k === "sms" ? "mail" : "sms"]) return; gs[k] = !gs[k]; gs.err = ""; renderGifts(); return; } // хотя бы один способ отправки
     var gsc = e.target.closest("[data-gf-scroll]"); if (gsc) { var row = $("#gf-des"); row.scrollBy({ left: +gsc.dataset.gfScroll * row.clientWidth * .8, behavior: reduceMotion ? "auto" : "smooth" }); return; }
     if (e.target.closest('[data-gf="again"]')) { gs.done = false; gs.rname = gs.phone = gs.email = gs.note = ""; renderGifts(); return; }
+    var fm = e.target.closest("[data-fam]"); if (fm) { fam[fm.dataset.fam] = !fam[fm.dataset.fam]; renderFam(); return; }
+    if (e.target.closest("[data-fam-all]")) { var fc = $$("#fam-res [data-add]").map(function (b) { return b.dataset.add; }); fc.forEach(function (c) { cart[c] = 1; }); syncCart(); renderFam(); toast("Добавили в корзину: " + nAn(fc.length)); return; }
     var gx = e.target.closest("[data-gift-cx]"); if (gx) { gs.amt = Math.ceil(CX[gx.dataset.giftCx].p / 100) * 100; gs.done = false; if (state.view !== "gifts") go("gifts"); else renderGifts(); $("#gf-card").scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); return; }
     var wb = e.target.closest("[data-wallet]"); if (wb) { toast("Карта добавлена в " + wb.dataset.wallet); return; }
     if (e.target.closest("[data-pick-pt]")) { window.scrollTo(0, 0); ptPop(true); return; }
