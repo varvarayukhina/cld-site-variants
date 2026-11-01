@@ -1,0 +1,57 @@
+  var PAGE_META = {
+    home: ["Медицинские анализы — цены и адреса пунктов", "Медицинские анализы CLD: каталог исследований, цены выбранного пункта, адреса, подготовка и результаты."],
+    express: ["Экспресс-анализы: исследования и сроки", "Анализы CLD с короткими сроками выполнения: исследования, подготовка, цены и доступность в выбранном пункте."],
+    promos: ["Акции и предложения", "Акции лаборатории CLD, предложения на анализы и наборы исследований. Стоимость зависит от выбранного пункта."],
+    gifts: ["Подарочные сертификаты на анализы", "Подарочные сертификаты CLD: номиналы, оформление и условия использования на анализы и услуги лаборатории."],
+    dcard: ["Скидочная карта", "Скидочная карта CLD: условия программы, оформление и использование."],
+    checkups: ["Чек-апы и комплексы анализов", "Наборы анализов CLD: состав, подготовка, сроки и стоимость исследований в выбранном пункте."],
+    "home-visit": ["Анализы на дому — выезд медсестры", "Анализы на дому в CLD: как заказать выезд медсестры, подготовиться к исследованиям и уточнить условия для своего адреса."],
+    points: ["Адреса и часы работы пунктов", "Пункты приёма анализов CLD: адреса, часы работы, контакты и расположение на карте."],
+    results: ["Результаты анализов", "Получение результатов анализов CLD: вход по номеру телефона и доступ к результатам исследований."],
+    about: ["О лаборатории", "Лаборатория CLD: сведения о компании, исследованиях и сети пунктов приёма анализов."],
+    contacts: ["Контакты лаборатории", "Контакты CLD: телефон, адреса пунктов, сведения о компании и способы связи."],
+    docs: ["Лицензии и документы", "Лицензии и документы лаборатории CLD, информация для пациентов."],
+    doctors: ["Врачам и клиникам", "Лабораторные исследования CLD для врачей и клиник: сотрудничество, каталог и направления."],
+    dcat: ["Каталог исследований для врачей", "Каталог исследований CLD для врачей: названия, коды анализов, сроки и правила подготовки."],
+    privacy: ["Обработка персональных данных", "Информация об обработке персональных данных при использовании сайта CLD."],
+    referral: ["Бланк направления на анализы", "Направление на лабораторные исследования CLD: выбор анализов и подготовка бланка."],
+    cart: ["Корзина анализов", "Выбранные исследования CLD: состав заказа, пункт, способ сдачи и итоговая стоимость."],
+    checkout: ["Оформление заказа на анализы", "Проверка и оформление заказа на лабораторные исследования CLD."],
+    order: ["Подтверждение заказа", "Подтверждение заказа CLD: выбранные исследования, подготовка и сведения о визите."]
+  };
+  function applyPageMeta() {
+    var pair = PAGE_META[state.view] || PAGE_META.home, title = pair[0], description = pair[1];
+    if (state.view === "guide" && GUIDES[state.guide]) {
+      var guide = GUIDES[state.guide]; title = guide.title; description = guide.desc;
+      if (state.guide === "pregnant") { title = "Анализы при беременности: календарь исследований | CLD"; description = "Календарь анализов при беременности: зачем назначают исследования на разных сроках, что показывают результаты, подготовка и цены в выбранном пункте CLD."; }
+    } else if (state.view === "catalog") {
+      var category = CATS.filter(function (c) { return c.id === state.cat; })[0] || CATS[0];
+      title = category.n + " — анализы и цены"; description = category.desc;
+    } else if ((state.view === "card" || state.view === "book") && (A[state.code] || CXX[state.code])) {
+      var entry = A[state.code] || CXX[state.code];
+      title = state.view === "book" ? "Запись: " + entry.n : entry.n + " — анализ, подготовка и цена";
+      description = (entry.d || "Исследование " + entry.n + ".") + " Подготовка, срок выполнения и стоимость в выбранном пункте CLD.";
+    }
+    document.title = /\| CLD$/.test(title) ? title : title + " | CLD";
+    var meta = document.querySelector('meta[name="description"]');
+    if (!meta) { meta = document.createElement("meta"); meta.name = "description"; document.head.appendChild(meta); }
+    meta.content = description;
+    // A guide's FAQ must not remain attached to a different screen.
+    var ld = $("#g-ld"); if (state.view !== "guide" && ld) ld.remove();
+  }
+  var CATALOG_GUIDE_COPY = {
+    women: ["Какие анализы назначают женщинам", "Железо, щитовидная железа, гормоны и планирование беременности: объясняем, что показывают результаты."],
+    men: ["Что показывают анализы для мужчин", "Гормоны, простата, сахар и холестерин: когда назначают исследования и как подготовиться."],
+    pregnant: ["Какие анализы сдают на вашем сроке", "Календарь беременности, понятные объяснения исследований и подготовка к сдаче."],
+    kids: ["Какие анализы назначают детям", "Когда назначают исследования, как подготовить ребёнка и что можно узнать по результатам."],
+    senior: ["Анализы для родителей старшего возраста", "Сахар, сердце, сосуды и почки: разбираемся, что показывают исследования."]
+  };
+  function renderCatalogGuide(category) {
+    var box = $("#catalog-guide-callout");
+    if (!box) { box = document.createElement("aside"); box.id = "catalog-guide-callout"; box.className = "catalog-guide-callout"; $("#c-desc").closest(".chead").insertAdjacentElement("afterend", box); }
+    var copy = CATALOG_GUIDE_COPY[category.id], guide = GUIDES[category.id];
+    box.hidden = !copy || !guide;
+    if (box.hidden) { box.innerHTML = ""; return; }
+    box.setAttribute("aria-label", "Гид: " + copy[0]);
+    box.innerHTML = '<img class="cg-character" src="../assets/img/aud/' + esc(AUDIMG[category.id]) + '" alt="" width="96" height="96"><div class="cg-copy"><span class="cg-label">Гид по исследованиям</span><h2>' + esc(copy[0]) + '</h2><p>' + esc(copy[1]) + '</p></div><a class="btn btn-navy cg-link" href="#for-' + esc(category.id) + '" data-go="guide:' + esc(category.id) + '">Подробнее <svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></a>';
+  }
