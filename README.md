@@ -28,3 +28,7 @@ python3 scripts/build-pregnancy-guide.py
 GitHub Pages остаётся прототипом с `noindex`. SEO-публикация на рабочем домене требует отдельных индексируемых URL и подключения реальных сервисов лаборатории.
 
 Общие заголовки/описания экранов и блоки перехода из прайса к гидам: `content/navigation/navigation.js`, стили — `assets/navigation.css`. После их изменения выполнить `python3 scripts/build-navigation.py`. Этот шаг также включён в локальную сборку v4 после сборки гида.
+
+Women guide: `content/women-guide/` → `python3 scripts/build-women-guide.py`.
+Comparisons: `content/comparisons/articles.json` and `adapter.js` → `python3 scripts/build-comparisons.py`; styles in `assets/comparisons.css`.
+Rebuild order: pregnancy → women → navigation → comparisons. All builders are idempotent. Contextual comparisons use the shared catalogue, selected point and cart; source references stay in the JSON for editorial verification.

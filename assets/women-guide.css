@@ -1,0 +1,48 @@
+.pregnancy-guide .pg-w-topic-strip{background:var(--soft)}
+.pregnancy-guide .pg-w-topic-strip>.pg-wrap{padding-top:22px;padding-bottom:22px;display:flex;align-items:center;gap:26px}
+.pregnancy-guide .pg-w-topic-strip>.pg-wrap>span{font-weight:600;white-space:nowrap}
+.pregnancy-guide .pg-w-topic-strip nav{display:flex;flex-wrap:wrap;gap:10px 20px}
+.pregnancy-guide .pg-w-topic-strip a{font-size:16px;border-bottom:1px solid var(--line);padding:5px 0}
+.pregnancy-guide .pg-w-iron-list{margin:30px 0}
+.pregnancy-guide .pg-w-iron-list article{display:grid;grid-template-columns:52px 1fr;gap:22px;padding:25px 0;border-top:1px solid var(--line)}
+.pregnancy-guide .pg-w-step{width:48px;height:48px;display:grid;place-items:center;background:var(--soft);border-radius:50%;font-size:18px;font-weight:600}
+.pregnancy-guide .pg-w-iron-list article:nth-child(2) .pg-w-step{background:var(--blue)}
+.pregnancy-guide .pg-w-test-label{display:block;font-size:16px;margin-bottom:7px}
+.pregnancy-guide .pg-w-iron-list h3{font-size:25px;margin-bottom:12px}
+.pregnancy-guide .pg-w-iron-list p{font-size:17px;line-height:1.8}
+.pregnancy-guide .pg-w-thyroid{display:grid;grid-template-columns:180px 1fr;gap:35px;align-items:center;margin:30px 0}
+.pregnancy-guide .pg-w-thyroid-art svg{width:170px;height:150px;stroke-width:2;fill:none}
+.pregnancy-guide .pg-w-thyroid-notes>div{border-bottom:1px solid var(--blue);padding:18px 0}
+.pregnancy-guide .pg-w-thyroid-notes b{font-weight:600;font-size:20px}
+.pregnancy-guide .pg-w-thyroid-notes p{margin-top:8px;line-height:1.75}
+.pregnancy-guide .pg-w-cycle{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:30px 0 20px;padding:25px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pregnancy-guide .pg-w-cycle-when{display:block;font-weight:600;font-size:16px;margin-bottom:12px}
+.pregnancy-guide .pg-w-cycle h3{font-size:25px;margin-bottom:14px}
+.pregnancy-guide .pg-w-cycle p{font-size:17px;line-height:1.8}
+.pregnancy-guide .pg-w-amg{background:var(--navy);color:white;padding:30px;border-radius:18px;margin:28px 0}
+.pregnancy-guide .pg-w-amg-label{font-size:16px;display:block;margin-bottom:16px;color:var(--lime);font-weight:600}
+.pregnancy-guide .pg-w-amg h3{font-family:'Avanti CLD',Montserrat,sans-serif;font-size:32px;line-height:1.2;margin-bottom:18px}
+.pregnancy-guide .pg-w-amg p{font-size:17px;line-height:1.8}
+.pregnancy-guide .pg-w-route-icon{width:44px;height:44px;flex-shrink:0}
+.pregnancy-guide .pg-w-text-link{display:inline-flex;align-items:center;gap:10px;margin-top:14px;font-weight:600;border-bottom:1px solid var(--navy)}
+.pregnancy-guide .pg-w-complex{padding:25px 0;border-top:1px solid var(--blue)}
+.pregnancy-guide .pg-w-complex h3{font-size:21px}
+.pregnancy-guide .pg-w-complex p{margin-top:11px;line-height:1.75}
+.pregnancy-guide .pg-w-complex-price{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:20px}
+.pregnancy-guide .pg-w-complex-price b{font-size:23px}
+.pregnancy-guide .pg-w-complex-price small{display:block;font-size:16px}
+.pregnancy-guide .pg-w-complex-na{margin-top:14px}
+@media(max-width:700px){.pregnancy-guide .pg-w-topic-strip>.pg-wrap{align-items:start;flex-direction:column;gap:10px}
+.pregnancy-guide .pg-w-topic-strip nav{gap:6px 17px}
+.pregnancy-guide .pg-w-iron-list article{grid-template-columns:38px 1fr;gap:14px;padding:23px 0}
+.pregnancy-guide .pg-w-step{width:36px;height:36px;font-size:16px}
+.pregnancy-guide .pg-w-iron-list h3{font-size:23px}
+.pregnancy-guide .pg-w-thyroid{grid-template-columns:1fr;gap:8px}
+.pregnancy-guide .pg-w-thyroid-art{justify-self:center}
+.pregnancy-guide .pg-w-thyroid-art svg{height:110px;width:140px}
+.pregnancy-guide .pg-w-cycle{grid-template-columns:1fr;gap:25px;margin-top:24px}
+.pregnancy-guide .pg-w-cycle article+article{border-top:1px solid var(--blue);padding-top:23px}
+.pregnancy-guide .pg-w-amg{padding:25px 21px}
+.pregnancy-guide .pg-w-amg h3{font-size:28px}
+.pregnancy-guide .pg-w-complex-price{align-items:center}
+.pregnancy-guide .pg-w-complex-price .pg-add-btn{min-width:126px}}

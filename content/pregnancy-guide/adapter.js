@@ -76,6 +76,7 @@
     var meta = document.querySelector('meta[name="description"]'); if (!meta) { meta = document.createElement("meta"); meta.name = "description"; document.head.appendChild(meta); }
     meta.content = "Календарь анализов при беременности: зачем назначают исследования на разных сроках, что показывают результаты, подготовка и цены в выбранном пункте CLD.";
     var ld = $("#g-ld"); if (!ld) { ld = document.createElement("script"); ld.type = "application/ld+json"; ld.id = "g-ld"; document.head.appendChild(ld); } ld.textContent = JSON.stringify(PREG_FAQ);
+    if (typeof decorateComparisonSlots === "function") decorateComparisonSlots(root);
     syncCart();
     if (state.gsec) { var slug = state.gsec; setTimeout(function () { if (state.view === "guide" && state.guide === "pregnant") pregJump(slug, false); }, 80); }
   }
