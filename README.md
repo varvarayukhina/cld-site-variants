@@ -31,4 +31,7 @@ GitHub Pages остаётся прототипом с `noindex`. SEO-публи�
 
 Women guide: `content/women-guide/` → `python3 scripts/build-women-guide.py`.
 Comparisons: `content/comparisons/articles.json` and `adapter.js` → `python3 scripts/build-comparisons.py`; styles in `assets/comparisons.css`.
-Rebuild order: pregnancy → women → navigation → comparisons. All builders are idempotent. Contextual comparisons use the shared catalogue, selected point and cart; source references stay in the JSON for editorial verification.
+Children guide: `content/kids-guide/` → `python3 scripts/build-kids-guide.py`.
+Rebuild order: pregnancy → women → kids → navigation → comparisons. All builders are idempotent. Contextual comparisons use the shared catalogue, selected point and cart; source references stay in the JSON for editorial verification.
+
+Women and children guides use task cards and one selected topic panel at a time. Keep `womenJump` / `kidsJump` responsible for opening panels before scrolling to legacy anchors. Full analysis lists stay visible. Shared task styles live in `content/women-guide/style.css`.

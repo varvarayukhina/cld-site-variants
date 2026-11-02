@@ -35,6 +35,11 @@
   }
   function womenJump(slug, update) {
     var target = document.getElementById("wg-" + slug); if (!target) return;
+    var panel = target.closest("[data-women-panel]");
+    if (panel || slug === "temy" || slug === "vse-analizy") {
+      document.querySelectorAll("#women-guide [data-women-panel]").forEach(function(el){el.hidden = el !== panel;});
+      document.querySelectorAll("#women-guide .pg-w-task-grid a").forEach(function(a){a.setAttribute("aria-current",panel && a.dataset.womenTarget === panel.id.slice(3) ? "true" : "false");});
+    }
     if (target.tagName === "DETAILS") target.open = true;
     for (var parent = target.parentElement; parent && parent.id !== "women-guide"; parent = parent.parentElement) if (parent.tagName === "DETAILS") parent.open = true;
     var top = $("#top"), sw = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sw-h"), 10) || 0;
@@ -59,6 +64,10 @@
     var ld = $("#g-ld"); if (!ld) { ld = document.createElement("script"); ld.type = "application/ld+json"; ld.id = "g-ld"; document.head.appendChild(ld); }
     ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: WOMEN_FAQ.map(function (f) { return { "@type": "Question", name: f[0], acceptedAnswer: { "@type": "Answer", text: f[1] } }; }) });
     if (typeof decorateComparisonSlots === "function") decorateComparisonSlots(root);
+    root.querySelectorAll("[data-women-panel]").forEach(function(panel){
+      panel.hidden = true;
+      panel.insertAdjacentHTML("afterbegin", '<a class="pg-w-panel-back" href="#for-women:temy" data-women-target="temy">← Выбрать другую тему</a>');
+    });
     syncCart();
     if (state.gsec) { var slug = state.gsec; setTimeout(function () { if (state.view === "guide" && state.guide === "women") womenJump(slug, false); }, 80); }
   }

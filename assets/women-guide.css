@@ -46,3 +46,64 @@
 .pregnancy-guide .pg-w-amg h3{font-size:28px}
 .pregnancy-guide .pg-w-complex-price{align-items:center}
 .pregnancy-guide .pg-w-complex-price .pg-add-btn{min-width:126px}}
+.pregnancy-guide .pg-w-start{padding-top:42px;padding-bottom:38px}
+.pregnancy-guide .pg-w-start-head{display:flex;gap:35px;align-items:end;justify-content:space-between;margin-bottom:25px}
+.pregnancy-guide .pg-w-start-head h2{font-size:34px;line-height:1.2;margin-top:10px}
+.pregnancy-guide .pg-w-start-head>p{max-width:380px;font-size:16px;line-height:1.65}
+.pregnancy-guide .pg-w-task-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pregnancy-guide .pg-w-task-grid>a{display:grid;grid-template-columns:44px 1fr 20px;gap:16px;align-items:center;background:white;border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;transition:background .15s,border-color .15s}
+.pregnancy-guide .pg-w-task-grid>a:hover,.pregnancy-guide .pg-w-task-grid>a[aria-current="true"]{background:var(--soft);border-color:var(--navy)}
+.pregnancy-guide .pg-w-task-grid b{display:block;font-size:18px;line-height:1.35}
+.pregnancy-guide .pg-w-task-grid small{display:block;font-size:14px;line-height:1.55;margin-top:7px}
+.pregnancy-guide .pg-w-task-icon{display:grid;place-items:center;width:44px;height:44px;font-size:14px;font-weight:700;background:var(--soft);border-radius:12px;padding:9px}
+.pregnancy-guide .pg-w-start-note{font-size:14px;margin-top:20px;max-width:720px}
+.pregnancy-guide .pg-w-focused-page{display:block!important;max-width:1120px}
+.pregnancy-guide .pg-w-focused-page .pg-page-main{min-width:0}
+.pregnancy-guide .pg-w-focused-page .pg-section[data-women-panel],.pregnancy-guide .pg-w-focused-page .pg-section[data-kids-panel]{border:1px solid var(--line);border-radius:22px;padding:32px;background:white;margin:0 0 34px}
+.pregnancy-guide .pg-w-focused-page [data-women-panel][hidden],.pregnancy-guide .pg-w-focused-page [data-kids-panel][hidden]{display:none!important}
+.pregnancy-guide .pg-w-focused-page .pg-section-head h2{font-size:34px}
+.pregnancy-guide .pg-w-focused-page .pg-intro{font-size:18px;max-width:800px;line-height:1.65}
+.pregnancy-guide .pg-w-focused-page .pg-buy-group{background:#F4F7F8;padding:20px 24px;border-radius:16px;margin-top:24px}
+.pregnancy-guide .pg-w-focused-page .pg-buy-label{font-size:14px}
+.pregnancy-guide .pg-w-focused-page .pg-test-row{background:transparent}
+.pregnancy-guide .pg-w-focused-page .pg-more{margin-top:12px}
+.pregnancy-guide .pg-w-compare-link{display:inline-block;font:inherit;font-size:14px;font-weight:600;color:var(--navy);border:0;border-bottom:1px solid var(--navy);background:transparent;padding:0 0 4px;margin-top:16px;cursor:pointer}
+.pregnancy-guide .pg-w-panel-back{font-size:14px;display:inline-block;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.pregnancy-guide .pg-w-secondary{background:#F4F7F8;border-radius:16px;padding:20px!important}
+.pregnancy-guide .pg-w-age-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
+.pregnancy-guide .pg-w-age-grid article{border:1px solid var(--line);border-radius:14px;padding:20px}
+.pregnancy-guide .pg-w-age-grid b{display:block;font-size:23px;margin-bottom:7px}
+.pregnancy-guide .pg-w-age-grid p{font-size:16px;line-height:1.6}
+.pregnancy-guide .pg-w-task-hero .pg-hero-art,.pregnancy-guide .pg-w-task-hero .pg-hero-art{max-width:260px;justify-self:center}
+.pregnancy-guide .pg-w-task-hero .pg-hero-art img,.pregnancy-guide .pg-w-task-hero .pg-hero-art img{width:100%;height:auto;object-fit:contain}
+.pregnancy-guide .pg-w-task-hero .pg-hero-grid,.pregnancy-guide .pg-w-task-hero .pg-hero-grid{grid-template-columns:minmax(0,1fr) 270px;gap:45px}
+.pregnancy-guide .pg-w-task-hero h1,.pregnancy-guide .pg-w-task-hero h1{font-size:clamp(36px,4vw,56px)}
+.pregnancy-guide .pg-w-task-hero p,.pregnancy-guide .pg-w-task-hero p{font-size:18px;line-height:1.65;max-width:670px}
+.pregnancy-guide .pg-w-task-hero .pg-wrap,.pregnancy-guide .pg-w-task-hero .pg-wrap{padding-top:30px;padding-bottom:36px}
+@media(max-width:700px){.pregnancy-guide .pg-w-start{padding-top:30px;padding-bottom:28px}
+.pregnancy-guide .pg-w-start-head{display:block}
+.pregnancy-guide .pg-w-start-head>p{margin-top:14px}
+.pregnancy-guide .pg-w-start-head h2{font-size:29px}
+.pregnancy-guide .pg-w-task-grid{grid-template-columns:1fr;gap:10px}
+.pregnancy-guide .pg-w-task-grid>a{padding:17px;gap:12px;grid-template-columns:40px 1fr 16px}
+.pregnancy-guide .pg-w-task-grid b{font-size:16px}
+.pregnancy-guide .pg-w-task-grid small{font-size:13px}
+.pregnancy-guide .pg-w-focused-page .pg-section[data-women-panel],.pregnancy-guide .pg-w-focused-page .pg-section[data-kids-panel]{padding:21px 17px;border-radius:17px}
+.pregnancy-guide .pg-w-focused-page .pg-section-head h2{font-size:28px}
+.pregnancy-guide .pg-w-focused-page .pg-buy-group{padding:14px;margin-left:-5px;margin-right:-5px}
+.pregnancy-guide .pg-w-focused-page .pg-intro{font-size:16px}
+.pregnancy-guide .pg-w-age-grid{grid-template-columns:1fr}
+.pregnancy-guide .pg-w-task-hero .pg-hero-grid,.pregnancy-guide .pg-w-task-hero .pg-hero-grid{grid-template-columns:minmax(0,1fr) 80px;gap:12px}
+.pregnancy-guide .pg-w-task-hero .pg-hero-art,.pregnancy-guide .pg-w-task-hero .pg-hero-art{align-self:start;margin-top:12px;width:80px}
+.pregnancy-guide .pg-w-task-hero h1,.pregnancy-guide .pg-w-task-hero h1{font-size:32px}
+.pregnancy-guide .pg-w-task-hero p,.pregnancy-guide .pg-w-task-hero p{font-size:16px}
+.pregnancy-guide .pg-w-task-hero .pg-hero-actions,.pregnancy-guide .pg-w-task-hero .pg-hero-actions{grid-column:1/-1}
+.pregnancy-guide .pg-w-task-hero .pg-hero-link,.pregnancy-guide .pg-w-task-hero .pg-hero-link{font-size:14px}
+.pregnancy-guide .pg-w-task-hero .pg-wrap,.pregnancy-guide .pg-w-task-hero .pg-wrap{padding-top:22px;padding-bottom:25px}}
+@media(max-width:700px){.pregnancy-guide .pg-w-task-hero .pg-hero-grid{grid-template-columns:1fr}
+.pregnancy-guide .pg-w-task-hero .pg-hero-art{display:none}
+.pregnancy-guide .pg-w-task-hero .pg-hero-actions{gap:14px}
+.pregnancy-guide .pg-w-task-hero .pg-hero-actions .pg-btn{font-size:14px;min-width:0;max-width:100%;padding:16px 20px}
+.pregnancy-guide .pg-w-task-hero .pg-hero-grid>div{min-width:0}}
+.pregnancy-guide .pg-w-utility-links{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:22px}
+.pregnancy-guide .pg-w-utility-links a{font-size:14px;border-bottom:1px solid var(--line);padding-bottom:3px}
