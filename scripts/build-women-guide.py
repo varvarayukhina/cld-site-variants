@@ -1,6 +1,6 @@
 """Build the women's guide with isolated shared editorial components."""
 from pathlib import Path
-import re,json,runpy
+import re,json,runpy,hashlib
 ROOT=Path(__file__).resolve().parents[1]
 CONTENT=ROOT/'content/women-guide'
 
@@ -47,6 +47,8 @@ def integrate(html):
         html=html.replace('pregSyncControls(); // shared cart','pregSyncControls(); // shared cart\n    womenSyncControls(); // shared women cart',1)
     if 'href="../assets/women-guide.css' not in html:
         html=html.replace('</head>','<link rel="stylesheet" href="../assets/women-guide.css?v=20261102">\n</head>',1)
+    version=hashlib.sha256(css.encode()).hexdigest()[:12]
+    html=re.sub(r'href="../assets/women-guide.css[^\"]*"', 'href="../assets/women-guide.css?v='+version+'"', html, count=1)
     return html
 
 if __name__=='__main__':
