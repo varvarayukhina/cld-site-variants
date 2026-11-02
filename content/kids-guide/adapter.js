@@ -1,6 +1,6 @@
   /* KIDS_TEMPLATE */
   var kidsSpy = null, kidsSearch = "";
-  var KIDS_FAQ = [["Какие анализы входят в профосмотр ребёнка?", "Общий анализ крови и мочи — в 3 и 12 месяцев, в 3, 6, 10, 15, 16 и 17 лет. В 6 и 10 лет детям из группы риска определяют холестерин."], ["Покажет ли общий IgE, на что аллергия?", "Нет. Конкретный аллерген ищут по специфическим IgE, общий IgE для этого неинформативен."], ["Зачем ферритин, если гемоглобин в норме?", "Ферритин отражает запасы железа, а дефицит железа бывает и без анемии."], ["Проверяют ли сахар на профосмотре?", "Глюкоза не входит в перечень исследований профосмотра детей. Её назначает врач по показаниям."]];
+  var KIDS_FAQ = [["Какие анализы входят в профосмотр ребёнка?", "Общий анализ крови и мочи — в 3 и 12 месяцев, в 3, 6, 10, 15, 16 и 17 лет. В 6 и 10 лет детям из группы риска определяют холестерин."], ["Нужен ли ребёнку анализ на витамин D?", "Профилактику витамином D клинические рекомендации советуют всем детям. Анализ нужен при подозрении на рахит или дефицит, при факторах риска и при лечении лечебными дозами."], ["Покажет ли общий IgE, на что аллергия?", "Нет. Конкретный аллерген ищут по специфическим IgE, общий IgE для этого неинформативен."], ["Зачем ферритин, если гемоглобин в норме?", "Ферритин отражает запасы железа, а дефицит железа бывает и без анемии."], ["Проверяют ли сахар на профосмотре?", "Глюкоза не входит в перечень исследований профосмотра детей. Её назначает врач по показаниям."]];
   function kidsIcon(name) { return '<svg aria-hidden="true"><use href="#kg-i-' + name + '"/></svg>'; }
   function kidsTest(code) {
     var html = pregTest(code), flag = { "40-297": "По назначению врача", "60-011": "Не определяет конкретный аллерген" }[code];
@@ -28,11 +28,7 @@
   }
   function kidsJump(slug, update) {
     var target = document.getElementById("kg-" + slug); if (!target) return;
-    var panel = target.closest("[data-kids-panel]");
-    if (panel || slug === "temy" || slug === "vse-analizy") {
-      document.querySelectorAll("#kids-guide [data-kids-panel]").forEach(function(el){el.hidden = el !== panel;});
-      document.querySelectorAll("#kids-guide .pg-w-task-grid a").forEach(function(a){a.setAttribute("aria-current",panel && a.dataset.kidsTarget === panel.id.slice(3) ? "true" : "false");});
-    }
+
     if (target.tagName === "DETAILS") target.open = true;
     for (var parent = target.parentElement; parent && parent.id !== "kids-guide"; parent = parent.parentElement) if (parent.tagName === "DETAILS") parent.open = true;
     var top = $("#top"), sw = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sw-h"), 10) || 0;
@@ -57,10 +53,6 @@
     var ld = $("#g-ld"); if (!ld) { ld = document.createElement("script"); ld.type = "application/ld+json"; ld.id = "g-ld"; document.head.appendChild(ld); }
     ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: KIDS_FAQ.map(function (f) { return { "@type": "Question", name: f[0], acceptedAnswer: { "@type": "Answer", text: f[1] } }; }) });
     if (typeof decorateComparisonSlots === "function") decorateComparisonSlots(root);
-    root.querySelectorAll("[data-kids-panel]").forEach(function(panel){
-      panel.hidden = true;
-      panel.insertAdjacentHTML("afterbegin", '<a class="pg-w-panel-back" href="#for-kids:temy" data-kids-target="temy">← Выбрать другую тему</a>');
-    });
     syncCart();
     if (state.gsec) { var slug = state.gsec; setTimeout(function () { if (state.view === "guide" && state.guide === "kids") kidsJump(slug, false); }, 80); }
   }

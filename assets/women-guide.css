@@ -117,3 +117,23 @@
 @media(max-width:700px){.pregnancy-guide .pg-w-kids-hero .pg-hero-grid{grid-template-columns:1fr;gap:16px}
 .pregnancy-guide .pg-w-kids-hero .pg-hero-art{display:block;width:220px;max-width:70%;justify-self:center;align-self:center;margin:0}
 .pregnancy-guide .pg-w-kids-hero h1{font-size:32px}}
+.pregnancy-guide .pg-w-kids-hero .pg-hero-art{background:#E7EFF3;border-radius:32px;overflow:hidden}
+@media(max-width:700px){.pregnancy-guide .pg-w-kids-hero .pg-hero-art{border-radius:24px}}
+.pregnancy-guide .pg-w-reading-nav{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;padding-top:24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.pregnancy-guide .pg-w-reading-nav a{font-size:15px;border-bottom:1px solid var(--line);padding-bottom:3px}
+.pregnancy-guide .pg-w-reading-section{padding:40px 0!important;margin:0!important;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;background:transparent!important}
+.pregnancy-guide .pg-w-reading-section>p{max-width:850px;font-size:17px;line-height:1.8;margin:18px 0}
+.pregnancy-guide .pg-w-reading-section ul,.pregnancy-guide .pg-w-reading-benefits{max-width:850px;padding-left:24px}
+.pregnancy-guide .pg-w-reading-section li,.pregnancy-guide .pg-w-reading-benefits li{font-size:17px;line-height:1.8;margin:12px 0}
+.pregnancy-guide .pg-w-reading-section .pg-w-age-grid{margin:28px 0}
+.pregnancy-guide .pg-w-age-grid h3{font-size:23px;line-height:1.3;margin-bottom:10px}
+.pregnancy-guide .pg-w-reading-result{padding:22px 26px;border-left:4px solid var(--lime);background:var(--blue);border-radius:0 14px 14px 0;margin:26px 0;max-width:850px}
+.pregnancy-guide .pg-w-reading-result p{margin-top:10px;line-height:1.75}
+.pregnancy-guide .pg-w-reading-section .pg-buy-group{margin-top:25px}
+.pregnancy-guide .pg-w-reading-section .pg-section-head h2{max-width:850px}
+@media(max-width:700px){.pregnancy-guide .pg-w-reading-nav{gap:10px 18px}
+.pregnancy-guide .pg-w-reading-nav b{width:100%}
+.pregnancy-guide .pg-w-reading-section{padding:30px 0!important}
+.pregnancy-guide .pg-w-reading-section>p,.pregnancy-guide .pg-w-reading-section li,.pregnancy-guide .pg-w-reading-benefits li{font-size:16px}
+.pregnancy-guide .pg-w-reading-result{padding:18px}
+.pregnancy-guide .pg-w-reading-section .pg-buy-group{margin-left:0;margin-right:0}}

@@ -1,4 +1,4 @@
-"""Build task-first children's guide with native catalogue and cart."""
+"""Build continuous-reading children's guide with native catalogue and cart."""
 from pathlib import Path
 import re,json
 ROOT=Path(__file__).resolve().parents[1]
