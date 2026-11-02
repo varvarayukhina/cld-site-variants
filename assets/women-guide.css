@@ -107,3 +107,13 @@
 .pregnancy-guide .pg-w-task-hero .pg-hero-grid>div{min-width:0}}
 .pregnancy-guide .pg-w-utility-links{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:22px}
 .pregnancy-guide .pg-w-utility-links a{font-size:14px;border-bottom:1px solid var(--line);padding-bottom:3px}
+.pregnancy-guide .pg-w-kids-hero .pg-hero-grid{grid-template-columns:minmax(0,1fr) 430px;align-items:center;gap:40px}
+.pregnancy-guide .pg-w-kids-hero .pg-hero-art{display:block;width:430px;max-width:100%;margin:0;align-self:center}
+.pregnancy-guide .pg-w-kids-hero .pg-hero-art img{width:100%;height:auto;display:block}
+.pregnancy-guide .pg-w-kids-hero h1{font-size:48px}
+@media(max-width:1000px) and (min-width:701px){.pregnancy-guide .pg-w-kids-hero .pg-hero-grid{grid-template-columns:minmax(0,1fr) 300px;gap:24px}
+.pregnancy-guide .pg-w-kids-hero .pg-hero-art{width:300px}
+.pregnancy-guide .pg-w-kids-hero h1{font-size:38px}}
+@media(max-width:700px){.pregnancy-guide .pg-w-kids-hero .pg-hero-grid{grid-template-columns:1fr;gap:16px}
+.pregnancy-guide .pg-w-kids-hero .pg-hero-art{display:block;width:220px;max-width:70%;justify-self:center;align-self:center;margin:0}
+.pregnancy-guide .pg-w-kids-hero h1{font-size:32px}}

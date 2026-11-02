@@ -1,0 +1,8 @@
+# Children's hero illustration
+Generated 2026-11-02 with the built-in image_gen tool (not CLI).
+Project asset: assets/img/kids/hero-family.webp, transparent WebP, 860×860.
+Original: /Users/varvarauhina/.codex/generated_images/01a198de-8c10-7a40-ae54-d6fa1a3a225b/exec-13cbb580-2cb0-4f7f-a32c-cbaec78339b1.png
+Style reference: assets/img/aud/women.webp. Previous kids audience icon is preserved for existing navigation.
+
+## Final prompt
+Use case: illustration-story. Create a replacement hero illustration for the children's section of Russian CLD medical laboratory website. Use the attached woman icon ONLY as style reference: restrained flat shapes, clean dark navy #14374B outlines, lime #AFC81E accents, natural warm skin. New subject: one calm mother seated beside her school-age child, about 7 years old, both casually dressed, child holding a small closed book, mother's hand resting naturally on child's shoulder. Waist-up or seated three-quarter grouping, friendly relaxed ordinary expressions, tiny simple eyes and modest smiles, believable proportions and clearly distinct adult/child sizes. A grown-up contemporary editorial illustration, not baby mascot, not chibi, not anime. Simple cohesive silhouette and uncluttered composition that reads well at 350px. True transparent background. No text, no logos, no sparkles, no floating objects, no syringes or test tubes, no stethoscope, no watercolor, no grain, no gradients, no 3D, no huge shiny eyes, no exaggerated blush. Navy and lime clothing with a little off-white; ensure outlines and faces remain readable when placed on a dark navy website background.
