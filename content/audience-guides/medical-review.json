@@ -1,0 +1,186 @@
+{
+  "reviewed": "2026-11-03",
+  "scope": "Тексты двух audience-guides. Не аудит всего сайта, всех карточек каталога и комплексов; не медицинское согласование лабораторией.",
+  "references": {
+    "lipids": {
+      "title": "КР «Нарушения липидного обмена», 2023",
+      "url": "https://cr.minzdrav.gov.ru/preview-cr/752_1",
+      "read_and_checked": "Раздел 2.3; приложение Б1. Прочитан сохранённый первичный текст cld-work/cards50/fc1/752_1.txt: оценка риска, натощак при ГТГ, мониторинг АЛТ/липидов. Не переносить интервалы наблюдения на всех пациентов."
+    },
+    "cholesterol": {
+      "title": "MedlinePlus: холестерин",
+      "url": "https://medlineplus.gov/lab-tests/cholesterol-levels/",
+      "read_and_checked": "What is it used for; Why do I need. Риск при отсутствии симптомов; показатели липидограммы."
+    },
+    "hf": {
+      "title": "КР «Хроническая сердечная недостаточность», 2024",
+      "url": "https://webmed.irkutsk.ru/doc/pdf/kr156.pdf",
+      "read_and_checked": "Оригинальная публикация РКО, 99 страниц, DOI10.15829/1560-4071-2024-6162. Прочитаны 1.5/2.3/2.4/5: симптомы неспецифичны, NT-proBNP при подозрении, ограничения нормального результата, отдельная группа ХСНнФВ при частоте наблюдения."
+    },
+    "a1c": {
+      "title": "NIDDK: гликированный гемоглобин",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test",
+      "read_and_checked": "What is; Diagnosis; False results; Monitoring. Средний сахар примерно3месяца, без голодания, подтверждение диагноза, влияние эритроцитов/гемоглобина/анемий/переливаний. Не путать с разовым измерением глюкозы."
+    },
+    "ckd": {
+      "title": "NIDDK: обследование почек",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/tests-diagnosis",
+      "read_and_checked": "How can I tell; Blood test for GFR; Urine test for albumin. Ранние стадии без жалоб; диабет/гипертензия, СКФ по креатинину и альбумин мочи."
+    },
+    "warfarin": {
+      "title": "NHS: варфарин и контроль МНО",
+      "url": "https://www.nhs.uk/medicines/warfarin/",
+      "read_and_checked": "Blood tests while taking warfarin. Эффект варфарина/подбор дозы, чаще в начале. Удалён универсальный календарь каждые3дня/4–6недель: интервалы зависят от клинического контекста."
+    },
+    "inr": {
+      "title": "MedlinePlus: МНО",
+      "url": "https://medlineplus.gov/lab-tests/prothrombin-time-test-and-inr-ptinr/",
+      "read_and_checked": "What is; used for; why need. Перекрёстная проверка роли INR для варфарина и индивидуального графика."
+    },
+    "doac": {
+      "title": "NHS: контроль антикоагулянтов",
+      "url": "https://www.nhs.uk/medicines/anticoagulants/dosage/",
+      "read_and_checked": "Monitoring your dose, Warfarin/Newer anticoagulants. МНО не используется для регулярного контроля прямых антикоагулянтов."
+    },
+    "renal-dose": {
+      "title": "NHS SPS: обследование при прямых антикоагулянтах",
+      "url": "https://sps.nhs.uk/monitorings/doacs-direct-oral-anticoagulants-monitoring/",
+      "read_and_checked": "Before starting/Monitoring renal function, обновлено22.10.2026. Креатинин для клиренса, Cockcroft-Gault; не отождествлять клиренс и расчётную СКФ."
+    },
+    "thyroid": {
+      "title": "КР «Гипотиреоз», 2024",
+      "url": "https://cr.minzdrav.gov.ru/preview-cr/531_4",
+      "read_and_checked": "Прочитан сохранённый первичный JSON women-531_4.json: раздел3 и критерии качества. Контроль дозы по ТТГ ограничен первичным гипотиреозом, возрастной контекст цели сохранён."
+    },
+    "thyroid-life": {
+      "title": "NIDDK: гипотиреоз",
+      "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases/hypothyroidism",
+      "read_and_checked": "Symptoms/Diagnosis/Treatment. Зябкость, утомляемость, вес неспецифичны; по симптомам диагноз не ставят. Сверено также NIDDK Thyroid Tests."
+    },
+    "iron": {
+      "title": "КР «Железодефицитная анемия», 2024",
+      "url": "https://cr.minzdrav.gov.ru/preview-cr/669_2",
+      "read_and_checked": "Прочитан сохранённый current-669_2.json, определение/2.3: гемоглобин, ферритин, другие показатели обмена железа; ОАК не определяет причину анемии."
+    },
+    "b12": {
+      "title": "MHRA: метформин и витамин B12",
+      "url": "https://www.gov.uk/drug-safety-update/metformin-and-reduced-vitamin-b12-levels-new-advice-for-monitoring-patients-at-risk",
+      "read_and_checked": "Advice for professionals/patients, risk factors. Длительность/доза и риск дефицита; покалывания и утомляемость неспецифичны; не рекомендовать отменять метформин."
+    },
+    "d": {
+      "title": "Endocrine Society: витамин D, 2024",
+      "url": "https://www.endocrine.org/clinical-practice-guidelines/vitamin-d-for-prevention-of-disease",
+      "read_and_checked": "Рекомендации6–7 вместе с technical remarks:75+ в целом здоровые, без установленных показаний к тестированию. Нельзя распространять на всех75+."
+    },
+    "psa": {
+      "title": "NCI: анализ ПСА",
+      "url": "https://www.cancer.gov/types/prostate/psa-fact-sheet",
+      "read_and_checked": "Прочитаны показания/скрининг/результат/факторы/дальнейшая тактика/польза-вред. Не равен диагнозу рака; возраст скрининга США не переносится на РФ; финастерид, воспаление, биопсия влияют."
+    },
+    "prostate": {
+      "title": "NIDDK: обследования простаты",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/prostate",
+      "read_and_checked": "Симптомы/PSA. Перекрёстная проверка жалоб на мочеиспускание и нескольких причин повышения."
+    },
+    "testosterone": {
+      "title": "Endocrine Society: дефицит тестостерона, 2018",
+      "url": "https://academic.oup.com/jcem/article/103/5/1715/4939465",
+      "read_and_checked": "Прочитан полный доступный текст, раздел1.1/1.2 и таблицы2–3: симптомы плюс устойчиво низкий уровень, утро натощак, повтор; свободныйТ/ГСПГ по показаниям. Перекрёстно проверена официальная страница Endocrine Society."
+    },
+    "gout": {
+      "title": "NIAMS: подагра",
+      "url": "https://www.niams.nih.gov/health-topics/gout",
+      "read_and_checked": "Overview/Symptoms/Who gets. Суставная боль, отёк, мужчины чаще, высокая мочевая кислота не означает диагноз."
+    },
+    "urate": {
+      "title": "MedlinePlus: мочевая кислота",
+      "url": "https://medlineplus.gov/lab-tests/uric-acid-test/",
+      "read_and_checked": "What used for/Why/Results. Проверка назначения, неспецифичности и того, что нормальный результат не исключает подагру."
+    },
+    "404": {
+      "title": "Приказ Минздрава №404н: профосмотр и диспансеризация",
+      "url": "https://legalacts.ru/doc/prikaz-minzdrava-rossii-ot-27042021-n-404n-ob-utverzhdenii/",
+      "read_and_checked": "Прочитан полный текст нормативного акта в правовой базе:16–18 и приложение2, редакция15.06.2026. Глюкоза/общийхолестерин ежегодно18+, ОАК40+, ПСА45/50/55/60/64, HbA1cIIэтап при подозрении, анкета65+. Таблица показывает отдельные исследования, не полный состав диспансеризации."
+    }
+  },
+  "sections": {
+    "senior": {
+      "serdce": [
+        "hf",
+        "lipids"
+      ],
+      "sahar": [
+        "a1c",
+        "404"
+      ],
+      "pochki": [
+        "ckd"
+      ],
+      "mno": [
+        "warfarin",
+        "inr",
+        "doac",
+        "renal-dose"
+      ],
+      "shchitovidka": [
+        "thyroid",
+        "thyroid-life"
+      ],
+      "vitaminy": [
+        "iron",
+        "b12",
+        "d"
+      ],
+      "psa": [
+        "psa",
+        "404"
+      ],
+      "medosmotr": [
+        "404"
+      ],
+      "podgotovka": [
+        "a1c"
+      ]
+    },
+    "men": {
+      "testosteron": [
+        "testosterone"
+      ],
+      "psa": [
+        "psa",
+        "prostate",
+        "404"
+      ],
+      "holesterin": [
+        "lipids",
+        "cholesterol"
+      ],
+      "sahar": [
+        "a1c"
+      ],
+      "mochevaya-kislota": [
+        "gout",
+        "urate"
+      ],
+      "pechen": [
+        "lipids"
+      ],
+      "medosmotr": [
+        "404"
+      ],
+      "podgotovka": [
+        "testosterone",
+        "psa",
+        "a1c",
+        "lipids"
+      ]
+    }
+  },
+  "editorial_changes": [
+    "Удалена эпидемиологическая статистика NATION, анемии и ХБП из вводных абзацев; она не объясняла выбор исследования.",
+    "Убраны универсальные интервалы МНО и диабетического скрининга; не заменены другой общей схемой.",
+    "Уточнён первичный гипотиреоз; сохранено исключение отдельных показаний к анализуD.",
+    "Жизненные ситуации отделены от диагноза; объяснение до покупки.",
+    "Все разделы и основные медицинские темы сохранены, без полной маскировки статьёй-карточками."
+  ]
+}
