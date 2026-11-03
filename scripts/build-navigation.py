@@ -1,6 +1,6 @@
 """Apply shared view metadata and prominent audience-guide links to v4."""
 from pathlib import Path
-import re
+import re,hashlib
 ROOT=Path(__file__).resolve().parents[1]
 
 def integrate(html):
@@ -21,6 +21,8 @@ def integrate(html):
         assert count==1,'Could not find the inline audience-guide link'
     if 'href="../assets/navigation.css' not in html:
         html=html.replace('</head>','<link rel="stylesheet" href="../assets/navigation.css?v=20261102">\n</head>',1)
+    version=hashlib.sha256((ROOT/'assets/navigation.css').read_bytes()).hexdigest()[:12]
+    html=re.sub(r'href="../assets/navigation.css[^\"]*"', 'href="../assets/navigation.css?v='+version+'"', html, count=1)
     return html
 
 if __name__=='__main__':

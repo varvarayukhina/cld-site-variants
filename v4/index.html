@@ -1874,7 +1874,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
 }
 </style>
 <link rel="stylesheet" href="../assets/pregnancy-guide.css?v=20261102">
-<link rel="stylesheet" href="../assets/navigation.css?v=20261102">
+<link rel="stylesheet" href="../assets/navigation.css?v=f48e681706c9">
 <link rel="stylesheet" href="../assets/women-guide.css?v=2388100d189f">
 <link rel="stylesheet" href="../assets/comparisons.css?v=20261102">
 </head>
@@ -4409,7 +4409,8 @@ var PREG_WHY=[
   };
   function renderCatalogGuide(category) {
     var box = $("#catalog-guide-callout");
-    if (!box) { box = document.createElement("aside"); box.id = "catalog-guide-callout"; box.className = "catalog-guide-callout"; $("#c-desc").closest(".chead").insertAdjacentElement("afterend", box); }
+    if (!box) { box = document.createElement("aside"); box.id = "catalog-guide-callout"; box.className = "catalog-guide-callout";  }
+    $("#c-rows").insertAdjacentElement("afterend", box);
     var copy = CATALOG_GUIDE_COPY[category.id], guide = GUIDES[category.id];
     box.hidden = !copy || !guide;
     if (box.hidden) { box.innerHTML = ""; return; }

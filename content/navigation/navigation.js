@@ -48,7 +48,8 @@
   };
   function renderCatalogGuide(category) {
     var box = $("#catalog-guide-callout");
-    if (!box) { box = document.createElement("aside"); box.id = "catalog-guide-callout"; box.className = "catalog-guide-callout"; $("#c-desc").closest(".chead").insertAdjacentElement("afterend", box); }
+    if (!box) { box = document.createElement("aside"); box.id = "catalog-guide-callout"; box.className = "catalog-guide-callout";  }
+    $("#c-rows").insertAdjacentElement("afterend", box);
     var copy = CATALOG_GUIDE_COPY[category.id], guide = GUIDES[category.id];
     box.hidden = !copy || !guide;
     if (box.hidden) { box.innerHTML = ""; return; }
