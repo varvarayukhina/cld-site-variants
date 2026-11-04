@@ -3,18 +3,16 @@ from pathlib import Path
 import re,json
 ROOT=Path(__file__).resolve().parents[1]
 def integrate(html):
-    markup=(ROOT/'content/kids-guide/view.html').read_text()
+    defs=re.search(r'(<svg aria-hidden="true" style="position:absolute;[\s\S]*?</svg>)',(ROOT/'content/pregnancy-guide/page.html').read_text())[1]
+    markup=defs+'\n'+(ROOT/'content/kids-guide/view.html').read_text()
     ids=re.findall(r'\bid="([^"]+)"',markup)
     for ident in sorted(ids,key=len,reverse=True):
         markup=markup.replace('id="'+ident+'"','id="kg-'+ident+'"').replace('href="#'+ident+'"','href="#kg-'+ident+'"')
         for attr in ['for','aria-controls','aria-labelledby']:markup=markup.replace(attr+'="'+ident+'"',attr+'="kg-'+ident+'"')
-    # Symbols use the existing editorial set; no duplicated illustration assets.
-    markup=markup.replace('href="#i-','href="#pg-i-')
-    markup=re.sub(r'href="#kg-([^"]+)"',lambda m:'href="#for-kids:'+m[1]+'" data-kids-target="'+m[1]+'"',markup)
+    # Icon symbols are embedded with the kg- prefix: the pregnancy guide is not always rendered.
+    markup=re.sub(r'href="#kg-([^"]+)"',lambda m:m[0] if m[1].startswith('i-') else 'href="#for-kids:'+m[1]+'" data-kids-target="'+m[1]+'"',markup)
     markup=re.sub(r'class="([^"]+)"',lambda m:'class="'+' '.join('pg-'+c for c in m[1].split())+'"',markup)
     module=(ROOT/'content/kids-guide/adapter.js').read_text().replace('/* KIDS_TEMPLATE */','var KIDS_TEMPLATE='+json.dumps(markup,ensure_ascii=False)+';')
-    # Product helper icon references use pregnancy symbols.
-    module=module.replace('#kg-i-','#pg-i-')
     block='  /* KIDS GUIDE START */\n'+module+'\n  /* KIDS GUIDE END */\n'
     if '/* KIDS GUIDE START */' in html:html=re.sub(r'  /\* KIDS GUIDE START \*/[\s\S]*?/\* KIDS GUIDE END \*/\n',lambda m:block,html,count=1)
     else:html=html.replace('  function renderGuide() {',block+'  function renderGuide() {',1)

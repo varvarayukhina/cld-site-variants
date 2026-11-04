@@ -4,7 +4,7 @@
     ["Гемоглобин в норме — зачем назначают ферритин?", "Ферритин помогает оценить запасы железа. Они могут снижаться раньше гемоглобина. При воспалении результат требует дополнительной оценки."],
     ["Все гормоны можно сдать в один день?", "Дата зависит от исследования и цели обследования. Например, для подтверждения овуляции прогестерон назначают в другие сроки, чем ФСГ и ЛГ при нарушениях цикла."],
     ["АМГ показывает вероятность естественной беременности?", "По одному АМГ её надёжно не предсказывают. Результат используют вместе с другими данными, в частности при планировании стимуляции яичников."],
-    ["Всем ли нужен анализ на витамин D?", "Он не относится к одинаковому набору исследований для каждого здорового человека. Необходимость анализа определяется по показаниям."],
+    ["Всем ли нужен анализ на витамин D?", "Нет. Анализ не входит в обязательное обследование здоровых людей и назначается по показаниям."],
     ["CA 125 подходит для обычной проверки на рак?", "Для профилактического обследования женщин без симптомов и без известного наследственного синдрома высокого риска его не используют. Анализ назначают при определённых показаниях."],
     ["Нужен ли анализ на фолиевую кислоту перед её приёмом?", "При планировании беременности предварительный анализ не является условием начала приёма фолиевой кислоты. Дозу назначает врач."]
   ];
@@ -35,11 +35,6 @@
   }
   function womenJump(slug, update) {
     var target = document.getElementById("wg-" + slug); if (!target) return;
-    var panel = target.closest("[data-women-panel]");
-    if (panel || slug === "temy" || slug === "vse-analizy") {
-      document.querySelectorAll("#women-guide [data-women-panel]").forEach(function(el){el.hidden = el !== panel;});
-      document.querySelectorAll("#women-guide .pg-w-task-grid a").forEach(function(a){a.setAttribute("aria-current",panel && a.dataset.womenTarget === panel.id.slice(3) ? "true" : "false");});
-    }
     if (target.tagName === "DETAILS") target.open = true;
     for (var parent = target.parentElement; parent && parent.id !== "women-guide"; parent = parent.parentElement) if (parent.tagName === "DETAILS") parent.open = true;
     var top = $("#top"), sw = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sw-h"), 10) || 0;
@@ -64,10 +59,6 @@
     var ld = $("#g-ld"); if (!ld) { ld = document.createElement("script"); ld.type = "application/ld+json"; ld.id = "g-ld"; document.head.appendChild(ld); }
     ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: WOMEN_FAQ.map(function (f) { return { "@type": "Question", name: f[0], acceptedAnswer: { "@type": "Answer", text: f[1] } }; }) });
     if (typeof decorateComparisonSlots === "function") decorateComparisonSlots(root);
-    root.querySelectorAll("[data-women-panel]").forEach(function(panel){
-      panel.hidden = true;
-      panel.insertAdjacentHTML("afterbegin", '<a class="pg-w-panel-back" href="#for-women:temy" data-women-target="temy">← Выбрать другую тему</a>');
-    });
     syncCart();
     if (state.gsec) { var slug = state.gsec; setTimeout(function () { if (state.view === "guide" && state.guide === "women") womenJump(slug, false); }, 80); }
   }

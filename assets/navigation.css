@@ -9,3 +9,6 @@
 .catalog-guide-callout .cg-link{white-space:nowrap;min-height:48px;gap:10px;text-decoration:none}
 @media(max-width:1100px){.catalog-guide-callout{grid-template-columns:64px minmax(0,1fr);gap:18px}.catalog-guide-callout .cg-character{width:64px;height:76px}.catalog-guide-callout .cg-link{grid-column:2;justify-self:start}}
 @media(max-width:600px){.catalog-guide-callout{grid-template-columns:52px minmax(0,1fr);gap:15px;padding:21px 18px;margin-top:24px}.catalog-guide-callout .cg-character{width:52px;height:65px;align-self:start}.catalog-guide-callout h2{font-size:24px}.catalog-guide-callout .cg-label{font-size:16px;margin-bottom:8px}.catalog-guide-callout .cg-link{grid-column:1/-1;justify-self:stretch;margin-top:3px}.catalog-guide-callout p{font-size:16px}}
+
+/* 03.11.2026: legacy guide shell stays hidden behind editorial guides */
+#v-guide > .gd[hidden], #v-guide > .cxhero[hidden] { display: none !important; }

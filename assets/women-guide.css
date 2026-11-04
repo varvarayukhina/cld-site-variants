@@ -127,7 +127,7 @@
 .pregnancy-guide .pg-w-reading-section li,.pregnancy-guide .pg-w-reading-benefits li{font-size:17px;line-height:1.8;margin:12px 0}
 .pregnancy-guide .pg-w-reading-section .pg-w-age-grid{margin:28px 0}
 .pregnancy-guide .pg-w-age-grid h3{font-size:23px;line-height:1.3;margin-bottom:10px}
-.pregnancy-guide .pg-w-reading-result{padding:22px 26px;border-left:4px solid var(--lime);background:var(--blue);border-radius:0 14px 14px 0;margin:26px 0;max-width:850px}
+.pregnancy-guide .pg-w-reading-result{padding:22px 26px;background:var(--blue);border-radius:14px;margin:26px 0;max-width:850px}
 .pregnancy-guide .pg-w-reading-result p{margin-top:10px;line-height:1.75}
 .pregnancy-guide .pg-w-reading-section .pg-buy-group{margin-top:25px}
 .pregnancy-guide .pg-w-reading-section .pg-section-head h2{max-width:850px}
@@ -171,7 +171,7 @@
 .pregnancy-guide .pg-k-reading-buy .pg-add-btn.pg-added{background:#E7EFF3;border-color:#14374B}
 .pregnancy-guide .pg-k-reading-buy .pg-test-row small{color:#4A6474}
 .pregnancy-guide .pg-k-reading-buy .pg-group-note{font-size:14px;color:#4A6474;max-width:65ch;line-height:1.6}
-.pregnancy-guide .pg-k-complex-note{border-left:4px solid #AFC81E;padding:16px 20px;background:#EEF2D8;max-width:850px;font-size:16px;line-height:1.7;margin:20px 0}
+.pregnancy-guide .pg-k-complex-note{border-radius:14px;padding:16px 20px;background:#EEF2D8;max-width:850px;font-size:16px;line-height:1.7;margin:20px 0}
 @media(max-width:1000px) and (min-width:701px){.pregnancy-guide .pg-k-iron-compare{gap:12px}
 .pregnancy-guide .pg-k-iron-compare article{padding:18px}
 .pregnancy-guide .pg-k-iron-compare h3{font-size:21px}
@@ -193,3 +193,16 @@
 .pregnancy-guide .pg-k-reading-buy{margin-left:0!important;margin-right:0!important}
 .pregnancy-guide .pg-k-reading-buy .pg-add-btn{min-width:115px}
 .pregnancy-guide .pg-k-context{font-size:15px!important}}
+.pregnancy-guide .pg-w-explain{margin:26px 0 8px}
+.pregnancy-guide .pg-w-explain-title{font-size:20px;line-height:1.35;margin:0 0 16px}
+.pregnancy-guide .pg-w-subtopic{padding:26px 0;border-top:1px solid var(--line)}
+.pregnancy-guide .pg-w-subtopic:first-of-type{border-top:0;padding-top:8px}
+.pregnancy-guide .pg-w-subtopic h3{font-size:22px;line-height:1.35;margin-bottom:12px}
+.pregnancy-guide .pg-w-subtopic p{margin-bottom:12px;max-width:72ch}
+.pregnancy-guide .pg-w-task-grid small{font-size:16px;line-height:1.5}
+.pregnancy-guide .pg-w-task-icon{font-size:16px;min-width:48px;padding:0 6px;width:auto}
+.pregnancy-guide .pg-add-btn,.pregnancy-guide .pg-buy-label,.pregnancy-guide .pg-group-note,.pregnancy-guide .pg-w-compare-link,.pregnancy-guide .pg-w-start-note,.pregnancy-guide .pg-w-utility-links a,.pregnancy-guide .pg-k-compare-label,.pregnancy-guide .pg-k-age-table th{font-size:16px!important}
+@media(max-width:700px){.pregnancy-guide .pg-hero-actions .pg-btn,.pregnancy-guide .pg-hero-actions .pg-hero-link{font-size:16px!important}
+.pregnancy-guide .pg-w-task-grid small{font-size:16px}}
+.pregnancy-guide .pg-k-table-test{font-size:16px!important}
+@media(max-width:700px){.pregnancy-guide .pg-hero-actions .pg-btn{white-space:nowrap}}

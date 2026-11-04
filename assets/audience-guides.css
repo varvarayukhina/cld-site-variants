@@ -30,7 +30,7 @@
 .pregnancy-guide .pg-ag-compare article:nth-child(2){background:#F2F6DE}
 .pregnancy-guide .pg-ag-compare h3{font-size:24px;margin-bottom:14px}
 .pregnancy-guide .pg-ag-compare p{font-size:16px;line-height:1.75}
-.pregnancy-guide .pg-ag-use{background:#F2F6DE;border-left:4px solid var(--lime);border-radius:0 14px 14px 0;padding:20px 24px;margin:26px 0;max-width:850px}
+.pregnancy-guide .pg-ag-use{background:#F2F6DE;border-radius:14px;padding:20px 24px;margin:26px 0;max-width:850px}
 .pregnancy-guide .pg-ag-use p{margin-top:8px;font-size:16px;line-height:1.75}
 .pregnancy-guide .pg-ag-section .pg-more{max-width:850px}
 .pregnancy-guide .pg-ag-related{margin-top:28px;border-top:1px solid #CBD9E0;padding-top:22px}
@@ -39,7 +39,7 @@
 .pregnancy-guide .pg-ag-related .pg-add-btn.pg-added{background:#E7EFF3;border-color:var(--navy)}
 .pregnancy-guide .pg-ag-related .pg-test-row small{color:#4A6474}
 .pregnancy-guide .pg-ag-explain-list{margin-top:25px}
-.pregnancy-guide .pg-ag-explain-list article{padding:23px 24px;border-left:4px solid #CBD9E0;background:#F5F7F8;border-radius:0 16px 16px 0;margin:16px 0;max-width:850px}
+.pregnancy-guide .pg-ag-explain-list article{padding:23px 24px;border:1px solid #CBD9E0;border-radius:14px;background:#F5F7F8;margin:16px 0;max-width:850px}
 .pregnancy-guide .pg-ag-explain-list p{font-size:17px;line-height:1.8;margin-top:10px}
 .pregnancy-guide .pg-ag-compare-link{border:0;border-bottom:1px solid var(--navy);background:none;color:var(--navy);font:600 14px/1.5 Montserrat,sans-serif;padding:0 0 5px;cursor:pointer;margin:10px 0}
 .pregnancy-guide .pg-ag-table-wrap{margin:25px 0;border:1px solid #CBD9E0;border-radius:16px;overflow:hidden}
@@ -49,7 +49,7 @@
 .pregnancy-guide .pg-ag-table tr:last-child td{border:0}
 .pregnancy-guide .pg-ag-table tr:nth-child(even){background:#F5F7F8}
 .pregnancy-guide .pg-ag-benefits{list-style:none;padding:0!important}
-.pregnancy-guide .pg-ag-benefits li{padding:18px 22px;border-left:4px solid var(--lime);background:#F5F7F8;margin:12px 0;border-radius:0 12px 12px 0}
+.pregnancy-guide .pg-ag-benefits li{padding:18px 22px;background:#F5F7F8;border-radius:14px;margin:12px 0}
 @media(max-width:900px){.pregnancy-guide .pg-ag-hero-grid{grid-template-columns:1fr;gap:30px}
 .pregnancy-guide .pg-ag-visit{max-width:650px}
 .pregnancy-guide .pg-ag-visit ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;padding-left:20px}
@@ -85,3 +85,14 @@
 .pregnancy-guide .pg-ag-situation+.pg-ag-answer{font-size:17px!important;line-height:1.7!important}
 @media(max-width:600px){.pregnancy-guide .pg-ag-situation{font-size:18px;padding:18px;margin-bottom:22px!important}
 .pregnancy-guide .pg-ag-situation+.pg-ag-answer{font-size:16px!important}}
+.pregnancy-guide .pg-ag-hero-art .pg-hero-grid{grid-template-columns:minmax(0,1fr) 400px;align-items:center;gap:40px}
+.pregnancy-guide .pg-ag-hero-art .pg-hero-art{display:block;width:400px;max-width:100%;margin:0;align-self:center;background:#E7EFF3;border-radius:32px;overflow:hidden}
+.pregnancy-guide .pg-ag-hero-art .pg-hero-art img{width:100%;height:auto;display:block}
+.pregnancy-guide .pg-ag-guide .pg-w-start{max-width:1120px}
+.pregnancy-guide .pg-ag-guide .pg-page-main.pg-ag-content{max-width:none}
+.pregnancy-guide .pg-ag-guide .pg-ag-section:first-child{padding-top:0}
+@media(max-width:1000px) and (min-width:701px){.pregnancy-guide .pg-ag-hero-art .pg-hero-grid{grid-template-columns:minmax(0,1fr) 280px;gap:24px}
+.pregnancy-guide .pg-ag-hero-art .pg-hero-art{width:280px}}
+@media(max-width:700px){.pregnancy-guide .pg-ag-hero-art .pg-hero-grid{grid-template-columns:1fr;gap:16px}
+.pregnancy-guide .pg-ag-hero-art .pg-hero-art{display:block;width:220px;max-width:70%;justify-self:center;border-radius:24px}}
+.pregnancy-guide .pg-ag-label,.pregnancy-guide .pg-ag-compare-link{font-size:16px}

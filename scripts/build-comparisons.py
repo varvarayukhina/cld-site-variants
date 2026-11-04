@@ -26,14 +26,18 @@ def integrate(html):
         html=html.replace('    else if (h.indexOf("card-")','    else if (h.indexOf("compare-") === 0) go("compare:" + h.slice(8), false);\n    else if (h.indexOf("card-")',1)
     if '// comparison metadata' not in html:
         html=html.replace('    document.title = /', '''    // comparison metadata
-    if (state.view === "compare" && COMPARISONS[state.comparison]) { title = COMPARISONS[state.comparison].title; description = COMPARISONS[state.comparison].intro; }
-    if (state.view === "comparisons") { title = "Об анализах: сравнения исследований"; description = "Чем отличаются похожие анализы: железо, моча, щитовидная железа и сахар в крови. Понятные объяснения и выбор исследований CLD."; }
+    if (state.view === "compare" && COMPARISONS[state.comparison]) { title = COMPARISONS[state.comparison].title; description = COMPARISONS[state.comparison].description || COMPARISONS[state.comparison].intro; }
+    if (state.view === "comparisons") { title = "Об анализах: сравнения исследований"; description = "Чем отличаются похожие анализы: железо, сахар, щитовидная железа, печень, почки, холестерин, гормоны и другие. Понятные объяснения и выбор исследований CLD."; }
     document.title = /''',1)
+    if 'cardComparisons(code); // comparison links' not in html:
+        html=html.replace('    if (togHtml) html += togHtml;','    html += cardComparisons(code); // comparison links\n    if (togHtml) html += togHtml;',1)
     if 'comparisonSync(); // shared comparison cart' not in html:
         html=html.replace('womenSyncControls(); // shared women cart','womenSyncControls(); // shared women cart\n    comparisonSync(); // shared comparison cart',1)
     if 'decorateGuideComparisons(); // contextual comparisons' not in html:
         html=html.replace('    $("#g-toc").innerHTML =','    decorateGuideComparisons(); // contextual comparisons\n    $("#g-toc").innerHTML =',1)
     if 'href="../assets/comparisons.css' not in html:html=html.replace('</head>','<link rel="stylesheet" href="../assets/comparisons.css?v=20261102">\n</head>',1)
+    import hashlib
+    html=re.sub(r'href="../assets/comparisons.css[^"]*"','href="../assets/comparisons.css?v='+hashlib.sha256((ROOT/'assets/comparisons.css').read_bytes()).hexdigest()[:12]+'"',html,count=1)
     return html
 if __name__=='__main__':
-    path=ROOT/'v4/index.html';path.write_text(integrate(path.read_text()));print('Built four comparisons, shared cart and contextual dialogs.')
+    path=ROOT/'v4/index.html';path.write_text(integrate(path.read_text()));print('Built comparisons, shared cart, card links and contextual dialogs.')

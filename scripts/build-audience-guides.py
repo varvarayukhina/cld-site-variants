@@ -7,12 +7,13 @@ def integrate(html):
  helpers=runpy.run_path(str(ROOT/'scripts/build-pregnancy-guide.py'))
  css=helpers['scope_css']((CONTENT/'style.css').read_text());(ROOT/'assets/audience-guides.css').write_text(css+'\n')
  render=runpy.run_path(str(CONTENT/'templates.py'))['template'];templates={}
+ defs=re.search(r'(<svg aria-hidden="true" style="position:absolute;[\s\S]*?</svg>)',(ROOT/'content/pregnancy-guide/page.html').read_text())[1]
  for key in ['senior','men']:
-  markup=render(key);ids=re.findall(r'\bid="([^"]+)"',markup)
+  markup=defs+render(key);ids=re.findall(r'\bid="([^"]+)"',markup)
   for ident in sorted(ids,key=len,reverse=True):
    markup=markup.replace('id="'+ident+'"','id="ag-'+ident+'"').replace('href="#'+ident+'"','href="#ag-'+ident+'"')
    for attr in ['for','aria-controls','aria-labelledby']:markup=markup.replace(attr+'="'+ident+'"',attr+'="ag-'+ident+'"')
-  markup=re.sub(r'href="#ag-([^"]+)"',lambda m:'href="#for-'+key+':'+m[1]+'" data-audience-target="'+m[1]+'"',markup)
+  markup=re.sub(r'href="#ag-([^"]+)"',lambda m:m[0] if m[1].startswith('i-') else 'href="#for-'+key+':'+m[1]+'" data-audience-target="'+m[1]+'"',markup)
   markup=re.sub(r'class="([^"]+)"',lambda m:'class="'+' '.join('pg-'+c for c in m[1].split())+'"',markup)
   templates[key]=markup
  module=(CONTENT/'adapter.js').read_text().replace('/* AUDIENCE_TEMPLATES */','var AUDIENCE_TEMPLATES='+json.dumps(templates,ensure_ascii=False)+';\nvar AUDIENCE_COPY='+json.dumps({key:json.loads((CONTENT/(key+'.json')).read_text()) for key in templates},ensure_ascii=False)+';\nObject.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];});')

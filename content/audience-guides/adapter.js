@@ -1,5 +1,5 @@
   /* AUDIENCE_TEMPLATES */
-  var audienceSearch = { senior: "", men: "" };
+  var audienceSearch = { senior: "", men: "" }, audienceSpy = null;
   function audienceFilter() {
     var q=audienceSearch[state.guide].trim().toLowerCase(),count=0;
     $$("#ag-catalog-list [data-preg-code]").forEach(function(row){var c=row.dataset.pregCode,a=A[c],match=!q||(c+" "+a.n+" "+a.off).toLowerCase().indexOf(q)>=0;row.hidden=!match;if(match)count++;});
@@ -27,6 +27,11 @@
     root.querySelector('[data-audience-count]').textContent=nAn(codes.length);root.querySelector('[data-audience-point]').textContent='Цены и доступность: '+ptName(POINTS[state.pt]);
     root.querySelector('[data-audience-faq]').innerHTML=(g.faq||[]).map(function(f){return '<details class="pg-more"><summary>'+esc(f.q)+'</summary><div class="pg-detail-body"><p>'+esc(f.a)+'</p></div></details>';}).join('');
     var ld=$('#g-ld');if(!ld){ld=document.createElement('script');ld.type='application/ld+json';ld.id='g-ld';document.head.appendChild(ld);}ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:(g.faq||[]).map(function(f){return {'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}};})});
+    var topics=Array.prototype.slice.call(root.querySelectorAll('section[data-topic]'));
+    root.querySelectorAll('[data-audience-toc]').forEach(function(el){el.innerHTML=topics.map(function(s){var id=s.id.slice(3);return '<a href="#for-'+state.guide+':'+id+'" data-audience-target="'+id+'">'+esc(s.dataset.topic)+'</a>';}).join('');});
+    if(audienceSpy)audienceSpy.disconnect();
+    audienceSpy=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)return;root.querySelectorAll('[data-audience-toc] a').forEach(function(a){a.setAttribute('aria-current',a.dataset.audienceTarget===entry.target.id.slice(3)?'true':'false');});});},{rootMargin:'-20% 0px -65% 0px'});
+    topics.forEach(function(s){audienceSpy.observe(s);});
     syncCart();if(state.gsec){var slug=state.gsec,key=state.guide;setTimeout(function(){if(state.view==='guide'&&state.guide===key)audienceJump(slug,false);},80);}
   }
   $('#audience-guide').addEventListener('click',function(e){var a=e.target.closest('[data-audience-target]');if(a){e.preventDefault();e.stopPropagation();audienceJump(a.dataset.audienceTarget,true);}});
