@@ -58,12 +58,12 @@
   }
   function renderComparisonPage() {
     var key=state.comparison||'iron',a=COMPARISONS[key];
-    document.getElementById('comparison-page').innerHTML='<a class="cmp-back" href="#comparisons" data-go="comparisons">← Об анализах</a><h1>'+esc(a.title)+'</h1>'+comparisonBody(key,true)+'<a class="btn btn-navy" href="#cart" data-go="cart">Перейти в корзину</a>';
+    document.getElementById('comparison-page').innerHTML='<a class="cmp-back" href="#comparisons" data-go="comparisons">← Справочник об анализах</a><h1>'+esc(a.title)+'</h1>'+comparisonBody(key,true)+'<a class="btn btn-navy" href="#cart" data-go="cart">Перейти в корзину</a>';
     var ld=$('#g-ld');if(!ld){ld=document.createElement('script');ld.type='application/ld+json';ld.id='g-ld';document.head.appendChild(ld);}ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:a.details.map(function(d){return {'@type':'Question',name:d[0],acceptedAnswer:{'@type':'Answer',text:d[1]}};})});
     comparisonSync();
   }
   function renderComparisonHub() {
-    document.getElementById('comparison-hub').innerHTML='<h1>Об анализах: чем отличаются похожие исследования</h1><p class="cmp-intro">Разбираемся, что показывает каждый анализ и как сопоставить исследования с назначением.</p><div class="cmp-hub-grid">'+Object.keys(COMPARISONS).map(function(k){var a=COMPARISONS[k];return '<a class="cmp-hub-card" href="#compare-'+k+'" data-go="compare:'+k+'"><h2>'+esc(a.shortTitle)+'</h2><p>'+esc(a.intro)+'</p><b>Разобраться →</b></a>';}).join('')+'</div>';
+    document.getElementById('comparison-hub').innerHTML='<h1>Справочник об анализах</h1><p class="cmp-intro">Чем отличаются похожие анализы, что показывает каждый из них и как сопоставить исследования с назначением.</p><div class="cmp-hub-grid">'+Object.keys(COMPARISONS).map(function(k){var a=COMPARISONS[k];return '<a class="cmp-hub-card" href="#compare-'+k+'" data-go="compare:'+k+'"><h2>'+esc(a.shortTitle)+'</h2><p>'+esc(a.intro)+'</p><b>Разобраться →</b></a>';}).join('')+'</div>';
   }
   PAGES.push('comparisons','compare');RENDER.compare=renderComparisonPage;RENDER.comparisons=renderComparisonHub;
   document.addEventListener('click',function(e){var b=e.target.closest('[data-comparison]');if(b){e.preventDefault();openComparison(b.dataset.comparison,b);}if(e.target.closest('[data-comparison-close]'))closeComparison(false);});

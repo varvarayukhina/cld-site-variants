@@ -14,7 +14,8 @@ def integrate(html):
   <section id="v-comparisons" data-view="comparisons" hidden><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
   <dialog id="comparison-dialog" class="cmp-root" aria-labelledby="cmp-dialog-title"><div class="cmp-dialog-top"><button type="button" data-comparison-close aria-label="Закрыть сравнение">×</button></div><div class="cmp-dialog-content"></div><div class="cmp-dialog-footer"><button type="button" class="btn" data-comparison-close>Вернуться к выбору</button><a class="btn btn-navy" href="#cart" data-go="cart" data-comparison-cart hidden>Перейти в корзину</a></div></dialog>
   <footer class="foot">''',1)
-    footer_link='<a href="#comparisons" data-go="comparisons">Статьи об анализах</a>'
+    footer_link='<a href="#comparisons" data-go="comparisons">Справочник об анализах</a>'
+    html=html.replace('<a href="#comparisons" data-go="comparisons">Статьи об анализах</a>',footer_link)
     if footer_link not in html:
         anchor='          <a href="#points" data-go="points">Где сдать анализы</a>\n          <a href="#results" data-go="results">Результаты анализов</a>\n'
         assert html.count(anchor)==1,'footer anchor'
@@ -30,7 +31,7 @@ def integrate(html):
     if '// comparison metadata' not in html:
         html=html.replace('    document.title = /', '''    // comparison metadata
     if (state.view === "compare" && COMPARISONS[state.comparison]) { title = COMPARISONS[state.comparison].title; description = COMPARISONS[state.comparison].description || COMPARISONS[state.comparison].intro; }
-    if (state.view === "comparisons") { title = "Об анализах: сравнения исследований"; description = "Чем отличаются похожие анализы: железо, сахар, щитовидная железа, печень, почки, холестерин, гормоны и другие. Понятные объяснения и выбор исследований CLD."; }
+    if (state.view === "comparisons") { title = "Справочник об анализах: чем отличаются похожие исследования"; description = "Чем отличаются похожие анализы: железо, сахар, щитовидная железа, печень, почки, холестерин, гормоны и другие. Понятные объяснения и выбор исследований CLD."; }
     document.title = /''',1)
     if 'cardComparisons(code); // comparison links' not in html:
         html=html.replace('    if (togHtml) html += togHtml;','    html += cardComparisons(code); // comparison links\n    if (togHtml) html += togHtml;',1)
