@@ -62,9 +62,24 @@
     var ld=$('#g-ld');if(!ld){ld=document.createElement('script');ld.type='application/ld+json';ld.id='g-ld';document.head.appendChild(ld);}ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:a.details.map(function(d){return {'@type':'Question',name:d[0],acceptedAnswer:{'@type':'Answer',text:d[1]}};})});
     comparisonSync();
   }
+  var COMPARISON_GROUPS = [
+    { id: 'krov', n: 'Кровь и воспаление', keys: ['iron', 'inflammation', 'b12'] },
+    { id: 'obmen', n: 'Сахар и обмен веществ', keys: ['glucose'] },
+    { id: 'serdce', n: 'Сердце и сосуды', keys: ['lipids'] },
+    { id: 'pechen', n: 'Печень', keys: ['liver'] },
+    { id: 'pochki', n: 'Почки и мочевыводящие пути', keys: ['kidneys', 'urine'] },
+    { id: 'shchitovidka', n: 'Щитовидная железа', keys: ['thyroid'] },
+    { id: 'muzhskoe', n: 'Мужские гормоны и предстательная железа', keys: ['testosterone', 'psa'] }
+  ];
   function renderComparisonHub() {
-    document.getElementById('comparison-hub').innerHTML='<h1>Справочник об анализах</h1><p class="cmp-intro">Чем отличаются похожие анализы, что показывает каждый из них и как сопоставить исследования с назначением.</p><div class="cmp-hub-grid">'+Object.keys(COMPARISONS).map(function(k){var a=COMPARISONS[k];return '<a class="cmp-hub-card" href="#compare-'+k+'" data-go="compare:'+k+'"><h2>'+esc(a.shortTitle)+'</h2><p>'+esc(a.intro)+'</p><b>Разобраться →</b></a>';}).join('')+'</div>';
+    var used = {}, groups = COMPARISON_GROUPS.map(function (g) { var keys = g.keys.filter(function (k) { return COMPARISONS[k]; }); keys.forEach(function (k) { used[k] = 1; }); return { id: g.id, n: g.n, keys: keys }; }).filter(function (g) { return g.keys.length; });
+    var rest = Object.keys(COMPARISONS).filter(function (k) { return !used[k]; }); if (rest.length) groups.push({ id: 'drugoe', n: 'Другие исследования', keys: rest });
+    var card = function (k) { var a = COMPARISONS[k]; return '<a class="cmp-hub-card" href="#compare-' + k + '" data-go="compare:' + k + '"><h3>' + esc(a.shortTitle) + '</h3><p>' + esc(a.intro) + '</p><b>Читать →</b></a>'; };
+    document.getElementById('comparison-hub').innerHTML = '<h1>Справочник об анализах</h1><p class="cmp-intro">Чем отличаются похожие анализы, что показывает каждый из них и как сопоставить исследования с назначением.</p>' +
+      '<nav class="cmp-hub-nav" aria-label="Системы органов">' + groups.map(function (g) { return '<button type="button" data-hub-group="' + g.id + '">' + esc(g.n) + ' <span>' + g.keys.length + '</span></button>'; }).join('') + '</nav>' +
+      groups.map(function (g) { return '<section class="cmp-hub-group" id="cmp-group-' + g.id + '"><h2>' + esc(g.n) + '</h2><div class="cmp-hub-grid">' + g.keys.map(card).join('') + '</div></section>'; }).join('');
   }
+  document.addEventListener('click', function (e) { var b = e.target.closest('[data-hub-group]'); if (!b) return; var s = document.getElementById('cmp-group-' + b.dataset.hubGroup); if (!s) return; var top = document.getElementById('top'); window.scrollTo({ top: s.getBoundingClientRect().top + scrollY - (top ? top.offsetHeight : 94) - 16, behavior: reduceMotion ? 'auto' : 'smooth' }); });
   PAGES.push('comparisons','compare');RENDER.compare=renderComparisonPage;RENDER.comparisons=renderComparisonHub;
   document.addEventListener('click',function(e){var b=e.target.closest('[data-comparison]');if(b){e.preventDefault();openComparison(b.dataset.comparison,b);}if(e.target.closest('[data-comparison-close]'))closeComparison(false);});
   document.getElementById('comparison-dialog').addEventListener('close',function(){
