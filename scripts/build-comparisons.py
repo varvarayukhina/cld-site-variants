@@ -14,8 +14,11 @@ def integrate(html):
   <section id="v-comparisons" data-view="comparisons" hidden><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
   <dialog id="comparison-dialog" class="cmp-root" aria-labelledby="cmp-dialog-title"><div class="cmp-dialog-top"><button type="button" data-comparison-close aria-label="Закрыть сравнение">×</button></div><div class="cmp-dialog-content"></div><div class="cmp-dialog-footer"><button type="button" class="btn" data-comparison-close>Вернуться к выбору</button><a class="btn btn-navy" href="#cart" data-go="cart" data-comparison-cart hidden>Перейти в корзину</a></div></dialog>
   <footer class="foot">''',1)
-    if 'data-go="comparisons"' not in html:
-        html=html.replace('<a href="#checkups" data-go="checkups">Чек-апы</a>\n          <a href="#" data-scroll="promos">','<a href="#checkups" data-go="checkups">Чек-апы</a>\n          <a href="#comparisons" data-go="comparisons">Об анализах</a>\n          <a href="#" data-scroll="promos">',1)
+    footer_link='<a href="#comparisons" data-go="comparisons">Статьи об анализах</a>'
+    if footer_link not in html:
+        anchor='          <a href="#points" data-go="points">Где сдать анализы</a>\n          <a href="#results" data-go="results">Результаты анализов</a>\n'
+        assert html.count(anchor)==1,'footer anchor'
+        html=html.replace(anchor,anchor+'          '+footer_link+'\n',1)
     if 'closeComparison(true); // comparison navigation' not in html:
         html=html.replace('  function go(target, push) {','  function go(target, push) {\n    closeComparison(true); // comparison navigation',1)
     if 'state.comparison = p[1]' not in html:
