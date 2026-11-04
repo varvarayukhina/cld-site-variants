@@ -33,11 +33,13 @@ Women guide: `content/women-guide/` → `python3 scripts/build-women-guide.py`.
 Comparisons: `content/comparisons/articles.json` and `adapter.js` → `python3 scripts/build-comparisons.py`; styles in `assets/comparisons.css`.
 Children guide: `content/kids-guide/` → `python3 scripts/build-kids-guide.py`.
 Parents and men: `content/audience-guides/` → `python3 scripts/build-audience-guides.py`.
-Rebuild order: pregnancy → women → kids → audience → navigation → comparisons → catalog-additions → crosslinks. All builders are idempotent. Contextual comparisons use the shared catalogue, selected point and cart; source references stay in the JSON for editorial verification.
+Rebuild order: pregnancy → women → kids → audience → navigation → comparisons → catalog-additions → crosslinks → situations. All builders are idempotent. Contextual comparisons use the shared catalogue, selected point and cart; source references stay in the JSON for editorial verification.
 
 Audience guides women, kids, men and senior share one structure (03.11.2026): navy hero with an illustration (assets/img/{women/hero-character,kids/hero-family,men/hero,senior/hero}.webp), task grid «С какой задачей вы пришли?», all topic sections visible, sticky TOC on desktop (same component as the pregnancy guide), one optional «Подробнее» per topic, analyses at the end of each topic. No topic gating and no sources block on the page. Shared task/hero/readability styles live in `content/women-guide/style.css` and `content/audience-guides/style.css`; icon symbols are embedded in each guide.
 
 Comparison articles: short fields (intro, items, use, preparation) feed the dialog; `situation`, `sections`, `details` (FAQ + FAQPage JSON-LD), `related` and `description` render on the full page `#compare-<key>`. Analysis cards link to every article that contains their code. Drafts and verification live in `~/cld-work/site/comparisons-new/`; merge with `python3 ~/cld-work/site/comparisons-new/merge.py <keys>` then rebuild.
+
+Situation pages «Анализы по поводу» (#povody, #povod-<id>): `content/situations/situations.json` → `python3 scripts/build-situations.py`, last in the order; illustrations in `assets/img/situations/`; facts and primary-source review in `~/cld-work/situations-facts.md`.
 
 Card cross-links («Читайте также»: audience guides and checkups containing the analysis): `python3 scripts/build-crosslinks.py`, last in the order.
 
