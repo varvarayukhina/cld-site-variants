@@ -1946,6 +1946,52 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
   .st-hi .ico { width: 18px; height: 18px; }
 }
 /* SITUATIONS CSS END */
+/* PREP CSS */
+.pp-art { padding-block: 40px 72px; }
+.pp-sec { scroll-margin-top: 140px; }
+.pp-sec + .pp-sec { margin-top: 56px; }
+.pp-sec > h2 { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; font-size: clamp(26px, 2.6vw, 32px); line-height: 1.2; }
+.pp-p, .pp-call p { max-width: 70ch; font-size: 18px; line-height: 1.6; color: var(--ink); }
+.pp-fast { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.pp-f { display: grid; align-content: start; gap: 8px; padding: 20px; border-radius: 18px; background: var(--surface-2); }
+.pp-f b { font: 800 30px/1.1 var(--text); color: var(--navy); }
+.pp-f span { font-size: 17px; line-height: 1.5; color: var(--ink); }
+.pp-when { display: inline-block; margin: 28px 0 14px; padding: 8px 16px; border-radius: 999px; background: var(--navy); color: #FFF; font: 700 17px/1.3 var(--text); }
+.pp-strip { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 18px; }
+.pp-panel { margin: 0; display: grid; grid-row: span 3; grid-template-rows: subgrid; gap: 0; border: 2.5px solid var(--navy); border-radius: 20px; overflow: hidden; background: #FFF; }
+.pp-head { display: flex; align-items: flex-end; gap: 12px; padding: 14px 14px 4px; }
+.pp-n { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--lime); color: var(--navy); font: 800 18px var(--text); border: 2.5px solid var(--navy); }
+.pp-bub { position: relative; flex: 1; padding: 10px 14px; border: 2.5px solid var(--navy); border-radius: 18px; background: #FFF; color: var(--ink); font: 700 16px/1.35 var(--text); }
+.pp-bub::after { content: ""; position: absolute; left: 34%; bottom: -10px; width: 16px; height: 16px; background: #FFF; border-right: 2.5px solid var(--navy); border-bottom: 2.5px solid var(--navy); transform: rotate(45deg); }
+.pp-panel > img { display: block; width: 100%; height: auto; max-height: 400px; aspect-ratio: 3 / 2; object-fit: contain; border-bottom: 2.5px solid var(--navy); background: #FFF; }
+.pp-panel figcaption { padding: 16px 18px 20px; }
+.pp-panel h3 { margin-bottom: 6px; font: 700 20px/1.3 var(--display); color: var(--ink); }
+.pp-panel p { font-size: 17px; line-height: 1.55; color: var(--ink); }
+.pp-spec { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 28px; align-items: center; padding: 22px; border: 2.5px solid var(--navy); border-radius: 20px; }
+.pp-spec + .pp-spec { margin-top: 18px; }
+.pp-spec img { display: block; width: 100%; height: auto; border-radius: 14px; }
+.pp-spec.no-img { grid-template-columns: minmax(0, 1fr); }
+.pp-spec.no-img > div { max-width: 72ch; }
+.pp-sec.st-faq details p { max-width: 64ch; }
+.pp-spec h3 { margin-bottom: 10px; font: 700 22px/1.3 var(--display); color: var(--ink); }
+.pp-ol { margin: 0; padding-left: 24px; display: grid; gap: 8px; font-size: 17px; line-height: 1.55; color: var(--ink); }
+.pp-ol li::marker { font-weight: 800; color: var(--navy); }
+.pp-note { margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--ink); }
+.pp-call { padding: 24px; border-radius: 20px; background: var(--lime-soft); }
+.pp-end { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 44px; font-size: 17px; color: var(--ink); }
+.pp-more { display: inline-flex; align-items: center; gap: 10px; margin-top: 12px; padding: 10px 16px; border-radius: 12px; background: var(--lime-soft); color: var(--navy); font: 700 16px/1.35 var(--text); text-decoration: none; }
+.pp-more:hover { background: var(--lime); }
+.pp-more .ico { width: 20px; height: 20px; flex: none; }
+@media (max-width: 1100px) { .pp-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pp-strip > .pp-panel:last-child:nth-child(odd) { grid-column: span 2; } .pp-fast { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  .pp-art { padding-block: 24px 48px; }
+  .pp-strip, .pp-fast, .pp-spec { grid-template-columns: minmax(0, 1fr); }
+  .pp-strip > .pp-panel:last-child:nth-child(odd) { grid-column: auto; }
+  .pp-spec { padding: 16px; gap: 16px; }
+  .pp-p, .pp-call p { font-size: 17px; }
+  .pp-f b { font-size: 26px; }
+}
+/* PREP CSS END */
 </style>
 <link rel="stylesheet" href="../assets/pregnancy-guide.css?v=20261102">
 <link rel="stylesheet" href="../assets/women-guide.css?v=af23bd447fab">
@@ -2332,6 +2378,18 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
     <div class="wrap"><div class="st-hub" id="st-hub"></div></div>
   </section>
   <!-- SITUATIONS VIEWS END -->
+  <!-- PREP VIEW START -->
+  <section id="v-podgotovka" data-view="podgotovka" hidden>
+    <div class="st-hero pp-hero" style="--st-bg: url(../assets/img/prep/p04-voda.webp)">
+      <div class="wrap st-hero-in">
+        <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Подготовка к анализам</span></div>
+        <h1 id="pp-h1"></h1>
+        <p class="lede" id="pp-lede"></p>
+      </div>
+    </div>
+    <div class="wrap pp-art" id="pp-art"></div>
+  </section>
+  <!-- PREP VIEW END -->
   <section id="v-card" data-view="card" hidden>
     <div class="wrap">
       <div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><button type="button" id="crumb-card-cat" data-go="catalog:blood">Кровь и анемия</button><span>/</span><span id="crumb-card">Ферритин</span></div>
@@ -2805,6 +2863,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
           <a href="#points" data-go="points">Где сдать анализы</a>
           <a href="#results" data-go="results">Результаты анализов</a>
           <a href="#comparisons" data-go="comparisons">Справочник об анализах</a>
+          <a href="#podgotovka" data-go="podgotovka">Подготовка к анализам</a>
         </nav>
         <nav class="f-col" aria-label="Врачам и клиникам"><h2 class="f-h">Врачам и клиникам</h2>
           <a href="#doctors" data-go="doctors">Врачам</a>
@@ -3977,6 +4036,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
     html += cardReadMore(code); // гиды и чек-апы с этим анализом
     if (t && t.src) html += '<details class="srcs"><summary>Источники для проверки врачом</summary><ul>' + t.src.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul></details>";
     $("#k-blocks").innerHTML = html;
+    $$("#k-blocks > section").forEach(function (s) { var h = s.querySelector("h2"); if (h && /подготов/i.test(h.textContent)) s.insertAdjacentHTML("beforeend", PP_LINK); }); // памятка в карточке
     var NPTS = {"28.135": 8, "80-049": 21, "30-017": 21, "10-008": 21, "40-062": 21, "10.105": 8, "19.115": 27, "19.100": 27, "19.105": 27, "40-080": 21, "17.130": 27, "17.167": 27, "40.120": 27, "21.120": 8, "18.101": 27, "18.103": 27, "18.110": 27, "50-126": 21, "28.145": 27, "32.100": 27, "20-001": 21, "20-017": 21, "20-003": 21, "20-007": 21, "25-018": 21, "40-052": 21, "40-060.": 21, "40-107": 21, "40-111": 21, "40-081": 21, "40-028": 21, "50-056": 21, "40-013": 21, "40-047": 21, "40-141": 21, "30-035": 21, "30-037": 21, "30-043": 21, "40-390": 21, "40-391": 20, "40-004": 21, "30-010": 21, "30-009": 21, "30-008": 21, "30-007": 21, "30-006": 21, "50-125": 21, "30-040": 21, "30-001": 21, "40-070": 21, "40-072": 21, "40-073": 21, "40-069": 21, "40-044": 21, "40-104": 21, "40-026": 21, "40-025": 21, "40-042": 21, "40-121": 21, "40-067": 21, "40-010": 21, "40-035": 21, "40-036": 21, "40-037": 21, "40-001": 21, "40-027": 21, "40-063": 21, "40-077": 21, "40-018.1": 21, "40-056": 21, "40-057": 21, "40-058": 21, "40-297": 21, "40-041": 21, "40-123": 21, "40-054": 21, "40-075": 21, "40-112": 21, "30-021": 21, "30-004": 21, "30-011": 21, "30-018": 21, "30-005": 21, "30-029": 21, "30-014": 21, "30-020": 20, "30-039": 21, "30-015": 21, "30-034": 21, "90-001": 21, "90-021": 21, "90-279": 21, "90-006": 21, "90-046": 21, "60-011": 20, "10-012": 21, "80-041": 21, "80-002": 21, "80-012": 21, "80-015": 21, "80-003": 21, "80-004": 21, "80-013": 21, "80-007": 21, "41-016": 21, "41-017": 21, "41-018": 21, "41-001": 21, "41-002": 21, "41-006": 21, "41-003": 21, "41-004": 21, "41-005": 21}; // пункты из API, 22.10.2026; остальные — 24
     var blood = a.bio.indexOf("Кровь") === 0;
     var cito = cx ? 0 : citoOf(code), na = item(code).na, npts = POINTS.filter(function (p, i) { return priceAt(code, i) != null; }).length;
@@ -4368,7 +4428,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
       var rules = b ? (b.list || b.p || []).filter(function (x) { return !/^Приём лекарств перед анализом/.test(x); }) : null;
       var k = !rules && (CX[c] ? CX[c].prep : DPREP[c]);
       return "<li><b>" + esc(item(c).n) + "</b>" + (rules ? "<ul>" + rules.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul>" : k ? '<p><span class="prep-k">' + esc(k) + "</span>" + esc(DOC.prep[k]) + "</p>" : "<p>Подготовка — в карточке анализа.</p>") + "</li>";
-    }).join("") + '</ol><p class="prep-last">Приём лекарств перед анализом согласуйте с лечащим врачом.</p>';
+    }).join("") + '</ol><p class="prep-last">Приём лекарств перед анализом согласуйте с лечащим врачом.</p>' + PP_LINK;
   }
   function renderOrder() {
     var o = lastOrder, el = $("#order-body");
@@ -4570,6 +4630,41 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
     if (t) { e.preventDefault(); var sec = document.getElementById(t.dataset.stToc); if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.scrollY - 140, behavior: reduceMotion ? "auto" : "smooth" }); }
   });
   /* SITUATIONS END */
+  /* PREP START */
+  var PREP = {"title": "Как подготовиться к анализам", "lede": "Подготовка к анализам занимает несколько шагов: от вечера накануне до получения результата. Точное правило для вашего анализа указано в его карточке, на странице — общие шаги и причины.", "description": "Как подготовиться к анализам в CLD: что делать накануне и утром, сколько не есть, как собрать мочу и кал. Правило для вашего анализа — в его карточке.", "panels": [{"id": "p01-kartochka", "when": "Накануне вечером", "title": "Найдите правило в карточке анализа", "bubble": "Так, что написано в карточке?", "text": "Правило для вашего анализа указано в его карточке: сколько часов не есть и что исключить. Здесь объяснены общие шаги и причины."}, {"id": "p02-uzhin", "when": "Накануне вечером", "title": "Рассчитайте время ужина", "bubble": "Ужин сегодня пораньше.", "text": "Закончите ужин так, чтобы до взятия крови прошло указанное в карточке число часов. После еды в крови повышаются глюкоза, триглицериды и железо."}, {"id": "p03-otdyh", "when": "Накануне вечером", "title": "Отложите тренировку", "bubble": "Тренировка подождёт до завтра.", "text": "Физическая активность перед взятием крови может влиять на результат. Для большинства анализов нагрузки исключают за 30 минут, для части анализов на гормоны — за сутки."}, {"id": "p04-voda", "when": "Утром", "title": "Пейте только чистую воду", "bubble": "Кофе подождёт. Пока только вода.", "text": "Пока действует ограничение в еде, можно пить чистую воду. Кофе, чай и сок в это время не пьют."}, {"id": "p05-lekarstva", "when": "Утром", "title": "Согласуйте приём лекарств с врачом", "bubble": "Позвоню врачу, спрошу про таблетки.", "text": "Некоторые лекарства влияют на результаты анализов. Приём лекарств перед анализом согласуйте с лечащим врачом."}, {"id": "p06-doroga", "when": "Утром", "title": "Идите спокойно, не спешите", "bubble": "Не тороплюсь, времени достаточно.", "text": "Для большинства анализов за 30 минут до взятия крови исключают нагрузки и курение. Для части анализов на гормоны курение исключают за 3 часа."}, {"id": "p07-ozhidanie", "when": "В пункте", "title": "Посидите спокойно перед взятием", "bubble": "Посижу спокойно, подышу.", "text": "Перед взятием крови посидите около 15 минут. Смена положения тела может заметно влиять на результаты."}, {"id": "p08-medsestra", "when": "В пункте", "title": "Сообщите медсестре о лекарствах", "bubble": "Принимаю вот эти таблетки.", "text": "Сообщите медсестре, какие лекарства принимаете и соблюдена ли подготовка. Во время взятия крови расслабьте руку: кулак сжимать не нужно."}, {"id": "p09-posle", "when": "После", "title": "После взятия крови можно поесть", "bubble": "Теперь можно и позавтракать.", "text": "Прижмите повязку на 5–10 минут, не сгибая руку, и отдохните около 5 минут. Если в карточке нет другого указания, после этого можно поесть."}, {"id": "p10-rezultat", "when": "После", "title": "Откройте результат в бланке", "bubble": "Результат пришёл. Посмотрю бланк.", "text": "В бланке рядом с результатом указан референтный интервал — границы, с которыми лаборатория сравнивает результат. Что значит результат для вас, объяснит врач."}], "fasting": [{"label": "12 часов", "text": "Не есть 12 часов, можно пить чистую воду. За 30 минут — без нагрузок и курения. Если сдаёте кровь в 8:00, последний приём пищи — до 20:00."}, {"label": "8 часов", "text": "Не есть 8 часов, можно пить чистую воду. За сутки — без алкоголя, за 30 минут — без нагрузок и курения."}, {"label": "2–3 часа", "text": "Не есть 2–3 часа, можно пить чистую воду. За 30 минут — без нагрузок и курения."}, {"label": "Без подготовки", "text": "Особой подготовки нет. За 30 минут до взятия крови — не курить."}], "special": [{"id": "mocha", "img": "s-mocha", "title": "Сбор мочи", "steps": ["Для общего анализа соберите первую утреннюю порцию мочи — сразу после сна.", "Перед сбором тщательно промойте наружные половые органы с мылом.", "Соберите мочу в чистую сухую ёмкость и закройте её крышкой.", "Накануне исключите физические нагрузки и алкоголь.", "Мочегонные препараты отменяют за 48 часов только с разрешения врача.", "Женщинам сдавать мочу до менструации или через 2–3 дня после её окончания."], "note": "Для суточной мочи, посева и других видов исследования правила отличаются: они указаны в карточке анализа."}, {"id": "kal", "img": "s-kal", "title": "Сбор кала", "steps": ["Соберите кал в чистую сухую ёмкость с широкой горловиной.", "Следите, чтобы в ёмкость не попали моча, выделения из половых органов и лекарства.", "Приём лекарств, влияющих на работу желудка и кишечника или меняющих цвет кала, согласуйте с лечащим врачом.", "После рентгеновского исследования желудка или кишечника кал исследуют не ранее чем через 2 дня."], "note": "Правило для вашего анализа — в его карточке. Контейнер и срок доставки в пункт уточните по телефону 8 800 201 78 30."}, {"id": "cikl", "img": "s-cikl", "title": "Женские гормоны и день цикла", "steps": ["День цикла для каждого гормона называет врач.", "Для пролактина, ФСГ и ЛГ в клинических рекомендациях указан 2–5-й день цикла.", "Для прогестерона — через 5–7 дней после предполагаемой овуляции или за 5–7 дней до предполагаемой менструации.", "Перед анализом на ЛГ, ФСГ, эстрадиол и прогестерон не есть 2–3 часа, можно пить чистую воду.", "За 48 часов — без стероидных и тиреоидных гормонов, если это согласовано с врачом.", "За сутки — без нагрузок, за 3 часа — без курения."], "note": "Дни указаны для обследования при нарушении цикла или трудностях с зачатием. Подготовка к анализу на пролактин указана в его карточке."}, {"id": "deti", "img": "s-deti", "title": "Анализы у детей", "steps": ["Детям 1–5 лет при правиле «12 часов» или «8 часов» не есть 2–3 часа.", "Детей до года не кормить 30–40 минут.", "За 30 минут до взятия крови исключите нагрузки.", "Для детей старше 5 лет срок указан в карточке анализа.", "Если ребёнку нет 15 лет, согласие на анализ даёт сопровождающий его родитель или законный представитель."], "note": "Сильный плач у младенцев может влиять на отдельные показатели, например на лейкоциты."}, {"id": "mazki", "img": null, "title": "Мазки и соскобы на ПЦР", "steps": ["Мазок из уретры берут не раньше чем через 3 часа после мочеиспускания, при обильных выделениях — через 15–20 минут.", "Женщинам сдавать до менструации или через 2 дня после её окончания.", "Накануне и в день анализа не спринцеваться.", "В день анализа не использовать средства интимной гигиены.", "За 3–5 дней исключить вагинальные свечи, кремы и таблетки с противомикробными и антисептическими средствами.", "После вагинального УЗИ или кольпоскопии сдавать мазок не ранее чем через 24–48 часов."], "note": "ПЦР находит в мазке ДНК или РНК возбудителя. Если свечи или кремы назначил врач, перерыв перед анализом согласуйте с ним. Правило для вашего анализа — в его карточке."}], "if_not_ready": "Если вы поели, покурили или приняли лекарство, сообщите об этом медсестре до взятия крови. Эти сведения учитывают при оценке результата. При заметном нарушении подготовки анализ можно сдать в другой день.", "faq": [{"q": "Можно ли пить воду перед анализом?", "a": "Да. Правила CLD с ограничением в еде разрешают чистую воду."}, {"q": "Можно ли выпить кофе или чай?", "a": "Пока действует ограничение в еде, разрешена только чистая вода. Кофе и чай в это время не пьют."}, {"q": "За сколько не курить перед анализом?", "a": "Для большинства анализов — за 30 минут до взятия крови, для части анализов на гормоны — за 3 часа. Точный срок указан в карточке анализа."}, {"q": "Можно ли заниматься спортом перед анализом?", "a": "Для большинства анализов нагрузки исключают за 30 минут до взятия крови, для части анализов на гормоны — за сутки. Физическая активность может влиять на результат."}, {"q": "Что делать, если я принимаю лекарства?", "a": "Приём лекарств перед анализом согласуйте с лечащим врачом. Назовите медсестре все препараты, которые принимаете: их учитывают при оценке результата."}, {"q": "Можно ли сдавать кровь не утром?", "a": "Время зависит от анализа. Многие анализы сдают утром: уровень части показателей меняется в течение суток. Для части анализов без особой подготовки в карточке указано, что кровь можно сдать в любое время. Если сдаёте кровь не утром, сообщите медсестре, когда ели в последний раз."}, {"q": "Можно ли сдавать мочу во время менструации?", "a": "Нет. При плановом исследовании мочу сдают до менструации или через 2–3 дня после её окончания."}, {"q": "Почему перед взятием крови просят посидеть?", "a": "Смена положения тела может заметно влиять на результаты. Поэтому перед взятием крови рекомендуют посидеть около 15 минут."}]};
+  PAGES.push("podgotovka"); NAVOF.podgotovka = "catalog";
+  function ppPanel(p, n) {
+    return '<figure class="pp-panel"><div class="pp-head"><span class="pp-n num">' + n + "</span>" + (p.bubble ? '<span class="pp-bub">' + typo(esc(p.bubble)) + "</span>" : "") + "</div>" +
+      '<img src="../assets/img/prep/' + p.id + '.webp" alt="" width="1200" height="800" loading="lazy"><figcaption><h3>' + typo(esc(p.title)) + "</h3><p>" + typo(esc(p.text)) + "</p></figcaption></figure>";
+  }
+  function renderPrep() {
+    PAGE_META.podgotovka = [PREP.title + " — памятка в картинках | CLD", PREP.description];
+    $("#pp-h1").textContent = PREP.title; $("#pp-lede").innerHTML = typo(esc(PREP.lede));
+    var html = '<section class="pp-sec" id="skolko-ne-est"><h2><span class="st-hi">' + icon("i-clock") + "</span>Сколько не есть перед анализом</h2>" +
+      '<p class="pp-p">' + typo("Точное правило для вашего анализа — в его карточке, в разделе «Как подготовиться».") + '</p><div class="pp-fast">' +
+      PREP.fasting.map(function (f) { return '<div class="pp-f"><b class="num">' + typo(esc(f.label)) + "</b><span>" + typo(esc(f.text)) + "</span></div>"; }).join("") + "</div></section>";
+    var n = 0, groups = [];
+    PREP.panels.forEach(function (p) { var g = groups[groups.length - 1]; if (!g || g.when !== p.when) groups.push(g = { when: p.when, items: [] }); g.items.push(p); });
+    html += '<section class="pp-sec" id="po-shagam"><h2><span class="st-hi">' + icon("i-check") + "</span>Подготовка по шагам</h2>" +
+      groups.map(function (g) { return '<h3 class="pp-when">' + esc(g.when) + '</h3><div class="pp-strip" style="--n:' + Math.min(3, g.items.length) + '">' + g.items.map(function (p) { return ppPanel(p, ++n); }).join("") + "</div>"; }).join("") + "</section>";
+    html += '<section class="pp-sec" id="osobye"><h2><span class="st-hi">' + icon("i-info") + "</span>Если сдаёте не кровь</h2>" +
+      PREP.special.map(function (s) {
+        return '<div class="pp-spec' + (s.img ? "" : " no-img") + '" id="' + s.id + '">' + (s.img ? '<img src="../assets/img/prep/' + s.img + '.webp" alt="" width="1200" height="800" loading="lazy">' : "") +
+          "<div><h3>" + typo(esc(s.title)) + '</h3><ol class="pp-ol">' + s.steps.map(function (x) { return "<li>" + typo(esc(x)) + "</li>"; }).join("") + "</ol>" + (s.note ? '<p class="pp-note">' + typo(esc(s.note)) + "</p>" : "") + "</div></div>";
+      }).join("") + "</section>";
+    html += '<section class="pp-sec pp-call" id="ne-poluchilos"><h2><span class="st-hi">' + icon("i-chat") + "</span>Если не получилось подготовиться</h2><p>" + typo(esc(PREP.if_not_ready)) + "</p></section>";
+    html += '<section class="pp-sec st-faq" id="voprosy"><h2>Частые вопросы</h2>' + PREP.faq.map(function (f) { return "<details><summary>" + esc(f.q) + "</summary><p>" + typo(esc(f.a)) + "</p></details>"; }).join("") + "</section>";
+    html += '<div class="pp-end"><button class="btn btn-lime" type="button" data-go="catalog:blood">Найти свой анализ</button><span>' + typo("Помогут с подготовкой по телефону 8 800 201 78 30") + "</span></div>";
+    $("#pp-art").innerHTML = html;
+    var ld = $("#s-ld"); if (!ld) { ld = document.createElement("script"); ld.type = "application/ld+json"; ld.id = "s-ld"; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": [
+      { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Главная" }, { "@type": "ListItem", position: 2, name: "Подготовка к анализам" }] },
+      { "@type": "MedicalWebPage", name: PREP.title, description: PREP.description, inLanguage: "ru" },
+      { "@type": "FAQPage", mainEntity: PREP.faq.map(function (f) { return { "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } }; }) }] });
+  }
+  RENDER.podgotovka = renderPrep;
+  var PP_LINK = '<a class="pp-more" href="#podgotovka" data-go="podgotovka">' + icon("i-file") + "<span>Памятка в картинках: как подготовиться к анализам</span></a>";
+  /* PREP END */
   /* SHARED NAVIGATION START */
   var PAGE_META = {
     home: ["Медицинские анализы — цены и адреса пунктов", "Медицинские анализы CLD: каталог исследований, цены выбранного пункта, адреса, подготовка и результаты."],
@@ -4750,7 +4845,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
     if (state.view === "dcat") renderDoctors();
     if (RENDER[state.view]) RENDER[state.view]();
     applyPageMeta(); // reset metadata for every view
-    var sld = $("#s-ld"); if (sld && state.view !== "situation") sld.remove();
+    var sld = $("#s-ld"); if (sld && state.view !== "situation" && state.view !== "podgotovka") sld.remove();
     hideTip();
     $$(".sugg").forEach(function (b) { b.hidden = true; });
     menu(false);
