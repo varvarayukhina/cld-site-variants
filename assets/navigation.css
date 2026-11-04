@@ -12,3 +12,6 @@
 
 /* 03.11.2026: legacy guide shell stays hidden behind editorial guides */
 #v-guide > .gd[hidden], #v-guide > .cxhero[hidden] { display: none !important; }
+
+/* 04.11.2026: long analysis names (e.g. «Адренокортикотропный») must not overflow on phones */
+#v-card h1 { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word; }
