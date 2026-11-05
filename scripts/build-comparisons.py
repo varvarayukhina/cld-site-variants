@@ -10,12 +10,13 @@ def integrate(html):
         html=re.sub(r'  /\* COMPARISONS START \*/[\s\S]*?/\* COMPARISONS END \*/\n',lambda m:block,html,count=1)
     else:html=html.replace('  function go(target, push) {',block+'  function go(target, push) {',1)
     hub_section='<section id="v-comparisons" data-view="comparisons" hidden><div class="cxhero cmp-hub-hero"><div class="wrap" id="comparison-hub-hero"></div></div><div class="cmp-root cmp-page" id="comparison-hub"></div></section>'
-    html=re.sub(r'<section id="v-comparisons" data-view="comparisons" hidden>.*?</section>',lambda m:hub_section,html,count=1,flags=re.S)
     if 'id="v-compare"' not in html:
         html=html.replace('  <footer class="foot">','''  <section id="v-compare" data-view="compare" hidden><article class="cmp-root cmp-page" id="comparison-page"></article></section>
   <section id="v-comparisons" data-view="comparisons" hidden><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
   <dialog id="comparison-dialog" class="cmp-root" aria-labelledby="cmp-dialog-title"><div class="cmp-dialog-top"><button type="button" data-comparison-close aria-label="Закрыть сравнение">×</button></div><div class="cmp-dialog-content"></div><div class="cmp-dialog-footer"><button type="button" class="btn" data-comparison-close>Вернуться к выбору</button><a class="btn btn-navy" href="#cart" data-go="cart" data-comparison-cart hidden>Перейти в корзину</a></div></dialog>
   <footer class="foot">''',1)
+    # after the first-time insertion above, so a fresh base also gets the hub hero (it was lost on 05.11)
+    html=re.sub(r'<section id="v-comparisons" data-view="comparisons" hidden>.*?</section>',lambda m:hub_section,html,count=1,flags=re.S)
     footer_link='<a href="#comparisons" data-go="comparisons">Справочник об анализах</a>'
     html=html.replace('<a href="#comparisons" data-go="comparisons">Статьи об анализах</a>',footer_link)
     if footer_link not in html:
