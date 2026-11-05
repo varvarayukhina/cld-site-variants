@@ -1593,6 +1593,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .spot .spot-dots button::before { background: var(--muted); opacity: .45; }
 .spot .spot-dots button[aria-current="true"]::before { background: var(--navy); opacity: 1; }
 .spot-card { padding-bottom: 46px; min-height: 0; }
+@media (min-width: 961px) { .hero .wrap { padding-block: 40px 44px; } .hero-main h1 { font-size: 60px; } .hero-main .perk { margin: 16px 0 8px; } .hero-main .search { margin-top: 20px; } .hero-main .hero-point { margin-top: 16px; } .spot-card .spot-text h2 { font-size: 32px; } .spot-card .spot-text { gap: 8px; } .spot-card { padding-bottom: 38px; } }
 @media (max-width: 960px) {
   .spot .spot-btn { display: none; }
   .spot-nav { position: static; display: flex; justify-content: center; margin-top: 12px; }
@@ -2843,7 +2844,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
   </section>
 
   <section id="v-compare" data-view="compare" hidden><article class="cmp-root cmp-page" id="comparison-page"></article></section>
-  <section id="v-comparisons" data-view="comparisons" hidden><div class="cxhero cmp-hub-hero"><div class="wrap" id="comparison-hub-hero"></div></div><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
+  <section id="v-comparisons" data-view="comparisons" hidden><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
   <dialog id="comparison-dialog" class="cmp-root" aria-labelledby="cmp-dialog-title"><div class="cmp-dialog-top"><button type="button" data-comparison-close aria-label="Закрыть сравнение">×</button></div><div class="cmp-dialog-content"></div><div class="cmp-dialog-footer"><button type="button" class="btn" data-comparison-close>Вернуться к выбору</button><a class="btn btn-navy" href="#cart" data-go="cart" data-comparison-cart hidden>Перейти в корзину</a></div></dialog>
   <footer class="foot">
     <div class="wrap">
@@ -3033,7 +3034,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
     "41-005": { n: "СА 72-4", off: "СА 72-4", d: "Отражает уровень белка СА 72-4, по которому врач может следить за лечением некоторых опухолей желудка", p: 820, bio: "Кровь из вены", days: 1, own: true, pop: 60 }
   };
   var SPOT = [
-    { c: "66.300", ds: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи, плесень и яды насекомых. Помогает отличить истинную аллергию от перекрёстной реакции на похожие белки", img: "spot-allergy", tag: "Аллергология", pic: "allergy", n: "Аллергочип ALEX", off: "Аллергочип ALEX (300 аллергокомпонентов + IgE общий)", d: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи домашней пыли, плесень и яды насекомых", days: 8, bio: "Кровь из вены" },
+    { c: "66.300", ds: "Около 300 аллергенов — экстрактов и отдельных белков — и общий IgE по одной пробе крови: пыльца, пища, животные, клещи, плесень и яды насекомых. Помогает отличить истинную аллергию от перекрёстной реакции на похожие белки", img: "spot-allergy", tag: "Аллергология", pic: "allergy", n: "Аллергочип ALEX", off: "Аллергочип ALEX (300 аллергокомпонентов + IgE общий)", d: "300 аллергокомпонентов и общий IgE по одной пробе крови: пыльца, пища, животные, клещи домашней пыли, плесень и яды насекомых", days: 8, bio: "Кровь из вены" },
     { c: "55.240", ds: "Мутации в генах BRCA1 и BRCA2, связанные с повышенным риском рака молочной железы и яичников. Гены не меняются в течение жизни, поэтому анализ сдают один раз", img: "spot-brca", tag: "Генетика", pic: "onco", n: "BRCA-скрининг", off: "BRCA-скрин: профиль генетического исследования «Рак молочной железы и/или яичников»", d: "Мутации в генах BRCA1 и BRCA2, связанные с повышенным риском рака молочной железы и яичников", days: 10, bio: "Кровь из вены" },
     { c: "56.376", img: "spot-thrombo", tag: "Генетика", pic: "clotting", n: "Генетический тест на тромбофилию", off: "Генетический тест на тромбофилии (12 полиморфизмов)", d: "12 вариантов генов свёртывания крови и обмена фолиевой кислоты", days: 6, bio: "Кровь из вены" },
     { c: "50.525", ds: "Генетическая предрасположенность к целиакии — непереносимости глютена. Глютен повреждает слизистую тонкой кишки: возможны боль и вздутие живота, диарея", img: "spot-celiac", tag: "Генетика", pic: "sugar", n: "Гены целиакии HLA-DQ2 и DQ8", off: "Типирование HLA DQ2/DQ8 при целиакии", d: "Генетическая предрасположенность к целиакии — непереносимости глютена. При целиакии глютен повреждает слизистую тонкой кишки, возможны боль и вздутие живота, диарея, потеря веса и анемия", days: 16, bio: "Кровь из вены" },
@@ -5102,8 +5103,9 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
     ps.forEach(function (p) { if (p) p.style.fontSize = ""; });
     if (window.innerWidth < 961 || !cards.length) return;
     tr.style.alignItems = "flex-start";
-    var H = Math.max.apply(null, cards.map(function (c) { return c.offsetHeight; }));
-    cards.forEach(function (c, i) { var p = ps[i]; if (!p) return; var cap = Math.min(26, parseFloat(getComputedStyle(c.querySelector("h2")).fontSize) - 6); for (var fs = 20; fs <= cap; fs++) { p.style.fontSize = fs + "px"; if (c.offsetHeight > H) { p.style.fontSize = (fs - 1) + "px"; break; } } });
+    // высота слайда — не выше левой колонки, чтобы первый экран целиком помещался на ноутбуке (05.11)
+    var main = $("#v-home .hero-main"), H = main ? main.offsetHeight : Math.max.apply(null, cards.map(function (c) { return c.offsetHeight; }));
+    cards.forEach(function (c, i) { var p = ps[i]; if (!p) return; var cap = Math.min(24, parseFloat(getComputedStyle(c.querySelector("h2")).fontSize) - 6); for (var fs = 16; fs <= cap; fs++) { p.style.fontSize = fs + "px"; if (c.offsetHeight > H) { p.style.fontSize = Math.max(16, fs - 1) + "px"; break; } } });
     tr.style.alignItems = "";
   }
   var spotFitT = null;
