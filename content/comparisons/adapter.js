@@ -6,7 +6,7 @@
   }
   function comparisonProducts(a) {
     return a.tests.filter(function(c){return A[c];}).map(function(c){
-      var x=A[c];return '<div class="cmp-product"><div><b>'+esc(x.n)+'</b><small>'+esc(x.off || '')+'</small></div><div class="cmp-price">'+(x.na?'Нет в выбранном пункте':'<b>'+rub(online(x.p))+'</b><small>на сайте · в пункте '+rub(x.p)+'</small>')+'</div>'+(x.na?'':'<button class="btn btn-lime" type="button" data-add="'+c+'">Добавить</button>')+'</div>';
+      var x=A[c];return '<div class="cmp-product"><div><b>'+esc(x.n)+'</b><small>'+esc(x.off || '')+'</small></div><div class="cmp-price">'+(x.na?'Нет в выбранном пункте':'<b>'+rub(online(x.p))+'</b><small>при оплате онлайн · в пункте '+rub(x.p)+'</small>')+'</div>'+(x.na?'':'<button class="btn btn-lime" type="button" data-add="'+c+'">Добавить</button>')+'</div>';
     }).join('');
   }
   function comparisonPara(x) {
