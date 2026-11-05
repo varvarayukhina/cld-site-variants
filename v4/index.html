@@ -1595,6 +1595,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .spot .spot-dots button::before { background: var(--muted); opacity: .45; }
 .spot .spot-dots button[aria-current="true"]::before { background: var(--navy); opacity: 1; }
 .spot-card { padding-bottom: 46px; min-height: 0; }
+.ab-lede { max-width: 62ch; margin: -6px 0 22px; font-size: 18px; } .ab-gal { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, 230px); gap: 16px; } .ab-gal figure { margin: 0; min-width: 0; position: relative; isolation: isolate; } .ab-gal img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; display: block; } .ab-gal .big { grid-row: span 2; margin: 0 12px 12px 0; } .ab-gal .big::before { content: ""; position: absolute; inset: 0; transform: translate(12px, 12px); border: 2px solid var(--navy); border-radius: 18px; z-index: -1; }
+@media (max-width: 760px) { .ab-gal { grid-template-columns: 1fr 1fr; grid-template-rows: 220px repeat(2, 140px); gap: 10px; } .ab-gal .big { grid-row: auto; grid-column: span 2; margin: 0 8px 8px 0; } .ab-gal .big::before { transform: translate(8px, 8px); } }
 .hv-car { grid-template-columns: minmax(0, 1fr) minmax(0, 480px); padding-block: 26px; } .hv-car .btn { margin-top: 18px; } .hv-car-img { width: 100%; height: auto; margin: -64px 0 -30px; }
 @media (max-width: 960px) { .hv-car { grid-template-columns: minmax(0, 1fr); } .hv-car-img { order: -1; margin: -36px 0 -6px; } }
 @media (min-width: 961px) { .hero .wrap { padding-block: 40px 44px; } .hero-main h1 { font-size: 60px; } .hero-main .perk { margin: 16px 0 8px; } .hero-main .search { margin-top: 20px; } .hero-main .hero-point { margin-top: 16px; } .spot-card .spot-text h2 { font-size: 32px; } .spot-card .spot-text { gap: 8px; } .spot-card { padding-bottom: 38px; } }
@@ -2740,8 +2742,19 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
         </dl>
       </div>
     </div>
+    <div class="sec wrap ab-photos">
+      <div class="sec-h"><h2>Наши пункты</h2></div>
+      <p class="ab-lede">Светлые просторные кабинеты, удобные кресла для взятия крови, одноразовые стерильные расходники.</p>
+      <div class="ab-gal">
+        <figure class="big"><img src="../assets/img/about/reception.webp" alt="Стойка администратора в пункте CLD" width="1200" height="904" loading="lazy"></figure>
+        <figure><img src="../assets/img/about/hall.webp" alt="Холл пункта CLD" width="1200" height="904" loading="lazy"></figure>
+        <figure><img src="../assets/img/about/blood-chair.webp" alt="Кресло для взятия крови" width="1200" height="904" loading="lazy"></figure>
+        <figure><img src="../assets/img/about/blood-room.webp" alt="Кабинет взятия крови" width="1200" height="889" loading="lazy"></figure>
+        <figure><img src="../assets/img/about/procedure.webp" alt="Процедурный кабинет" width="1200" height="800" loading="lazy"></figure>
+      </div>
+    </div>
     <div class="sec wrap">
-      <div class="sec-h"><h2>Пункты приёма по регионам</h2><a class="linkbtn" href="#points" data-go="points">Адреса и часы на карте</a></div>
+      <div class="sec-h"><h2>Пункты приёма по регионам</h2><a class="linkbtn" href="#points" data-go="points">Адреса и часы на карте</a></div>
       <ul class="regs"><li><span>Карачаево-Черкесия</span><b>15</b></li><li><span>Кабардино-Балкария</span><b>5</b></li><li><span>Ставропольский край</span><b>2</b></li><li><span>Северная Осетия</span><b>2</b></li><li><span>Краснодарский край</span><b>1</b></li><li><span>Ингушетия</span><b>1</b></li><li><span>Дагестан</span><b>1</b></li><li><span>Татарстан</span><b>1</b></li><li><span>Удмуртия</span><b>1</b></li></ul>
     </div>
     <div class="sec wrap">
