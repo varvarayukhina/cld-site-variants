@@ -44,7 +44,10 @@
     men: ["Что показывают анализы для мужчин", "Гормоны, простата, сахар и холестерин: когда назначают исследования и как подготовиться."],
     pregnant: ["Какие анализы сдают на вашем сроке", "Календарь беременности, понятные объяснения исследований и подготовка к сдаче."],
     kids: ["Какие анализы назначают детям", "Когда назначают исследования, как подготовить ребёнка и что можно узнать по результатам."],
-    senior: ["Анализы для родителей старшего возраста", "Сахар, сердце, сосуды и почки: разбираемся, что показывают исследования."]
+    senior: ["Анализы для родителей старшего возраста", "Сахар, сердце, сосуды и почки: разбираемся, что показывают исследования."],
+    thyroid: ["Какие анализы сдать на щитовидную железу", "С чего начинают, что добавляют, если ТТГ изменён, и как подготовиться."],
+    sugar: ["Какие анализы сдать на сахар", "Глюкоза, гликированный гемоглобин, глюкозотолерантный тест и инсулин: когда что назначают."],
+    blood: ["Какие анализы крови сдать", "Общий анализ крови, железо, витамин B12 и показатели воспаления: что показывают и когда их назначают."]
   };
   function renderCatalogGuide(category) {
     var box = $("#catalog-guide-callout");
@@ -54,5 +57,5 @@
     box.hidden = !copy || !guide;
     if (box.hidden) { box.innerHTML = ""; return; }
     box.setAttribute("aria-label", "Гид: " + copy[0]);
-    box.innerHTML = '<img class="cg-character" src="../assets/img/aud/' + esc(AUDIMG[category.id]) + '" alt="" width="96" height="96"><div class="cg-copy"><span class="cg-label">Гид по исследованиям</span><h2>' + esc(copy[0]) + '</h2><p>' + esc(copy[1]) + '</p></div><a class="btn btn-navy cg-link" href="#for-' + esc(category.id) + '" data-go="guide:' + esc(category.id) + '">Подробнее <svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></a>';
+    box.innerHTML = '<img class="cg-character" src="../assets/img/' + (AUDIMG[category.id] ? "aud/" + esc(AUDIMG[category.id]) : "sections/" + esc(category.id) + ".webp") + '" alt="" width="96" height="96"><div class="cg-copy"><span class="cg-label">Гид по исследованиям</span><h2>' + esc(copy[0]) + '</h2><p>' + esc(copy[1]) + '</p></div><a class="btn btn-navy cg-link" href="#for-' + esc(category.id) + '" data-go="guide:' + esc(category.id) + '">Подробнее <svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></a>';
   }

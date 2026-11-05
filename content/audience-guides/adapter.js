@@ -1,7 +1,7 @@
   /* AUDIENCE_TEMPLATES */
-  var audienceSearch = { senior: "", men: "" }, audienceSpy = null;
+  var audienceSearch = {}, audienceSpy = null;
   function audienceFilter() {
-    var q=audienceSearch[state.guide].trim().toLowerCase(),count=0;
+    var q=(audienceSearch[state.guide]||"").trim().toLowerCase(),count=0;
     $$("#ag-catalog-list [data-preg-code]").forEach(function(row){var c=row.dataset.pregCode,a=A[c],match=!q||(c+" "+a.n+" "+a.off).toLowerCase().indexOf(q)>=0;row.hidden=!match;if(match)count++;});
     $("#ag-no-results").hidden=!!count;
   }
@@ -21,9 +21,10 @@
   function renderAudienceGuide() {
     if(gSpy)gSpy.disconnect();var root=$('#audience-guide'),g=GUIDES[state.guide];root.innerHTML=AUDIENCE_TEMPLATES[state.guide];
     root.querySelectorAll('[data-audience-tests]').forEach(function(el){el.innerHTML=el.dataset.audienceTests.split(',').map(pregTest).join('');});
+    root.querySelectorAll('[data-sg-chips]').forEach(function(el){el.innerHTML=el.dataset.sgChips.split(',').filter(function(c){return A[c];}).map(function(c){return '<a class="pg-sg-chip" href="#card-'+esc(c)+'" data-go="card:'+esc(c)+'">'+esc(pregName(c))+'</a>';}).join('');}); // названия анализов в схеме и подготовке
     root.querySelector('[data-audience-complexes]').innerHTML=(g.cx||[]).map(womenComplex).join('');
     var cat=CATS.filter(function(c){return c.id===state.guide;})[0],codes=cat.items.filter(function(c,i,a){return A[c]&&a.indexOf(c)===i;});
-    $('#ag-catalog-list').innerHTML=codes.map(pregTest).join('');$('#ag-catalog-q').value=audienceSearch[state.guide];audienceFilter();
+    $('#ag-catalog-list').innerHTML=codes.map(pregTest).join('');$('#ag-catalog-q').value=audienceSearch[state.guide]||"";audienceFilter();
     root.querySelector('[data-audience-count]').textContent=nAn(codes.length);root.querySelector('[data-audience-point]').textContent='Цены и доступность: '+ptName(POINTS[state.pt]);
     root.querySelector('[data-audience-faq]').innerHTML=(g.faq||[]).map(function(f){return '<details class="pg-more"><summary>'+esc(f.q)+'</summary><div class="pg-detail-body"><p>'+esc(f.a)+'</p></div></details>';}).join('');
     var ld=$('#g-ld');if(!ld){ld=document.createElement('script');ld.type='application/ld+json';ld.id='g-ld';document.head.appendChild(ld);}ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:(g.faq||[]).map(function(f){return {'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}};})});

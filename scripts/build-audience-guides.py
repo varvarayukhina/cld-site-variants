@@ -8,7 +8,7 @@ def integrate(html):
  css=helpers['scope_css']((CONTENT/'style.css').read_text());(ROOT/'assets/audience-guides.css').write_text(css+'\n')
  render=runpy.run_path(str(CONTENT/'templates.py'))['template'];templates={}
  defs=re.search(r'(<svg aria-hidden="true" style="position:absolute;[\s\S]*?</svg>)',(ROOT/'content/pregnancy-guide/page.html').read_text())[1]
- for key in ['senior','men']:
+ for key in ['senior','men','thyroid','sugar','blood']:
   markup=defs+render(key);ids=re.findall(r'\bid="([^"]+)"',markup)
   for ident in sorted(ids,key=len,reverse=True):
    markup=markup.replace('id="'+ident+'"','id="ag-'+ident+'"').replace('href="#'+ident+'"','href="#ag-'+ident+'"')
