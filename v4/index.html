@@ -1056,6 +1056,8 @@ button.c-n:hover { text-decoration: underline; text-underline-offset: 3px; }
 .s-tel span { color: var(--muted); }
 .s-wa .ico { width: 20px; height: 20px; color: #25D366; }
 .s-wa span { font-weight: 600; }
+.s-login { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; text-decoration: none; white-space: nowrap; } /* вход в личный кабинет (05.11, вариант 1) */
+.s-login .ico { width: 20px; height: 20px; }
 .tnav { display: block; margin: 0; background: #FFF; border-bottom: 1px solid var(--line); }
 .tnav .wrap { display: flex; gap: 28px; min-height: 50px; align-items: stretch; }
 .tnav button { position: relative; background: none; border: 0; padding: 0; border-radius: 0; font: 600 16px var(--text); color: var(--ink); cursor: pointer; white-space: nowrap; }
@@ -1446,7 +1448,7 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
   .util.srow .s-tel, .util.srow .s-wa span { display: none; }
   .srow .ptbtn { max-width: 100%; min-width: 0; }
   .srow .ptbtn b { min-width: 0; }
-  .srow .s-wa { flex: none; }
+  .srow .s-wa, .srow .s-login { flex: none; }
   .ptband .ptbtn { max-width: none; }
   .ptband .ptbtn b { overflow: visible; text-overflow: clip; }
   .subnav, .bcont, .ilink, .bar .resbtn, .ptband .pills, .ptband .nav, .tnav, .s-tel, .s-wa span { display: none; }
@@ -2053,6 +2055,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
     <span class="spacer"></span>
     <a class="s-tel" href="tel:88002017830" data-note="h5"><svg class="ico"><use href="#i-phone"/></svg><b class="num">8 800 201 78 30</b><span>звонок бесплатный</span></a>
     <a class="s-wa" href="#" data-stub="Номер WhatsApp появится после согласования" aria-label="Написать в WhatsApp"><svg class="ico ico-fill"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+    <a class="s-login" href="#results" data-go="results"><svg class="ico"><use href="#i-user"/></svg><span>Войти</span></a>
   </div>
 </div>
 <header class="top" id="top">
