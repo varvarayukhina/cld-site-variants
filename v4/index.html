@@ -1595,6 +1595,8 @@ button.btn[disabled] { opacity: 1; background: var(--surface); color: var(--mute
 .spot .spot-dots button::before { background: var(--muted); opacity: .45; }
 .spot .spot-dots button[aria-current="true"]::before { background: var(--navy); opacity: 1; }
 .spot-card { padding-bottom: 46px; min-height: 0; }
+.hv-car { grid-template-columns: minmax(0, 1fr) minmax(0, 480px); padding-block: 26px; } .hv-car .btn { margin-top: 18px; } .hv-car-img { width: 100%; height: auto; margin: -64px 0 -30px; }
+@media (max-width: 960px) { .hv-car { grid-template-columns: minmax(0, 1fr); } .hv-car-img { order: -1; margin: -36px 0 -6px; } }
 @media (min-width: 961px) { .hero .wrap { padding-block: 40px 44px; } .hero-main h1 { font-size: 60px; } .hero-main .perk { margin: 16px 0 8px; } .hero-main .search { margin-top: 20px; } .hero-main .hero-point { margin-top: 16px; } .spot-card .spot-text h2 { font-size: 32px; } .spot-card .spot-text { gap: 8px; } .spot-card { padding-bottom: 38px; } }
 @media (max-width: 960px) {
   .spot .spot-btn { display: none; }
@@ -2589,9 +2591,9 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
       </ul>
     </div>
     <div class="sec wrap hv-area">
-      <div class="hv-area-in">
-        <div><h2>Куда приезжает медсестра</h2><p>Медсестра выезжает из&nbsp;пунктов CLD. Приедет&nbsp;ли она в&nbsp;ваш населённый пункт, уточняйте по&nbsp;телефону.</p></div>
-        <a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span class="hv-x">Уточнить адрес:</span> <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a>
+      <div class="hv-area-in hv-car">
+        <div><h2>Куда приезжает медсестра</h2><p>Медсестра выезжает из&nbsp;пунктов CLD. Приедет&nbsp;ли она в&nbsp;ваш населённый пункт, уточняйте по&nbsp;телефону.</p><a class="btn btn-navy" href="tel:88002017830"><svg class="ico"><use href="#i-phone"/></svg><span class="hv-x">Уточнить адрес:</span> <span class="num">8&nbsp;800&nbsp;201&nbsp;78&nbsp;30</span></a></div>
+        <img class="hv-car-img" src="../assets/img/home-visit/car.webp" alt="Автомобиль CLD для выезда медсестры" width="1000" height="428" loading="lazy">
       </div>
     </div>
     <section class="wrap fam" id="fam" aria-labelledby="fam-h">
