@@ -96,6 +96,7 @@ JS = r'''  /* SITUATIONS START */
 
 CSS = '''/* SITUATIONS CSS */
 .st-lede { max-width: 68ch; }
+#v-povody .cxhero .wrap { padding-bottom: 36px; }
 .st-hero { position: relative; overflow: hidden; background: #FFF; border-bottom: 1px solid var(--line); }
 .st-hero::before { content: ""; position: absolute; right: max(-60px, calc((100vw - 1440px) / 2)); bottom: -90px; width: 720px; height: 720px; background: var(--st-bg) center / contain no-repeat; opacity: .32; }
 .st-hero-in { position: relative; z-index: 1; min-height: 440px; padding-block: 28px 48px; display: flex; flex-direction: column; }
