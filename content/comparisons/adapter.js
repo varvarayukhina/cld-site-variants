@@ -63,21 +63,26 @@
     comparisonSync();
   }
   var COMPARISON_GROUPS = [
-    { id: 'krov', n: 'Кровь и воспаление', keys: ['iron', 'inflammation', 'b12'] },
-    { id: 'obmen', n: 'Сахар и обмен веществ', keys: ['glucose'] },
-    { id: 'serdce', n: 'Сердце и сосуды', keys: ['lipids'] },
-    { id: 'pechen', n: 'Печень', keys: ['liver'] },
-    { id: 'pochki', n: 'Почки и мочевыводящие пути', keys: ['kidneys', 'urine'] },
-    { id: 'shchitovidka', n: 'Щитовидная железа', keys: ['thyroid'] },
-    { id: 'muzhskoe', n: 'Мужские гормоны и предстательная железа', keys: ['testosterone', 'psa'] }
+    { id: 'krov', n: 'Кровь и воспаление', ic: 'blood', keys: ['iron', 'inflammation', 'b12'] },
+    { id: 'serdce', n: 'Сердце, сосуды и сахар', ic: 'heart', keys: ['lipids', 'glucose'] },
+    { id: 'pechen', n: 'Печень, почки и моча', ic: 'liver', keys: ['liver', 'kidneys', 'urine'] },
+    { id: 'gormony', n: 'Гормоны и щитовидная железа', ic: 'thyroid', keys: ['hormones', 'thyroid'] },
+    { id: 'muzhskoe', n: 'Мужское здоровье', ic: 'men', keys: ['testosterone', 'psa'] },
+    { id: 'allergiya', n: 'Аллергия', ic: 'allergy', keys: ['allergy', 'food-intolerance'] }
   ];
+  function comparisonGroups() {
+    var used = {}, groups = COMPARISON_GROUPS.map(function (g) { var keys = g.keys.filter(function (k) { return COMPARISONS[k]; }); keys.forEach(function (k) { used[k] = 1; }); return { id: g.id, n: g.n, ic: g.ic, keys: keys }; }).filter(function (g) { return g.keys.length; });
+    var rest = Object.keys(COMPARISONS).filter(function (k) { return !used[k]; }); if (rest.length) groups.push({ id: 'drugoe', n: 'Другие исследования', ic: 'checkups', keys: rest });
+    return groups;
+  }
   function renderComparisonHub() {
-    var used = {}, groups = COMPARISON_GROUPS.map(function (g) { var keys = g.keys.filter(function (k) { return COMPARISONS[k]; }); keys.forEach(function (k) { used[k] = 1; }); return { id: g.id, n: g.n, keys: keys }; }).filter(function (g) { return g.keys.length; });
-    var rest = Object.keys(COMPARISONS).filter(function (k) { return !used[k]; }); if (rest.length) groups.push({ id: 'drugoe', n: 'Другие исследования', keys: rest });
-    var card = function (k) { var a = COMPARISONS[k]; return '<a class="cmp-hub-card" href="#compare-' + k + '" data-go="compare:' + k + '"><h3>' + esc(a.shortTitle) + '</h3><p>' + esc(a.intro) + '</p><b>Читать →</b></a>'; };
-    document.getElementById('comparison-hub').innerHTML = '<h1>Справочник об анализах</h1><p class="cmp-intro">Чем отличаются похожие анализы, что показывает каждый из них и как сопоставить исследования с назначением.</p>' +
-      '<nav class="cmp-hub-nav" aria-label="Системы органов">' + groups.map(function (g) { return '<button type="button" data-hub-group="' + g.id + '">' + esc(g.n) + ' <span>' + g.keys.length + '</span></button>'; }).join('') + '</nav>' +
-      groups.map(function (g) { return '<section class="cmp-hub-group" id="cmp-group-' + g.id + '"><h2>' + esc(g.n) + '</h2><div class="cmp-hub-grid">' + g.keys.map(card).join('') + '</div></section>'; }).join('');
+    var groups = comparisonGroups(), total = groups.reduce(function (s, g) { return s + g.keys.length; }, 0);
+    document.getElementById('comparison-hub-hero').innerHTML = '<div class="crumbs"><button type="button" data-go="home">Главная</button><span>/</span><span>Справочник об анализах</span></div>' +
+      '<div class="cmp-hero-grid"><div><h1>Справочник об анализах</h1><p class="lede">Чем отличаются похожие анализы, что показывает каждый из них и как сопоставить исследования с назначением. ' + plural(total, ['статья', 'статьи', 'статей']) + ' по системам органов.</p>' +
+      '<nav class="cmp-hub-nav" aria-label="Системы органов">' + groups.map(function (g) { return '<button type="button" data-hub-group="' + g.id + '"><span class="cmp-chip-ic">' + picto(g.ic) + '</span>' + esc(g.n) + ' <span class="cmp-chip-n">' + g.keys.length + '</span></button>'; }).join('') + '</nav></div>' +
+      '<div class="cmp-hero-mosaic" aria-hidden="true">' + ['blood', 'heart', 'liver', 'thyroid', 'allergy', 'urine', 'sugar', 'men', 'hormones'].map(function (id) { return '<span>' + picto(id) + '</span>'; }).join('') + '</div></div>';
+    var card = function (k, ic) { var a = COMPARISONS[k]; return '<a class="cmp-hub-card" href="#compare-' + k + '" data-go="compare:' + k + '"><span class="cmp-card-ic">' + picto(ic) + '</span><h3>' + esc(a.shortTitle) + '</h3><p>' + esc(a.intro) + '</p><b>Читать →</b></a>'; };
+    document.getElementById('comparison-hub').innerHTML = groups.map(function (g) { return '<section class="cmp-hub-group" id="cmp-group-' + g.id + '"><h2><span class="cmp-group-ic">' + picto(g.ic) + '</span>' + esc(g.n) + '</h2><div class="cmp-hub-grid">' + g.keys.map(function (k) { return card(k, g.ic); }).join('') + '</div></section>'; }).join('');
   }
   document.addEventListener('click', function (e) { var b = e.target.closest('[data-hub-group]'); if (!b) return; var s = document.getElementById('cmp-group-' + b.dataset.hubGroup); if (!s) return; var top = document.getElementById('top'); window.scrollTo({ top: s.getBoundingClientRect().top + scrollY - (top ? top.offsetHeight : 94) - 16, behavior: reduceMotion ? 'auto' : 'smooth' }); });
   PAGES.push('comparisons','compare');RENDER.compare=renderComparisonPage;RENDER.comparisons=renderComparisonHub;

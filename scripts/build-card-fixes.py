@@ -20,7 +20,10 @@ def integrate(html: str) -> str:
              '      c.lede = fix(c.lede, code);\n'
              '      (c.blocks || []).forEach(function (b) { ["p", "list"].forEach(function (k) { if (b[k]) b[k] = b[k].map(function (x) { return fix(x, code); }).filter(function (x) { return x; }); }); if (b.note) b.note = fix(b.note, code); });\n'
              '      (c.faq || []).forEach(function (q) { q.q = fix(q.q, code); q.a = fix(q.a, code); }); });\n'
-             '    Object.keys(A).forEach(function (code) { if (A[code] && A[code].d) A[code].d = fix(A[code].d, code); }); })();\n'
+             '    Object.keys(A).forEach(function (code) { if (A[code] && A[code].d) A[code].d = fix(A[code].d, code); });\n'
+             '    if (typeof SPOT !== "undefined") SPOT.forEach(function (x) { if (x.c && x.ds) x.ds = fix(x.ds, x.c); if (x.c && x.d) x.d = fix(x.d, x.c); }); // тексты слайдера\n'
+             '    if (typeof SEASON !== "undefined") SEASON.forEach(function (x) { if (x.c && x.p) x.p = fix(x.p, x.c); });\n'
+             '    if (typeof renderSpot === "function" && document.getElementById("spot-track")) renderSpot(); })(); // главная отрисована раньше — перерисовать слайдер\n'
              '  /* CARD FIXES END */\n')
     if "/* CARD FIXES START */" in html:
         return re.sub(r"  /\* CARD FIXES START \*/[\s\S]*?/\* CARD FIXES END \*/\n", lambda m: block, html, count=1)

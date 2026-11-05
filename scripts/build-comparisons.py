@@ -9,6 +9,8 @@ def integrate(html):
     if '/* COMPARISONS START */' in html:
         html=re.sub(r'  /\* COMPARISONS START \*/[\s\S]*?/\* COMPARISONS END \*/\n',lambda m:block,html,count=1)
     else:html=html.replace('  function go(target, push) {',block+'  function go(target, push) {',1)
+    hub_section='<section id="v-comparisons" data-view="comparisons" hidden><div class="cxhero cmp-hub-hero"><div class="wrap" id="comparison-hub-hero"></div></div><div class="cmp-root cmp-page" id="comparison-hub"></div></section>'
+    html=re.sub(r'<section id="v-comparisons" data-view="comparisons" hidden>.*?</section>',lambda m:hub_section,html,count=1,flags=re.S)
     if 'id="v-compare"' not in html:
         html=html.replace('  <footer class="foot">','''  <section id="v-compare" data-view="compare" hidden><article class="cmp-root cmp-page" id="comparison-page"></article></section>
   <section id="v-comparisons" data-view="comparisons" hidden><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
