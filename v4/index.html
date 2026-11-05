@@ -1398,7 +1398,9 @@ button.mini-n:hover, .mini-sit:hover .mini-n { text-decoration: underline; text-
 .arow .a-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-width: 62ch; color: var(--muted); }
 .arow .a-meta { color: var(--muted); gap: 6px; }
 @media (min-width: 961px) { .arow { grid-template-columns: minmax(0, 1fr) 220px 260px; } }
-@media (min-width: 1200px) { .arow { grid-template-columns: minmax(0, 1fr) 200px 360px; } }
+@media (min-width: 1200px) { .arow { grid-template-columns: minmax(0, 1fr) 220px 300px; } }
+.p-on, .pg-p-on { display: block; margin: 0 0 2px; font: 600 16px/1.3 var(--text); color: inherit; white-space: nowrap; } /* «при оплате онлайн» у цены (просьба Дениса 05.11) */
+@media (min-width: 961px) { .arow .p-on { display: inline; margin: 0 8px 0 0; } }
 .arow .price b { font-size: 24px; font-weight: 700; }
 .arow .price small { color: var(--muted); margin-top: 2px; }
 .arow .a-meta .urg { display: inline-grid; grid-template-columns: auto 1fr; column-gap: 7px; align-items: center; justify-self: start; padding: 7px 12px; border-radius: 12px; background: var(--lime-soft); color: var(--navy); font-weight: 700; }
@@ -3277,7 +3279,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
     if (cito) m.push('<span class="urg"><svg class="ico"><use href="#i-bolt"/></svg>ЦИТО — ' + rub(cito) + "<small>за несколько часов</small></span>");
     return '<div class="arow' + (a.na ? " is-na" : "") + '"><div><button class="a-name" type="button" data-go="card:' + code + '">' + esc(a.n) + '</button><p class="a-desc">' + esc(a.d) + '</p></div>' +
       '<div class="a-meta">' + m.join("") + "</div>" +
-      '<div class="a-buy">' + (a.na ? "" : '<div class="price"><b>' + rub(online(a.p)) + "</b><small>при оплате онлайн · в пункте " + rub(a.p) + "</small></div>" + addBtn(code)) + "</div></div>";
+      '<div class="a-buy">' + (a.na ? "" : '<div class="price"><span class="p-on">при оплате онлайн</span><b>' + rub(online(a.p)) + "</b><small>в пункте " + rub(a.p) + "</small></div>" + addBtn(code)) + "</div></div>";
   }
   function mode(arr) { var c = {}, best = arr[0], n = 0; arr.forEach(function (v) { c[v] = (c[v] || 0) + 1; if (c[v] > n) { n = c[v]; best = v; } }); return best; }
   function commonOf(codes) {
@@ -3427,13 +3429,13 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
   function gTest(c) {
     var a = A[c]; if (!a) return "";
     return '<div class="gt"><div class="gt-t"><button class="gt-n" type="button" data-go="card:' + c + '">' + esc(a.n) + "</button><p>" + typo(esc(a.d)) + '.</p><p class="gt-m">' + dLabel(a.days) + " · " + esc(a.bio.toLowerCase()) + "</p></div>" +
-      '<div class="gt-b">' + (a.na ? '<span class="gt-na">Нет в этом пункте — есть в других пунктах CLD</span>' : '<span class="gt-p"><b class="num">' + rub(online(a.p)) + "</b><small>при оплате онлайн · в пункте " + rub(a.p) + "</small></span>") + addBtn(c) + "</div></div>";
+      '<div class="gt-b">' + (a.na ? '<span class="gt-na">Нет в этом пункте — есть в других пунктах CLD</span>' : '<span class="gt-p"><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(a.p)) + "</b><small>в пункте " + rub(a.p) + "</small></span>") + addBtn(c) + "</div></div>";
   }
   function gCx(c) {
     var x = CXX[c], p = CX[c]; if (!x || !p || p.na) return "";
     var onco = c === "04.25.013" || c === "04.25.014";
     return '<div class="gt gt-cx"><div class="gt-t"><span class="gt-tag">Чек-ап · ' + nAn(x.parts.length) + '</span><button class="gt-n" type="button" data-go="cx:' + c + '">' + esc(x.n) + "</button><p>" + esc(x.parts.join(", ")) + ".</p>" + (onco ? "<p>" + typo("Набор не предназначен для профилактической проверки на рак. Нужные маркеры определяет врач.") + "</p>" : "") + "</div>" +
-      '<div class="gt-b"><span class="gt-p"><b class="num">' + rub(online(p.p)) + "</b><small>при оплате онлайн · в пункте " + rub(p.p) + "</small></span>" + addBtn(c) + "</div></div>";
+      '<div class="gt-b"><span class="gt-p"><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(p.p)) + "</b><small>в пункте " + rub(p.p) + "</small></span>" + addBtn(c) + "</div></div>";
   }
   function gPara(t) {
     if (typeof t === "object") {
@@ -3488,7 +3490,7 @@ var PREG_WHY=[
   function pregTest(code) {
     var a = A[code]; if (!a) return "";
     var note = code === "40-111" ? "При подозрении на дефицит железа" : code === "80-049" ? "По показаниям" : code === "18.103" ? "ПГТТ с 75 г глюкозы" : "";
-    return '<div class="pg-test-row" data-preg-code="' + esc(code) + '"><div class="pg-test-info"><button class="pg-test-name pg-test-details" type="button" data-go="card:' + esc(code) + '">' + esc(pregName(code)) + '</button><small>' + esc(a.bio) + " · " + dLabel(a.days) + '</small>' + (a.na ? '<span class="pg-preg-na">Нет в выбранном пункте — доступность в других пунктах можно уточнить по телефону</span>' : "") + (note ? '<span class="pg-tag-note">' + note + '</span>' : "") + '</div><div class="pg-test-price">' + (a.na ? "" : '<b class="pg-num">' + rub(online(a.p)) + '</b><span>при оплате онлайн</span>') + '</div><button type="button" class="pg-add-btn pg-btn-lime" data-add="' + esc(code) + '"' + (a.na ? ' disabled aria-label="Недоступно в выбранном пункте"' : ' aria-label="Добавить: ' + esc(pregName(code)) + '"') + '>' + (a.na ? "Недоступно" : "Добавить +") + '</button></div>';
+    return '<div class="pg-test-row" data-preg-code="' + esc(code) + '"><div class="pg-test-info"><button class="pg-test-name pg-test-details" type="button" data-go="card:' + esc(code) + '">' + esc(pregName(code)) + '</button><small>' + esc(a.bio) + " · " + dLabel(a.days) + '</small>' + (a.na ? '<span class="pg-preg-na">Нет в выбранном пункте — доступность в других пунктах можно уточнить по телефону</span>' : "") + (note ? '<span class="pg-tag-note">' + note + '</span>' : "") + '</div><div class="pg-test-price">' + (a.na ? "" : '<span class="pg-p-on">при оплате онлайн</span><b class="pg-num">' + rub(online(a.p)) + '</b>') + '</div><button type="button" class="pg-add-btn pg-btn-lime" data-add="' + esc(code) + '"' + (a.na ? ' disabled aria-label="Недоступно в выбранном пункте"' : ' aria-label="Добавить: ' + esc(pregName(code)) + '"') + '>' + (a.na ? "Недоступно" : "Добавить +") + '</button></div>';
   }
   function pregSyncControls() {
     var root = $("#pregnancy-guide"); if (!root || root.hidden || !root.firstChild) return;
@@ -3592,7 +3594,7 @@ var PREG_WHY=[
   }
   function womenComplex(code) {
     var x = CXX[code], price = CX[code]; if (!x || !price) return "";
-    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><b class="num">' + rub(online(price.p)) + '</b><small>при оплате онлайн · в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
+    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
   }
   function womenSyncControls() {
     var root = $("#women-guide"); if (!root || root.hidden || !root.firstChild) return;
@@ -3654,7 +3656,7 @@ var PREG_WHY=[
   }
   function kidsComplex(code) {
     var x = CXX[code], price = CX[code]; if (!x || !price) return "";
-    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><b class="num">' + rub(online(price.p)) + '</b><small>при оплате онлайн · в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
+    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
   }
   function kidsSyncControls() {
     var root = $("#kids-guide"); if (!root || root.hidden || !root.firstChild) return;
@@ -3957,7 +3959,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
   }
   function setCard(tag, title, codes, pic) {
     var sum = codes.reduce(function (s, c) { return s + A[c].p; }, 0), left = codes.filter(function (c) { return !cart[c]; });
-    return '<div class="pcard pc-h"><div class="picto">' + picto(pic) + '</div><div class="pc-t"><span class="pc-tag">' + esc(tag) + "</span><b>" + esc(title) + "</b><p>" + esc(codes.map(function (c) { return A[c].n; }).join(", ")) + '.</p></div><div class="pc-buy"><span class="pc-sum"><b class="num">' + rub(online(sum)) + '</b><small>при оплате онлайн · в пункте ' + rub(sum) + "</small></span>" +
+    return '<div class="pcard pc-h"><div class="picto">' + picto(pic) + '</div><div class="pc-t"><span class="pc-tag">' + esc(tag) + "</span><b>" + esc(title) + "</b><p>" + esc(codes.map(function (c) { return A[c].n; }).join(", ")) + '.</p></div><div class="pc-buy"><span class="pc-sum"><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(sum)) + '</b><small>в пункте ' + rub(sum) + "</small></span>" +
       (left.length ? '<button class="btn btn-lime" type="button" data-add-all="' + left.join(",") + '">Добавить все</button>' : '<button class="btn btn-lime" type="button" data-go="cart">Все в корзине</button>') + "</div></div>";
   }
   function catBanner(cat) {
@@ -4638,7 +4640,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
     var set = (s.set || []).filter(function (c) { return A[c] && !A[c].na; });
     if (set.length) {
       var sum = set.reduce(function (a, c) { return a + A[c].p; }, 0);
-      secs.splice(1, 0, '<section class="st-sec st-set" id="nabor"><h2>Анализы одним заказом</h2>' + (s.set_note ? "<p>" + typo(esc(s.set_note)) + "</p>" : "") + '<div class="rows">' + set.map(function (c) { return row(c); }).join("") + '</div><div class="st-buy"><span class="st-sum"><b class="num">' + rub(online(sum)) + "</b><small>при оплате онлайн · в пункте " + rub(sum) + '</small></span><button class="btn btn-lime" type="button" data-sit-add="' + set.join(",") + '">Добавить все в корзину</button></div></section>');
+      secs.splice(1, 0, '<section class="st-sec st-set" id="nabor"><h2>Анализы одним заказом</h2>' + (s.set_note ? "<p>" + typo(esc(s.set_note)) + "</p>" : "") + '<div class="rows">' + set.map(function (c) { return row(c); }).join("") + '</div><div class="st-buy"><span class="st-sum"><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(sum)) + "</b><small>в пункте " + rub(sum) + '</small></span><button class="btn btn-lime" type="button" data-sit-add="' + set.join(",") + '">Добавить все в корзину</button></div></section>');
     }
     if (s.faq && s.faq.length) secs.push('<section class="st-sec st-faq" id="voprosy"><h2>Частые вопросы</h2>' + s.faq.map(function (f) { return "<details><summary>" + esc(f.q) + "</summary><p>" + typo(esc(f.a)) + "</p></details>"; }).join("") + "</section>");
     var others = Object.keys(SITUATIONS).filter(function (k) { return k !== state.sit; });
@@ -4774,7 +4776,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
   }
   function comparisonProducts(a) {
     return a.tests.filter(function(c){return A[c];}).map(function(c){
-      var x=A[c];return '<div class="cmp-product"><div><b>'+esc(x.n)+'</b><small>'+esc(x.off || '')+'</small></div><div class="cmp-price">'+(x.na?'Нет в выбранном пункте':'<b>'+rub(online(x.p))+'</b><small>при оплате онлайн · в пункте '+rub(x.p)+'</small>')+'</div>'+(x.na?'':'<button class="btn btn-lime" type="button" data-add="'+c+'">Добавить</button>')+'</div>';
+      var x=A[c];return '<div class="cmp-product"><div><b>'+esc(x.n)+'</b><small>'+esc(x.off || '')+'</small></div><div class="cmp-price">'+(x.na?'Нет в выбранном пункте':'<span class="p-on">при оплате онлайн</span><b>'+rub(online(x.p))+'</b><small>в пункте '+rub(x.p)+'</small>')+'</div>'+(x.na?'':'<button class="btn btn-lime" type="button" data-add="'+c+'">Добавить</button>')+'</div>';
     }).join('');
   }
   function comparisonPara(x) {

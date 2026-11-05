@@ -67,7 +67,7 @@ JS = r'''  /* SITUATIONS START */
     var set = (s.set || []).filter(function (c) { return A[c] && !A[c].na; });
     if (set.length) {
       var sum = set.reduce(function (a, c) { return a + A[c].p; }, 0);
-      secs.splice(1, 0, '<section class="st-sec st-set" id="nabor"><h2>Анализы одним заказом</h2>' + (s.set_note ? "<p>" + typo(esc(s.set_note)) + "</p>" : "") + '<div class="rows">' + set.map(function (c) { return row(c); }).join("") + '</div><div class="st-buy"><span class="st-sum"><b class="num">' + rub(online(sum)) + "</b><small>при оплате онлайн · в пункте " + rub(sum) + '</small></span><button class="btn btn-lime" type="button" data-sit-add="' + set.join(",") + '">Добавить все в корзину</button></div></section>');
+      secs.splice(1, 0, '<section class="st-sec st-set" id="nabor"><h2>Анализы одним заказом</h2>' + (s.set_note ? "<p>" + typo(esc(s.set_note)) + "</p>" : "") + '<div class="rows">' + set.map(function (c) { return row(c); }).join("") + '</div><div class="st-buy"><span class="st-sum"><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(sum)) + "</b><small>в пункте " + rub(sum) + '</small></span><button class="btn btn-lime" type="button" data-sit-add="' + set.join(",") + '">Добавить все в корзину</button></div></section>');
     }
     if (s.faq && s.faq.length) secs.push('<section class="st-sec st-faq" id="voprosy"><h2>Частые вопросы</h2>' + s.faq.map(function (f) { return "<details><summary>" + esc(f.q) + "</summary><p>" + typo(esc(f.a)) + "</p></details>"; }).join("") + "</section>");
     var others = Object.keys(SITUATIONS).filter(function (k) { return k !== state.sit; });

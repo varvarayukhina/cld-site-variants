@@ -8,7 +8,7 @@
   }
   function kidsComplex(code) {
     var x = CXX[code], price = CX[code]; if (!x || !price) return "";
-    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><b class="num">' + rub(online(price.p)) + '</b><small>при оплате онлайн · в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
+    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
   }
   function kidsSyncControls() {
     var root = $("#kids-guide"); if (!root || root.hidden || !root.firstChild) return;
