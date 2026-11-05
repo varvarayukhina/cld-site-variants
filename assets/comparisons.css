@@ -56,3 +56,22 @@
 @media(max-width:900px){.cmp-hero-grid{grid-template-columns:1fr}.cmp-hero-mosaic{display:none}}
 .cmp-hub-hero .crumbs{margin-bottom:22px}
 .cmp-hub-hero .cmp-hub-nav button{text-align:left}
+
+/* 05.11.2026: one-line hub title; each group is one row — two articles visible, the rest scroll with arrows */
+.cmp-hub-hero h1{max-width:none;white-space:nowrap}
+@media(max-width:700px){.cmp-hub-hero h1{font-size:clamp(24px,7vw,32px)}}
+.cmp-group-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px}
+.cmp-group-head h2{margin:0}
+.cmp-row-nav{display:flex;gap:10px;flex-shrink:0}
+.cmp-row-nav button{width:44px;height:44px;border-radius:50%;border:1px solid #14374B;background:#fff;color:#14374B;display:grid;place-items:center;cursor:pointer}
+.cmp-row-nav button:hover:not(:disabled){background:#14374B;color:#fff}
+.cmp-row-nav button:disabled{opacity:.35;cursor:default}
+.cmp-row-nav .ico{width:20px;height:20px}
+.cmp-row-nav[hidden]{display:none}
+#comparison-hub.cmp-page{max-width:var(--wrap);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.cmp-hub-row{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px;margin:-8px;scroll-padding:8px}
+.cmp-hub-row::-webkit-scrollbar{display:none}
+.cmp-hub-row>.cmp-hub-card{flex:0 0 calc((100% - 24px)/2);scroll-snap-align:start}
+@media(max-width:700px){.cmp-hub-row{gap:14px}.cmp-hub-row>.cmp-hub-card{flex-basis:86%;padding:20px}.cmp-row-nav button{width:44px;height:44px}}
+.cmp-hub-hero h1{margin-bottom:16px}
+#comparison-hub .cmp-hub-group:first-child{margin-top:0}

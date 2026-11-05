@@ -1997,7 +1997,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
 <link rel="stylesheet" href="../assets/women-guide.css?v=af23bd447fab">
 <link rel="stylesheet" href="../assets/audience-guides.css?v=9c0440eeaf44">
 <link rel="stylesheet" href="../assets/navigation.css?v=1fe84880009b">
-<link rel="stylesheet" href="../assets/comparisons.css?v=ef6a7f48ba6b">
+<link rel="stylesheet" href="../assets/comparisons.css?v=03513b85f2bf">
 </head>
 <body>
 
@@ -4814,8 +4814,16 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
       '<nav class="cmp-hub-nav" aria-label="Системы органов">' + groups.map(function (g) { return '<button type="button" data-hub-group="' + g.id + '"><span class="cmp-chip-ic">' + picto(g.ic) + '</span>' + esc(g.n) + ' <span class="cmp-chip-n">' + g.keys.length + '</span></button>'; }).join('') + '</nav></div>' +
       '<div class="cmp-hero-mosaic" aria-hidden="true">' + ['blood', 'heart', 'liver', 'thyroid', 'allergy', 'urine', 'sugar', 'men', 'hormones'].map(function (id) { return '<span>' + picto(id) + '</span>'; }).join('') + '</div></div>';
     var card = function (k, ic) { var a = COMPARISONS[k]; return '<a class="cmp-hub-card" href="#compare-' + k + '" data-go="compare:' + k + '"><span class="cmp-card-ic">' + picto(ic) + '</span><h3>' + esc(a.shortTitle) + '</h3><p>' + esc(a.intro) + '</p><b>Читать →</b></a>'; };
-    document.getElementById('comparison-hub').innerHTML = groups.map(function (g) { return '<section class="cmp-hub-group" id="cmp-group-' + g.id + '"><h2><span class="cmp-group-ic">' + picto(g.ic) + '</span>' + esc(g.n) + '</h2><div class="cmp-hub-grid">' + g.keys.map(function (k) { return card(k, g.ic); }).join('') + '</div></section>'; }).join('');
+    var arrows = function (g) { return g.keys.length > 1 ? '<span class="cmp-row-nav"><button type="button" data-hub-scroll="-1" aria-label="Предыдущие статьи" disabled><svg class="ico"><use href="#i-left"/></svg></button><button type="button" data-hub-scroll="1" aria-label="Следующие статьи"><svg class="ico"><use href="#i-right"/></svg></button></span>' : ''; };
+    document.getElementById('comparison-hub').innerHTML = groups.map(function (g) { return '<section class="cmp-hub-group" id="cmp-group-' + g.id + '"><div class="cmp-group-head"><h2><span class="cmp-group-ic">' + picto(g.ic) + '</span>' + esc(g.n) + '</h2>' + arrows(g) + '</div><div class="cmp-hub-row">' + g.keys.map(function (k) { return card(k, g.ic); }).join('') + '</div></section>'; }).join('');
+    document.querySelectorAll('#comparison-hub .cmp-hub-row').forEach(function (row) { row.addEventListener('scroll', function () { comparisonRowNav(row); }, { passive: true }); comparisonRowNav(row); });
+    if (!window.cmpRowResize) { window.cmpRowResize = true; window.addEventListener('resize', function () { document.querySelectorAll('#comparison-hub .cmp-hub-row').forEach(comparisonRowNav); }); }
   }
+  function comparisonRowNav(row) {
+    var nav = row.parentElement.querySelector('.cmp-row-nav'); if (!nav) return;
+    nav.hidden = row.scrollWidth <= row.clientWidth + 8; var b = nav.querySelectorAll('button'); b[0].disabled = row.scrollLeft < 8; b[1].disabled = row.scrollLeft + row.clientWidth > row.scrollWidth - 8;
+  }
+  document.addEventListener('click', function (e) { var s = e.target.closest('[data-hub-scroll]'); if (!s) return; var row = s.closest('.cmp-hub-group').querySelector('.cmp-hub-row'), card = row.querySelector('.cmp-hub-card'); var step = card ? card.getBoundingClientRect().width + 24 : row.clientWidth; row.scrollBy({ left: step * Number(s.dataset.hubScroll), behavior: reduceMotion ? 'auto' : 'smooth' }); });
   document.addEventListener('click', function (e) { var b = e.target.closest('[data-hub-group]'); if (!b) return; var s = document.getElementById('cmp-group-' + b.dataset.hubGroup); if (!s) return; var top = document.getElementById('top'); window.scrollTo({ top: s.getBoundingClientRect().top + scrollY - (top ? top.offsetHeight : 94) - 16, behavior: reduceMotion ? 'auto' : 'smooth' }); });
   PAGES.push('comparisons','compare');RENDER.compare=renderComparisonPage;RENDER.comparisons=renderComparisonHub;
   document.addEventListener('click',function(e){var b=e.target.closest('[data-comparison]');if(b){e.preventDefault();openComparison(b.dataset.comparison,b);}if(e.target.closest('[data-comparison-close]'))closeComparison(false);});
