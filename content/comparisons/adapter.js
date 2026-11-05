@@ -25,8 +25,12 @@
     var buy='<section class="cmp-buy"><h2>Исследования по теме</h2><p class="cmp-point">Цены и доступность: '+esc(ptName(POINTS[state.pt]))+'</p>'+comparisonProducts(a)+(a.availability?'<p>'+esc(a.availability)+'</p>':'')+'<p class="cmp-note">Состав исследований сверяют с назначением. Сдавать все анализы из сравнения требуется не каждому.</p></section>';
     var related=full?(a.related||[]).filter(function(k){return COMPARISONS[k]&&k!==key;}):[];
     var rel=related.length?'<section class="cmp-related"><h2>Читайте также</h2><div class="cmp-related-list">'+related.map(function(k){return '<a href="#compare-'+k+'" data-go="compare:'+k+'">'+esc(COMPARISONS[k].title)+'</a>';}).join('')+'</div></section>':'';
-    return head+grid+sections+prep+faq+buy+rel;
+    var g=full&&COMPARISON_GUIDES[key];
+    var guide=g?'<a class="cmp-teaser cmp-guide-link" href="#for-'+g[0]+'"><span><small>Гид по разделу</small><b>'+g[1]+'</b></span><span aria-hidden="true">→</span></a>':'';
+    return head+grid+sections+prep+faq+buy+guide+rel;
   }
+  // 05.11.2026: section guides by 4e session (#for-blood / #for-sugar / #for-thyroid)
+  var COMPARISON_GUIDES = { iron: ['blood', 'Анализы крови и\u00a0на\u00a0анемию: с\u00a0чего начать и\u00a0что\u00a0добавляют'], b12: ['blood', 'Анализы крови и\u00a0на\u00a0анемию: с\u00a0чего начать и\u00a0что\u00a0добавляют'], inflammation: ['blood', 'Анализы крови и\u00a0на\u00a0анемию: с\u00a0чего начать и\u00a0что\u00a0добавляют'], glucose: ['sugar', 'Анализы на\u00a0сахар: какие сдать и\u00a0чем они отличаются'], thyroid: ['thyroid', 'Анализы на\u00a0щитовидную железу: какие сдать и\u00a0в\u00a0каком порядке'] };
   function comparisonsForTest(code) {
     return Object.keys(COMPARISONS).filter(function(k){return COMPARISONS[k].tests.indexOf(code)>=0;});
   }

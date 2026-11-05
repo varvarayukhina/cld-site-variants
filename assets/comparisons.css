@@ -75,3 +75,5 @@
 @media(max-width:700px){.cmp-hub-row{gap:14px}.cmp-hub-row>.cmp-hub-card{flex-basis:86%;padding:20px}.cmp-row-nav button{width:44px;height:44px}}
 .cmp-hub-hero h1{margin-bottom:16px}
 #comparison-hub .cmp-hub-group:first-child{margin-top:0}
+a.cmp-teaser{text-decoration:none}
+.cmp-guide-link{margin-top:40px}

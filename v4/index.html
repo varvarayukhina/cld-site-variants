@@ -1997,7 +1997,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
 <link rel="stylesheet" href="../assets/women-guide.css?v=af23bd447fab">
 <link rel="stylesheet" href="../assets/audience-guides.css?v=f006d59c6596">
 <link rel="stylesheet" href="../assets/navigation.css?v=1fe84880009b">
-<link rel="stylesheet" href="../assets/comparisons.css?v=03513b85f2bf">
+<link rel="stylesheet" href="../assets/comparisons.css?v=4f8179572be1">
 </head>
 <body>
 
@@ -2843,7 +2843,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
   </section>
 
   <section id="v-compare" data-view="compare" hidden><article class="cmp-root cmp-page" id="comparison-page"></article></section>
-  <section id="v-comparisons" data-view="comparisons" hidden><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
+  <section id="v-comparisons" data-view="comparisons" hidden><div class="cxhero cmp-hub-hero"><div class="wrap" id="comparison-hub-hero"></div></div><div class="cmp-root cmp-page" id="comparison-hub"></div></section>
   <dialog id="comparison-dialog" class="cmp-root" aria-labelledby="cmp-dialog-title"><div class="cmp-dialog-top"><button type="button" data-comparison-close aria-label="Закрыть сравнение">×</button></div><div class="cmp-dialog-content"></div><div class="cmp-dialog-footer"><button type="button" class="btn" data-comparison-close>Вернуться к выбору</button><a class="btn btn-navy" href="#cart" data-go="cart" data-comparison-cart hidden>Перейти в корзину</a></div></dialog>
   <footer class="foot">
     <div class="wrap">
@@ -4761,8 +4761,12 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
     var buy='<section class="cmp-buy"><h2>Исследования по теме</h2><p class="cmp-point">Цены и доступность: '+esc(ptName(POINTS[state.pt]))+'</p>'+comparisonProducts(a)+(a.availability?'<p>'+esc(a.availability)+'</p>':'')+'<p class="cmp-note">Состав исследований сверяют с назначением. Сдавать все анализы из сравнения требуется не каждому.</p></section>';
     var related=full?(a.related||[]).filter(function(k){return COMPARISONS[k]&&k!==key;}):[];
     var rel=related.length?'<section class="cmp-related"><h2>Читайте также</h2><div class="cmp-related-list">'+related.map(function(k){return '<a href="#compare-'+k+'" data-go="compare:'+k+'">'+esc(COMPARISONS[k].title)+'</a>';}).join('')+'</div></section>':'';
-    return head+grid+sections+prep+faq+buy+rel;
+    var g=full&&COMPARISON_GUIDES[key];
+    var guide=g?'<a class="cmp-teaser cmp-guide-link" href="#for-'+g[0]+'"><span><small>Гид по разделу</small><b>'+g[1]+'</b></span><span aria-hidden="true">→</span></a>':'';
+    return head+grid+sections+prep+faq+buy+guide+rel;
   }
+  // 05.11.2026: section guides by 4e session (#for-blood / #for-sugar / #for-thyroid)
+  var COMPARISON_GUIDES = { iron: ['blood', 'Анализы крови и\u00a0на\u00a0анемию: с\u00a0чего начать и\u00a0что\u00a0добавляют'], b12: ['blood', 'Анализы крови и\u00a0на\u00a0анемию: с\u00a0чего начать и\u00a0что\u00a0добавляют'], inflammation: ['blood', 'Анализы крови и\u00a0на\u00a0анемию: с\u00a0чего начать и\u00a0что\u00a0добавляют'], glucose: ['sugar', 'Анализы на\u00a0сахар: какие сдать и\u00a0чем они отличаются'], thyroid: ['thyroid', 'Анализы на\u00a0щитовидную железу: какие сдать и\u00a0в\u00a0каком порядке'] };
   function comparisonsForTest(code) {
     return Object.keys(COMPARISONS).filter(function(k){return COMPARISONS[k].tests.indexOf(code)>=0;});
   }
