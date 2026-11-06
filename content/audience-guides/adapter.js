@@ -22,7 +22,7 @@
     if(gSpy)gSpy.disconnect();var root=$('#audience-guide'),g=GUIDES[state.guide];root.innerHTML=AUDIENCE_TEMPLATES[state.guide];
     root.querySelectorAll('[data-audience-tests]').forEach(function(el){el.innerHTML=el.dataset.audienceTests.split(',').map(pregTest).join('');});
     root.querySelectorAll('[data-sg-chips]').forEach(function(el){el.innerHTML=el.dataset.sgChips.split(',').filter(function(c){return A[c];}).map(function(c){return '<a class="pg-sg-chip" href="#card-'+esc(c)+'" data-go="card:'+esc(c)+'">'+esc(pregName(c))+'</a>';}).join('');}); // названия анализов в схеме и подготовке
-    root.querySelector('[data-audience-complexes]').innerHTML=(g.cx||[]).map(womenComplex).join('');
+    var cxBox=root.querySelector('[data-audience-complexes]');if(cxBox)cxBox.innerHTML=(g.cx||[]).map(womenComplex).join('');
     var cat=CATS.filter(function(c){return c.id===state.guide;})[0],codes=cat.items.filter(function(c,i,a){return A[c]&&a.indexOf(c)===i;});
     $('#ag-catalog-list').innerHTML=codes.map(pregTest).join('');$('#ag-catalog-q').value=audienceSearch[state.guide]||"";audienceFilter();
     root.querySelector('[data-audience-count]').textContent=nAn(codes.length);root.querySelector('[data-audience-point]').textContent='Цены и доступность: '+ptName(POINTS[state.pt]);
