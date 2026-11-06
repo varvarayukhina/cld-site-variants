@@ -1399,6 +1399,7 @@ button.mini-n:hover, .mini-sit:hover .mini-n { text-decoration: underline; text-
 .arow .a-meta { color: var(--muted); gap: 6px; }
 @media (min-width: 961px) { .arow { grid-template-columns: minmax(0, 1fr) 220px 260px; } }
 @media (min-width: 1200px) { .arow { grid-template-columns: minmax(0, 1fr) 220px 300px; } }
+.addbtn .ico { width: 24px; height: 24px; } /* корзина вместо плюса читается крупнее (Варвара 06.11) */
 .p-on, .pg-p-on { display: block; margin: 0 0 2px; font: 600 16px/1.3 var(--text); color: inherit; white-space: nowrap; } /* «при оплате онлайн» у цены (просьба Дениса 05.11) */
 @media (min-width: 961px) { .arow .p-on { display: inline; margin: 0 8px 0 0; } }
 .arow .price b { font-size: 24px; font-weight: 700; }
@@ -3236,8 +3237,8 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
     $$("[data-cart]").forEach(function (el) { el.textContent = cartCount(); });
     $$("[data-add]").forEach(function (b) {
       var on = !!cart[b.dataset.add]; b.classList.toggle("added", on);
-      if (b.classList.contains("addbtn")) { b.innerHTML = icon(on ? "i-check" : "i-plus"); b.setAttribute("aria-label", on ? "Убрать из корзины" : "В корзину"); }
-      else b.innerHTML = icon(on ? "i-check" : "i-plus") + (on ? "В корзине" : "В корзину");
+      if (b.classList.contains("addbtn")) { b.innerHTML = icon(on ? "i-check" : "i-cart"); b.setAttribute("aria-label", on ? "Убрать из корзины" : "В корзину"); }
+      else b.innerHTML = icon(on ? "i-check" : "i-cart") + (on ? "В корзине" : "В корзину");
     });
     if (state.view === "cart") renderCart();
     pregSyncControls(); // shared cart
@@ -3246,7 +3247,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
     kidsSyncControls(); // shared kids cart
     audienceSyncControls(); // shared audience cart
   }
-  function buyBtn(code) { if (item(code).na) return '<button class="btn" type="button" disabled>Нет в этом пункте</button>'; var on = !!cart[code]; return '<button class="btn btn-lime' + (on ? " added" : "") + '" type="button" data-add="' + esc(code) + '">' + icon(on ? "i-check" : "i-plus") + (on ? "В корзине" : "В корзину") + "</button>"; }
+  function buyBtn(code) { if (item(code).na) return '<button class="btn" type="button" disabled>Нет в этом пункте</button>'; var on = !!cart[code]; return '<button class="btn btn-lime' + (on ? " added" : "") + '" type="button" data-add="' + esc(code) + '">' + icon(on ? "i-check" : "i-cart") + (on ? "В корзине" : "В корзину") + "</button>"; }
   function item(code) {
     var a = A[code], x = CX[code];
     if (a) return { n: a.n, p: a.p, na: a.na, blood: a.bio.indexOf("Кровь") === 0, urine: /моч/i.test(a.bio), days: a.days, go: "card:" + code };
@@ -3267,7 +3268,7 @@ details.gd-toc > summary::-webkit-details-marker { display: none; }
   function icon(id) { return '<svg class="ico"><use href="#' + id + '"/></svg>'; }
   function addBtn(code) {
     if (item(code).na) return '<span class="na">Нет в этом пункте</span>';
-    return '<button class="addbtn' + (cart[code] ? " added" : "") + '" type="button" data-add="' + code + '" aria-label="В корзину"><svg class="ico"><use href="#' + (cart[code] ? "i-check" : "i-plus") + '"/></svg></button>';
+    return '<button class="addbtn' + (cart[code] ? " added" : "") + '" type="button" data-add="' + code + '" aria-label="В корзину"><svg class="ico"><use href="#' + (cart[code] ? "i-check" : "i-cart") + '"/></svg></button>';
   }
   function dLabel(d) { return plural(d, ["день", "дня", "дней"]); }
   function citoOf(code) { var c = CITO[code], a = A[code]; return c && a && !a.na && a.p === c.base ? c.p : 0; }
