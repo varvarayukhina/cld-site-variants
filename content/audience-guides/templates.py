@@ -15,7 +15,7 @@ def small_cards(items):return '<div class="ag-compare">'+''.join('<article><h3>'
 def route(g):
  """Цветная схема «как обычно идёт обследование»; названия анализов подставляет adapter.js."""
  if not g.get('route'):return ''
- return '<section class="sg-route"><div class="wrap"><h2>Как обычно идёт обследование</h2><ol class="sg-steps">'+''.join('<li><span class="sg-step-n" aria-hidden="true">'+str(i+1)+'</span><h3>'+esc(r['title'])+'</h3><p>'+esc(r['text'])+'</p><div class="sg-chips" data-sg-chips="'+','.join(r.get('tests',[]))+'"></div></li>' for i,r in enumerate(g['route']))+'</ol></div></section>'
+ return '<section class="sg-route"><div class="wrap"><h2>'+esc(g.get('route_title','Как обычно идёт обследование'))+'</h2><ol class="sg-steps">'+''.join('<li><span class="sg-step-n" aria-hidden="true">'+str(i+1)+'</span><h3>'+esc(r['title'])+'</h3><p>'+esc(r['text'])+'</p><div class="sg-chips" data-sg-chips="'+','.join(r.get('tests',[]))+'"></div></li>' for i,r in enumerate(g['route']))+'</ol></div></section>'
 def prep_cards(cards):
  return '<div class="sg-prep">'+''.join('<article><b class="sg-prep-big">'+esc(c['big'])+'</b><p>'+esc(c['rule'])+'</p><div class="sg-chips" data-sg-chips="'+','.join(c['tests'])+'"></div></article>' for c in cards)+'</div><a class="sg-memo" href="#podgotovka" data-go="podgotovka"><svg aria-hidden="true"><use href="#i-file"></use></svg><span>Памятка в картинках: как подготовиться к анализам</span></a>'
 def template(key):
