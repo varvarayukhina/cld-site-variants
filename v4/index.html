@@ -3493,7 +3493,7 @@ var PREG_WHY=[
   function pregTest(code) {
     var a = A[code]; if (!a) return "";
     var note = code === "40-111" ? "При подозрении на дефицит железа" : code === "80-049" ? "По показаниям" : code === "18.103" ? "ПГТТ с 75 г глюкозы" : "";
-    return '<div class="pg-test-row" data-preg-code="' + esc(code) + '"><div class="pg-test-info"><button class="pg-test-name pg-test-details" type="button" data-go="card:' + esc(code) + '">' + esc(pregName(code)) + '</button><small>' + esc(a.bio) + " · " + dLabel(a.days) + '</small>' + (a.na ? '<span class="pg-preg-na">Нет в выбранном пункте — доступность в других пунктах можно уточнить по телефону</span>' : "") + (note ? '<span class="pg-tag-note">' + note + '</span>' : "") + '</div><div class="pg-test-price">' + (a.na ? "" : '<span class="pg-p-on">при оплате онлайн</span><b class="pg-num">' + rub(online(a.p)) + '</b>') + '</div><button type="button" class="pg-add-btn pg-btn-lime" data-add="' + esc(code) + '"' + (a.na ? ' disabled aria-label="Недоступно в выбранном пункте"' : ' aria-label="Добавить: ' + esc(pregName(code)) + '"') + '>' + (a.na ? "Недоступно" : "Добавить +") + '</button></div>';
+    return '<div class="pg-test-row" data-preg-code="' + esc(code) + '"><div class="pg-test-info"><button class="pg-test-name pg-test-details" type="button" data-go="card:' + esc(code) + '">' + esc(pregName(code)) + '</button><small>' + esc(a.bio) + " · " + dLabel(a.days) + '</small>' + (a.na ? '<span class="pg-preg-na">Нет в выбранном пункте — доступность в других пунктах можно уточнить по телефону</span>' : "") + (note ? '<span class="pg-tag-note">' + note + '</span>' : "") + '</div><div class="pg-test-price">' + (a.na ? "" : '<span class="pg-p-on">при оплате онлайн</span><b class="pg-num">' + rub(online(a.p)) + '</b>') + '</div><button type="button" class="pg-add-btn pg-btn-lime" data-add="' + esc(code) + '"' + (a.na ? ' disabled aria-label="Недоступно в выбранном пункте"' : ' aria-label="Добавить: ' + esc(pregName(code)) + '"') + '>' + (a.na ? "Недоступно" : pregIcon("cart") + " В корзину") + '</button></div>';
   }
   function pregSyncControls() {
     var root = $("#pregnancy-guide"); if (!root || root.hidden || !root.firstChild) return;
@@ -3502,7 +3502,7 @@ var PREG_WHY=[
       button.disabled = !!a.na;
       if (a.na) { button.textContent = "Недоступно"; button.setAttribute("aria-label", "Недоступно в выбранном пункте"); return; }
       var on = !!cart[code]; button.classList.toggle("pg-added", on);
-      button.innerHTML = on ? pregIcon("check") + " В корзине" : "Добавить +";
+      button.innerHTML = on ? pregIcon("check") + " В корзине" : pregIcon("cart") + " В корзину";
       button.setAttribute("aria-label", (on ? "Убрать из корзины: " : "Добавить: ") + pregName(code));
     });
   }
@@ -3597,7 +3597,7 @@ var PREG_WHY=[
   }
   function womenComplex(code) {
     var x = CXX[code], price = CX[code]; if (!x || !price) return "";
-    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
+    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">' + womenIcon("cart") + ' В корзину</button></div>') + '</article>';
   }
   function womenSyncControls() {
     var root = $("#women-guide"); if (!root || root.hidden || !root.firstChild) return;
@@ -3606,7 +3606,7 @@ var PREG_WHY=[
       button.disabled = !!entry.na;
       if (entry.na) { button.textContent = "Недоступно"; button.setAttribute("aria-label", "Недоступно в выбранном пункте"); return; }
       var on = !!cart[code], title = A[code] ? A[code].n : CXX[code].n;
-      button.classList.toggle("pg-added", on); button.innerHTML = on ? womenIcon("check") + " В корзине" : "Добавить +";
+      button.classList.toggle("pg-added", on); button.innerHTML = on ? womenIcon("check") + " В корзине" : womenIcon("cart") + " В корзину";
       button.setAttribute("aria-label", (on ? "Убрать из корзины: " : "Добавить: ") + title);
     });
   }
@@ -3659,7 +3659,7 @@ var PREG_WHY=[
   }
   function kidsComplex(code) {
     var x = CXX[code], price = CX[code]; if (!x || !price) return "";
-    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
+    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">' + kidsIcon("cart") + ' В корзину</button></div>') + '</article>';
   }
   function kidsSyncControls() {
     var root = $("#kids-guide"); if (!root || root.hidden || !root.firstChild) return;
@@ -3668,7 +3668,7 @@ var PREG_WHY=[
       button.disabled = !!entry.na;
       if (entry.na) { button.textContent = "Недоступно"; button.setAttribute("aria-label", "Недоступно в выбранном пункте"); return; }
       var on = !!cart[code], title = A[code] ? A[code].n : CXX[code].n;
-      button.classList.toggle("pg-added", on); button.innerHTML = on ? kidsIcon("check") + " В корзине" : "Добавить +";
+      button.classList.toggle("pg-added", on); button.innerHTML = on ? kidsIcon("check") + " В корзине" : kidsIcon("cart") + " В корзину";
       button.setAttribute("aria-label", (on ? "Убрать из корзины: " : "Добавить: ") + title);
     });
   }
@@ -3723,7 +3723,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
   }
   function audienceSyncControls() {
     var root=$("#audience-guide");if(!root||root.hidden||!root.firstChild)return;
-    root.querySelectorAll('[data-add]').forEach(function(b){var c=b.dataset.add,a=A[c]||CX[c];if(!a)return;b.disabled=!!a.na;var on=!!cart[c];b.classList.toggle('pg-added',on);b.textContent=a.na?'Недоступно':on?'В корзине ✓':'Добавить +';b.setAttribute('aria-label',a.na?'Недоступно в выбранном пункте':(on?'Убрать из корзины: ':'Добавить: ')+(A[c]?A[c].n:CXX[c].n));});
+    root.querySelectorAll('[data-add]').forEach(function(b){var c=b.dataset.add,a=A[c]||CX[c];if(!a)return;b.disabled=!!a.na;var on=!!cart[c];b.classList.toggle('pg-added',on);b.innerHTML=a.na?'Недоступно':on?'В корзине ✓':'<svg aria-hidden="true"><use href="#ag-i-cart"/></svg> В корзину';b.setAttribute('aria-label',a.na?'Недоступно в выбранном пункте':(on?'Убрать из корзины: ':'Добавить: ')+(A[c]?A[c].n:CXX[c].n));});
   }
   function audienceJump(slug,update) {
     var target=document.getElementById('ag-'+slug);if(!target)return;
@@ -4821,7 +4821,7 @@ Object.keys(AUDIENCE_COPY).forEach(function(key){GUIDES[key]=AUDIENCE_COPY[key];
     return '<section class="cmp-card-links"><h2>Чем отличается от похожих анализов</h2>'+keys.map(function(k){return '<a href="#compare-'+k+'" data-go="compare:'+k+'">'+esc(COMPARISONS[k].title)+' →</a>';}).join('')+'</section>';
   }
   function comparisonSync() {
-    document.querySelectorAll('.cmp-root [data-add]').forEach(function(b){var c=b.dataset.add;b.textContent=cart[c]?'В корзине ✓':'Добавить +';b.setAttribute('aria-pressed',cart[c]?'true':'false');b.setAttribute('aria-label',(cart[c]?'Убрать из корзины: ':'Добавить: ')+A[c].n);});
+    document.querySelectorAll('.cmp-root [data-add]').forEach(function(b){var c=b.dataset.add;b.innerHTML=icon(cart[c]?'i-check':'i-cart')+(cart[c]?'В корзине':'В корзину');b.setAttribute('aria-pressed',cart[c]?'true':'false');b.setAttribute('aria-label',(cart[c]?'Убрать из корзины: ':'Добавить: ')+A[c].n);});
     var cartLink=document.querySelector('#comparison-dialog [data-comparison-cart]');if(cartLink) cartLink.hidden=!cartCount();
   }
   function decorateComparisonSlots(root) {

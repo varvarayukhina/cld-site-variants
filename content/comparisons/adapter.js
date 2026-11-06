@@ -39,7 +39,7 @@
     return '<section class="cmp-card-links"><h2>Чем отличается от похожих анализов</h2>'+keys.map(function(k){return '<a href="#compare-'+k+'" data-go="compare:'+k+'">'+esc(COMPARISONS[k].title)+' →</a>';}).join('')+'</section>';
   }
   function comparisonSync() {
-    document.querySelectorAll('.cmp-root [data-add]').forEach(function(b){var c=b.dataset.add;b.textContent=cart[c]?'В корзине ✓':'Добавить +';b.setAttribute('aria-pressed',cart[c]?'true':'false');b.setAttribute('aria-label',(cart[c]?'Убрать из корзины: ':'Добавить: ')+A[c].n);});
+    document.querySelectorAll('.cmp-root [data-add]').forEach(function(b){var c=b.dataset.add;b.innerHTML=icon(cart[c]?'i-check':'i-cart')+(cart[c]?'В корзине':'В корзину');b.setAttribute('aria-pressed',cart[c]?'true':'false');b.setAttribute('aria-label',(cart[c]?'Убрать из корзины: ':'Добавить: ')+A[c].n);});
     var cartLink=document.querySelector('#comparison-dialog [data-comparison-cart]');if(cartLink) cartLink.hidden=!cartCount();
   }
   function decorateComparisonSlots(root) {

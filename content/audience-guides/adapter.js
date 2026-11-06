@@ -7,7 +7,7 @@
   }
   function audienceSyncControls() {
     var root=$("#audience-guide");if(!root||root.hidden||!root.firstChild)return;
-    root.querySelectorAll('[data-add]').forEach(function(b){var c=b.dataset.add,a=A[c]||CX[c];if(!a)return;b.disabled=!!a.na;var on=!!cart[c];b.classList.toggle('pg-added',on);b.textContent=a.na?'Недоступно':on?'В корзине ✓':'Добавить +';b.setAttribute('aria-label',a.na?'Недоступно в выбранном пункте':(on?'Убрать из корзины: ':'Добавить: ')+(A[c]?A[c].n:CXX[c].n));});
+    root.querySelectorAll('[data-add]').forEach(function(b){var c=b.dataset.add,a=A[c]||CX[c];if(!a)return;b.disabled=!!a.na;var on=!!cart[c];b.classList.toggle('pg-added',on);b.innerHTML=a.na?'Недоступно':on?'В корзине ✓':'<svg aria-hidden="true"><use href="#ag-i-cart"/></svg> В корзину';b.setAttribute('aria-label',a.na?'Недоступно в выбранном пункте':(on?'Убрать из корзины: ':'Добавить: ')+(A[c]?A[c].n:CXX[c].n));});
   }
   function audienceJump(slug,update) {
     var target=document.getElementById('ag-'+slug);if(!target)return;

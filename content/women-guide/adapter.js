@@ -15,7 +15,7 @@
   }
   function womenComplex(code) {
     var x = CXX[code], price = CX[code]; if (!x || !price) return "";
-    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">Добавить +</button></div>') + '</article>';
+    return '<article class="pg-w-complex"><h3><a href="#card-' + esc(code) + '" data-go="card:' + esc(code) + '">' + esc(x.n) + '</a></h3><p>' + esc(x.parts.join(", ")) + '.</p>' + (price.na ? '<p class="pg-w-complex-na">Нет в выбранном пункте</p>' : '<div class="pg-w-complex-price"><span><span class="p-on">при оплате онлайн</span><b class="num">' + rub(online(price.p)) + '</b><small>в пункте ' + rub(price.p) + '</small></span><button type="button" class="pg-add-btn" data-add="' + esc(code) + '">' + womenIcon("cart") + ' В корзину</button></div>') + '</article>';
   }
   function womenSyncControls() {
     var root = $("#women-guide"); if (!root || root.hidden || !root.firstChild) return;
@@ -24,7 +24,7 @@
       button.disabled = !!entry.na;
       if (entry.na) { button.textContent = "Недоступно"; button.setAttribute("aria-label", "Недоступно в выбранном пункте"); return; }
       var on = !!cart[code], title = A[code] ? A[code].n : CXX[code].n;
-      button.classList.toggle("pg-added", on); button.innerHTML = on ? womenIcon("check") + " В корзине" : "Добавить +";
+      button.classList.toggle("pg-added", on); button.innerHTML = on ? womenIcon("check") + " В корзине" : womenIcon("cart") + " В корзину";
       button.setAttribute("aria-label", (on ? "Убрать из корзины: " : "Добавить: ") + title);
     });
   }
