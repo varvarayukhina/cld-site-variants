@@ -11,7 +11,7 @@ JS = r'''
   var S_STOP = {}; SRCH.stop.forEach(function (w) { S_STOP[w] = 1; });
   function sToks(s) { return norm(String(s || "")).replace(/[^a-zа-я0-9]+/g, " ").trim().split(" ").filter(function (w) { return w && !S_STOP[w]; }); }
   function sRaw(s) { return norm(String(s || "")).replace(/[^a-zа-я0-9]+/g, " ").trim().split(" ").filter(Boolean); } // «где сдать» — only stop words
-  function sStem(w) { if (w.length < 5) return w; var s = w.replace(/(иями|ями|ами|ого|его|ому|ему|ыми|ими|ость|ов|ев|ей|ий|ый|ой|ая|яя|ое|ее|ые|ие|ым|им|ом|ем|ам|ям|ах|ях|ую|юю|у|ю|а|я|ы|и|е|о|ь)$/, ""); return s.length >= 3 ? s : w; }
+  function sStem(w) { if (w.length < 5) return w; var s = w.replace(/(иями|ями|ами|ого|его|ому|ему|ыми|ими|ость|ов|ев|ей|ий|ый|ой|ая|яя|ое|ее|ые|ие|ым|им|ом|ем|ам|ям|ах|ях|ую|юю|у|ю|а|я|ы|и|е|о|ь)$/, ""); return s.length >= 4 ? s : w; } // not shorter than 4 letters: «калий» ≠ «кал»
   function sWordHit(w, x) { return x.indexOf(w) === 0 || x.indexOf(sStem(w)) === 0; } // word of the query = beginning of the word (with a simple ending cut)
   var S_TERMS = null, S_PAGES = null;
   function sInit() {
@@ -59,6 +59,7 @@ JS = r'''
       return out;
     }
     var qt = sToks(q); if (!qt.length) qt = sRaw(q);
+    if (!qt.length) return out; // only punctuation: «!!»
     var qk = qt.join(" "), R = {};
     function add(key, rec) { var o = R[key]; if (o && o.dict) rec.dict = true; if (!o || o.score < rec.score) R[key] = rec; else if (rec.dict) o.dict = true; }
     var hits = [];
@@ -66,6 +67,10 @@ JS = r'''
     // «кровь в кале» also contains «кровь»: a shorter term inside a longer matched one is dropped
     var strong = hits.some(function (h) { return h.s >= 280; });
     if (hits.some(function (h) { return h.s >= 200; })) hits = hits.filter(function (h) { return h.s !== 150; }); // typo guess only when nothing matched as typed
+    // the query is the full name of an analysis («гликированный гемоглобин»): dictionary words inside it («гемоглобин» → ОАК) are noise
+    function sExact(a) { return sToks(a.n).join(" ") === qk; } // the patient name only: the official one can be bare («Кальций» for urine calcium)
+    function sLead(t) { var x = sToks(t); return qt.every(function (w, i) { return x[i] === w; }); } // the name starts with the query as whole words
+    if (Object.keys(A).some(function (c) { return sExact(A[c]); })) hits = hits.filter(function (h) { return h.s >= 280; });
     hits = hits.filter(function (h) { return !hits.some(function (o) { return o !== h && o.s >= 240 && o.t.k.length > h.t.k.length && (" " + o.t.k + " ").indexOf(" " + h.t.k + " ") >= 0; }); });
     hits.forEach(function (h) {
       var fz = h.s === 150;
@@ -76,6 +81,8 @@ JS = r'''
     Object.keys(CXX).forEach(function (code) { var s = sTextScore(qt, qk, sToks(CXX[code].n + " " + cxMis(code) + " чек ап")); if (s) add("a:" + code, { code: code, cx: true, score: s - 5 }); });
     Object.keys(A).forEach(function (code) {
       var a = A[code], words = sToks(a.n + " " + a.off), s = sTextScore(qt, qk, words), fuzzy = false;
+      if (s && sExact(a)) s = 305; // full name above the dictionary
+      else if (s && s < 210 && sLead(a.n)) s = 210; // «кальций» → «Кальций в крови» above the dictionary «кальций в суточной моче» (still typing)
       if (!s) { // typo in the name: «ферретин», «витамн д»
         var all = qt.every(function (w) { return words.some(function (x) { return sWordHit(w, x); }) || (w.length >= 3 && words.some(function (x) { return lev(w, x.slice(0, w.length + 1)) <= (w.length > 5 ? 2 : 1) || lev(w, x) <= (w.length > 5 ? 2 : 1); })); });
         if (all) { s = 90; fuzzy = true; }
